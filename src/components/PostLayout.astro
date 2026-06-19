@@ -1,6 +1,20 @@
 ---
+import { Image } from "astro:assets";
 import TagBadge from "./TagBadge.astro";
-import type { Post } from "@/data/posts";
+import type { ImageMetadata } from "astro";
+
+export interface Post {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  author: string;
+  date: string;
+  tags: string[];
+  thumbnail?: string | ImageMetadata;
+  pubDate?: Date;
+  keywords?: string[];
+}
 
 export interface Props {
   post: Post;
@@ -25,7 +39,7 @@ const { title, description, category, author, date, tags, thumbnail, slug } = po
   {
     thumbnail && (
       <div class="aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden mb-8">
-        <img src={thumbnail} alt={title} class="w-full h-full object-cover" />
+        <Image src={thumbnail} alt={title} class="w-full h-full object-cover" widths={[600, 900]} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 720px" />
       </div>
     )
   }
