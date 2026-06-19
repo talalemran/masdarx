@@ -1,0 +1,94 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="اتصل بنا"
+  description="تواصل مع فريق مصدر إكس. نرحب باستفساراتكم، اقتراحاتكم، ومساهماتكم في إثراء المحتوى التقني العربي."
+  keywords={["اتصل بنا", "تواصل", "مصدر إكس", "مراسلة"]}
+  canonical="/contact/"
+  ogType="website"
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="font-heading text-3xl sm:text-4xl font-extrabold text-charcoal mb-4">
+      اتصل بنا
+    </h1>
+    <p class="font-body text-lg text-gray-600 mb-8">
+      لديك استفسار أو اقتراح؟ نرحب بتواصلك معنا. يمكنك أيضاً مراسلتنا مباشرة على
+      <a href="mailto:info@masdarx.com" class="text-charcoal underline font-medium"> info@masdarx.com</a>.
+    </p>
+
+    <form
+      action="https://formsubmit.co/info@masdarx.com"
+      method="POST"
+      class="space-y-6"
+    >
+      <input type="hidden" name="_next" value="https://www.masdarx.com/" />
+      <input type="hidden" name="_subject" value="رسالة جديدة من موقع مصدر إكس" />
+      <input type="text" name="_honey" class="hidden" />
+
+      <div>
+        <label for="name" class="block font-body text-sm font-medium text-charcoal mb-1">
+          الاسم الكامل
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg font-body text-charcoal bg-white focus:outline-none focus:ring-2 focus:ring-charcoal focus:border-transparent transition"
+          placeholder="أدخل اسمك"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block font-body text-sm font-medium text-charcoal mb-1">
+          البريد الإلكتروني
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg font-body text-charcoal bg-white focus:outline-none focus:ring-2 focus:ring-charcoal focus:border-transparent transition"
+          placeholder="أدخل بريدك الإلكتروني"
+        />
+      </div>
+
+      <div>
+        <label for="subject" class="block font-body text-sm font-medium text-charcoal mb-1">
+          الموضوع
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg font-body text-charcoal bg-white focus:outline-none focus:ring-2 focus:ring-charcoal focus:border-transparent transition"
+          placeholder="موضوع الرسالة"
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block font-body text-sm font-medium text-charcoal mb-1">
+          الرسالة
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="6"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg font-body text-charcoal bg-white focus:outline-none focus:ring-2 focus:ring-charcoal focus:border-transparent transition resize-y"
+          placeholder="اكتب رسالتك هنا..."
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        class="px-8 py-3 bg-charcoal text-white font-heading font-bold text-base rounded-lg hover:bg-gray-800 transition-colors cursor-pointer border-none"
+      >
+        إرسال الرسالة
+      </button>
+    </form>
+  </div>
+</BaseLayout>

@@ -1,0 +1,72 @@
+---
+import TagBadge from "./TagBadge.astro";
+import type { Post } from "@/data/posts";
+
+export interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { title, description, category, author, date, tags, thumbnail, slug } = post;
+---
+
+<article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <nav class="mb-6 text-sm font-body text-gray-500">
+    <a href="/" class="hover:text-charcoal transition-colors no-underline">الرئيسية</a>
+    <span class="mx-2">/</span>
+    <a
+      href={`/category/${category}/`}
+      class="hover:text-charcoal transition-colors no-underline text-gray-500"
+    >
+      {category}
+    </a>
+  </nav>
+
+  {
+    thumbnail && (
+      <div class="aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden mb-8">
+        <img src={thumbnail} alt={title} class="w-full h-full object-cover" />
+      </div>
+    )
+  }
+
+  <div class="flex flex-wrap items-center gap-3 text-sm font-body text-gray-500 mb-4">
+    <a
+      href={`/category/${category}/`}
+      class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full hover:bg-gray-700 transition-colors no-underline"
+    >
+      {category}
+    </a>
+    <a
+      href={`/author/${author}/`}
+      class="hover:text-charcoal transition-colors no-underline text-gray-500"
+    >
+      {author}
+    </a>
+    <span>•</span>
+    <span>{date}</span>
+  </div>
+
+  <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-charcoal mb-6 leading-snug">
+    {title}
+  </h1>
+
+  <div class="post-content font-body text-base text-charcoal leading-relaxed">
+    <slot />
+  </div>
+
+  <div class="flex flex-wrap gap-2 mt-10 pt-6 border-t border-gray-100">
+    {tags?.map((tag) => (
+      <TagBadge tag={tag} href={`/tags/${tag}/`} />
+    ))}
+  </div>
+
+  <div class="mt-8">
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 font-body text-sm font-medium text-charcoal hover:text-gray-600 transition-colors no-underline"
+    >
+      &larr; العودة إلى الرئيسية
+    </a>
+  </div>
+</article>

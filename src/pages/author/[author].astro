@@ -1,0 +1,63 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
+
+export async function getStaticPaths() {
+  const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+  const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+  const authors = [...new Set(allPosts.map((p) => p.author))];
+  return authors.map((author) => ({
+    params: { author },
+    props: { author, posts: allPosts },
+  }));
+}
+
+export interface Props {
+  author: string;
+  posts: any[];
+}
+
+const { author, posts: allPosts } = Astro.props;
+const filteredPosts = allPosts.filter((p) => p.author === author);
+---
+
+<BaseLayout
+  title={author}
+  description={`جميع مقالات ${author} على مصدر إكس`}
+  keywords={[author, "كتّاب", "مصادر مفتوحة"]}
+  canonical={`/author/${author}/`}
+  ogType="website"
+>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <nav class="mb-6 text-sm font-body text-gray-500">
+      <a href="/" class="hover:text-charcoal transition-colors no-underline">الرئيسية</a>
+      <span class="mx-2">/</span>
+      <span class="text-charcoal">{author}</span>
+    </nav>
+
+    <h1 class="font-heading text-3xl font-extrabold text-charcoal mb-2">
+      الكاتب: {author}
+    </h1>
+    <p class="font-body text-gray-500 mb-8">{filteredPosts.length} مقال</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        filteredPosts.map((post) => (
+          <ArticleCard
+            title={post.title}
+            description={post.description}
+            category={post.category}
+            author={post.author}
+            date={post.date}
+            tags={post.tags}
+            slug={post.slug}
+            thumbnail={post.thumbnail}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

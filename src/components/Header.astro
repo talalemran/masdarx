@@ -1,0 +1,110 @@
+---
+const navLinks = [
+  { href: "/", label: "الرئيسية" },
+  { href: "/about/", label: "حول الموقع" },
+  { href: "/contact/", label: "اتصل بنا" },
+];
+---
+
+<header class="sticky top-0 z-50 bg-white border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a
+        href="/"
+        class="font-heading text-2xl font-extrabold text-charcoal hover:text-gray-600 transition-colors no-underline"
+      >
+        مصدر إكس
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class="font-body text-base font-medium text-charcoal hover:text-gray-600 transition-colors no-underline"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <button
+        id="menu-toggle"
+        class="md:hidden flex flex-col items-center justify-center w-10 h-10 cursor-pointer bg-transparent border-none rounded-lg hover:bg-gray-100 transition-colors"
+        aria-label="فتح القائمة"
+        type="button"
+      >
+        <span class="block w-5 h-[2px] bg-charcoal"></span>
+        <span class="block w-5 h-[2px] bg-charcoal my-[4px]"></span>
+        <span class="block w-5 h-[2px] bg-charcoal"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 bg-black/50 z-40 hidden"
+></div>
+
+<div
+  id="mobile-menu"
+  class="fixed top-0 bottom-0 right-0 w-72 bg-white shadow-2xl z-50 hidden"
+>
+  <div class="flex justify-between items-center p-4 border-b border-gray-100">
+    <span class="font-heading text-xl font-extrabold text-charcoal">مصدر إكس</span>
+    <button
+      id="menu-close"
+      class="w-10 h-10 flex items-center justify-center text-2xl cursor-pointer bg-transparent border-none text-charcoal rounded-lg hover:bg-gray-100 transition-colors"
+      aria-label="إغلاق القائمة"
+      type="button"
+    >
+      &times;
+    </button>
+  </div>
+  <nav class="flex flex-col p-4 gap-4">
+    {
+      navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-nav-link font-body text-lg font-medium text-charcoal hover:text-gray-600 transition-colors no-underline py-2 border-b border-gray-50"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</div>
+
+<script>
+  (function () {
+    var toggleBtn = document.getElementById("menu-toggle");
+    var closeBtn = document.getElementById("menu-close");
+    var mobileMenu = document.getElementById("mobile-menu");
+    var overlay = document.getElementById("mobile-menu-overlay");
+
+    if (!toggleBtn || !closeBtn || !mobileMenu || !overlay) return;
+
+    function openMenu() {
+      mobileMenu.classList.remove("hidden");
+      overlay.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.add("hidden");
+      overlay.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    toggleBtn.addEventListener("click", openMenu);
+    closeBtn.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", closeMenu);
+
+    var links = document.querySelectorAll(".mobile-nav-link");
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener("click", closeMenu);
+    }
+  })();
+</script>

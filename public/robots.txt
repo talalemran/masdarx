@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.masdarx.com/sitemap-index.xml

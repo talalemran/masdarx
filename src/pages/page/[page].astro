@@ -1,0 +1,67 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
+import Pagination from "@/components/Pagination.astro";
+
+export async function getStaticPaths() {
+  const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+  const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+  const pageSize = 6;
+  const totalPages = Math.ceil(allPosts.length / pageSize);
+
+  return Array.from({ length: totalPages - 1 }, (_, i) => {
+    const page = i + 2;
+    return {
+      params: { page: String(page) },
+      props: { page, totalPages, allPosts },
+    };
+  });
+}
+
+export interface Props {
+  page: number;
+  totalPages: number;
+  allPosts: any[];
+}
+
+const { page, totalPages, allPosts } = Astro.props;
+const pageSize = 6;
+const start = (page - 1) * pageSize;
+const pagePosts = allPosts.slice(start, start + pageSize);
+
+const canonicalPath = `/page/${page}/`;
+---
+
+<BaseLayout
+  title={`الصفحة ${page}`}
+  description={`مصدر إكس - الصفحة ${page} من أحدث أخبار البرمجيات مفتوحة المصدر والتقنيات الحديثة`}
+  canonical={canonicalPath}
+  ogType="website"
+>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h2 class="font-heading text-2xl font-bold text-charcoal mb-8">
+      المقالات - الصفحة {page}
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        pagePosts.map((post) => (
+          <ArticleCard
+            title={post.title}
+            description={post.description}
+            category={post.category}
+            author={post.author}
+            date={post.date}
+            tags={post.tags}
+            slug={post.slug}
+            thumbnail={post.thumbnail}
+          />
+        ))
+      }
+    </div>
+
+    <Pagination currentPage={page} totalPages={totalPages} />
+  </section>
+</BaseLayout>

@@ -1,0 +1,58 @@
+---
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  basePath?: string;
+}
+
+const { currentPage, totalPages, basePath = "/page" } = Astro.props;
+
+function href(p: number): string {
+  if (p === 1) return "/";
+  return `${basePath}/${p}/`;
+}
+---
+
+<nav class="flex justify-center items-center gap-2 mt-10" aria-label="التصفح">
+  <!-- Previous -->
+  <a
+    href={currentPage > 1 ? href(currentPage - 1) : undefined}
+    class={`px-4 py-2 text-sm font-body font-medium rounded-lg transition-colors no-underline ${
+      currentPage <= 1
+        ? "text-gray-300 pointer-events-none"
+        : "text-charcoal hover:bg-gray-100"
+    }`}
+    aria-disabled={currentPage <= 1}
+  >
+    &larr; السابق
+  </a>
+
+  <!-- Page Numbers -->
+  {
+    Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+      <a
+        href={href(p)}
+        class={`px-3 py-2 text-sm font-body font-medium rounded-lg transition-colors no-underline ${
+          p === currentPage
+            ? "bg-charcoal text-white"
+            : "text-charcoal hover:bg-gray-100"
+        }`}
+      >
+        {p}
+      </a>
+    ))
+  }
+
+  <!-- Next -->
+  <a
+    href={currentPage < totalPages ? href(currentPage + 1) : undefined}
+    class={`px-4 py-2 text-sm font-body font-medium rounded-lg transition-colors no-underline ${
+      currentPage >= totalPages
+        ? "text-gray-300 pointer-events-none"
+        : "text-charcoal hover:bg-gray-100"
+    }`}
+    aria-disabled={currentPage >= totalPages}
+  >
+    التالي &rarr;
+  </a>
+</nav>

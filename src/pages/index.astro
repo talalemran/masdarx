@@ -1,0 +1,64 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
+import Pagination from "@/components/Pagination.astro";
+
+const postModules = import.meta.glob("./posts/*.astro", { eager: true });
+const posts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+const pageSize = 6;
+const totalPages = Math.ceil(posts.length / pageSize);
+const currentPage = 1;
+const pagePosts = posts.slice(0, pageSize);
+---
+
+<BaseLayout
+  title="الرئيسية"
+  description="مصدر إكس - منصتك العربية الأولى لأخبار البرمجيات مفتوحة المصدر والتقنيات الحديثة"
+  keywords={["مصادر مفتوحة", "لينكس", "برمجة", "تقنية", "أخبار تقنية"]}
+  canonical="/"
+  ogType="website"
+>
+  <section class="bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="text-center">
+        <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4">
+          منصة أخبار المصادر المفتوحة
+        </h1>
+        <p class="font-body text-lg text-gray-600 max-w-2xl mx-auto">
+          أول منصة عربية متخصصة في تغطية أخبار البرمجيات مفتوحة المصدر، التقنيات الحديثة، ومجتمع المطورين العرب.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h2 class="font-heading text-2xl font-bold text-charcoal mb-8">
+      أحدث المقالات
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        pagePosts.map((post) => (
+          <ArticleCard
+            title={post.title}
+            description={post.description}
+            category={post.category}
+            author={post.author}
+            date={post.date}
+            tags={post.tags}
+            slug={post.slug}
+            thumbnail={post.thumbnail}
+          />
+        ))
+      }
+    </div>
+
+    {
+      totalPages > 1 && (
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
+      )
+    }
+  </section>
+</BaseLayout>
