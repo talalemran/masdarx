@@ -1,0 +1,82 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+export const post = {
+  slug: "node-js-patches-12-vulnerabilities",
+  title: "تصدر Node.js تحديثات أمنية لإصلاح 12 ثغرة",
+  description: "Node.js تصدر تحديثات أمنية لإصلاح 12 ثغرة، بما في ذلك ثغرتين عالية الخطورة تتعلقان بتجاوز المصادقة",
+  keywords: ["Node.js", "تحديثات أمنية", "ثغرات أمنية", "تجاوز المصادقة", "TLS", "WebCrypto"],
+  category: "برمجة",
+  author: "فريق مصدر إكس",
+  date: "19 يونيو 2026 ",
+  pubDate: new Date("2026-06-19"),
+  tags: ["Node.js", "تحديثات أمنية", "ثغرات أمنية"],
+  thumbnail: "/images/node-js.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post}>
+    <p>
+      أعلنت Node.js عن تحديثات أمنية لمعالجة 12 ثغرة في الإصدارات المدعومة. بعض
+      هذه الثغرات قد يسمح للمهاجمين بتجاوز المصادقة أو التسبب في تعطيل الخدمات.
+    </p>
+    <h2>ثغرات عالية الخطورة</h2>
+    <h3>تجاوز التحقق من TLS</h3>
+    <p>
+      إحدى الثغرات تؤثر على آلية التحقق من أسماء النطاقات في اتصالات TLS بسبب
+      طريقة معالجة بعض أحرف Unicode. قد يؤدي ذلك إلى تجاوز التحقق من الهوية
+      والوصول غير المصرح به إلى خدمات آمنة.
+    </p>
+    <h3>تعطيل الخدمة عبر WebCrypto</h3>
+    <p>
+      ثغرة أخرى في واجهة WebCrypto يمكن أن تتسبب في تعطل التطبيق عند معالجة
+      أحجام بيانات ضخمة جدًا، مما يسمح بتنفيذ هجمات حجب الخدمة (DoS).
+    </p>
+    <h3>ثغرات إضافية مهمة</h3>
+    <p>
+      تم إصلاح عدة مشكلات أخرى تتعلق بـ:
+      <ul>
+        <li>التحقق من هوية الخوادم في TLS.</li>
+        <li>المصادقة المتبادلة (mTLS).</li>
+        <li>معالجة أسماء المضيفين غير الصحيحة.</li>
+        <li>استهلاك الذاكرة بشكل مفرط في اتصالات HTTP/2.</li>
+        <li>احتمال تسريب بيانات اعتماد البروكسي في السجلات ورسائل الخطأ.</li>
+      </ul>
+    </p>
+    <h3>تحسينات أمنية أخرى</h3>
+    <p>
+      شملت التحديثات إصلاحات لثغرات منخفضة الخطورة مرتبطة بنموذج الصلاحيات
+      (Permission Model)، بالإضافة إلى معالجة بعض حالات السباق (Race Conditions)
+      ومشكلات تجاوز قيود الشبكة.
+    </p>
+    <h3>التوصية</h3>
+    <p>
+      تنصح Node.js جميع المستخدمين بالترقية إلى الإصدارات الأحدث المصححة في أسرع
+      وقت ممكن، وتجنب استخدام الإصدارات التي انتهى دعمها في بيئات الإنتاج.
+    </p>
+    <h3>الخلاصة</h3>
+    <p>
+      تركز الثغرات المكتشفة على التشفير، والتحقق من الهوية، وإدارة الصلاحيات،
+      وبروتوكولات الشبكة. ورغم أن بعضها يتطلب ظروفًا خاصة للاستغلال، فإن التحديث
+      الفوري يظل أفضل وسيلة لحماية التطبيقات المبنية على Node.js.
+    </p>
+    <p>
+      المصدر: <a
+        href="https://cybersecuritynews.com/node-js-patches-12-vulnerabilities/"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Node.js Fixes 12 Vulnerabilities, Including 2 High-Severity
+        Authentication Bypasses
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
