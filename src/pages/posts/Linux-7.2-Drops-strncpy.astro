@@ -1,0 +1,87 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+export const post = {
+  slug: "Linux-7.2-Drops-strncpy",
+  title: "لينكس يودّع strncpy: أكثر من 360 تصحيحاً لإنهاء مصدر مزمن للأخطاء",
+  description:
+    "لينكس يودّع strncpy: أكثر من 360 تصحيحاً لإنهاء مصدر مزمن للأخطاء في النواة",
+  keywords: [
+    "لينكس",
+    "strncpy",
+    "نواة لينكس",
+    "أمان البرمجيات",
+    "تطوير البرمجيات",
+    "تصحيحات الأمان",
+  ],
+  category: "لينكس",
+  author: "فريق مصدر إكس",
+  date: "20 يونيو 2026 ",
+  pubDate: new Date("2026-06-20"),
+  tags: ["لينكس", "strncpy", "نواة لينكس", "أمان البرمجيات"],
+  thumbnail: "/images/Linux-7.2-Drops-strncpy.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post}>
+    <p>
+      أنهى مطورو نواة لينكس عملية إزالة دالة <code>strncpy</code> بالكامل من الكود
+      المصدري، بعد رحلة استمرت نحو 6 سنوات وتضمنت أكثر من 360 تصحيحاً وتعديلاً عبر
+      أجزاء مختلفة من النواة.
+    </p>
+
+    <h2>أبرز ما في التغيير</h2>
+
+    <ul>
+      <li>
+        دالة <code>strncpy</code> كانت تُعتبر منذ سنوات مصدراً متكرراً للأخطاء الأمنية
+        والمنطقية.
+      </li>
+
+      <li>
+        المشكلة الرئيسية تكمن في سلوكها غير البديهي عند التعامل مع إنهاء السلاسل
+        النصية (<code>NUL termination</code>)، ما أدى إلى استخدامات خاطئة كثيرة
+        داخل الكود.
+      </li>
+
+      <li>
+        مطورو النواة استبدلوها تدريجياً ببدائل أكثر أماناً ووضوحاً مثل <code
+          >strscpy</code
+        >.
+      </li>
+
+      <li>
+        عملية الإزالة لم تكن بسيطة بسبب الانتشار الواسع للدالة داخل النواة
+        والسواقات (Drivers)، ما تطلب مئات التصحيحات على مدار سنوات.
+      </li>
+
+      <li>
+        الخطوة تأتي ضمن جهود مستمرة لتحسين أمان النواة وتقليل فئات كاملة من
+        الأخطاء المرتبطة بالتعامل مع السلاسل النصية في لغة C.
+      </li>
+    </ul>
+
+    <p>
+      <strong>الخلاصة:</strong> إزالة <code>strncpy</code> تمثل انتصاراً هندسياً طويل
+      الأمد لنواة لينكس، وتُظهر كيف يفضّل المطورون التخلص من المصادر التاريخية للأخطاء
+      بدلاً من الاستمرار في التعايش معها.
+    </p>
+    <p>
+      المصدر: <a
+        href="https://www.phoronix.com/news/Linux-7.2-Drops-strncpy"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Linux Finally Eliminates The strncpy API After Six Years Of Work, 360+ Patches
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
