@@ -15,24 +15,58 @@ const pagePosts = posts.slice(0, pageSize);
 ---
 
 <BaseLayout
-  title="الرئيسية"
-  description="مصدر إكس - منصتك العربية الأولى لأخبار البرمجيات مفتوحة المصدر والتقنيات الحديثة"
-  keywords={["مصادر مفتوحة", "لينكس", "برمجة", "تقنية", "أخبار تقنية"]}
+  title="مصدر إكس - منصة أخبار المصادر المفتوحة"
+  description="مصدر إكس هي منصتك العربية الأولى لأخبار البرمجيات مفتوحة المصدر والتقنيات الحديثة. تابع أحدث الأخبار، التحليلات، والمراجعات في عالم المصادر المفتوحة."
+  keywords={[
+    "مصدر إكس",
+    "أخبار المصادر المفتوحة",
+    "تقنيات حديثة",
+    "برمجيات مفتوحة المصدر",
+    "تكنولوجيا المعلومات",
+    "تطوير البرمجيات",
+    "لينكس",
+    "برمجة",
+  ]}
   canonical="/"
   ogType="website"
 >
   <section class="bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
       <div class="text-center">
-        <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4">
+        <h1
+          class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4"
+        >
           منصة أخبار المصادر المفتوحة
         </h1>
         <p class="font-body text-lg text-gray-600 max-w-2xl mx-auto">
-          أول منصة عربية متخصصة في تغطية أخبار البرمجيات مفتوحة المصدر، التقنيات الحديثة، ومجتمع المطورين العرب.
+          أول منصة عربية متخصصة في تغطية أخبار البرمجيات مفتوحة المصدر، التقنيات
+          الحديثة، ومجتمع المطورين العرب.
         </p>
       </div>
     </div>
   </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "NewsMediaOrganization",
+    "name": "مصدر إكس",
+    "url": "https://www.masdarx.com",
+    "logo": "https://www.masdarx.com/favicon.svg",
+    "description": "منصة عربية متخصصة في أخبار البرمجيات مفتوحة المصدر والتقنيات الحديثة",
+    "inLanguage": "ar",
+    "areaServed": {
+      "@type": "Country",
+      "name": "العالم العربي"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.masdarx.com/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  })} />
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <h2 class="font-heading text-2xl font-bold text-charcoal mb-8">
