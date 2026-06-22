@@ -1,3 +1,15 @@
+# https://www.masdarx.com/robots.txt
+
 User-agent: *
 Allow: /
+Allow: /categories/
+Allow: /posts/
+Disallow: /tags/
+Disallow: /tag/
+Disallow: /author/
+Disallow: /authors/
+Disallow: /search
+Disallow: /search/
+Disallow: /query/
+
 Sitemap: https://www.masdarx.com/sitemap-index.xml
