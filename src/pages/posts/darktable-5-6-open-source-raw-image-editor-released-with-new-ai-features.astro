@@ -1,0 +1,99 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+export const post = {
+  slug: "darktable-5-6-open-source-raw-image-editor-released-with-new-ai-features",
+  title: "Darktable 5.6: ترقية ضخمة للمصورين مع أدوات AI ودعم HEIF",
+  description:
+    "Darktable 5.6 يصل بميزات AI جديدة تشمل Denoise وUpscaling وAI Masking ودعم HEIF، ليمنح المصورين والمبدعين أدوات أقوى ضمن مشروع مفتوح المصدر.",
+  keywords: [
+    "Darktable",
+    "محرر صور RAW",
+    "ذكاء اصطناعي",
+    "AI Denoise",
+    "AI Upscaling",
+    "AI Masking",
+    "HEIF",
+    "تسريع GPU",
+    "محرر صور مفتوح المصدر",
+  ],
+  category: "برامج",
+  author: "فريق مصدر إكس",
+  date: "21 يونيو 2026 ",
+  pubDate: new Date("2026-06-21"),
+  tags: ["Darktable", "محرر صور RAW", "ذكاء اصطناعي"],
+  thumbnail: "/images//darktable-5-6-open-source-raw-image-editor.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post}>
+
+    <p>
+      أطلق مشروع <strong>Darktable 5.6</strong>، محرر صور RAW المفتوح المصدر
+      الشهير، تحديثًا كبيرًا يجلب ميزات ذكاء اصطناعي طال انتظارها للمستخدمين على
+      لينكس وويندوز وmacOS.
+    </p>
+
+    <ul>
+      <li>
+        <strong>نظام AI اختياري</strong> يمكن تفعيله أو تعطيله بالكامل دون إعادة تشغيل
+        البرنامج، مع بقائه معطلًا افتراضيًا.
+      </li>
+
+      <li>
+        <strong>وحدة Neural Restore</strong> الجديدة التي توفر:
+        <ul>
+          <li>إزالة الضوضاء (Denoise) بالذكاء الاصطناعي.</li>
+          <li>معالجة ضوضاء ملفات RAW مباشرة.</li>
+          <li>
+            تكبير الصور (Upscaling) حتى 2x و4x باستخدام نماذج تعتمد على ONNX.
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>أداة AI Masking</strong> لإنشاء الأقنعة وتحديد العناصر داخل الصورة
+        بشكل أسرع وأكثر دقة.
+      </li>
+
+      <li>
+        <strong>إضافة وحدة Color Harmonizer</strong> لتصحيح وتنسيق الألوان تلقائيًا
+        وفق أنماط لونية احترافية مثل Complementary وTriadic.
+      </li>
+
+      <li>
+        <strong>دعم تصدير الصور بصيغة HEIF</strong> مع خيارات ضغط متعددة وعمق ألوان
+        يصل إلى 12-bit.
+      </li>
+
+      <li>
+        الاستفادة من تسريع <strong>GPU</strong> عند توفره، مع التحويل تلقائيًا إلى
+        <strong>CPU</strong> في حال حدوث أي مشكلة.
+      </li>
+    </ul>
+    <h2>الخلاصة:</h2>
+
+    <p>
+      يمثل Darktable 5.6 واحدة من أكبر القفزات في تاريخ
+      المشروع، ويقرّب محرر الصور المفتوح المصدر خطوة إضافية من منافسة الحلول التجارية
+      بفضل أدوات الذكاء الاصطناعي المدمجة.
+    </p>
+    <p>
+      المصدر: <a
+        href="https://9to5linux.com/darktable-5-6-open-source-raw-image-editor-released-with-new-ai-features"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Darktable 5.6 Open-Source RAW Image Editor Released with New AI Features
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
