@@ -30,6 +30,7 @@ const filteredPosts = allPosts.filter((p) => p.tags?.includes(tag));
   keywords={[tag, "وسوم", "مصادر مفتوحة"]}
   canonical={`/tags/${tag}/`}
   ogType="website"
+  noIndex={true}
 >
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <nav class="mb-6 text-sm font-body text-gray-500">
