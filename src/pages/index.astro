@@ -113,7 +113,7 @@ const currentPage = 1;
               <span>{latestPosts[0].date}</span>
             </div>
             <div class="flex flex-wrap gap-1.5">
-              {latestPosts[0].tags?.slice(0, 3).map((tag) => (
+              {latestPosts[0].tags?.slice(0, 3).map((tag: string) => (
                 <TagBadge tag={tag} href={`/tags/${tag}/`} />
               ))}
             </div>
@@ -150,7 +150,7 @@ const currentPage = 1;
                   <span>{post.date}</span>
                 </div>
                 <div class="flex flex-wrap gap-1">
-                  {post.tags?.slice(0, 2).map((tag) => (
+                  {post.tags?.slice(0, 2).map((tag: string) => (
                     <TagBadge tag={tag} href={`/tags/${tag}/`} />
                   ))}
                 </div>
@@ -193,7 +193,7 @@ const currentPage = 1;
                 <span>{latestPosts[3].date}</span>
               </div>
               <div class="flex flex-wrap gap-1.5">
-                {latestPosts[3].tags?.slice(0, 3).map((tag) => (
+                {latestPosts[3].tags?.slice(0, 3).map((tag: string) => (
                   <TagBadge tag={tag} href={`/tags/${tag}/`} />
                 ))}
               </div>
