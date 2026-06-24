@@ -2,16 +2,20 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ArticleCard from "@/components/ArticleCard.astro";
 import Pagination from "@/components/Pagination.astro";
+import TagBadge from "@/components/TagBadge.astro";
 
 const postModules = import.meta.glob("./posts/*.astro", { eager: true });
 const posts = Object.values(postModules)
   .map((mod: any) => mod.post)
   .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
+const featured = posts[0];
+const latestPosts = posts.slice(1, 5);
+const morePosts = posts.slice(5);
+
 const pageSize = 6;
 const totalPages = Math.ceil(posts.length / pageSize);
 const currentPage = 1;
-const pagePosts = posts.slice(0, pageSize);
 ---
 
 <BaseLayout
@@ -52,47 +56,206 @@ const pagePosts = posts.slice(0, pageSize);
     }
   })} />
 
-  <section class="bg-white border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-      <div class="text-center">
-        <h1
-          class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4"
-        >
-          منصة أخبار المصادر المفتوحة
-        </h1>
-        <p class="font-body text-lg text-gray-600 max-w-2xl mx-auto">
-          أول منصة عربية متخصصة في تغطية أخبار البرمجيات مفتوحة المصدر، التقنيات
-          الحديثة، ومجتمع المطورين العرب.
-        </p>
+  {featured && (
+    <section class="bg-white border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div class="order-2 lg:order-1 relative">
+            <a href={`/category/${featured.category}/`} class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full mb-4 no-underline hover:bg-gray-700 transition-colors">
+              {featured.category}
+            </a>
+            <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4 leading-tight">
+              <a href={`/posts/${featured.slug}/`} class="no-underline text-charcoal hover:text-gray-700 transition-colors">{featured.title}</a>
+            </h1>
+            <p class="font-body text-lg text-gray-600 mb-4 leading-relaxed">
+              {featured.description}
+            </p>
+            <div class="flex flex-wrap items-center gap-2 text-sm text-gray-500 font-body mb-4">
+              <a href={`/author/${featured.author}/`} class="hover:text-charcoal transition-colors no-underline text-gray-500">{featured.author}</a>
+              <span>•</span>
+              <span>{featured.date}</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              {featured.tags?.map((tag: string) => (
+                <TagBadge tag={tag} href={`/tags/${tag}/`} />
+              ))}
+            </div>
+          </div>
+          <div class="order-1 lg:order-2">
+            {featured.thumbnail && (
+              <a href={`/posts/${featured.slug}/`} class="block no-underline group">
+                <div class="aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden">
+                  <img
+                    src={featured.thumbnail}
+                    alt={featured.title}
+                    width="720"
+                    height="405"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </a>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <h2 class="font-heading text-2xl font-bold text-charcoal mb-8">
-      أحدث المقالات
-    </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {
-        pagePosts.map((post) => (
-          <ArticleCard
-            title={post.title}
-            description={post.description}
-            category={post.category}
-            author={post.author}
-            date={post.date}
-            tags={post.tags}
-            slug={post.slug}
-            thumbnail={post.thumbnail}
-          />
-        ))
-      }
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="font-heading text-2xl font-bold text-charcoal">
+        أحدث المقالات
+      </h2>
+      <a href="/page/2/" class="font-body text-sm text-charcoal hover:text-gray-600 transition-colors no-underline">
+        عرض الكل &larr;
+      </a>
     </div>
 
-    {
-      totalPages > 1 && (
-        <Pagination currentPage={currentPage} totalPages={totalPages} />
-      )
-    }
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      {latestPosts[0] && (
+        <article class="relative bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transition-shadow hover:shadow-md h-full">
+          <a href={`/posts/${latestPosts[0].slug}/`} class="absolute inset-0 z-0 no-underline" aria-label={latestPosts[0].title}></a>
+          {latestPosts[0].thumbnail && (
+            <div class="aspect-[16/9] bg-gray-100 overflow-hidden">
+              <img
+                src={latestPosts[0].thumbnail}
+                alt={latestPosts[0].title}
+                width="600"
+                height="337"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          )}
+          <div class="p-6 relative z-10">
+            <a href={`/category/${latestPosts[0].category}/`} class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full mb-3 no-underline hover:bg-gray-700 transition-colors">
+              {latestPosts[0].category}
+            </a>
+            <h3 class="font-heading text-lg font-bold text-charcoal mb-2" style="line-height: 2;">
+              {latestPosts[0].title}
+            </h3>
+            <p class="font-body text-sm text-gray-600 leading-relaxed mb-3 line-clamp-2">
+              {latestPosts[0].description}
+            </p>
+            <div class="flex items-center gap-2 text-xs text-gray-500 font-body mb-3">
+              <a href={`/author/${latestPosts[0].author}/`} class="hover:text-charcoal transition-colors no-underline text-gray-500">{latestPosts[0].author}</a>
+              <span>•</span>
+              <span>{latestPosts[0].date}</span>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              {latestPosts[0].tags?.slice(0, 3).map((tag: string) => (
+                <TagBadge tag={tag} href={`/tags/${tag}/`} />
+              ))}
+            </div>
+          </div>
+        </article>
+      )}
+
+      <div class="flex flex-col gap-6">
+        {latestPosts.slice(1, 3).map((post) => (
+          <article class="relative bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transition-shadow hover:shadow-md">
+            <a href={`/posts/${post.slug}/`} class="absolute inset-0 z-0 no-underline" aria-label={post.title}></a>
+            <div class="flex">
+              {post.thumbnail && (
+                <div class="w-1/3 bg-gray-100 overflow-hidden shrink-0">
+                  <img
+                    src={post.thumbnail}
+                    alt={post.title}
+                    width="200"
+                    height="112"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              <div class="p-4 flex flex-col justify-center relative z-10">
+                <a href={`/category/${post.category}/`} class="inline-block px-2 py-0.5 text-xs font-bold font-heading text-white bg-charcoal rounded-full mb-2 self-start no-underline hover:bg-gray-700 transition-colors">
+                  {post.category}
+                </a>
+                <h3 class="font-heading text-base font-bold text-charcoal mb-1 leading-snug line-clamp-2">
+                  {post.title}
+                </h3>
+                <div class="flex items-center gap-2 text-xs text-gray-500 font-body mb-2">
+                  <a href={`/author/${post.author}/`} class="hover:text-charcoal transition-colors no-underline text-gray-500">{post.author}</a>
+                  <span>•</span>
+                  <span>{post.date}</span>
+                </div>
+                <div class="flex flex-wrap gap-1">
+                  {post.tags?.slice(0, 2).map((tag: string) => (
+                    <TagBadge tag={tag} href={`/tags/${tag}/`} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    {latestPosts[3] && (
+      <div class="mb-8">
+        <article class="relative bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transition-shadow hover:shadow-md">
+          <a href={`/posts/${latestPosts[3].slug}/`} class="absolute inset-0 z-0 no-underline" aria-label={latestPosts[3].title}></a>
+          <div class="flex flex-col sm:flex-row">
+            {latestPosts[3].thumbnail && (
+              <div class="sm:w-1/3 bg-gray-100 overflow-hidden shrink-0">
+                <img
+                  src={latestPosts[3].thumbnail}
+                  alt={latestPosts[3].title}
+                  width="400"
+                  height="225"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            )}
+            <div class="p-6 flex flex-col justify-center relative z-10">
+              <a href={`/category/${latestPosts[3].category}/`} class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full mb-3 self-start no-underline hover:bg-gray-700 transition-colors">
+                {latestPosts[3].category}
+              </a>
+              <h3 class="font-heading text-lg font-bold text-charcoal mb-2 leading-snug">
+                {latestPosts[3].title}
+              </h3>
+              <p class="font-body text-sm text-gray-600 leading-relaxed mb-3 line-clamp-2">
+                {latestPosts[3].description}
+              </p>
+              <div class="flex items-center gap-2 text-xs text-gray-500 font-body mb-3">
+                <a href={`/author/${latestPosts[3].author}/`} class="hover:text-charcoal transition-colors no-underline text-gray-500">{latestPosts[3].author}</a>
+                <span>•</span>
+                <span>{latestPosts[3].date}</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                {latestPosts[3].tags?.slice(0, 3).map((tag: string) => (
+                  <TagBadge tag={tag} href={`/tags/${tag}/`} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    )}
+
+    {morePosts.length > 0 && (
+      <div class="border-t border-gray-100 pt-8 mb-8">
+        <h2 class="font-heading text-2xl font-bold text-charcoal mb-6">
+          المزيد من المقالات
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {morePosts.map((post) => (
+            <ArticleCard
+              title={post.title}
+              description={post.description}
+              category={post.category}
+              author={post.author}
+              date={post.date}
+              tags={post.tags}
+              slug={post.slug}
+              thumbnail={post.thumbnail}
+            />
+          ))}
+        </div>
+      </div>
+    )}
+
+    {totalPages > 1 && (
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
+    )}
   </section>
 </BaseLayout>
