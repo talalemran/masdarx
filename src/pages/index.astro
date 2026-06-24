@@ -2,26 +2,16 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ArticleCard from "@/components/ArticleCard.astro";
 import Pagination from "@/components/Pagination.astro";
-import TagBadge from "@/components/TagBadge.astro";
 
 const postModules = import.meta.glob("./posts/*.astro", { eager: true });
 const posts = Object.values(postModules)
   .map((mod: any) => mod.post)
   .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
-const latestPosts = posts.slice(0, 4);
-const morePosts = posts.slice(4);
-
 const pageSize = 6;
 const totalPages = Math.ceil(posts.length / pageSize);
 const currentPage = 1;
-
-const categoryColors: Record<string, string> = {
-  "لينكس": "bg-emerald-600",
-  "برامج": "bg-blue-600",
-  "بيئة سطح المكتب": "bg-purple-600",
-  "برمجة": "bg-orange-600",
-};
+const pagePosts = posts.slice(0, pageSize);
 ---
 
 <BaseLayout
@@ -65,116 +55,44 @@ const categoryColors: Record<string, string> = {
   <section class="bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
       <div class="text-center">
-        <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4">
+        <h1
+          class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4"
+        >
           منصة أخبار المصادر المفتوحة
         </h1>
         <p class="font-body text-lg text-gray-600 max-w-2xl mx-auto">
-          أول منصة عربية متخصصة في تغطية أخبار البرمجيات مفتوحة المصدر، التقنيات الحديثة، ومجتمع المطورين العرب.
+          أول منصة عربية متخصصة في تغطية أخبار البرمجيات مفتوحة المصدر، التقنيات
+          الحديثة، ومجتمع المطورين العرب.
         </p>
       </div>
     </div>
   </section>
 
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-    <div class="flex items-center gap-3 mb-8">
-      <div class="w-1.5 h-8 bg-charcoal rounded-full"></div>
-      <h2 class="font-heading text-2xl font-bold text-charcoal">أحدث المقالات</h2>
-      <a href="/page/2/" class="mr-auto font-body text-sm text-gray-500 hover:text-charcoal transition-colors no-underline">عرض الكل &larr;</a>
+    <h2 class="font-heading text-2xl font-bold text-charcoal mb-8">
+      أحدث المقالات
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        pagePosts.map((post) => (
+          <ArticleCard
+            title={post.title}
+            description={post.description}
+            category={post.category}
+            author={post.author}
+            date={post.date}
+            tags={post.tags}
+            slug={post.slug}
+            thumbnail={post.thumbnail}
+          />
+        ))
+      }
     </div>
 
-    {latestPosts[0] && (
-      <a href={`/posts/${latestPosts[0].slug}/`} class="block no-underline group mb-8">
-        <article class="relative rounded-2xl overflow-hidden bg-gray-900">
-          {latestPosts[0].thumbnail && (
-            <div class="aspect-[21/9] sm:aspect-[3/1] overflow-hidden">
-              <img src={latestPosts[0].thumbnail} alt={latestPosts[0].title} width="1200" height="400" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500" />
-            </div>
-          )}
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-10">
-            <span class:list={[
-              "inline-block px-3 py-1 text-xs font-bold font-heading text-white rounded-full mb-4",
-              categoryColors[latestPosts[0].category] || "bg-charcoal"
-            ]}>
-              {latestPosts[0].category}
-            </span>
-            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-3 leading-tight group-hover:text-gray-200 transition-colors">
-              {latestPosts[0].title}
-            </h3>
-            <p class="font-body text-sm sm:text-base text-gray-300 mb-4 max-w-2xl leading-relaxed line-clamp-2">
-              {latestPosts[0].description}
-            </p>
-            <div class="flex flex-wrap items-center gap-3 text-sm text-gray-400 font-body">
-              <span>{latestPosts[0].author}</span>
-              <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-              <span>{latestPosts[0].date}</span>
-              <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-              <div class="flex flex-wrap gap-1.5">
-                {latestPosts[0].tags?.slice(0, 3).map((tag: string) => (
-                  <span class="text-xs text-gray-400">#{tag}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </article>
-      </a>
-    )}
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-      {latestPosts.slice(1, 4).map((post) => (
-        <a href={`/posts/${post.slug}/`} class="block no-underline group">
-          <article class="relative bg-white rounded-xl border border-gray-100 overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5 h-full">
-            {post.thumbnail && (
-              <div class="aspect-[16/9] overflow-hidden">
-                <img src={post.thumbnail} alt={post.title} width="400" height="225" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-              </div>
-            )}
-            <div class="p-5">
-              <div class="flex items-center gap-3 mb-3">
-                <span class:list={[
-                  "inline-block w-2 h-2 rounded-full shrink-0",
-                  categoryColors[post.category] || "bg-charcoal"
-                ]}></span>
-                <span class="font-body text-xs font-medium text-gray-500">{post.category}</span>
-              </div>
-              <h3 class="font-heading text-lg font-bold text-charcoal mb-2 leading-snug group-hover:text-gray-700 transition-colors line-clamp-2">{post.title}</h3>
-              <p class="font-body text-sm text-gray-500 leading-relaxed mb-3 line-clamp-2">{post.description}</p>
-              <div class="flex items-center gap-2 text-xs text-gray-400 font-body pt-3 border-t border-gray-50">
-                <span>{post.author}</span>
-                <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
-                <span>{post.date}</span>
-              </div>
-            </div>
-          </article>
-        </a>
-      ))}
-    </div>
-
-    {morePosts.length > 0 && (
-      <div class="border-t border-gray-100 pt-8 mb-8">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-1.5 h-8 bg-charcoal rounded-full"></div>
-          <h2 class="font-heading text-2xl font-bold text-charcoal">المزيد من المقالات</h2>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {morePosts.map((post) => (
-            <ArticleCard
-              title={post.title}
-              description={post.description}
-              category={post.category}
-              author={post.author}
-              date={post.date}
-              tags={post.tags}
-              slug={post.slug}
-              thumbnail={post.thumbnail}
-            />
-          ))}
-        </div>
-      </div>
-    )}
-
-    {totalPages > 1 && (
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
-    )}
+    {
+      totalPages > 1 && (
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
+      )
+    }
   </section>
 </BaseLayout>
