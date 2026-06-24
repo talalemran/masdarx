@@ -64,7 +64,7 @@ const currentPage = 1;
             <a href={`/category/${featured.category}/`} class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full mb-4 no-underline hover:bg-gray-700 transition-colors">
               {featured.category}
             </a>
-            <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4 leading-tight">
+            <h1 class="font-heading text-2xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal mb-4 leading-tight">
               <a href={`/posts/${featured.slug}/`} class="no-underline text-charcoal hover:text-gray-700 transition-colors">{featured.title}</a>
             </h1>
             <p class="font-body text-lg text-gray-600 mb-4 leading-relaxed">
@@ -76,7 +76,7 @@ const currentPage = 1;
               <span>{featured.date}</span>
             </div>
             <div class="flex flex-wrap gap-2">
-              {featured.tags?.map((tag) => (
+              {featured.tags?.map((tag: string) => (
                 <TagBadge tag={tag} href={`/tags/${tag}/`} />
               ))}
             </div>
