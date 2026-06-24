@@ -1,0 +1,94 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+export const post = {
+  slug: "cosmic-desktop-update-system-monitor",
+  title:
+    "COSMIC يحصل على مراقب نظام جديد بواجهة أسرع وتجربة أكثر احترافية",
+  description:
+    "تحديث جديد لبيئة COSMIC يجلب تحسينات كبيرة لأداة System Monitor مع مراقبة أدق للموارد، واجهة أسرع، وتجربة أكثر احترافية لمستخدمي لينكس والمطورين.",
+  keywords: [
+    "COSMIC",
+    "System Monitor",
+    "System76",
+    "توزيعة لينكس",
+    "مراقبة النظام",
+    "أداء النظام",
+    "تحديثات لينكس",
+  ],
+  category: "بيئة سطح المكتب",
+  author: "فريق مصدر إكس",
+  date: "23 يونيو 2026 ",
+  pubDate: new Date("2026-06-23"),
+  tags: [
+    "COSMIC",
+    "System Monitor",
+    "System76",
+    "توزيعة لينكس",
+    "مراقبة النظام",
+    "أداء النظام",
+  ],
+  thumbnail: "/images/cosmic-desktop-update-system-monitor.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post}>
+    <p>
+      Meta Description: تحديث جديد لبيئة COSMIC يجلب تحسينات مهمة لأداة System
+      Monitor مع عرض أوضح للموارد وأداء أسرع وتجربة أفضل للمطورين ومستخدمي
+      لينكس.
+    </p>
+
+    <h2>تحديث جديد لأداة مراقبة النظام في COSMIC</h2>
+
+    <p>
+      واصل فريق <strong>System76</strong> تحسين بيئة سطح المكتب <strong
+        >COSMIC</strong
+      > عبر تحديث جديد لأداة
+      <strong>System Monitor</strong>، مع تركيز واضح على الأداء وسهولة متابعة
+      موارد النظام.
+    </p>
+
+    <h2>أبرز التغييرات</h2>
+
+    <ul>
+      <li>عرض أكثر وضوحًا لاستهلاك المعالج والذاكرة والتخزين والشبكة.</li>
+      <li>تحديث البيانات في الوقت الفعلي بسرعة واستجابة أفضل.</li>
+      <li>تنظيم محسّن للعمليات النشطة لتسهيل مراقبة الأداء.</li>
+      <li>واجهة متناسقة مع تصميم COSMIC المبني بلغة Rust.</li>
+    </ul>
+
+    <h2>لماذا يهم المطورين؟</h2>
+
+    <p>
+      أصبحت أدوات مراقبة النظام جزءًا أساسيًا من بيئة عمل المطورين ومديري
+      الأنظمة. التحديث الجديد يوفر رؤية أسرع وأكثر وضوحًا لاستهلاك الموارد دون
+      الحاجة إلى أدوات إضافية، مع تجربة حديثة تتماشى مع فلسفة COSMIC في تقديم
+      سطح مكتب لينكس عصري وقابل للتخصيص.
+    </p>
+
+    <p>
+      الخلاصة: التحديث الجديد يجعل أداة System Monitor في COSMIC أكثر نضجًا
+      ويقرب البيئة خطوة إضافية نحو منافسة GNOME وKDE كمشروع مفتوح المصدر حديث
+      للمستخدمين والمطورين.
+    </p>
+
+    <p>
+      المصدر: <a
+        href="https://www.omgubuntu.co.uk/2026/06/cosmic-desktop-update-system-monitor"
+        target="_blank"
+        rel="noopener noreferrer"
+        >COSMIC desktop update adds new system monitor app
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
