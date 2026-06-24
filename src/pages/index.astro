@@ -76,7 +76,7 @@ const currentPage = 1;
               <span>{featured.date}</span>
             </div>
             <div class="flex flex-wrap gap-2">
-              {featured.tags?.map((tag: string) => (
+              {featured.tags?.map((tag) => (
                 <TagBadge tag={tag} href={`/tags/${tag}/`} />
               ))}
             </div>
@@ -142,7 +142,7 @@ const currentPage = 1;
               <span>{latestPosts[0].date}</span>
             </div>
             <div class="flex flex-wrap gap-1.5">
-              {latestPosts[0].tags?.slice(0, 3).map((tag: string) => (
+              {latestPosts[0].tags?.slice(0, 3).map((tag) => (
                 <TagBadge tag={tag} href={`/tags/${tag}/`} />
               ))}
             </div>
@@ -179,7 +179,7 @@ const currentPage = 1;
                   <span>{post.date}</span>
                 </div>
                 <div class="flex flex-wrap gap-1">
-                  {post.tags?.slice(0, 2).map((tag: string) => (
+                  {post.tags?.slice(0, 2).map((tag) => (
                     <TagBadge tag={tag} href={`/tags/${tag}/`} />
                   ))}
                 </div>
@@ -222,7 +222,7 @@ const currentPage = 1;
                 <span>{latestPosts[3].date}</span>
               </div>
               <div class="flex flex-wrap gap-1.5">
-                {latestPosts[3].tags?.slice(0, 3).map((tag: string) => (
+                {latestPosts[3].tags?.slice(0, 3).map((tag) => (
                   <TagBadge tag={tag} href={`/tags/${tag}/`} />
                 ))}
               </div>
