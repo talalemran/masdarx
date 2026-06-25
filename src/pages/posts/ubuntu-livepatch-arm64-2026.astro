@@ -1,0 +1,93 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+export const post = {
+  slug: "ubuntu-livepatch-arm64-2026",
+  title:
+    "لأول مرة: Ubuntu Livepatch يصل إلى ARM64 ويُلغي الحاجة لإعادة التشغيل",
+  description:
+    "أعلنت Canonical دعم Livepatch لمعمارية ARM64 في Ubuntu 26.04 LTS، ما يتيح تطبيق تحديثات نواة لينكس الأمنية دون إعادة تشغيل الخوادم أو الأجهزة، مع تحسين الاستقرار واستمرارية الخدمة.",
+  keywords: [
+    "Livepatch",
+    "ARM64",
+    "Ubuntu 26.04 LTS",
+    "تحديثات نواة لينكس",
+    "الأمن السيبراني",
+    "استمرارية الخدمة",
+    "تحديثات لينكس",
+  ],
+  category: "لينكس",
+  author: "فريق مصدر إكس",
+  date: "24 يونيو 2026 ",
+  pubDate: new Date("2026-06-24"),
+  tags: [
+    "Livepatch",
+    "ARM64",
+    "Ubuntu 26.04 LTS",
+    "توزيعة لينكس",
+    "مراقبة النظام",
+    "أداء النظام",
+  ],
+  thumbnail: "/images/ubuntu-livepatch-arm64-2026.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post}>
+    <p>
+    أعلنت Canonical عن دعم ميزة <strong>Livepatch</strong> لمعمارية
+    <strong>ARM64</strong> في Ubuntu 26.04 LTS، ما يسمح بتطبيق التحديثات
+    الأمنية الحرجة على <strong>نواة لينكس</strong> دون الحاجة إلى إعادة تشغيل
+    النظام.
+  </p>
+
+  <h2>ما الجديد؟</h2>
+
+  <ul>
+    <li>تطبيق تصحيحات النواة الأمنية أثناء عمل النظام.</li>
+    <li>تقليل فترات التوقف للخوادم وأجهزة Edge والبنى التحتية الحرجة.</li>
+    <li>دعم رسمي لأجهزة وخوادم ARM64 لأول مرة ضمن خدمة Livepatch.</li>
+    <li>متوفر في Ubuntu 26.04 LTS وUbuntu Core 26.</li>
+  </ul>
+
+  <h2>لماذا يهم المطورين ومديري الأنظمة؟</h2>
+
+  <p>
+    مع الانتشار المتزايد لخوادم ARM في مراكز البيانات والسحابة، أصبحت إعادة
+    التشغيل المتكررة عبئاً تشغيلياً ومصدراً محتملاً لانقطاع الخدمات. Livepatch
+    يتيح سد الثغرات الأمنية فوراً مع الحفاظ على استمرارية العمل، وهو أمر مهم
+    بشكل خاص للخدمات الحساسة والأجهزة البعيدة.
+  </p>
+
+  <h2>خلف الكواليس</h2>
+
+  <p>
+    تقول Canonical إنها بنت بنية اختبار وتجميع مخصصة لـ ARM64، مع مزارع بناء
+    واختبارات انحدار خاصة لضمان استقرار التصحيحات قبل توزيعها على المستخدمين.
+  </p>
+
+  <h2>الخلاصة:</h2>
+
+  <blockquote>
+   وصول Livepatch إلى ARM64 يجعل أوبونتو أكثر جاهزية للخوادم الحديثة،
+    مع تحديثات أمنية أسرع ووقت تشغيل أعلى دون إعادة تشغيل مزعجة.
+  </blockquote>
+
+    <p>
+      المصدر: <a
+        href="https://www.omgubuntu.co.uk/2026/06/ubuntu-livepatch-arm64"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Ubuntu brings Livepatch to arm64 for rebootless kernel updates
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
