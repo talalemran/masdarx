@@ -15,7 +15,7 @@ const pagePosts = posts.slice(0, pageSize);
 ---
 
 <BaseLayout
-  title="مصدر إكس - منصة أخبار المصادر المفتوحة"
+  title="منصة أخبار المصادر المفتوحة"
   description="مصدر إكس هي منصتك العربية الأولى لأخبار البرمجيات مفتوحة المصدر والتقنيات الحديثة. تابع أحدث الأخبار، التحليلات، والمراجعات في عالم المصادر المفتوحة."
   keywords={[
     "مصدر إكس",
@@ -33,6 +33,7 @@ const pagePosts = posts.slice(0, pageSize);
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "NewsMediaOrganization",
+    "name": "مصدر إكس",
     "url": "https://www.masdarx.com",
     "logo": "https://www.masdarx.com/favicon.svg",
     "description": "منصة عربية متخصصة في أخبار البرمجيات مفتوحة المصدر والتقنيات الحديثة",
