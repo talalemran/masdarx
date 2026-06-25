@@ -2,6 +2,11 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PostLayout from "@/components/PostLayout.astro";
 
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
 export const post = {
   slug: "opensuse-tumbleweed-unsung-rolling-distro",
   title: "لماذا تُعد openSUSE Tumbleweed أفضل توزيعة رولينغ لا تحظى بالاهتمام الكافي؟",
@@ -34,7 +39,7 @@ export const post = {
   ogImage={post.thumbnail}
   ogType="article"
 >
-  <PostLayout {post}>
+  <PostLayout {post} allPosts={allPosts}>
     <article>
         <p>
           رغم هيمنة أسماء مثل Arch Linux وFedora في نقاشات مجتمع لينكس، يرى

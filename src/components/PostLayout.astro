@@ -1,5 +1,6 @@
 ---
 import TagBadge from "./TagBadge.astro";
+import ArticleCard from "./ArticleCard.astro";
 
 export interface Props {
   post: {
@@ -14,9 +15,10 @@ export interface Props {
     pubDate?: Date;
     keywords?: string[];
   };
+  allPosts?: any[];
 }
 
-const { post } = Astro.props;
+const { post, allPosts = [] } = Astro.props;
 const { title, description, category, author, date, tags, thumbnail, slug } = post;
 
 const postUrl = `https://www.masdarx.com/posts/${slug}/`;
@@ -26,6 +28,15 @@ const shareLinks = {
   linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(postUrl)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(description)}`,
   telegram: `https://t.me/share/url?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(title)}`,
 };
+
+const relatedPosts = allPosts
+  .filter((p) => p.slug !== slug)
+  .map((p) => ({
+    ...p,
+    score: (p.tags?.filter((t) => tags?.includes(t)).length || 0) + (p.category === category ? 2 : 0),
+  }))
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 3);
 ---
 
 <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -130,3 +141,23 @@ const shareLinks = {
     </a>
   </div>
 </article>
+
+{relatedPosts.length > 0 && (
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-t border-gray-100">
+    <h2 class="font-heading text-2xl font-bold text-charcoal mb-8">مقالات ذات صلة</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {relatedPosts.map((rp) => (
+        <ArticleCard
+          title={rp.title}
+          description={rp.description}
+          category={rp.category}
+          author={rp.author}
+          date={rp.date}
+          tags={rp.tags}
+          slug={rp.slug}
+          thumbnail={rp.thumbnail}
+        />
+      ))}
+    </div>
+  </section>
+)}

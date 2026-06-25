@@ -2,6 +2,11 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PostLayout from "@/components/PostLayout.astro";
 
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
 export const post = {
   slug: "Linux-7.2-Drops-strncpy",
   title: "لينكس يودّع strncpy: أكثر من 360 تصحيحاً لإنهاء مصدر مزمن للأخطاء",
@@ -32,7 +37,7 @@ export const post = {
   ogImage={post.thumbnail}
   ogType="article"
 >
-  <PostLayout {post}>
+  <PostLayout {post} allPosts={allPosts}>
     <p>
       أنهى مطورو نواة لينكس عملية إزالة دالة <code>strncpy</code> بالكامل من الكود
       المصدري، بعد رحلة استمرت نحو 6 سنوات وتضمنت أكثر من 360 تصحيحاً وتعديلاً عبر

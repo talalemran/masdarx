@@ -2,6 +2,11 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PostLayout from "@/components/PostLayout.astro";
 
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
 export const post = {
   slug: "cosmic-desktop-update-system-monitor",
   title:
@@ -41,7 +46,7 @@ export const post = {
   ogImage={post.thumbnail}
   ogType="article"
 >
-  <PostLayout {post}>
+  <PostLayout {post} allPosts={allPosts}>
     <p>
       تحديث جديد لبيئة COSMIC يجلب تحسينات مهمة لأداة System
       Monitor مع عرض أوضح للموارد وأداء أسرع وتجربة أفضل للمطورين ومستخدمي
