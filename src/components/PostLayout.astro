@@ -32,7 +32,7 @@ const relatedPosts = allPosts
   .filter((p) => p.slug !== slug)
   .map((p) => ({
     ...p,
-    score: (p.tags?.filter((t) => tags?.includes(t)).length || 0) + (p.category === category ? 2 : 0),
+    score: (p.tags?.filter((t: string) => tags?.includes(t)).length || 0) + (p.category === category ? 2 : 0),
   }))
   .sort((a, b) => b.score - a.score)
   .slice(0, 3);
