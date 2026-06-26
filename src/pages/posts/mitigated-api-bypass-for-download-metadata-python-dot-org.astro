@@ -1,0 +1,128 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "mitigated-api-bypass-for-download-metadata-python-dot-org",
+  title: ">تجاوز مصادقة API في python.org: الكشف، الإصلاح، والتدقيق الكامل",
+  description:
+    "كشفت DEVCORE عن ثغرة تجاوز مصادقة في API تنزيلات python.org موجودة منذ 2014 — تعرّف على آلية الثغرة وكيف أغلقها فريق بايثون خلال 48 ساعة.",
+  keywords: [
+    "أمن",
+    "Python",
+    "API",
+    "ثغرة أمنية",
+    "تجاوز المصادقة",
+    "DEVCORE",
+  ],
+  category: "برمجة",
+  author: "فريق مصدر إكس",
+  date: "25 يونيو 2026 ",
+  pubDate: new Date("2026-06-25"),
+  tags: [
+    "أمن",
+    "Python",
+    "API",
+    "ثغرة أمنية",
+    "تجاوز المصادقة",
+    "DEVCORE",
+  ],
+  thumbnail: "/images/mitigated-api-bypass-for-download-metadata-python-dot-org.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <article>
+        <p>
+          كشف فريق <strong>DEVCORE Research Team</strong> في فبراير 2026 عن ثغرة أمنية
+          في الـ API الخاص بإدارة إصدارات بايثون على <strong>python.org</strong
+          >، تتيح تجاوز المصادقة بالكامل — وكانت مخبأة في الكود منذ عام <strong
+            >2014</strong
+          >.
+        </p>
+
+        <h2>كيف تعمل الثغرة؟</h2>
+
+        <p>
+          المشكلة ببساطة: يمكن إرسال اسم مستخدم <code>admin</code> مع أي API key عشوائي،
+          والسيرفر يقبل الطلب بصلاحيات كاملة. هذا كان يُمكّن أي مهاجم من:
+        </p>
+
+        <ul>
+          <li>
+            <strong>تعديل روابط التنزيل</strong> الرسمية لإصدارات بايثون على python.org/downloads
+          </li>
+          <li>
+            <strong>استبدال روابط التحقق</strong> (Sigstore وPGP) بروابط خبيثة
+          </li>
+          <li>
+            لكن <strong>لا</strong> يسمح بتعديل الملفات الفعلية مباشرة على السيرفر
+          </li>
+        </ul>
+
+        <h2>الاستجابة: أقل من 48 ساعة</h2>
+
+        <ul>
+          <li>
+            <strong>23 فبراير:</strong> استقبال البلاغ من DEVCORE وتأكيده فوراً
+          </li>
+          <li>
+            <strong>24 فبراير:</strong> نشر الإصلاح على بيئة الإنتاج مباشرة
+          </li>
+          <li>
+            <strong>25 فبراير:</strong> مراجعة السجلات وقواعد البيانات وملفات Sigstore
+            وPGP — <strong>لا أثر لأي استغلال</strong>
+          </li>
+        </ul>
+
+        <h2>التحصينات الإضافية</h2>
+
+        <ul>
+          <li>
+            رفض أي URL لا يبدأ بـ <code>https://www.python.org/</code> على مستوى قاعدة
+            البيانات والـ API
+          </li>
+          <li>
+            زيادة مدة الاحتفاظ بالسجلات من 3 أيام إلى <strong>30 يوماً</strong>
+          </li>
+          <li>
+            تدقيق مستقل من <strong>Trail of Bits</strong> ممول من <strong
+              >OpenAI</strong
+            >
+          </li>
+          <li>
+            تطبيق أدوات تدقيق أمني بالذكاء الاصطناعي — لم تُكتشف أي ثغرات إضافية
+          </li>
+        </ul>
+
+        <p>
+          <strong
+            >الثغرة موجودة في الكود منذ 2014، والفضل في اكتشافها وإغلاقها يذهب
+            للإفصاح المسؤول وسرعة استجابة فريق بايثون الأمني خلال 48 ساعة فقط.</strong
+          >
+        </p>
+      </h1>
+
+      <p>
+        <p>
+            >المصدر: <a
+              href="https://blog.python.org/2026/06/mitigated-api-bypass-for-download-metadata-python-dot-org/"
+              target="_blank">Python Insider Blog</a>
+        </p>
+      </p>
+    </article>
+  </PostLayout>
+</BaseLayout>
