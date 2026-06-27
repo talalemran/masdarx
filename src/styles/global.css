@@ -116,7 +116,7 @@
     @apply text-lg;
   }
 
-  .font-heading h1 {
+  .font-heading {
     line-height: 5rem !important;
   }
 
