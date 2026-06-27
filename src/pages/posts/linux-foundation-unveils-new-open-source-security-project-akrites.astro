@@ -1,0 +1,107 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "linux-foundation-unveils-new-open-source-security-project-akrites",
+  title:
+    "أكريتيس: مشروع مفتوح المصدر جديد لإصلاح الثغرات قبل أن يستغلها المهاجمون",
+  description:
+    "أطلقت Linux Foundation مشروع أكريتيس (Akrites)، فريق SIRT مشترك بدعم من غوغل وميكروسوفت وأنثروبيك وعشرين شركة، لمعالجة ثغرات البرمجيات مفتوحة المصدر سراً قبل إعلانها والحد من استغلال الذكاء الاصطناعي في تسليح هذه الثغرات.",
+  keywords: [
+    "أكريتيس",
+    "Akrites",
+    "Linux Foundation",
+    "SIRT",
+    "ثغرات أمنية",
+    "برمجيات مفتوحة المصدر",
+    "أمان البرمجيات",
+    "الذكاء الاصطناعي",
+  ],
+  category: "لينكس",
+  author: "فريق مصدر إكس",
+  date: "26 يونيو 2026 ",
+  pubDate: new Date("2026-06-26"),
+  tags: [
+    "أكريتيس",
+    "Akrites",
+    "Linux Foundation",
+    "SIRT",
+    "ثغرات أمنية",
+    "برمجيات مفتوحة المصدر",
+    "أمان البرمجيات",
+    "الذكاء الاصطناعي",
+  ],
+  thumbnail: "/images/cosmic-desktop-update-system-monitor.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      أعلنت <strong>Linux Foundation</strong> عن مشروعها الأمني الجديد <strong
+        >أكريتيس (Akrites)</strong
+      >، وهو مبادرة جماعية تهدف إلى معالجة الثغرات الأمنية في البرمجيات مفتوحة
+      المصدر
+      <strong>قبل</strong> إعلانها للعموم.
+    </p>
+
+    <h2>ما الذي يفعله أكريتيس؟</h2>
+
+    <p>يُنشئ المشروع فريق استجابة أمني مشترك <strong>(SIRT)</strong> يتولى:</p>
+    <ul>
+      <li>استقبال بلاغات الثغرات عبر قنوات سرية وموثوقة</li>
+      <li>التنسيق بين المطورين والمشرفين لتطوير الباتشات قبل الإفصاح</li>
+      <li>دعم الحزم المهجورة التي لم يعد لها مشرفون نشطون</li>
+      <li>
+        التنسيق مع البنية التحتية الحيوية لضمان نشر الإصلاحات قبل الاستغلال
+        الفعلي
+      </li>
+    </ul>
+
+    <h2>لماذا الآن؟</h2>
+
+    <p>
+      الذكاء الاصطناعي بات يُمكّن المهاجمين من الهندسة العكسية للثغرات وتطوير
+      الإكسبلويتس بسرعة قياسية فور نشر أي باتش علني، مما يُضيّق النافذة الزمنية
+      الآمنة بشكل كبير.
+    </p>
+
+    <h2>من يدعم المشروع؟</h2>
+
+    <p>
+      قائمة الداعمين تضم: Anthropic، AWS، Chainguard، Cisco، Google، IBM،
+      Microsoft، NVIDIA، OpenAI، Red Hat، وعشرين جهة أخرى، فيما يأتي التمويل
+      الأولي من صندوق
+      <strong>Alpha-Omega</strong> التابع لـ Linux Foundation.
+    </p>
+
+    <h2>الخلاصة</h2>
+    <p>
+      أكريتيس يُعيد رسم قواعد الأمان في عالم المصدر المفتوح — من الكشف والإعلان
+      إلى
+      <strong>الإصلاح الفعلي قبل الاستغلال</strong>.
+    </p>
+
+    <section>
+    <h3>المصدر:</h3>
+    <p>
+      <a href="https://www.securityweek.com/linux-foundation-unveils-new-open-source-security-project-akrites/" target="_blank" rel="noopener noreferrer">
+        Linux Foundation Unveils New Open Source Security Project Akrites — SecurityWeek
+      </a>
+    </p>
+  </section>
+  </PostLayout>
+</BaseLayout>
