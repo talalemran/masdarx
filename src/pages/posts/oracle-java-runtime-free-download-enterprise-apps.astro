@@ -1,0 +1,102 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "oracle-java-runtime-free-download-enterprise-apps",
+  title: "جافا مجانًا من أوراكل: بيئة التشغيل التي تُبقي تطبيقات الشركات حيّة",
+  description:
+    "تعرّف على Java Runtime Environment المجاني من أوراكل: لماذا لا تزال بيئة تشغيل جافا ضرورة حتمية في بيئات المؤسسات، وكيف يستخدمها المسؤولون والمطوّرون للحفاظ على التطبيقات القديمة تعمل بأمان وكفاءة.",
+  keywords: [
+    "جافا",
+    "Java Runtime Environment",
+    "JRE",
+    "أوراكل",
+    "Oracle",
+    "تطبيقات المؤسسات",
+    "Java Download",
+    "بيئة تشغيل جافا",
+    "JDK",
+    "برمجة",
+  ],
+  category: "برمجة",
+  author: "فريق مصدر إكس",
+  date: "27 يونيو 2026",
+  pubDate: new Date("2026-06-27"),
+  tags: ["جافا", "أوراكل", "Java", "JRE", "المؤسسات"],
+  thumbnail: "/images/oracle-java-runtime-free-download-enterprise-apps.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      رغم موجة التحوّل نحو الكلاود والحاويات، لا يزال <strong
+        >Java Runtime Environment (JRE)</strong
+      > من أوراكل حاضرًا بقوة في قلب بنية تقنية المعلومات لدى المؤسسات الكبرى. ببساطة:
+      مئات الأدوات المؤسسية — من لوحات ERP إلى تطبيقات الويب الداخلية — لا تعمل بدونه.
+    </p>
+
+    <h2>ما الذي يقدّمه Java Download؟</h2>
+
+    <ul>
+      <li>
+        <strong>JRE مجاني</strong> للمستخدمين العاديين عبر بوّابة أوراكل الرسمية
+      </li>
+      <li>
+        <strong>مُثبِّتات موجَّهة</strong> لـ Windows وmacOS تُسهّل النشر على نطاق
+        واسع
+      </li>
+      <li><strong>فصل واضح</strong> بين JRE للمستخدمين و JDK للمطوّرين</li>
+      <li>
+        <strong>تحكّم بالإصدارات</strong> يناسب بيئات القطاعات المُنظَّمة كالبنوك
+        والمصانع
+      </li>
+    </ul>
+
+    <h2>الأمان أولًا</h2>
+
+    <p>
+      كل إصدار جديد من Java يُغلق ثغرات أمنية ويُحسّن الأداء. المشكلة؟ كثير من
+      الفِرَق ما زالت تُشغّل إصدارات قديمة، مما يُقلق فِرَق الـ CISO والمُدققين.
+      الترقية ليست خيارًا — هي ضرورة.
+    </p>
+
+    <h2>الترخيص والتكلفة</h2>
+
+    <p>
+      الاستخدام مجاني للأفراد والشركات الصغيرة، لكن <strong
+        >البيئات المؤسسية الكبيرة</strong
+      > قد تحتاج ترخيصًا تجاريًا من أوراكل — وهو ما تتابعه فِرَق الامتثال عن كثب.
+    </p>
+
+    <p>
+      Java Download ليس مجرد أداة قديمة — بل هو الغراء الصامت الذي يربط بنية
+      تقنية المؤسسات العالمية، ولن يختفي قريبًا ما دامت تكلفة إعادة كتابة
+      التطبيقات الموروثة باهظة.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://www.ad-hoc-news.de/boerse/news/ueberblick/java-download-from-oracle-corp-free-runtime-keeps-legacy-apps-alive/69641784"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ad-hoc-news.de
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
