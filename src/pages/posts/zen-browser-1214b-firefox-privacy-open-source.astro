@@ -1,0 +1,119 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "zen-browser-1214b-firefox-privacy-open-source",
+  title:
+    "زن براوزر 1.21.4b: المتصفح المفتوح المصدر القائم على فايرفوكس يحصل على تحديث جديد",
+  description:
+    "تحديث زن براوزر 1.21.4b يجلب دعم Firefox 152، قائمة سياق لتحرير التبويبات المثبتة، وإصلاحات مهمة — تعرّف على أبرز مميزات هذا المتصفح المركّز على الخصوصية.",
+  keywords: [
+    "زن براوزر",
+    "Zen Browser",
+    "متصفح مفتوح المصدر",
+    "Firefox",
+    "فايرفوكس",
+    "خصوصية",
+    "Zen Mods",
+    "متصفح خصوصية",
+    "تبويبات عمودية",
+    "برمجة",
+  ],
+  category: "برامج",
+  author: "فريق مصدر إكس",
+  date: "28 يونيو 2026",
+  pubDate: new Date("2026-06-28"),
+  tags: ["زن براوزر", "Firefox", "خصوصية", "مفتوح المصدر", "متصفح"],
+  thumbnail: "/images/zen-browser-1214b-firefox-privacy-open-source.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      صدر الإصدار <strong>1.21.4b</strong> من <strong>زن براوزر</strong>،
+      المتصفح المفتوح المصدر المبني على فايرفوكس والمصمّم لمن يضع الخصوصية في
+      المقام الأول. يحجب المتصفح المتتبّعين والإعلانات بشكل افتراضي، ولا يجمع
+      بيانات المستخدمين.
+    </p>
+
+    <h2>ما الجديد في هذا الإصدار؟</h2>
+
+    <ul>
+      <li>
+        <strong>تحديث إلى Firefox 152.0.2 و152.0.3</strong> لضمان أحدث تصحيحات الأمان
+      </li>
+      <li>
+        <strong>قائمة سياق جديدة</strong> لتحرير رابط التبويب المثبّت يدويًا
+      </li>
+      <li>
+        <strong>إضافة مسار سريع للدومين</strong> من قائمة السياق مباشرةً إلى إعدادات
+        Space Routing
+      </li>
+    </ul>
+
+    <h2>الإصلاحات</h2>
+
+    <ul>
+      <li>حلّ مشكلة وميض الشريط الجانبي عند نقل التبويبات</li>
+      <li>
+        الدخول إلى وضع الشاشة الكاملة من تبويب Glance يحوّله الآن إلى تبويب عادي
+      </li>
+      <li>إصلاح فتح تبويبات Space Routing في الخلفية بدلًا من المقدمة</li>
+      <li>تحسينات وإصلاحات طفيفة متعددة</li>
+    </ul>
+
+    <h2>أبرز مميزات زن براوزر</h2>
+
+    <ul>
+      <li><strong>زن مودز (Zen Mods):</strong> تخصيص عميق للواجهة والتخطيط</li>
+      <li><strong>تبويبات عمودية وعرض مقسّم:</strong> إدارة أذكى للنوافذ</li>
+      <li>
+        <strong>مساحات عمل (Workspaces):</strong> تنظيم التبويبات في بيئات منفصلة
+      </li>
+      <li>
+        <strong>تبويبات الحاويات (Container Tabs):</strong> فصل جلسات التصفّح
+      </li>
+      <li><strong>زن غلانس (Zen Glance):</strong> معاينة سريعة للمواقع</li>
+      <li><strong>تحديثات تلقائية</strong> بتصحيحات أمنية مستمرة</li>
+    </ul>
+
+    <h2>تحذير: لا دعم لـ DRM</h2>
+
+    <p>
+      زن براوزر لا يدعم محتوى DRM حاليًا، مما يعني أن خدمات مثل <strong
+        >Netflix</strong
+      > و<strong>HBO Max</strong> لن تعمل عليه. السبب: غياب ترخيص Widevine الذي يستلزم
+      تكاليف باهظة وانتماء لشركة كبرى. هذا القيد سيبقى قائمًا في المدى المنظور.
+    </p>
+
+    <p>
+      زن براوزر خيار قوي لكل من يريد متصفحًا سريعًا وقابلًا للتخصيص مع حماية
+      حقيقية للخصوصية — شرط ألا يكون Netflix ضرورةً يومية.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://www.neowin.net/software/zen-browser-1214b/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Neowin
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
