@@ -81,9 +81,9 @@ const pagePosts = restPosts.slice(0, pageSize);
 
   {featured && (
     <section class="bg-white border-b border-gray-100">
-      <a href={`/posts/${featured.slug}/`} class="block no-underline group">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <a href={`/posts/${featured.slug}/`} class="block no-underline group">
             {featured.thumbnail && (
               <div class="aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden">
                 <img
@@ -95,25 +95,39 @@ const pagePosts = restPosts.slice(0, pageSize);
                 />
               </div>
             )}
-            <div>
-              <span class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full mb-4">
-                {featured.category}
-              </span>
+          </a>
+          <div>
+            <a href={`/category/${featured.category}/`} class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full mb-4 hover:bg-gray-800 transition-colors no-underline">
+              {featured.category}
+            </a>
+            <a href={`/posts/${featured.slug}/`} class="block no-underline group">
               <h2 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-charcoal mb-4 leading-tight group-hover:text-gray-700 transition-colors">
                 {featured.title}
               </h2>
-              <p class="font-body text-base text-gray-600 mb-4 leading-relaxed line-clamp-3">
-                {featured.description}
-              </p>
-              <div class="flex items-center gap-2 text-sm text-gray-500 font-body">
-                <span>{featured.author}</span>
-                <span>•</span>
-                <span>{featured.date}</span>
-              </div>
+            </a>
+            <p class="font-body text-base text-gray-600 mb-4 leading-relaxed line-clamp-3">
+              {featured.description}
+            </p>
+            <div class="flex items-center gap-2 text-sm text-gray-500 font-body mb-4">
+              <span>{featured.author}</span>
+              <span>•</span>
+              <span>{featured.date}</span>
             </div>
+            {featured.tags && featured.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {featured.tags.map((tag: string) => (
+                  <a
+                    href={`/tags/${tag}/`}
+                    class="inline-block px-3 py-1 text-xs font-body text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors no-underline"
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-      </a>
+      </div>
     </section>
   )}
 
