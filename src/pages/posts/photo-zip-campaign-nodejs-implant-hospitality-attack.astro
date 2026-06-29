@@ -1,0 +1,91 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "photo-zip-campaign-nodejs-implant-hospitality-attack",
+  title: "حملة Photo ZIP تستهدف قطاع الفنادق بإيمبلانت Node.js للوصول الدائم",
+  description:
+    "هجوم متعدد المراحل يستهدف قطاع الضيافة عبر ملفات ZIP مموّهة بصور، تحمل ملفات LNK خبيثة وكود PowerShell مشفّر وإيمبلانت Node.js لضمان الوصول الدائم — تعرّف على تفاصيل الحملة وكيفية الحماية منها.",
+  keywords: [
+    "Node.js implant",
+    "Photo ZIP campaign",
+    "هجمات سيبرانية",
+    "PowerShell",
+    "LNK malware",
+    "قطاع الضيافة",
+    "أمن معلومات",
+    "MITRE ATT&CK",
+    "مفتوح المصدر",
+    "برمجة",
+  ],
+  category: "برمجة",
+  author: "فريق مصدر إكس",
+  date: "29 يونيو 2026",
+  pubDate: new Date("2026-06-29"),
+  tags: ["أمن معلومات", "Node.js", "PowerShell", "هجمات", "Malware"],
+  thumbnail: "/images/Linux-7.2-Drops-strncpy.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>رصد فريق مايكروسوفت للأمن حملة هجومية نشطة تستهدف <strong>قطاع الفنادق والضيافة</strong> عبر ملفات ZIP مموّهة على شكل صور. الهجوم متعدد المراحل ويعتمد على أدوات مشروعة لتفادي الكشف، وينتهي بزرع <strong>إيمبلانت مبني على Node.js</strong> يمنح المهاجم وصولًا دائمًا إلى الجهاز المخترق.</p>
+
+    <h2>كيف يعمل الهجوم؟</h2>
+
+    <ul>
+      <li><strong>الطُّعم:</strong> رسائل بريد إلكتروني تحتوي روابط عبر Calendly وGoogle تُعيد توجيه الضحية لتحميل ملف ZIP يحتوي على صور مزيّفة</li>
+      <li><strong>ملفات LNK خبيثة:</strong> عند فتح الملف، يُشغَّل اختصار مموّه يبدو كصورة لكنه يُطلق PowerShell مشفّرًا</li>
+      <li><strong>التشفير والتمويه:</strong> يستخدم PowerShell تقنيات XOR وModulo لفك تشفير المراحل التالية ديناميكيًا</li>
+      <li><strong>تجميع .NET:</strong> يُشغَّل <code>csc.exe</code> و<code>cvtres.exe</code> لتجميع DLL خبيث في الذاكرة</li>
+      <li><strong>الإيمبلانت:</strong> نشر ملفات <code>.js</code> خبيثة تعمل عبر <code>node.exe</code> وتتصل بسيرفر C2 على منافذ غير اعتيادية مثل 8443 و56001</li>
+    </ul>
+
+    <h2>آلية البقاء الدائم (Persistence)</h2>
+
+    <ul>
+      <li>استخدام مفتاحَي ريجستري <code>HKCU\Run</code> و<code>HKCU\RunOnce</code> معًا لضمان إعادة تشغيل الإيمبلانت حتى بعد إزالة أحدهما</li>
+      <li>تخزين Node.js runtime والـ payloads في مجلد <code>AppData\Local\Nodejs</code></li>
+      <li>استخدام دومينات محمية بـ Cloudflare لإخفاء البنية التحتية للهجوم</li>
+    </ul>
+
+    <h2>كيف تحمي بيئتك؟</h2>
+
+    <ul>
+      <li>راقب تشغيل <code>node.exe</code> من مجلدات المستخدم القابلة للكتابة</li>
+      <li>فعّل قواعد Attack Surface Reduction في ويندوز</li>
+      <li>راقب أي تغييرات على استثناءات Microsoft Defender</li>
+      <li>احجب أنماط دومينات <code>.cfd</code> المشبوهة وراقب الاتصالات الصادرة على منافذ غير اعتيادية</li>
+    </ul>
+
+    <h2>خطوات الاستجابة والإزالة</h2>
+
+    <ul>
+      <li>احذف مفتاح <code>RunOnce</code> من <code>ProgramData</code> ومفتاح <code>Run</code> الخاص بـ Node.js</li>
+      <li>احذف Node.js runtime وجميع ملفات <code>.js</code> الخبيثة من <code>AppData\Local\Nodejs</code></li>
+      <li>تأكد من معالجة كلٍّ من الـ payload النشط وآليات البقاء الدائم معًا</li>
+    </ul>
+
+    <p>هذه الحملة نموذج واضح على تطور أساليب الهجوم نحو استغلال أدوات مشروعة كـ Node.js وخدمات موثوقة كـ Calendly وGoogle لتجاوز جدران الحماية التقليدية — مما يجعل المراقبة السلوكية خط الدفاع الأول.</p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a href="https://socprime.com/active-threats/photo-zip-campaign-targeting-hospitality-industry-delivers-node-js-implant-for-persistent-access/" target="_blank" rel="noopener noreferrer">
+        SOC Prime
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
