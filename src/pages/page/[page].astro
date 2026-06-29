@@ -10,13 +10,14 @@ export async function getStaticPaths() {
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   const pageSize = 6;
-  const totalPages = Math.ceil(allPosts.length / pageSize);
+  const gridPosts = allPosts.slice(1);
+  const totalPages = Math.ceil(gridPosts.length / pageSize);
 
   return Array.from({ length: totalPages - 1 }, (_, i) => {
     const page = i + 2;
     return {
       params: { page: String(page) },
-      props: { page, totalPages, allPosts },
+      props: { page, totalPages, gridPosts },
     };
   });
 }
@@ -24,13 +25,13 @@ export async function getStaticPaths() {
 export interface Props {
   page: number;
   totalPages: number;
-  allPosts: any[];
+  gridPosts: any[];
 }
 
-const { page, totalPages, allPosts } = Astro.props;
+const { page, totalPages, gridPosts } = Astro.props;
 const pageSize = 6;
 const start = (page - 1) * pageSize;
-const pagePosts = allPosts.slice(start, start + pageSize);
+const pagePosts = gridPosts.slice(start, start + pageSize);
 
 const canonicalPath = `/page/${page}/`;
 ---
