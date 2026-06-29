@@ -49,9 +49,14 @@ const {
       {category}
     </a>
 
-    <h3 class="font-heading text-lg font-bold text-charcoal mb-2 leading-snug">
-      {title}
-    </h3>
+    <a
+      href={`/posts/${slug}/`}
+      class="block no-underline group/title"
+    >
+      <h3 class="font-heading text-lg font-bold text-charcoal mb-2 leading-snug group-hover/title:text-gray-700 transition-colors">
+        {title}
+      </h3>
+    </a>
 
     <p class="font-body text-sm text-gray-600 leading-relaxed mb-3 line-clamp-2">
       {description}
