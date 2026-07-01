@@ -1,0 +1,187 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "cachyos-june-2026-iso-hyprland-noctalia-performance",
+  title: "CachyOS يونيو 2026: هايبرلاند نوكتاليا، أداء أسرع، وأدوات أذكى",
+  description:
+    "إصدار CachyOS يونيو 2026 يجلب بيئة Hyprland Noctalia الجديدة، تحسينات المترجم PGO، عزل الشبكة لـ Pacman، ودعم أفضل للهاردوير — توزيعة Arch المُحسَّنة تواصل تقدمها.",
+  keywords: [
+    "CachyOS",
+    "كاشي أو إس",
+    "Hyprland",
+    "هايبرلاند",
+    "Arch Linux",
+    "توزيعة لينكس",
+    "لينكس",
+    "PGO",
+    "Wayland",
+    "نواة لينكس",
+  ],
+  category: "لينكس",
+  author: "فريق مصدر إكس",
+  date: "30 يونيو 2026",
+  pubDate: new Date("2026-06-30"),
+  tags: ["CachyOS", "لينكس", "Hyprland", "Arch Linux", "Wayland"],
+  thumbnail: "/images/Linux-7.2-Drops-strncpy.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      أصدر فريق <strong>CachyOS</strong> نسخة يونيو 2026 من التوزيعة، وهي الرابعة
+      كبرى هذا العام. التوزيعة المبنية على Arch Linux والمصمّمة للأداء العالي تواصل
+      تطورها بمزايا جديدة تطال بيئة سطح المكتب، والمترجم، والأمان، والهاردوير.
+    </p>
+
+    <h2>هايبرلاند نوكتاليا — بيئة جاهزة من المثبّت</h2>
+
+    <p>
+      أبرز إضافات هذا الإصدار هي بيئة <strong>Hyprland Noctalia</strong> المتاحة مباشرةً
+      من المثبّت. توفّر بيئة Wayland مصمَّمة مسبقًا بمظهر عصري دون الحاجة لساعات من
+      إعداد ملفات الضبط يدويًا، مع معاينة مرئية قبل الاختيار.
+    </p>
+
+    <h2>تحسينات الأداء</h2>
+
+    <ul>
+      <li>
+        حزم Python مبنية الآن بتقنية <strong>PGO موسَّعة</strong> لأداء أفضل
+      </li>
+      <li>
+        تصحيح جديد لـ GCC لضبط التنبؤ بالفروع على معالجات Intel وAMD الحديثة
+      </li>
+      <li>
+        إصلاح تراجع أداء <strong>OpenBLAS</strong> على أنظمة بعدد نوى مرتفع
+      </li>
+    </ul>
+
+    <h2>أمان وإدارة الحزم</h2>
+
+    <ul>
+      <li>
+        <strong>عزل الشبكة لـ Pacman scriptlets:</strong> سكريبتات التثبيت لن تتصل
+        بالإنترنت بشكل افتراضي
+      </li>
+      <li>
+        إعادة تسمية <code>proton-cachyos</code> إلى <code
+          >proton-cachyos-native</code>
+      </li>
+      <li>
+        حذف <strong>paru</strong> من المثبّت والتحوّل نحو <strong>Shelly</strong
+        > كـ AUR helper بواجهتين: رسومية وسطر أوامر
+      </li>
+    </ul>
+
+    <h2>تحسينات المثبّت</h2>
+
+    <ul>
+      <li>كشف تلقائي أدق لتخطيط لوحة المفاتيح واللغة المحلية</li>
+      <li>تنظيف تلقائي لملفات المثبّت المتبقية بعد الانتهاء</li>
+      <li>روتينات Calamares أكثر موثوقية واتساقًا</li>
+    </ul>
+
+    <h2>تطبيق Welcome وأدوات النظام</h2>
+
+    <ul>
+      <li>
+        دعم <strong>DNS-over-QUIC</strong> عبر Blocky مع إعداد مخصص لنقاط DNS
+      </li>
+      <li>قسم مخصص لاستكشاف الأخطاء وإصلاحها</li>
+      <li>دعم محاكي طرفية <strong>Ptyxis</strong></li>
+      <li>استرداد تلقائي عند تلف ملفات الإعداد</li>
+    </ul>
+
+    <h2>دعم الهاردوير وأوقات الإيقاف</h2>
+
+    <ul>
+      <li>
+        أداة <strong>chwd</strong> تدعم الآن بشكل أذكى الأنظمة متعددة GPU ذات متطلبات
+        تعريف مختلفة
+      </li>
+      <li>تحسين دعم الأجهزة الافتراضية وتعريفات Vulkan 32-bit</li>
+      <li>
+        تقليص وقت الإيقاف الذي كان يصل أحيانًا إلى <strong>90 ثانية</strong> بسبب
+        خدمات المستخدم
+      </li>
+    </ul>
+
+    <h2>مكونات النواة والحزم</h2>
+
+    <div class="overflow-x-auto my-4">
+      <table
+        class="w-full text-sm text-right border border-zinc-200 dark:border-zinc-700 rounded-lg"
+      >
+        <thead class="bg-zinc-100 dark:bg-zinc-800">
+          <tr>
+            <th class="px-4 py-2 font-semibold">المكوّن</th>
+            <th class="px-4 py-2 font-semibold">الإصدار</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+          <tr>
+            <td class="px-4 py-2">Linux Kernel (CachyOS build)</td>
+            <td class="px-4 py-2">7.1</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">KDE Plasma</td>
+            <td class="px-4 py-2">6.7.1</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">KDE Frameworks</td>
+            <td class="px-4 py-2">6.27</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">KDE Gear</td>
+            <td class="px-4 py-2">26.04.2</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Qt</td>
+            <td class="px-4 py-2">6.11</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">جلسة افتراضية</td>
+            <td class="px-4 py-2">Wayland</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      المستخدمون الحاليون لا يحتاجون إعادة تثبيت — يكفي تشغيل <code
+        >sudo pacman -Syu</code
+      > للحصول على كل التحديثات.
+    </p>
+
+    <p>
+      CachyOS يونيو 2026 يُثبت أن التوزيعة تسير بخطى واثقة نحو أن تكون الخيار
+      الأول لعشّاق الأداء والمطوّرين الباحثين عن توزيعة Arch محسَّنة وجاهزة
+      للإنتاج.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://www.linuxjournal.com/content/cachyos-june-2026-iso-released-hyprland-noctalia-faster-performance-and-smarter-system"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Linux Journal
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
