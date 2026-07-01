@@ -16,14 +16,18 @@ export function GET() {
     <language>ar</language>
     <lastBuildDate>${toISODate(new Date())}</lastBuildDate>
     <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml" />
-${posts.map((post) => `    <item>
+${posts.map((post) => {
+  const cats = Array.isArray(post.category) ? post.category : [post.category];
+  const categoryXml = cats.map((c) => `      <category>${c}</category>`).join("\n");
+  return `    <item>
       <title>${post.title}</title>
       <link>${siteUrl}/posts/${post.slug}/</link>
       <guid isPermaLink="true">${siteUrl}/posts/${post.slug}/</guid>
       <description>${post.description}</description>
-      <category>${post.category}</category>
+${categoryXml}
       <pubDate>${post.pubDate ? toISODate(new Date(post.pubDate)) : ""}</pubDate>
-    </item>`).join("\n")}
+    </item>`;
+}).join("\n")}
   </channel>
 </rss>`;
 

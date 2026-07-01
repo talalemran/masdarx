@@ -18,7 +18,9 @@ export interface Props {
 }
 
 const { post, allPosts = [] } = Astro.props;
-const { title, description, category, author, date, tags, thumbnail, slug } = post;
+const { title, description, author, date, tags, thumbnail, slug } = post;
+const categories = Array.isArray(post.category) ? post.category : [post.category];
+const category = categories[0];
 
 const postUrl = `https://www.masdarx.com/posts/${slug}/`;
 const shareLinks = {
@@ -30,10 +32,14 @@ const shareLinks = {
 
 const relatedPosts = allPosts
   .filter((p) => p.slug !== slug)
-  .map((p) => ({
-    ...p,
-    score: (p.tags?.filter((t: string) => tags?.includes(t)).length || 0) + (p.category === category ? 2 : 0),
-  }))
+  .map((p) => {
+    const pCategories = Array.isArray(p.category) ? p.category : [p.category];
+    const categoryMatch = pCategories.some((c) => categories.includes(c)) ? 2 : 0;
+    return {
+      ...p,
+      score: (p.tags?.filter((t: string) => tags?.includes(t)).length || 0) + categoryMatch,
+    };
+  })
   .sort((a, b) => b.score - a.score)
   .slice(0, 3);
 ---
@@ -42,12 +48,17 @@ const relatedPosts = allPosts
   <nav class="mb-6 text-sm font-body text-gray-500">
     <a href="/" class="hover:text-charcoal transition-colors no-underline">الرئيسية</a>
     <span class="mx-2">/</span>
-    <a
-      href={`/category/${category}/`}
-      class="hover:text-charcoal transition-colors no-underline text-gray-500"
-    >
-      {category}
-    </a>
+    {categories.map((cat, i) => (
+      <>
+        <a
+          href={`/category/${cat}/`}
+          class="hover:text-charcoal transition-colors no-underline text-gray-500"
+        >
+          {cat}
+        </a>
+        {i < categories.length - 1 && <span class="mx-2">,</span>}
+      </>
+    ))}
   </nav>
 
   {
@@ -59,12 +70,14 @@ const relatedPosts = allPosts
   }
 
   <div class="flex flex-wrap items-center gap-3 text-sm font-body text-gray-500 mb-4">
-    <a
-      href={`/category/${category}/`}
-      class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full hover:bg-gray-700 transition-colors no-underline"
-    >
-      {category}
-    </a>
+    {categories.map((cat) => (
+      <a
+        href={`/category/${cat}/`}
+        class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full hover:bg-gray-700 transition-colors no-underline"
+      >
+        {cat}
+      </a>
+    ))}
     <a
       href={`/author/${author}/`}
       class="hover:text-charcoal transition-colors no-underline text-gray-500"
