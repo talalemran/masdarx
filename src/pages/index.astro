@@ -129,14 +129,16 @@ const pagePosts = restPosts.slice(0, pageSize);
             )}
             </a>
             <div>
-              {(Array.isArray(featured.category) ? featured.category : [featured.category]).map((cat) => (
-                <a
-                  href={`/category/${cat}/`}
-                  class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full mb-4 hover:bg-gray-800 transition-colors no-underline"
-                >
-                  {cat}
-                </a>
-              ))}
+              <div class="flex flex-wrap gap-2 mb-4">
+                {(Array.isArray(featured.category) ? featured.category : [featured.category]).map((cat) => (
+                  <a
+                    href={`/category/${cat}/`}
+                    class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full hover:bg-gray-800 transition-colors no-underline"
+                  >
+                    {cat}
+                  </a>
+                ))}
+              </div>
               <a
                 href={`/posts/${featured.slug}/`}
                 class="block no-underline group"
