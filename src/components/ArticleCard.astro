@@ -28,13 +28,13 @@ const {
   <a href={`/posts/${slug}/`} class="absolute inset-0 z-0 no-underline" aria-label={title}></a>
   {
     thumbnail && (
-      <div class="aspect-[16/9] bg-gray-100 overflow-hidden">
+      <div class="bg-gray-100 overflow-hidden">
         <img
           src={thumbnail}
           alt={title}
           width="400"
           height="225"
-          class="w-full h-full object-contain"
+          class="w-full h-auto"
           loading="lazy"
         />
       </div>

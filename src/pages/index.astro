@@ -116,17 +116,17 @@ const pagePosts = restPosts.slice(0, pageSize);
               href={`/posts/${featured.slug}/`}
               class="block no-underline group"
             >
-              {featured.thumbnail && (
-                <div class="aspect-[16/9] bg-gray-100 rounded-xl overflow-hidden">
-                  <img
-                    src={featured.thumbnail}
-                    alt={featured.title}
-                    width="720"
-                    height="405"
-                    class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              )}
+            {featured.thumbnail && (
+              <div class="bg-gray-100 rounded-xl overflow-hidden">
+                <img
+                  src={featured.thumbnail}
+                  alt={featured.title}
+                  width="720"
+                  height="405"
+                  class="w-full h-auto"
+                />
+              </div>
+            )}
             </a>
             <div>
               <a
