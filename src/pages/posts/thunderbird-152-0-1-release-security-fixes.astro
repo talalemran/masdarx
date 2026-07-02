@@ -1,0 +1,111 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "thunderbird-152-0-1-release-security-fixes",
+  title: "ثاندربيرد 152.0.1: إصلاح أمني عاجل وتصحيح زر الرد الجماعي",
+  description:
+    "إصدار Thunderbird 152.0.1 يحمل إصلاحًا لزر Reply All المفقود في رسائل EWS متعددة المستلمين، وتصحيحات أمنية مهمة — تحديث خفيف لكنه ضروري.",
+  keywords: [
+    "Thunderbird",
+    "ثاندربيرد",
+    "Mozilla",
+    "عميل بريد إلكتروني",
+    "مفتوح المصدر",
+    "تحديث أمني",
+    "IMAP",
+    "POP",
+    "EWS",
+    "برامج مجانية",
+  ],
+  category: "برامج",
+  author: "فريق مصدر إكس",
+  date: "1 يوليو 2026",
+  pubDate: new Date("2026-07-01"),
+  tags: ["Thunderbird", "Mozilla", "بريد إلكتروني", "مفتوح المصدر", "أمان"],
+  thumbnail: "/images/thunderbird-152-0-1-release-security-fixes.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+        <p>أصدرت موزيلا تحديث <strong>Thunderbird 152.0.1</strong>، وهو إصدار تصحيحي خفيف يعالج خللين أساسيين تبعًا للإصدار الرئيسي 152.0 الذي صدر منتصف يونيو.</p>
+
+    <h2>ما الجديد؟</h2>
+
+    <ul>
+      <li>إصلاح اختفاء زر <strong>Reply All</strong> في بعض رسائل EWS التي تضم مستلمين متعددين</li>
+      <li>تصحيحات أمنية مهمة موثّقة في صفحة الثغرات الرسمية لموزيلا</li>
+    </ul>
+
+    <h2>عن ثاندربيرد</h2>
+
+    <p><strong>Thunderbird</strong> عميل بريد إلكتروني مجاني ومفتوح المصدر من موزيلا، يعمل على Windows وmacOS وLinux. يدعم IMAP وPOP وRSS، ويتميز بالبحث السريع، والفلترة المتقدمة، وإدارة حسابات متعددة في صندوق وارد موحّد أو منفصل. يمكن توسيعه بمئات الإضافات (Add-ons) لتخصيص تجربة البريد بالكامل.</p>
+
+    <h2>تحميل Thunderbird 152.0.1</h2>
+
+    <div class="overflow-x-auto my-4">
+       <table class="w-full text-right border border-zinc-200 dark:border-zinc-700 rounded-lg">
+        <thead class="bg-zinc-100 dark:bg-zinc-800 light:text-zinc-700 dark:text-zinc-300">
+          <tr>
+            <th class="px-4 py-2 font-semibold">النظام</th>
+            <th class="px-4 py-2 font-semibold">الحجم</th>
+            <th class="px-4 py-2 font-semibold">تحميل</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+          <tr>
+            <td class="px-4 py-2">Windows 64-bit</td>
+            <td class="px-4 py-2">~70 MB</td>
+            <td class="px-4 py-2">
+              <a href="https://download.cdn.mozilla.net/pub/thunderbird/releases/152.0.1/win64/en-US/Thunderbird%20Setup%20152.0.1.exe" target="_blank" rel="noopener noreferrer">تحميل</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Windows 32-bit</td>
+            <td class="px-4 py-2">~70 MB</td>
+            <td class="px-4 py-2">
+              <a href="https://download.cdn.mozilla.net/pub/thunderbird/releases/152.0.1/win32/en-US/Thunderbird%20Setup%20152.0.1.exe" target="_blank" rel="noopener noreferrer">تحميل</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">macOS</td>
+            <td class="px-4 py-2">145 MB</td>
+            <td class="px-4 py-2">
+              <a href="https://download-origin.cdn.mozilla.net/pub/thunderbird/releases/152.0.1/mac/en-US/Thunderbird%20152.0.1.dmg" target="_blank" rel="noopener noreferrer">تحميل</a>
+            </td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">لغات أخرى / Linux</td>
+            <td class="px-4 py-2">—</td>
+            <td class="px-4 py-2">
+              <a href="https://download.cdn.mozilla.net/pub/thunderbird/releases/152.0.1/" target="_blank" rel="noopener noreferrer">صفحة التحميل الكاملة</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>تحديث بسيط لكنه مهم — خصوصًا لمستخدمي بيئات Exchange عبر EWS. يُنصح بالتحديث فورًا نظرًا للتصحيحات الأمنية المرفقة.</p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a href="https://www.neowin.net/software/thunderbird-15201/" target="_blank" rel="noopener noreferrer">
+        Neowin
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
