@@ -1,0 +1,105 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "typescript-7-rc-go-port-10x-faster",
+  title: "TypeScript 7.0 RC: أسرع 10 مرات بفضل Go",
+  description:
+    "مايكروسوفت تُطلق نسخة Release Candidate من TypeScript 7.0 المبنية على Go — أداء أسرع 10 مرات من الإصدار السابق، مع معالجة متوازية للكود ودعم التشغيل جانبًا لجانب مع TypeScript 6.",
+  keywords: [
+    "TypeScript 7",
+    "تايب سكريبت",
+    "Go",
+    "مايكروسوفت",
+    "Microsoft",
+    "Release Candidate",
+    "JavaScript",
+    "npm",
+    "برمجة",
+    "لغات البرمجة",
+  ],
+  category: "برمجة",
+  author: "فريق مصدر إكس",
+  date: "2 يوليو 2026",
+  pubDate: new Date("2026-07-02"),
+  tags: ["TypeScript", "Microsoft", "Go", "JavaScript", "برمجة"],
+  thumbnail: "/images/typescript-7-rc-go-port-10x-faster.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      أعلنت مايكروسوفت عن إصدار <strong>Release Candidate</strong> من <strong
+        >TypeScript 7.0</strong
+      >، وهو أول إصدار يُعاد بناؤه بالكامل باستخدام لغة <strong>Go</strong> بدلًا
+      من JavaScript — مما يجعله أسرع بنحو <strong>10 مرات</strong> من TypeScript 6.0
+      بفضل سرعة الكود الأصلي والمعالجة المتوازية.
+    </p>
+
+    <h2>كيف تجرّبه الآن؟</h2>
+
+    <p>يمكن تثبيته مباشرة من npm:</p>
+
+    <pre><code>npm install -D typescript@rc</code></pre>
+
+    <h2>أبرز ما يجلبه TypeScript 7.0</h2>
+
+    <ul>
+      <li>
+        <strong>معالجة متوازية:</strong> يُنفّذ الـ parsing وtype checking والـ emitting
+        في آنٍ واحد، مما يُقلّص وقت البناء بشكل ملحوظ على الكودبيسات الكبيرة
+      </li>
+      <li>
+        <strong>أداء أصلي:</strong> البناء على Go يعني تجميعًا إلى كود أصلي بدلًا
+        من تشغيله فوق V8
+      </li>
+      <li>
+        <strong>تشغيل جانبًا لجانب مع TS 6:</strong> حزمة <code
+          >@typescript/typescript6</code
+        > توفر أمر <code>tsc6</code> منفصلًا لتجنّب أي تعارض
+      </li>
+      <li>
+        <strong>الـ API مؤجّل إلى 7.1:</strong> الـ programmatic API الثابت لن يتوفر
+        حتى الإصدار القادم
+      </li>
+    </ul>
+
+    <h2>ما التالي؟</h2>
+
+    <p>
+      تخطط مايكروسوفت لإصدار TypeScript 7.0 النهائي <strong>خلال شهر</strong> من الآن،
+      مع التركيز في 7.1 على إتاحة الـ API البرمجي الكامل وإصلاح أي تراجعات مُبلَّغ
+      عنها.
+    </p>
+
+    <p>
+      TypeScript 7.0 ليس مجرد تحديث — بل إعادة هيكلة جذرية تُعيد رسم حدود الأداء
+      في أدوات تطوير JavaScript، وستغيّر تجربة البناء لملايين المطوّرين.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://www.infoworld.com/article/4191918/typescript-7-0-reaches-release-candidate-stage.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        InfoWorld
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
