@@ -1,0 +1,131 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "gnome-51-alpha-a-coruna-public-testing",
+  title: "جنوم 51 ألفا متاح للاختبار: A Coruña في طريقها لسبتمبر",
+  description:
+    "بيئة سطح المكتب GNOME 51 باسم A Coruña تدخل مرحلة الألفا للاختبار العام — خارطة الطريق، ما المتوقع من تحسينات Wayland، وموعد الإصدار النهائي في سبتمبر 2026.",
+  keywords: [
+    "GNOME 51",
+    "جنوم",
+    "A Coruña",
+    "لينكس",
+    "Wayland",
+    "بيئة سطح المكتب",
+    "GUADEC 2026",
+    "توزيعات لينكس",
+    "مفتوح المصدر",
+    "Linux desktop",
+  ],
+  category: "بيئة سطح المكتب",
+  author: "فريق مصدر إكس",
+  date: "3 يوليو 2026",
+  pubDate: new Date("2026-07-03"),
+  tags: ["GNOME", "لينكس", "Wayland", "مفتوح المصدر", "سطح المكتب"],
+  thumbnail: "/images/gnome-51-alpha-a-coruna-public-testing.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      أصبح <strong>GNOME 51 Alpha</strong> متاحًا للاختبار العام، وهو أول محطة رسمية
+      في دورة تطوير بيئة سطح المكتب الأكثر انتشارًا على لينكس. الإصدار يحمل اسم <strong
+        >"A Coruña"</strong
+      > تيمّنًا بالمدينة الإسبانية التي ستستضيف مؤتمر <strong
+        >GUADEC 2026</strong
+      > في يوليو القادم.
+    </p>
+
+    <h2>خارطة الطريق</h2>
+
+    <div class="overflow-x-auto my-4">
+      <table class="w-full text-right border border-zinc-200 dark:border-zinc-700 rounded-lg">
+        <thead class="bg-zinc-100 dark:bg-zinc-800 light:text-zinc-700 dark:text-zinc-300">
+          <tr>
+            <th class="px-4 py-2 font-semibold">المرحلة</th>
+            <th class="px-4 py-2 font-semibold">الموعد</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+          <tr>
+            <td class="px-4 py-2">Alpha</td>
+            <td class="px-4 py-2">27 يونيو 2026</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Beta</td>
+            <td class="px-4 py-2">1 أغسطس 2026</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Release Candidate</td>
+            <td class="px-4 py-2">29 أغسطس 2026</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">الإصدار النهائي</td>
+            <td class="px-4 py-2">16 سبتمبر 2026</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>ما المتوقع في GNOME 51؟</h2>
+
+    <ul>
+      <li>
+        <strong>Wayland أولًا:</strong> بعد أن تخلّى GNOME 50 عن دعم X11 كليًا، يُتوقع
+        أن يُعمّق GNOME 51 نضج Wayland وإصلاح ما تبقّى من ثغرات في التوافق
+      </li>
+      <li>
+        <strong>تحسينات الأداء:</strong> ضبط إضافي على الرسوميات وتقليص استهلاك الذاكرة
+      </li>
+      <li>
+        <strong>تحديث المكونات الأساسية:</strong> GTK وlibadwaita ومكتبات GNOME ستحصل
+        على تحديثات دورية طوال الدورة
+      </li>
+      <li>
+        <strong>GUADEC 2026:</strong> من المرتقب أن يُحدد مؤتمر يوليو أولويات الميزات
+        الكبرى للإصدار النهائي
+      </li>
+    </ul>
+
+    <h2>ماذا عن GNOME 50؟</h2>
+
+    <p>
+      أُطلق GNOME 50 "Tokyo" في مارس 2026 وجلب تحسينات بارزة شملت رقابة أولياء
+      الأمور على وقت الشاشة، وتجديدًا شاملًا لتطبيق الملفات، وتحسينات على
+      التقويم والتعليقات في قارئ المستندات. GNOME 51 يبني على هذه الأسس ويمضي
+      قُدُمًا.
+    </p>
+
+    <p>
+      GNOME 51 "A Coruña" ليس ثورةً بل تطورًا مدروسًا — وهذا بالضبط ما يحتاجه
+      لينكس سطح المكتب: استقرار متزايد ونضج Wayland الكامل بدلًا من مزايا
+      إعلانية على حساب الجودة.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://9to5linux.com/gnome-51-alpha-desktop-environment-is-now-available-for-public-testing"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        9to5Linux
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
