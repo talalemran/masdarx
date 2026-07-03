@@ -86,6 +86,8 @@ const relatedPosts = allPosts
     </a>
     <span>•</span>
     <span>{date}</span>
+    <span>•</span>
+    <span id="reading-time"></span>
   </div>
 
   <h1 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-charcoal mb-6 leading-snug">
@@ -171,3 +173,20 @@ const relatedPosts = allPosts
     </a>
   </div>
 </article>
+
+<script>
+  function calculateReadingTime() {
+    const article = document.querySelector('.post-content');
+    const readingTimeEl = document.getElementById('reading-time');
+    if (!article || !readingTimeEl) return;
+
+    const text = article.textContent || '';
+    const wordCount = text.trim().split(/\s+/).length;
+    const wordsPerMinute = 200;
+    const minutes = Math.ceil(wordCount / wordsPerMinute);
+
+    readingTimeEl.textContent = `${minutes} دقيقة قراءة`;
+  }
+
+  calculateReadingTime();
+</script>
