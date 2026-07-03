@@ -44,6 +44,57 @@ const relatedPosts = allPosts
   .slice(0, 3);
 ---
 
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "الرئيسية",
+      "item": "https://www.masdarx.com"
+    },
+    ...categories.map((cat, i) => ({
+      "@type": "ListItem",
+      "position": i + 2,
+      "name": cat,
+      "item": `https://www.masdarx.com/category/${cat}/`
+    })),
+    {
+      "@type": "ListItem",
+      "position": categories.length + 2,
+      "name": title
+    }
+  ]
+})} />
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "url": postUrl,
+  "image": thumbnail ? (thumbnail.startsWith("http") ? thumbnail : `https://www.masdarx.com${thumbnail}`) : undefined,
+  "author": {
+    "@type": "Person",
+    "name": author
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "مصدر إكس",
+    "url": "https://www.masdarx.com",
+    "logo": "https://www.masdarx.com/favicon.svg"
+  },
+  "datePublished": post.pubDate ? new Date(post.pubDate).toISOString() : undefined,
+  "dateModified": post.pubDate ? new Date(post.pubDate).toISOString() : undefined,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": postUrl
+  },
+  "articleSection": categories,
+  "keywords": tags?.join(", ")
+})} />
+
 <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
   <nav class="mb-6 text-sm font-body text-gray-500">
     <a href="/" class="hover:text-charcoal transition-colors no-underline">الرئيسية</a>
