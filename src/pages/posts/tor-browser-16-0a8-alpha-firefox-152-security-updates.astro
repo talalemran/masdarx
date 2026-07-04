@@ -1,0 +1,116 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "tor-browser-16-0a8-alpha-firefox-152-security-updates",
+  title: "تور براوزر 16.0a8 ألفا: تحديثات أمنية من Firefox 152",
+  description:
+    "إصدار Tor Browser 16.0a8 Alpha يجلب تحديث Firefox وGeckoView إلى 152.0a1، وتحديث Tor إلى 0.4.9.11، وOpenSSL إلى 3.5.7 — مع إصلاحات لمقاومة بصمة المتصفح ودعم Android.",
+  keywords: [
+    "Tor Browser",
+    "تور براوزر",
+    "Firefox 152",
+    "خصوصية",
+    "أمن معلومات",
+    "OpenSSL",
+    "NoScript",
+    "متصفح",
+    "ألفا",
+    "مفتوح المصدر",
+  ],
+  category: "برامج",
+  author: "فريق مصدر إكس",
+  date: "4 يوليو 2026",
+  pubDate: new Date("2026-07-04"),
+  tags: ["Tor Browser", "Firefox", "خصوصية", "أمان", "مفتوح المصدر"],
+  thumbnail: "/images/tor-browser-16-0a8-alpha-firefox-152-security-updates.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      أصدر مشروع تور الإصدار <strong>16.0a8</strong> من قناة الألفا، وهو يحمل تحديثات
+      أمنية مهمة مستمدة من Firefox 152.0a1، إلى جانب جملة من الإصلاحات التي تطال الخصوصية
+      والأداء على منصات متعددة.
+    </p>
+
+    <h2>أبرز التغييرات</h2>
+
+    <ul>
+      <li>
+        <strong>Firefox وGeckoView</strong> محدّثان إلى الإصدار 152.0a1 — أحدث محرك
+        من موزيلا
+      </li>
+      <li><strong>Tor</strong> محدّث إلى 0.4.9.11</li>
+      <li><strong>OpenSSL</strong> محدّث إلى 3.5.7 لتعزيز طبقة التشفير</li>
+      <li><strong>NoScript</strong> محدّث إلى 13.6.25.90301984</li>
+      <li>
+        إصلاحات متعددة لـ <strong>fingerprinting resistance</strong> ومشاكل وضع Safer
+        Mode
+      </li>
+      <li>تحسينات وإصلاحات خاصة بـ Android</li>
+    </ul>
+
+    <h2>إصلاحات إضافية</h2>
+
+    <p>
+      يعالج الإصدار أيضًا مشاكل أصغر تشمل تحسينات في واجهة الـ letterboxing
+      والبحث، وإصلاح أخطاء في الإعدادات وعند الإقلاع، بالإضافة إلى تصحيحات خاصة
+      بمنصات Windows وmacOS وLinux.
+    </p>
+
+    <h2>تنبيه مهم: هذا إصدار تجريبي</h2>
+
+    <p>
+      إصدارات الألفا مخصصة للمطورين والمختبرين فقط — وليست للاستخدام اليومي. قد
+      تحتوي على أخطاء تؤثر على التجربة وقد لا تتبع جدولًا زمنيًا ثابتًا. منذ
+      الإصدار 16.0، باتت نسخ الألفا مبنية على قناة Firefox Rapid Release بدلًا
+      من ESR، مما يعني وصولًا أسرع للميزات الجديدة لكن مع احتمال عدم استقرار
+      أعلى.
+    </p>
+
+    <p>
+      إذا كنت تستخدم الإصدار المستقر ولم تُحدّثه بعد، يُنصح بالتحديث فورًا نظرًا
+      لتحديث أمني حرج صدر مؤخرًا.
+    </p>
+
+    <h2>تحميل Tor Browser 16.0a8 Alpha</h2>
+
+    <ul>
+      <li>
+        <a
+          href="https://torproject.org/download/alpha/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          صفحة التحميل الرسمية — torproject.org
+        </a>
+      </li>
+    </ul>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://piunikaweb.com/2026/07/04/tor-update-alpha-security-updates/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        PiunikaWeb
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
