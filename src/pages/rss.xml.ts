@@ -8,7 +8,7 @@ const toISODate = (d: Date) => d.toISOString().split("T")[0];
 
 export function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>مصدر إكس</title>
     <link>${siteUrl}</link>
@@ -26,6 +26,7 @@ ${posts.map((post) => {
       <description>${post.description}</description>
 ${categoryXml}
       <pubDate>${post.pubDate ? toISODate(new Date(post.pubDate)) : ""}</pubDate>
+      ${post.thumbnail ? `<media:content url="${siteUrl}${post.thumbnail}" medium="image" />` : ""}
     </item>`;
 }).join("\n")}
   </channel>
