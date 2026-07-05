@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Pagination from "@/components/Pagination.astro";
 import { projects } from "@/data/projects";
 
 const categories = [...new Set(projects.flatMap((p) => Array.isArray(p.category) ? p.category : [p.category]))];
@@ -11,6 +12,11 @@ const projectsByCategory = categories.map((cat) => ({
     return cats.includes(cat);
   }),
 }));
+
+const pageSize = 9;
+const totalPages = Math.ceil(projects.length / pageSize);
+const currentPage = 1;
+const pageProjects = projects.slice(0, pageSize);
 ---
 
 <BaseLayout
@@ -68,7 +74,7 @@ const projectsByCategory = categories.map((cat) => ({
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {projects.map((project) => (
+      {pageProjects.map((project) => (
         <a
           href={`/projects/${project.slug}/`}
           class="group block bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow no-underline"
@@ -109,6 +115,12 @@ const projectsByCategory = categories.map((cat) => ({
         </a>
       ))}
     </div>
+
+    {
+      totalPages > 1 && (
+        <Pagination currentPage={currentPage} totalPages={totalPages} basePath="/projects/page" />
+      )
+    }
 
     <div class="mt-12 text-center">
       <p class="font-body text-sm text-gray-500">
