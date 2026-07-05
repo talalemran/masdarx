@@ -80,13 +80,13 @@ const pageProjects = projects.slice(0, pageSize);
           class="group block bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow no-underline"
         >
           {project.thumbnail && (
-            <div class="aspect-[16/9] bg-gray-100 overflow-hidden">
+            <div class="bg-gray-100 overflow-hidden">
               <img
                 src={project.thumbnail}
                 alt={project.name}
                 width="400"
                 height="225"
-                class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                class="w-full h-auto group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
             </div>
