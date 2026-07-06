@@ -155,7 +155,7 @@ export const projects: Project[] = [
     stars: "9k+",
     license: "GPL-3.0",
     tags: ["معالجة صور", "RAW", "تصوير", "محترفون"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/darktable.webp",
     features: [
       "معالجة صور RAW غير إتلافية تحافظ دائمًا على الملف الأصلي بدون أي تغيير دائم",
       "أدوات تصحيح ألوان وإضاءة احترافية تشمل منحنيات النغمة وضبط التعرض بدقة متناهية",
