@@ -1,0 +1,138 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "box3d-open-source-3d-physics-engine-erin-catto",
+  title: "Box3D: محرك فيزياء ثلاثي الأبعاد مفتوح المصدر من صانع Box2D",
+  description:
+    "إيرين كاتو، مبتكر Box2D الشهير، يُطلق Box3D — محرك فيزياء ثلاثي الأبعاد مفتوح المصدر مبني على تجربة حقيقية في تطوير ألعاب. يُستخدم بالفعل في s&box وEsoterica ولعبة فضاء تدعم 1000 لاعب.",
+  keywords: [
+    "Box3D",
+    "Box2D",
+    "محرك فيزياء",
+    "Physics Engine",
+    "مفتوح المصدر",
+    "تطوير ألعاب",
+    "Erin Catto",
+    "s&box",
+    "Facepunch Studios",
+    "Jolt",
+  ],
+  category: "برامج",
+  author: "فريق مصدر إكس",
+  date: "5 يوليو 2026",
+  pubDate: new Date("2026-07-05"),
+  tags: ["Box3D", "فيزياء", "تطوير ألعاب", "مفتوح المصدر", "C++"],
+  thumbnail: "/images/box3d-open-source-3d-physics-engine-erin-catto.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      أعلن <strong>إيرين كاتو</strong>، مبتكر محرك الفيزياء ثنائي الأبعاد الشهير <strong
+        >Box2D</strong
+      >، عن إطلاق <strong>Box3D</strong> — محرك فيزياء ثلاثي الأبعاد مفتوح المصدر
+      متاح الآن على GitHub. المشروع لم يُولد في مختبر، بل نشأ من تحديات حقيقية واجهها
+      كاتو أثناء تطوير لعبته المفتوحة <strong>The Legend of California</strong> على
+      Unreal Engine.
+    </p>
+
+    <h2>لماذا Box3D ولم يستخدم Jolt أو Rapier؟</h2>
+
+    <p>
+      فكّر كاتو في استخدام Jolt كبديل جاهز، لكنه قرر بناء محرك خاص يُصمَّم
+      خصيصًا لمتطلبات لعبته من حيث الأداء والميزات. والنتيجة كانت Box3D — محرك
+      يحمل نفس فلسفة Box2D في التصميم لكنه مُوسَّع ليشمل عالم الـ 3D.
+    </p>
+
+    <h2>أبرز الإضافات مقارنة بـ Box2D</h2>
+
+    <ul>
+      <li>
+        <strong>Triangle Mesh Collision:</strong> اكتشاف التصادم مع شبكات المثلثات
+        المعقدة
+      </li>
+      <li>
+        <strong>Height-Field Collision:</strong> دعم التضاريس والأسطح المرتفعة
+      </li>
+      <li>
+        <strong>Baked Compound Collision:</strong> تصادم مُجمَّع مُحسَّن مسبقًا للأداء
+      </li>
+    </ul>
+
+    <h2>من يستخدمه فعلًا؟</h2>
+
+    <ul>
+      <li>
+        <strong>The Legend of California:</strong> اللعبة الأصلية التي دفعت لإنشاء
+        المحرك
+      </li>
+      <li><strong>s&box:</strong> منصة الألعاب الجديدة من Facepunch Studios</li>
+      <li>
+        <strong>Esoterica:</strong> محرك ألعاب مفتوح المصدر من Bobby Anguelov
+      </li>
+      <li>
+        <strong>لعبة فضاء لـ 1000 لاعب:</strong> مشروع مالتي بلاير ضخم من Glenn Fiedler
+      </li>
+    </ul>
+
+    <h2>تنبيه: لا يزال في مرحلة الألفا</h2>
+
+    <p>
+      يؤكد كاتو أن Box3D لا يزال <strong>إصدار ألفا</strong> ويحتاج مزيدًا من الاختبار
+      والتوثيق. كما يوضح أنه لا يسعى للمنافسة مع محركات أخرى — المشروع مفتوح المصدر
+      وليس تجاريًا، والأمر بيدك لتقرر إن كان يناسب احتياجاتك.
+    </p>
+
+    <ul>
+      <li>
+        <a
+          href="https://github.com/erincatto/box3d"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          المستودع الرسمي على GitHub
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://box2d.org/posts/2026/06/announcing-box3d/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          إعلان المطور الرسمي
+        </a>
+      </li>
+    </ul>
+
+    <p>
+      Box3D إضافة مثيرة لعالم محركات الفيزياء المفتوحة — وإن كان قادمًا من صانع
+      Box2D، فالثقة به مكتسبة مسبقًا حتى قبل اكتمال توثيقه.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://80.lv/articles/box3d-new-open-source-3d-physics-engine"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        80.lv
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
