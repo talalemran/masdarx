@@ -170,22 +170,6 @@ const projectUrl = `https://www.masdarx.com/projects/${project.slug}/`;
       </div>
     )}
 
-    {tags && tags.length > 0 && (
-      <div class="mb-8">
-        <h2 class="font-heading text-xl font-bold text-charcoal mb-4">الوسوم</h2>
-        <div class="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <a
-              href={`/tags/${tag}/`}
-              class="px-3 py-1.5 text-sm font-body text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors no-underline"
-            >
-              {tag}
-            </a>
-          ))}
-        </div>
-      </div>
-    )}
-
     {relatedProjects.length > 0 && (
       <div class="mt-10 pt-6 border-t border-gray-100">
         <h2 class="font-heading text-lg font-bold text-charcoal mb-4">مشاريع مشابهة</h2>
