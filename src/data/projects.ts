@@ -134,7 +134,7 @@ export const projects: Project[] = [
     stars: "25k+",
     license: "AGPL-3.0",
     tags: ["سحابة", "خصوصية", "مشاركة ملفات", "تعاون"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/nextcloud.webp",
     features: [
       "مشاركة ملفات مرنة عبر روابط قابلة للتحكم بالصلاحيات وتاريخ الانتهاء لكل رابط",
       "تزامن تلقائي للملفات بين جميع أجهزتك بمجرد تعديل أي ملف على أي جهاز",
