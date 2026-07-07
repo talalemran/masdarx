@@ -42,16 +42,11 @@ const pageProjects = projects.slice(0, pageSize);
           href={`/projects/category/${category}/`}
           class="group block bg-white rounded-xl border border-gray-100 shadow-sm p-6 hover:shadow-md transition-all no-underline"
         >
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-12 h-12 bg-charcoal rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
-              <span class="text-white font-heading font-bold text-lg">{category.charAt(0)}</span>
-            </div>
-            <div>
-              <h2 class="font-heading text-lg font-bold text-charcoal group-hover:text-gray-700 transition-colors">
-                {category}
-              </h2>
-              <span class="text-xs font-body text-gray-500">{catProjects.length} مشروع</span>
-            </div>
+          <div class="mb-3">
+            <h2 class="font-heading text-lg font-bold text-charcoal group-hover:text-gray-700 transition-colors">
+              {category}
+            </h2>
+            <span class="text-xs font-body text-gray-500">{catProjects.length} مشروع</span>
           </div>
           <div class="flex flex-wrap gap-1.5">
             {catProjects.slice(0, 3).map((p) => (
