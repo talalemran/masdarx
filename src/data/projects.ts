@@ -260,7 +260,7 @@ export const projects: Project[] = [
     stars: "2k+",
     license: "MPL-2.0",
     tags: ["بريد إلكتروني", "تواصل", "مفتوح المصدر", "إنتاجية"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/thunderbird.webp",
     features: [
       "إدارة حسابات بريد متعددة من مزودين مختلفين في صندوق وارد موحد واحد",
       "تقويم مدمج يتيح جدولة المواعيد والتذكيرات ومزامنتها مع التقاويم الخارجية",
@@ -281,7 +281,7 @@ export const projects: Project[] = [
     stars: "3k+",
     license: "MPL-2.0",
     tags: ["مجموعة مكاتب", "مستندات", "جداول", "عرض تقديمي"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/libreoffice.webp",
     features: [
       "برنامج Writer لمعالجة النصوص يدعم التنسيق المتقدم وقوالب المستندات الجاهزة",
       "برنامج Calc لجداول البيانات يوفر معادلات ودوال قوية شبيهة بـ Excel لتحليل البيانات",
@@ -302,7 +302,7 @@ export const projects: Project[] = [
     stars: "25k+",
     license: "AGPL-3.0",
     tags: ["تواصل", "خصوصية", "تشفير", "رسائل"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/signal.webp",
     features: [
       "تشفير من طرف إلى طرف لكل رسالة ومكالمة بحيث لا يستطيع أحد غير المرسل والمستقبل قراءتها",
       "رسائل ذاتية التدمير تختفي تلقائيًا بعد مدة زمنية يحددها المستخدم لمزيد من الخصوصية",
@@ -323,7 +323,7 @@ export const projects: Project[] = [
     stars: "3k+",
     license: "GPL-2.0",
     tags: ["رسومات متجهية", "تصميم", "SVG", "جرافيك"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/inkscape.webp",
     features: [
       "تحرير كامل لملفات SVG مع الوصول المباشر إلى الكود البرمجي وراء كل عنصر رسومي",
       "أداة قلم متقدمة لرسم مسارات ومنحنيات بيزييه بدقة عالية للشعارات والرسوم التوضيحية",
