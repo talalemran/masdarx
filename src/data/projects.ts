@@ -176,7 +176,7 @@ export const projects: Project[] = [
     stars: "5k+",
     license: "GPL-2.0",
     tags: ["سطح مكتب", "واجهة", "تخصيص", "KDE"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/kde-plasma-logo.webp",
     features: [
       "تخصيص شامل يطال كل عنصر تقريبًا في الواجهة من شريط المهام إلى الأيقونات والقوائم",
       "دعم كامل لبروتوكول Wayland الحديث إلى جانب X11 لضمان توافق واسع مع مختلف الأجهزة",
@@ -197,7 +197,7 @@ export const projects: Project[] = [
     stars: "2k+",
     license: "GPL-2.0",
     tags: ["سطح مكتب", "واجهة", "بساطة", "GNOME"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/gnome.webp",
     features: [
       "تصميم بسيط وخالٍ من التشتيت يركّز على مهمة واحدة في كل مرة لتحسين التركيز",
       "إيماءات لمس سلسة على شاشات اللمس ولوحات التتبع تجعل التنقل بين النوافذ أسرع",
@@ -218,7 +218,7 @@ export const projects: Project[] = [
     stars: "12k+",
     license: "GPL-2.0",
     tags: ["مشغل وسائط", "فيديو", "صوت", "صيغ متعددة"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/vlc.webp",
     features: [
       "دعم شبه كامل لجميع صيغ الفيديو والصوت الشائعة دون الحاجة لتثبيت ترميزات إضافية",
       "دعم متقدم للترجمات يشمل التحميل التلقائي وضبط التوقيت والخط والحجم بسهولة",
@@ -239,7 +239,7 @@ export const projects: Project[] = [
     stars: "28k+",
     license: "MPL-2.0",
     tags: ["متصفح", "خصوصية", "Mozilla", "مفتوح المصدر"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/firefox.webp",
     features: [
       "حماية مدمجة ومفعّلة افتراضيًا من متتبعي الإعلانات وبرمجيات جمع البيانات أثناء التصفح",
       "متجر إضافات غني يتيح توسيع وظائف المتصفح بحجب الإعلانات ومديري كلمات المرور وغيرها",
