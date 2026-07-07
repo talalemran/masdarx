@@ -1,0 +1,121 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "ecmascript-2026-approved-javascript-new-features",
+  title: "ECMAScript 2026 معتمد رسميًا: 7 إضافات تغيّر طريقة كتابة JavaScript",
+  description:
+    "ECMA International تعتمد مواصفة ECMAScript 2026 — الإصدار 17 من معيار JavaScript يجلب Error.isError، Math.sumPrecise، Array.fromAsync، وإضافات جديدة للـ Map وIterator والـ Uint8Array.",
+  keywords: [
+    "ECMAScript 2026",
+    "JavaScript",
+    "ES2026",
+    "ECMA International",
+    "Array.fromAsync",
+    "Math.sumPrecise",
+    "Error.isError",
+    "جافاسكريبت",
+    "برمجة",
+    "معيار JavaScript",
+  ],
+  category: "برمجة",
+  author: "فريق مصدر إكس",
+  date: "7 يوليو 2026",
+  pubDate: new Date("2026-07-07"),
+  tags: ["JavaScript", "ECMAScript", "ES2026", "برمجة", "ECMA"],
+  thumbnail: "/images/ecmascript-2026-approved-javascript-new-features.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      اعتمدت <strong>ECMA International</strong> رسميًا مواصفة <strong
+        >ECMAScript 2026</strong
+      >، الإصدار السابع عشر من معيار JavaScript. الإصدار الجديد يُضيف مجموعة
+      متنوعة من الدوال والتحسينات تطال المصفوفات، التشفير، الـ Iterators، الـ
+      JSON، والـ Math — وهي إضافات عملية تحل مشاكل حقيقية يواجهها المطورون
+      يوميًا.
+    </p>
+
+    <h2>أبرز الإضافات في ES2026</h2>
+
+    <h3>Error.isError()</h3>
+    <p>
+      يتحقق مما إذا كانت القيمة المُعترضة في <code>try/catch</code> هي فعلًا كائن
+      خطأ، بغض النظر عن مصدره — سواء كان من وحدة نمطية أخرى، Web Worker، أو iframe.
+      يحل مشكلة عدم الاتساق عند التعامل مع تطبيقات متعددة الوحدات.
+    </p>
+
+    <h3>Math.sumPrecise()</h3>
+    <p>
+      بسبب طبيعة الأرقام العشرية في JavaScript واعتمادها على الفاصلة العائمة،
+      تُفقد الدقة عند جمع أرقام كثيرة تتابعيًا. <code>Math.sumPrecise()</code> يجمع
+      مصفوفات الأرقام بأعلى دقة ممكنة — حل مثالي للتطبيقات المالية التي تعالج آلاف
+      السجلات.
+    </p>
+
+    <h3>Array.fromAsync()</h3>
+    <p>
+      كان <code>Array.from()</code> لا يعمل مع المصادر غير المتزامنة مثل الـ Streams
+      أو الـ Paginated APIs، مما يجبر المطورين على كتابة حلقات انتظار يدوية. <code
+        >Array.fromAsync()</code
+      > يُعالج هذا مباشرةً بطريقة نظيفة وبديهية.
+    </p>
+
+    <h3>Iterator.concat()</h3>
+    <p>
+      يتيح ربط مُكرِّرَين (Iterators) أو أكثر في تسلسل واحد يُستهلك كما لو كان
+      مُكرِّرًا واحدًا — دون الحاجة لـ Generators كما كان الحال سابقًا.
+    </p>
+
+    <h3>JSON.parse وJSON.stringify — تحسينات</h3>
+    <p>
+      تحديث سلوك <code>JSON.parse</code> ليمنح دوال الـ reviver وصولًا لنص المصدر
+      الأصلي. كما يدعم <code>JSON.stringify</code> الآن العناصر النائبة لقيم JSON
+      الخام.
+    </p>
+
+    <h3>Map.prototype وWeakMap.prototype — قيم افتراضية</h3>
+    <p>
+      دوال جديدة تُعيد القيمة المرتبطة بمفتاح إن وُجد، أو تُدرج المفتاح بقيمة
+      افتراضية إن لم يكن موجودًا — حل أنيق لمشكلة التحديث الشرطي في الـ Maps.
+    </p>
+
+    <h3>Uint8Array — تحويل Base64 وHex</h3>
+    <p>
+      دوال جديدة لتحويل البيانات الثنائية إلى سلاسل Hexadecimal وBase64 والعكس —
+      مباشرةً دون مكتبات خارجية.
+    </p>
+
+    <p>
+      ECMAScript 2026 ليس ثورة في بنية اللغة، بل هو ترسيخ للنضج — إضافات مدروسة
+      تُغلق ثغرات حقيقية يعمل حولها المطورون منذ سنوات، والمواصفة الكاملة متاحة
+      الآن على موقع ECMA الرسمي.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://www.i-programmer.info/news/167-javascript/18988-ecma-2026-spec-approved.html"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        I Programmer
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
