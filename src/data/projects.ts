@@ -344,7 +344,7 @@ export const projects: Project[] = [
     stars: "7k+",
     license: "GPL-3.0",
     tags: ["رسومات", "تصميم", "فن رقمي", "لوحة رسم"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/krita.webp",
     features: [
       "مجموعة ضخمة من الفرش القابلة للتخصيص تحاكي الألوان المائية والزيتية والفحم الحقيقي",
       "نظام طبقات متقدم يدعم أوضاع المزج وأقنعة القص لتحكم دقيق في كل جزء من اللوحة",
@@ -365,7 +365,7 @@ export const projects: Project[] = [
     stars: "13k+",
     license: "GPL-2.0",
     tags: ["صوت", "بودكاست", "تسجيل", "تحرير"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/audacity.webp",
     features: [
       "تسجيل وتحرير متعدد المسارات يتيح دمج أصوات متعددة كالموسيقى والتعليق الصوتي معًا",
       "مكتبة مؤثرات صوتية واسعة تشمل الصدى والتضخيم وتغيير طبقة الصوت والسرعة",
@@ -386,7 +386,7 @@ export const projects: Project[] = [
     stars: "12k+",
     license: "GPL-3.0",
     tags: ["كلمات مرور", "أمن", "خصوصية", "تشفير"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/bitwarden.webp",
     features: [
       "ملء تلقائي ذكي لبيانات تسجيل الدخول ونماذج البطاقات في المتصفحات والتطبيقات",
       "مزامنة فورية ومشفّرة لخزنة كلمات المرور عبر جميع الأجهزة والمتصفحات المرتبطة بالحساب",
@@ -407,7 +407,7 @@ export const projects: Project[] = [
     stars: "4k+",
     license: "AGPL-3.0",
     tags: ["مجموعة مكاتب", "تعاون", "سحابة", "مستندات"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/onlyoffice.webp",
     features: [
       "تعاون في الوقت الحقيقي يتيح لعدة أشخاص تحرير نفس المستند ورؤية تعديلات بعضهم فورًا",
       "توافق عالٍ مع صيغ Microsoft Office يحافظ على التنسيق دون تشويه عند فتح الملفات",
@@ -428,7 +428,7 @@ export const projects: Project[] = [
     stars: "4k+",
     license: "Apache-2.0",
     tags: ["تشفير", "أمن", "خصوصية", "حماية"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/veracrypt.webp",
     features: [
       "تشفير أقراص كامل يحمي جميع البيانات المخزنة على القرص الصلب أو المحرك الخارجي",
       "حاوية مخفية داخل حاوية مشفّرة أخرى تمنح إنكارًا معقولًا لوجود بيانات حساسة إضافية",
@@ -449,7 +449,7 @@ export const projects: Project[] = [
     stars: "3k+",
     license: "GPL-3.0",
     tags: ["فيديو", "تحرير", "صانع أفلام", "مفتوح المصدر"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/openshot.webp",
     features: [
       "أدوات قص ودمج بسيطة تعمل بالسحب والإفلات على خط زمني متعدد المسارات",
       "مكتبة تأثيرات بصرية جاهزة تشمل الانتقالات والفلاتر اللونية لتحسين مظهر الفيديو",
@@ -470,7 +470,7 @@ export const projects: Project[] = [
     stars: "65k+",
     license: "MPL-2.0",
     tags: ["مزامنة", "سحابة", "خصوصية", "peer-to-peer"],
-    thumbnail: "/images/soon.webp",
+    thumbnail: "/images/syncthing.webp",
     features: [
       "مزامنة فورية للملفات تكتشف التغييرات وتنقلها بين الأجهزة المتصلة خلال لحظات",
       "تشفير كامل للاتصال بين الأجهزة يمنع اعتراض البيانات أثناء عملية النقل",
