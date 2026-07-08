@@ -32,6 +32,7 @@ ${projects.map((project) => {
 ${categoryXml}
       <pubDate>${new Date().toISOString().split("T")[0]}</pubDate>
       ${project.thumbnail ? `<media:content url="${siteUrl}${project.thumbnail}" medium="image" />` : ""}
+      ${project.thumbnail ? `<enclosure url="${siteUrl}${project.thumbnail}" type="image/webp" length="0" />` : ""}
     </item>`;
 }).join("\n")}
   </channel>

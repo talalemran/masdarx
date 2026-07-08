@@ -36,6 +36,7 @@ ${posts.map((post) => {
 ${categoryXml}
       <pubDate>${post.pubDate ? toISODate(new Date(post.pubDate)) : ""}</pubDate>
       ${post.thumbnail ? `<media:content url="${siteUrl}${post.thumbnail}" medium="image" />` : ""}
+      ${post.thumbnail ? `<enclosure url="${siteUrl}${post.thumbnail}" type="image/webp" length="0" />` : ""}
     </item>`;
 }).join("\n")}
   </channel>
