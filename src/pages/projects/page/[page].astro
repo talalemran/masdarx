@@ -70,14 +70,22 @@ const canonicalPath = `/projects/page/${page}/`;
           )}
           <div class="p-5">
             <div class="flex items-center gap-2 mb-2">
-              <span class="px-2 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full">
+              <a
+                href={`/projects/category/${Array.isArray(project.category) ? project.category[0] : project.category}/`}
+                class="px-2 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full hover:bg-gray-700 transition-colors no-underline"
+              >
                 {Array.isArray(project.category) ? project.category[0] : project.category}
-              </span>
+              </a>
               <span class="text-xs font-body text-gray-500">{project.language}</span>
             </div>
-            <h3 class="font-heading text-lg font-bold text-charcoal mb-2 group-hover:text-gray-700 transition-colors">
-              {project.name}
-            </h3>
+            <a
+              href={`/projects/${project.slug}/`}
+              class="block no-underline group/title"
+            >
+              <h3 class="font-heading text-lg font-bold text-charcoal mb-2 group-hover:text-gray-700 transition-colors">
+                {project.name}
+              </h3>
+            </a>
             <p class="font-body text-sm text-gray-600 leading-relaxed mb-3 line-clamp-2">
               {project.description}
             </p>
