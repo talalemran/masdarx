@@ -45,32 +45,36 @@ const filteredProjects = allProjects.filter((p) => {
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {filteredProjects.map((project) => (
-        <a
-          href={`/projects/${project.slug}/`}
-          class="group block bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow no-underline"
-        >
-          {project.thumbnail && (
-            <div class="bg-gray-100 overflow-hidden">
-              <img
-                src={project.thumbnail}
-                alt={project.name}
-                width="400"
-                height="225"
-                class="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-          )}
+        <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+          <a href={`/projects/${project.slug}/`} class="block no-underline">
+            {project.thumbnail && (
+              <div class="bg-gray-100 overflow-hidden">
+                <img
+                  src={project.thumbnail}
+                  alt={project.name}
+                  width="400"
+                  height="225"
+                  class="w-full h-auto"
+                  loading="lazy"
+                />
+              </div>
+            )}
+          </a>
           <div class="p-5">
             <div class="flex items-center gap-2 mb-2">
-              <span class="px-2 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full">
+              <a
+                href={`/projects/category/${Array.isArray(project.category) ? project.category[0] : project.category}/`}
+                class="px-2 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full hover:bg-gray-700 transition-colors no-underline"
+              >
                 {Array.isArray(project.category) ? project.category[0] : project.category}
-              </span>
+              </a>
               <span class="text-xs font-body text-gray-500">{project.language}</span>
             </div>
-            <h3 class="font-heading text-lg font-bold text-charcoal mb-2 group-hover:text-gray-700 transition-colors">
-              {project.name}
-            </h3>
+            <a href={`/projects/${project.slug}/`} class="block no-underline">
+              <h3 class="font-heading text-lg font-bold text-charcoal mb-2 hover:text-gray-700 transition-colors">
+                {project.name}
+              </h3>
+            </a>
             <p class="font-body text-sm text-gray-600 leading-relaxed mb-3 line-clamp-2">
               {project.description}
             </p>
@@ -82,7 +86,7 @@ const filteredProjects = allProjects.filter((p) => {
               <span>{project.license}</span>
             </div>
           </div>
-        </a>
+        </div>
       ))}
     </div>
   </section>
