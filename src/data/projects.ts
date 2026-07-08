@@ -18,7 +18,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "zen-browser",
-    name: "Zen Browser",
+    name: "زن براوزر - Zen Browser",
     nameEn: "Zen Browser",
     description: "متصفح مفتوح المصدر مبني على محرك فايرفوكس، صُمم ليمنحك تجربة تصفح أكثر هدوءًا وتركيزًا عبر تبويبات عمودية ومساحات عمل منفصلة، مع حماية قوية من التتبع وتخصيص عميق للواجهة.",
     url: "https://github.com/zen-browser/desktop",
@@ -40,7 +40,7 @@ export const projects: Project[] = [
   },
   {
     slug: "linux-mint",
-    name: "Linux Mint",
+    name: "لينكس مينت - Linux Mint",
     nameEn: "Linux Mint",
     description: "توزيعة لينكس مبنية على Ubuntu، تجمع بين الاستقرار وسهولة الاستخدام في واجهة كلاسيكية مألوفة تُسهّل الانتقال من ويندوز، مع مجموعة برامج جاهزة من أول تشغيل ودعم طويل الأمد يوفر تحديثات أمان مستمرة.",
     url: "https://github.com/linuxmint",
@@ -61,7 +61,7 @@ export const projects: Project[] = [
   },
   {
     slug: "gimp",
-    name: "GIMP",
+    name: "جي آي إم بي - GIMP",
     nameEn: "GIMP",
     description: "برنامج احترافي لتحرير الصور الرقمية ومعالجتها، يقدّم أدوات متقدمة للرتوش والتركيب والرسم تُضاهي برامج تجارية مثل Photoshop، مع دعم واسع للإضافات وسكربتات الأتمتة.",
     url: "https://gitlab.gnome.org/GNOME/gimp",
@@ -82,7 +82,7 @@ export const projects: Project[] = [
   },
   {
     slug: "obs-studio",
-    name: "OBS Studio",
+    name: "أوبس ستوديو - OBS Studio",
     nameEn: "OBS Studio",
     description: "برنامج بث وتسجيل شاشة مجاني بالكامل، يتيح للاعبين وصانعي المحتوى البث المباشر للألعاب والدروس أو تسجيل الشاشة بجودة عالية، مع إمكانية مزج مصادر متعددة وتطبيق فلاتر صوتية وبصرية في الوقت الحقيقي.",
     url: "https://github.com/obsproject/obs-studio",
@@ -103,7 +103,7 @@ export const projects: Project[] = [
   },
   {
     slug: "blender",
-    name: "Blender",
+    name: "بليندر - Blender",
     nameEn: "Blender",
     description: "مجموعة أدوات متكاملة للنمذجة والتحريك والمحاكاة ثلاثية الأبعاد، تُستخدم في إنتاج الأفلام والألعاب والإعلانات، وتضم أيضًا محرر فيديو ومحرك ألعاب مدمجَين يجعلانها حلاً شاملاً للإبداع الرقمي.",
     url: "https://projects.blender.org/blender/blender",
@@ -124,7 +124,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nextcloud",
-    name: "Nextcloud",
+    name: "نكست كلاود - Nextcloud",
     nameEn: "Nextcloud",
     description: "منصة سحابية خاصة يمكن استضافتها على خوادمك الخاصة، تمنحك التحكم الكامل في بياناتك بدلاً من الاعتماد على خدمات مثل Google Drive، مع تطبيقات لمشاركة الملفات والتقويم وجهات الاتصال والتعاون الجماعي.",
     url: "https://github.com/nextcloud/server",
@@ -145,7 +145,7 @@ export const projects: Project[] = [
   },
   {
     slug: "darktable",
-    name: "Darktable",
+    name: "داركتيبل - Darktable",
     nameEn: "Darktable",
     description: "برنامج متخصص في معالجة صور RAW القادمة من الكاميرات الاحترافية، يوفر أدوات دقيقة لتصحيح الألوان والإضاءة وإدارة مكتبة الصور ضمن سير عمل غير إتلافي، ما يجعله بديلاً قويًا لـ Adobe Lightroom.",
     url: "https://github.com/darktable-org/darktable",
@@ -166,7 +166,7 @@ export const projects: Project[] = [
   },
   {
     slug: "kde-plasma",
-    name: "KDE Plasma",
+    name: "ك دي بلازما - KDE Plasma",
     nameEn: "KDE Plasma",
     description: "بيئة سطح مكتب غنية بالخيارات وقابلة للتخصيص إلى أدق التفاصيل، تجمع بين الأداء العالي والمظهر العصري، وتدعم Wayland وتأثيرات بصرية سلسة وطرفية Konsole القوية.",
     url: "https://github.com/KDE/plasma-desktop",
@@ -187,7 +187,7 @@ export const projects: Project[] = [
   },
   {
     slug: "gnome",
-    name: "GNOME",
+    name: "جنوم - GNOME",
     nameEn: "GNOME",
     description: "بيئة سطح مكتب تعتمد فلسفة البساطة والتركيز على المهمة الواحدة، بواجهة نظيفة خالية من التشتيت وإيماءات لمس سلسة، وهي البيئة الافتراضية في توزيعات مثل Ubuntu وFedora.",
     url: "https://gitlab.gnome.org/GNOME/gnome-desktop",
@@ -208,7 +208,7 @@ export const projects: Project[] = [
   },
   {
     slug: "vlc",
-    name: "VLC Media Player",
+    name: "في إل سي - VLC Media Player",
     nameEn: "VLC",
     description: "مشغل وسائط متعدد المنصات يفتح تقريبًا أي صيغة فيديو أو صوت دون الحاجة لتثبيت ترميزات (codecs) إضافية، ويدعم الترجمات والبث المباشر، وكل ذلك دون إعلانات أو تتبع.",
     url: "https://code.videolan.org/videolan/vlc",
@@ -229,7 +229,7 @@ export const projects: Project[] = [
   },
   {
     slug: "firefox",
-    name: "Firefox",
+    name: "فايرفوكس - Firefox",
     nameEn: "Firefox",
     description: "متصفح ويب سريع من Mozilla يقف في مواجهة مباشرة مع المتصفحات المبنية على Chromium، بمحرك عرض مستقل خاص به وحماية قوية من التتبع الإعلاني، مع دعم واسع للإضافات وتزامن البيانات بين الأجهزة.",
     url: "https://github.com/mozilla-firefox/firefox",
@@ -250,7 +250,7 @@ export const projects: Project[] = [
   },
   {
     slug: "thunderbird",
-    name: "Thunderbird",
+    name: "ثاندربرد - Thunderbird",
     nameEn: "Thunderbird",
     description: "عميل بريد إلكتروني يتيح إدارة عدة حسابات بريدية في مكان واحد، مع تقويم وجهات اتصال مدمجين وتشفير PGP لحماية المراسلات الحساسة، كبديل قوي لبرنامج Outlook.",
     url: "https://github.com/thunderbird",
@@ -271,7 +271,7 @@ export const projects: Project[] = [
   },
   {
     slug: "libreoffice",
-    name: "LibreOffice",
+    name: "ليبر أوفيس - LibreOffice",
     nameEn: "LibreOffice",
     description: "مجموعة مكتبية متكاملة تضم محرر نصوص وجداول بيانات وعروضًا تقديمية ومحرر معادلات، متوافقة مع صيغ Microsoft Office، وتوفر بديلاً كاملاً ومجانيًا دون الحاجة لاشتراكات سحابية.",
     url: "https://github.com/LibreOffice/core",
@@ -292,7 +292,7 @@ export const projects: Project[] = [
   },
   {
     slug: "signal",
-    name: "Signal",
+    name: "سيجنال - Signal",
     nameEn: "Signal",
     description: "تطبيق مراسلة يعتمد بروتوكول تشفير من طرف إلى طرف يُعدّه خبراء الأمن من الأقوى المتاحة حاليًا، مع دعم للمكالمات الصوتية والفيديو والرسائل ذاتية التدمير والمجموعات، وبلا نموذج ربحي قائم على جمع البيانات.",
     url: "https://github.com/signalapp/Signal-Desktop",
@@ -313,7 +313,7 @@ export const projects: Project[] = [
   },
   {
     slug: "inkscape",
-    name: "Inkscape",
+    name: "إنكسكيب - Inkscape",
     nameEn: "Inkscape",
     description: "محرر رسومات متجهية (Vector) احترافي لتصميم الشعارات والرسوم التوضيحية ومواد الطباعة، يدعم صيغة SVG المفتوحة بشكل كامل ويقدم أدوات دقيقة للرسم والتحويل تنافس Adobe Illustrator.",
     url: "https://gitlab.com/inkscape/inkscape",
@@ -334,7 +334,7 @@ export const projects: Project[] = [
   },
   {
     slug: "krita",
-    name: "Krita",
+    name: "كريتا - Krita",
     nameEn: "Krita",
     description: "برنامج رسم رقمي مصمم خصيصًا للفنانين، يضم مجموعة ضخمة من الفرش القابلة للتخصيص وأدوات تحريك أساسية ونظام طبقات متقدم، ويحظى بشعبية واسعة في مجتمعات الرسم المفهومي والقصص المصورة.",
     url: "https://github.com/KDE/krita",
@@ -355,7 +355,7 @@ export const projects: Project[] = [
   },
   {
     slug: "audacity",
-    name: "Audacity",
+    name: "أوداسيتي - Audacity",
     nameEn: "Audacity",
     description: "محرر صوت متعدد المسارات يتيح تسجيل وتحرير ومعالجة الملفات الصوتية بسهولة، مع مكتبة مؤثرات صوتية وأدوات إزالة الضوضاء، وهو الخيار المفضل لدى صنّاع البودكاست والموسيقيين المستقلين.",
     url: "https://github.com/audacity/audacity",
@@ -376,7 +376,7 @@ export const projects: Project[] = [
   },
   {
     slug: "bitwarden",
-    name: "Bitwarden",
+    name: "بيتواردن - Bitwarden",
     nameEn: "Bitwarden",
     description: "مدير كلمات مرور يخزّن بياناتك بتشفير قوي لا يمكن لأحد سوى صاحب الحساب فك رموزه، مع ملء تلقائي للنماذج ومزامنة عبر جميع الأجهزة والمتصفحات، ومولّد كلمات مرور قوية لحماية حساباتك.",
     url: "https://github.com/bitwarden/clients",
@@ -397,7 +397,7 @@ export const projects: Project[] = [
   },
   {
     slug: "onlyoffice",
-    name: "OnlyOffice",
+    name: "أوني أوفيس - OnlyOffice",
     nameEn: "OnlyOffice",
     description: "مجموعة مكتبية سحابية تتيح لعدة مستخدمين تحرير المستند نفسه في الوقت الحقيقي، مع توافق عالٍ مع صيغ Microsoft Office ومحرر PDF ونماذج تفاعلية، ما يجعلها خيارًا عمليًا للفرق والشركات.",
     url: "https://github.com/ONLYOFFICE/DesktopEditors",
@@ -418,7 +418,7 @@ export const projects: Project[] = [
   },
   {
     slug: "veracrypt",
-    name: "VeraCrypt",
+    name: "فيركريبت - VeraCrypt",
     nameEn: "VeraCrypt",
     description: "أداة تشفير أقراص تتيح إنشاء أقسام أو حاويات مشفّرة بالكامل، بما في ذلك خاصية الحجم المخفي التي تمنح إنكارًا معقولًا (Plausible Deniability)، وتدعم تشفير نظام التشغيل نفسه على ويندوز ولينكس وماك.",
     url: "https://github.com/veracrypt/VeraCrypt",
@@ -439,7 +439,7 @@ export const projects: Project[] = [
   },
   {
     slug: "openshot",
-    name: "OpenShot",
+    name: "أوبن شوت - OpenShot",
     nameEn: "OpenShot",
     description: "محرر فيديو بسيط وسهل التعلم، يوفر أدوات قص ودمج وتأثيرات وعناوين متحركة كافية لإنتاج فيديوهات احترافية بسرعة، ما يجعله خيارًا مناسبًا للمبتدئين في صناعة المحتوى.",
     url: "https://github.com/OpenShot/openshot-qt",
@@ -460,7 +460,7 @@ export const projects: Project[] = [
   },
   {
     slug: "syncthing",
-    name: "Syncthing",
+    name: "سينكثينغ - Syncthing",
     nameEn: "Syncthing",
     description: "أداة مزامنة ملفات لامركزية تعمل مباشرة بين أجهزتك دون المرور بخادم سحابي وسيط، مع تشفير كامل للبيانات أثناء النقل، وهي حل مثالي لمن يريد بديلاً خاصًا بالكامل عن Dropbox.",
     url: "https://github.com/syncthing/syncthing",
