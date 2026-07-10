@@ -1,0 +1,131 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "linux-mint-cinnamon-wayland-ready-christmas-2026",
+  title: "Linux Mint سينامون جاهز لـ Wayland: لم يعد تجريبيًا",
+  description:
+    "فريق Linux Mint يُعلن أن Cinnamon أصبح جاهزًا للـ Wayland في الإصدار القادم المتوقع نهاية 2026 — مع دعم كامل لـ HiDPI والشاشات المتعددة وتسريع الهاردوير وإصلاحات جوهرية كثيرة.",
+  keywords: [
+    "Linux Mint",
+    "Cinnamon",
+    "Wayland",
+    "لينكس منت",
+    "سينامون",
+    "X11",
+    "HiDPI",
+    "لينكس",
+    "بيئة سطح المكتب",
+    "مفتوح المصدر",
+  ],
+  category: ["لينكس", "بيئة سطح المكتب"],
+  author: "فريق مصدر إكس",
+  date: "9 يوليو 2026",
+  pubDate: new Date("2026-07-09"),
+  tags: ["Linux Mint", "Cinnamon", "Wayland", "لينكس", "سطح المكتب"],
+  thumbnail: "/images/linux-mint-cinnamon-wayland-ready-christmas-2026.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      أعلن <strong>كليمان لوفيفر</strong>، المطوّر الرئيسي لـ Linux Mint، في
+      تقرير يونيو الشهري أن بيئة سطح المكتب <strong>Cinnamon</strong> باتت جاهزة للـ
+      <strong>Wayland</strong> في الإصدار القادم المتوقع نهاية 2026 — ولم يعد دعم
+      Wayland يُصنَّف "تجريبيًا". بمعنى آخر: كلٌّ من X11 وWayland سيكونان مدعومَين
+      بشكل كامل جنبًا إلى جنب.
+    </p>
+
+    <h2>أبرز تحسينات Wayland في Cinnamon</h2>
+
+    <ul>
+      <li>
+        <strong>تعيين صحيح للنوافذ:</strong> تحديد الحجم والموضع بدقة لنوافذ التطبيقات
+        وقوائم السياق
+      </li>
+      <li>
+        <strong>منع سرقة التركيز:</strong> إصلاح مشكلة التطبيقات التي تقفز أمام النافذة
+        النشطة
+      </li>
+      <li>
+        <strong>إصلاح أعطال واسعة:</strong> تصحيح سيناريوهات كسر في Cinnamon وMuffin
+        وcinnamon-session وXwayland
+      </li>
+      <li><strong>دعم محسّن للشاشات المتعددة وKVM Switches</strong></li>
+      <li>
+        <strong>تسريع هاردوير شامل:</strong> عبر wl_drm وdmabuf وGBM/EGL بما فيه دعم
+        NVIDIA
+      </li>
+      <li>
+        <strong>دعم كامل لـ HiDPI:</strong> أيقونات حادة، مؤشرات ماوس مُصلَحة، وإصلاحات
+        لتطبيقات Chromium كـ Slack وVSCode
+      </li>
+      <li>
+        <strong>Window Progress:</strong> إمكانية رؤية تقدم نسخ الملفات في زر شريط
+        المهام
+      </li>
+      <li>
+        <strong>التطبيقات الجذرية (pkexec)</strong> تعمل الآن كـ Wayland clients وليس
+        Xwayland
+      </li>
+    </ul>
+
+    <h2>تحسينات إضافية في Cinnamon</h2>
+
+    <ul>
+      <li>
+        أمر <code>cinnamon-list-windows</code> جديد لعرض جميع النوافذ المفتوحة مع
+        معلوماتها
+      </li>
+      <li>Muffin يُقرّب الإحداثيات والأبعاد لضمان رسم حاد وخالٍ من الضبابية</li>
+      <li>
+        دعم <strong>systemd graphical-session</strong> لتحسين التوافق مع المشاريع
+        الأوبن سورس
+      </li>
+      <li>تحسين دعم <strong>SSH keyring</strong> على مستوى النظام</li>
+      <li>
+        دعم <strong>بصمة الإصبع</strong> في Slick Greeter — لتسجيل الدخول بمجرد لمس
+        القارئ دون الحاجة لضغط Enter
+      </li>
+    </ul>
+
+    <h2>متى يصدر؟</h2>
+
+    <p>
+      الإصدار القادم من Linux Mint متوقع <strong>قُرب نهاية 2026</strong> (حوالي موسم
+      عيد الميلاد وفق النمط المعتاد للفريق). المستخدمون الحاليون لن يحصلوا على هذه
+      التحسينات حتى صدور الإصدار الجديد رسميًا.
+    </p>
+
+    <p>
+      Linux Mint سينامون كان آخر بيئات سطح المكتب الكبرى في التحوّل لـ Wayland —
+      لكن الفريق آثر الصبر على الجودة بدلًا من الاستعجال، وهذا بالضبط ما جعل
+      المنت التوزيعة الأكثر ثقةً بين المستخدمين الجدد والمحترفين على حدٍّ سواء.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://www.gamingonlinux.com/2026/07/linux-mint-cinnamon-is-finally-wayland-ready/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GamingOnLinux
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
