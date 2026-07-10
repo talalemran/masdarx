@@ -24,8 +24,9 @@ export interface Props {
 
 const { page, totalPages, allProjects } = Astro.props;
 const pageSize = 9;
+const reversedProjects = [...allProjects].reverse();
 const start = (page - 1) * pageSize;
-const pageProjects = allProjects.slice(start, start + pageSize);
+const pageProjects = reversedProjects.slice(start, start + pageSize);
 
 const canonicalPath = `/projects/page/${page}/`;
 ---

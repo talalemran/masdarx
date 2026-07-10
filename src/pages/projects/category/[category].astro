@@ -19,7 +19,7 @@ const { category, projects: allProjects } = Astro.props;
 const filteredProjects = allProjects.filter((p) => {
   const cats = Array.isArray(p.category) ? p.category : [p.category];
   return cats.includes(category);
-});
+}).reverse();
 ---
 
 <BaseLayout

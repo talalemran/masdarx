@@ -17,7 +17,7 @@ const totalPages = Math.ceil(restPosts.length / pageSize);
 const currentPage = 1;
 const pagePosts = restPosts.slice(0, pageSize);
 
-const latestProjects = projects.slice(-3);
+const latestProjects = [...projects].reverse().slice(-3);
 ---
 
 <BaseLayout

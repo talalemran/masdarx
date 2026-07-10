@@ -16,7 +16,8 @@ const projectsByCategory = categories.map((cat) => ({
 const pageSize = 9;
 const totalPages = Math.ceil(projects.length / pageSize);
 const currentPage = 1;
-const pageProjects = projects.slice(0, pageSize);
+const reversedProjects = [...projects].reverse();
+const pageProjects = reversedProjects.slice(0, pageSize);
 ---
 
 <BaseLayout
