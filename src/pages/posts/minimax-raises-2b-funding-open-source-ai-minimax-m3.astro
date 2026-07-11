@@ -1,0 +1,130 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "minimax-raises-2b-funding-open-source-ai-minimax-m3",
+  title: "MiniMax تجمع ملياري دولار: الذكاء الاصطناعي الصيني يُعيد رسم المشهد",
+  description:
+    "شركة MiniMax الصينية تجمع 2 مليار دولار عبر إصدار أسهم وسندات قابلة للتحويل — وراء الخبر المالي: نموذج MiniMax-M3 بـ 427 مليار معامل وتقنية MSA التي تُسرّع الاستنتاج 15 مرة.",
+  keywords: [
+    "MiniMax",
+    "مينيماكس",
+    "ذكاء اصطناعي",
+    "AI funding",
+    "MiniMax-M3",
+    "نماذج مفتوحة المصدر",
+    "LLM",
+    "هونغ كونغ",
+    "استثمار ذكاء اصطناعي",
+    "AGI",
+  ],
+  category: "ذكاء اصطناعي",
+  author: "فريق مصدر إكس",
+  date: "10 يوليو 2026",
+  pubDate: new Date("2026-07-10"),
+  tags: ["MiniMax", "ذكاء اصطناعي", "تمويل", "LLM", "مفتوح المصدر"],
+  thumbnail: "/images/minimax-raises-2b-funding-open-source-ai-minimax-m3.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      جمعت <strong>MiniMax Group</strong> الصينية <strong>ملياري دولار</strong> في
+      جولة تمويل جديدة — أكثر من نصفها من إصدار أسهم جديدة، والباقي عبر سندات قابلة
+      للتحويل. الشركة المدرجة في بورصة هونغ كونغ منذ مطلع 2026 تواصل توسعها بوتيرة
+      لافتة في سوق الذكاء الاصطناعي مفتوح المصدر.
+    </p>
+
+    <h2>الأرقام بالتفصيل</h2>
+
+    <ul>
+      <li>
+        جمعت الشركة <strong>619 مليون دولار</strong> في طرحها العام الأولي بهونغ كونغ
+        مطلع 2026
+      </li>
+      <li>
+        الجولة الحالية تبلغ <strong>2 مليار دولار</strong> عبر مزيج من الأسهم والسندات
+      </li>
+      <li>
+        تخطط لإصدار سندات صفرية القسيمة بقيمة <strong>6.5 مليار دولار</strong> تمنح
+        المستثمرين 19.4 مليون سهم بعلاوة 12.6%، مستحقة عام 2027
+      </li>
+      <li>أسهم الشركة انخفضت <strong>9.8%</strong> يوم الإعلان</li>
+    </ul>
+
+    <h2>النموذج التقني: MiniMax-M3</h2>
+
+    <p>
+      في يونيو 2026، كشفت MiniMax عن نموذجها الرائد الجديد <strong
+        >MiniMax-M3</strong
+      > بـ <strong>427 مليار معامل</strong> وسياق يصل إلى <strong
+        >مليون توكن</strong
+      >. الأهم من الحجم هو السرعة: M3 يُنجز مرحلة الـ prefill أسرع <strong
+        >9 مرات</strong
+      >، ومرحلة الـ decode أسرع <strong>15 مرة</strong> مقارنة بالنموذج السابق.
+    </p>
+
+    <h2>التقنية خلف السرعة: MiniMax Sparse Attention</h2>
+
+    <p>
+      السر في تقنية <strong>MSA (MiniMax Sparse Attention)</strong> التي تعتمد على
+      FlashAttention لتقليل حركة البيانات بين SRAM وHBM في الـ GPU — مما يُقلّص وقت
+      الاستنتاج بشكل جذري. كما تستخدم M3 تقنية <strong
+        >block-sparse prefill</strong
+      > لفهم البرومبتات الطويلة بسرعة، إلى جانب وحدة كمية (quantization) تُقلّص متطلبات
+      الذاكرة.
+    </p>
+
+    <h2>ما وراء النماذج النصية</h2>
+
+    <ul>
+      <li>
+        MiniMax طوّرت سلسلة <strong>VTL</strong> من المحوّلات البصرية المفتوحة لتحويل
+        الصور إلى متجهات رياضية يفهمها الـ LLM
+      </li>
+      <li>
+        تولّد إيراداتها عبر منصة سحابية للوصول إلى نماذجها، وتطبيقات وسائط
+        متعددة للمستهلكين
+      </li>
+    </ul>
+
+    <h2>الرهان على AGI</h2>
+
+    <p>
+      الرئيس التنفيذي <strong>Yan Junjie</strong> أعلن تنازله عن راتبه حتى تحقق الشركة
+      الذكاء الاصطناعي العام (AGI)، كما تعهّد بالتنازل عن 5% من أسهمه لتمويل حوافز
+      الموظفين والمشاريع مفتوحة المصدر.
+    </p>
+
+    <p>
+      MiniMax ليست مجرد شركة تمويل جديدة — بل لاعب تقني حقيقي يجمع بين نماذج
+      مفتوحة المصدر وتقنيات استنتاج متقدمة وقدرة مالية ضخمة، في وقت يتصاعد فيه
+      التنافس العالمي على قيادة سباق الذكاء الاصطناعي.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://siliconangle.com/2026/07/10/open-source-ai-model-developer-minimax-raises-2b-funding/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        SiliconAngle
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
