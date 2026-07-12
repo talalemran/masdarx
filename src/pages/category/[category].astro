@@ -24,7 +24,7 @@ const { category, posts: allPosts } = Astro.props;
 const filteredPosts = allPosts.filter((p) => {
   const cats = Array.isArray(p.category) ? p.category : [p.category];
   return cats.includes(category);
-});
+}).slice(0, 6);
 ---
 
 <BaseLayout

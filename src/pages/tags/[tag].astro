@@ -21,7 +21,7 @@ export interface Props {
 }
 
 const { tag, posts: allPosts } = Astro.props;
-const filteredPosts = allPosts.filter((p) => p.tags?.includes(tag));
+const filteredPosts = allPosts.filter((p) => p.tags?.includes(tag)).slice(0, 6);
 ---
 
 <BaseLayout

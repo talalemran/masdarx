@@ -21,7 +21,7 @@ export interface Props {
 }
 
 const { author, posts: allPosts } = Astro.props;
-const filteredPosts = allPosts.filter((p) => p.author === author);
+const filteredPosts = allPosts.filter((p) => p.author === author).slice(0, 6);
 ---
 
 <BaseLayout
