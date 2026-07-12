@@ -5,7 +5,7 @@ import { projects } from "@/data/projects";
 
 export async function getStaticPaths() {
   const categories = [...new Set(projects.flatMap((p) => Array.isArray(p.category) ? p.category : [p.category]))];
-  const pageSize = 6;
+const pageSize = 9;
 
   const paths = [];
 

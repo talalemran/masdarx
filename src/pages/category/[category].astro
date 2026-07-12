@@ -22,7 +22,7 @@ export interface Props {
 }
 
 const { category, posts: allPosts } = Astro.props;
-const pageSize = 6;
+const pageSize = 9;
 const filteredPosts = allPosts.filter((p) => {
   const cats = Array.isArray(p.category) ? p.category : [p.category];
   return cats.includes(category);

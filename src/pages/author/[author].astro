@@ -22,7 +22,7 @@ export interface Props {
 }
 
 const { author, posts: allPosts } = Astro.props;
-const pageSize = 6;
+const pageSize = 9;
 const filteredPosts = allPosts.filter((p) => p.author === author);
 const totalPages = Math.ceil(filteredPosts.length / pageSize);
 const pagePosts = filteredPosts.slice(0, pageSize);

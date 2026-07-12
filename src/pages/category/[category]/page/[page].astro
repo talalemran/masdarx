@@ -10,7 +10,7 @@ export async function getStaticPaths() {
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   const categories = [...new Set(allPosts.flatMap((p) => Array.isArray(p.category) ? p.category : [p.category]))];
-  const pageSize = 6;
+const pageSize = 9;
 
   const paths = [];
 

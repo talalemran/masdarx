@@ -10,7 +10,7 @@ export async function getStaticPaths() {
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   const authors = [...new Set(allPosts.map((p) => p.author))];
-  const pageSize = 6;
+const pageSize = 9;
 
   const paths = [];
 

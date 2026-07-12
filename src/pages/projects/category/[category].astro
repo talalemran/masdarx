@@ -17,7 +17,7 @@ export interface Props {
 }
 
 const { category, projects: allProjects } = Astro.props;
-const pageSize = 6;
+const pageSize = 9;
 const filteredProjects = allProjects.filter((p) => {
   const cats = Array.isArray(p.category) ? p.category : [p.category];
   return cats.includes(category);
