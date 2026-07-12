@@ -4,46 +4,66 @@ import ArticleCard from "@/components/ArticleCard.astro";
 import Pagination from "@/components/Pagination.astro";
 
 export async function getStaticPaths() {
-  const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+  const postModules = import.meta.glob("../../../posts/*.astro", { eager: true });
   const allPosts = Object.values(postModules)
     .map((mod: any) => mod.post)
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   const categories = [...new Set(allPosts.flatMap((p) => Array.isArray(p.category) ? p.category : [p.category]))];
-  return categories.map((category) => ({
-    params: { category },
-    props: { category, posts: allPosts },
-  }));
+  const pageSize = 6;
+
+  const paths = [];
+
+  for (const category of categories) {
+    const filteredPosts = allPosts.filter((p) => {
+      const cats = Array.isArray(p.category) ? p.category : [p.category];
+      return cats.includes(category);
+    });
+    const totalPages = Math.ceil(filteredPosts.length / pageSize);
+
+    for (let page = 2; page <= totalPages; page++) {
+      paths.push({
+        params: { category, page: String(page) },
+        props: { category, posts: allPosts, page, totalPages },
+      });
+    }
+  }
+
+  return paths;
 }
 
 export interface Props {
   category: string;
   posts: any[];
+  page: number;
+  totalPages: number;
 }
 
-const { category, posts: allPosts } = Astro.props;
+const { category, posts: allPosts, page, totalPages } = Astro.props;
 const pageSize = 6;
 const filteredPosts = allPosts.filter((p) => {
   const cats = Array.isArray(p.category) ? p.category : [p.category];
   return cats.includes(category);
 });
-const totalPages = Math.ceil(filteredPosts.length / pageSize);
-const pagePosts = filteredPosts.slice(0, pageSize);
+const pagePosts = filteredPosts.slice((page - 1) * pageSize, page * pageSize);
+
 const basePath = `/category/${category}/page`;
 ---
 
 <BaseLayout
-  title={category}
-  description={`جميع المقالات في تصنيف ${category} على مصدر إكس`}
+  title={`${category} - الصفحة ${page}`}
+  description={`مقالات ${category} على مصدر إكس - الصفحة ${page}`}
   keywords={[category, "تصنيفات", "مصادر مفتوحة"]}
-  canonical={`/category/${category}/`}
+  canonical={`/category/${category}/page/${page}/`}
   ogType="website"
 >
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <nav class="mb-6 text-sm font-body text-gray-500">
       <a href="/" class="hover:text-charcoal transition-colors no-underline">الرئيسية</a>
       <span class="mx-2">/</span>
-      <span class="text-charcoal">{category}</span>
+      <a href={`/category/${category}/`} class="hover:text-charcoal transition-colors no-underline text-gray-500">{category}</a>
+      <span class="mx-2">/</span>
+      <span class="text-charcoal">الصفحة {page}</span>
     </nav>
 
     <h1 class="font-heading text-3xl font-extrabold text-charcoal mb-2">
@@ -68,8 +88,6 @@ const basePath = `/category/${category}/page`;
       }
     </div>
 
-    {totalPages > 1 && (
-      <Pagination currentPage={1} totalPages={totalPages} basePath={basePath} />
-    )}
+    <Pagination currentPage={page} totalPages={totalPages} basePath={basePath} />
   </section>
 </BaseLayout>

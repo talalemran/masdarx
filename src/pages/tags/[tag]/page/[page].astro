@@ -4,36 +4,51 @@ import ArticleCard from "@/components/ArticleCard.astro";
 import Pagination from "@/components/Pagination.astro";
 
 export async function getStaticPaths() {
-  const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+  const postModules = import.meta.glob("../../../posts/*.astro", { eager: true });
   const allPosts = Object.values(postModules)
     .map((mod: any) => mod.post)
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   const allTags = [...new Set(allPosts.flatMap((p) => p.tags))];
-  return allTags.map((tag) => ({
-    params: { tag },
-    props: { tag, posts: allPosts },
-  }));
+  const pageSize = 6;
+
+  const paths = [];
+
+  for (const tag of allTags) {
+    const filteredPosts = allPosts.filter((p) => p.tags?.includes(tag));
+    const totalPages = Math.ceil(filteredPosts.length / pageSize);
+
+    for (let page = 2; page <= totalPages; page++) {
+      paths.push({
+        params: { tag, page: String(page) },
+        props: { tag, posts: allPosts, page, totalPages },
+      });
+    }
+  }
+
+  return paths;
 }
 
 export interface Props {
   tag: string;
   posts: any[];
+  page: number;
+  totalPages: number;
 }
 
-const { tag, posts: allPosts } = Astro.props;
+const { tag, posts: allPosts, page, totalPages } = Astro.props;
 const pageSize = 6;
 const filteredPosts = allPosts.filter((p) => p.tags?.includes(tag));
-const totalPages = Math.ceil(filteredPosts.length / pageSize);
-const pagePosts = filteredPosts.slice(0, pageSize);
+const pagePosts = filteredPosts.slice((page - 1) * pageSize, page * pageSize);
+
 const basePath = `/tags/${tag}/page`;
 ---
 
 <BaseLayout
-  title={`#${tag}`}
-  description={`جميع المقالات الموسومة بـ ${tag} على مصدر إكس`}
+  title={`#${tag} - الصفحة ${page}`}
+  description={`مقالات ${tag} على مصدر إكس - الصفحة ${page}`}
   keywords={[tag, "وسوم", "مصادر مفتوحة"]}
-  canonical={`/tags/${tag}/`}
+  canonical={`/tags/${tag}/page/${page}/`}
   ogType="website"
   noIndex={true}
 >
@@ -41,7 +56,9 @@ const basePath = `/tags/${tag}/page`;
     <nav class="mb-6 text-sm font-body text-gray-500">
       <a href="/" class="hover:text-charcoal transition-colors no-underline">الرئيسية</a>
       <span class="mx-2">/</span>
-      <span class="text-charcoal">{tag}</span>
+      <a href={`/tags/${tag}/`} class="hover:text-charcoal transition-colors no-underline text-gray-500">#{tag}</a>
+      <span class="mx-2">/</span>
+      <span class="text-charcoal">الصفحة {page}</span>
     </nav>
 
     <h1 class="font-heading text-3xl font-extrabold text-charcoal mb-2">
@@ -66,8 +83,6 @@ const basePath = `/tags/${tag}/page`;
       }
     </div>
 
-    {totalPages > 1 && (
-      <Pagination currentPage={1} totalPages={totalPages} basePath={basePath} />
-    )}
+    <Pagination currentPage={page} totalPages={totalPages} basePath={basePath} />
   </section>
 </BaseLayout>

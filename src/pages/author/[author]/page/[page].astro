@@ -4,43 +4,60 @@ import ArticleCard from "@/components/ArticleCard.astro";
 import Pagination from "@/components/Pagination.astro";
 
 export async function getStaticPaths() {
-  const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+  const postModules = import.meta.glob("../../../posts/*.astro", { eager: true });
   const allPosts = Object.values(postModules)
     .map((mod: any) => mod.post)
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   const authors = [...new Set(allPosts.map((p) => p.author))];
-  return authors.map((author) => ({
-    params: { author },
-    props: { author, posts: allPosts },
-  }));
+  const pageSize = 6;
+
+  const paths = [];
+
+  for (const author of authors) {
+    const filteredPosts = allPosts.filter((p) => p.author === author);
+    const totalPages = Math.ceil(filteredPosts.length / pageSize);
+
+    for (let page = 2; page <= totalPages; page++) {
+      paths.push({
+        params: { author, page: String(page) },
+        props: { author, posts: allPosts, page, totalPages },
+      });
+    }
+  }
+
+  return paths;
 }
 
 export interface Props {
   author: string;
   posts: any[];
+  page: number;
+  totalPages: number;
 }
 
-const { author, posts: allPosts } = Astro.props;
+const { author, posts: allPosts, page, totalPages } = Astro.props;
 const pageSize = 6;
 const filteredPosts = allPosts.filter((p) => p.author === author);
-const totalPages = Math.ceil(filteredPosts.length / pageSize);
-const pagePosts = filteredPosts.slice(0, pageSize);
+const pagePosts = filteredPosts.slice((page - 1) * pageSize, page * pageSize);
+
 const basePath = `/author/${author}/page`;
 ---
 
 <BaseLayout
-  title={author}
-  description={`جميع مقالات ${author} على مصدر إكس`}
+  title={`${author} - الصفحة ${page}`}
+  description={`مقالات ${author} على مصدر إكس - الصفحة ${page}`}
   keywords={[author, "كتّاب", "مصادر مفتوحة"]}
-  canonical={`/author/${author}/`}
+  canonical={`/author/${author}/page/${page}/`}
   ogType="website"
 >
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <nav class="mb-6 text-sm font-body text-gray-500">
       <a href="/" class="hover:text-charcoal transition-colors no-underline">الرئيسية</a>
       <span class="mx-2">/</span>
-      <span class="text-charcoal">{author}</span>
+      <a href={`/author/${author}/`} class="hover:text-charcoal transition-colors no-underline text-gray-500">{author}</a>
+      <span class="mx-2">/</span>
+      <span class="text-charcoal">الصفحة {page}</span>
     </nav>
 
     <h1 class="font-heading text-3xl font-extrabold text-charcoal mb-2">
@@ -65,8 +82,6 @@ const basePath = `/author/${author}/page`;
       }
     </div>
 
-    {totalPages > 1 && (
-      <Pagination currentPage={1} totalPages={totalPages} basePath={basePath} />
-    )}
+    <Pagination currentPage={page} totalPages={totalPages} basePath={basePath} />
   </section>
 </BaseLayout>
