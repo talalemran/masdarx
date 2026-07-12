@@ -1,0 +1,136 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "typescript-overtaking-python-ai-default-language-coding-agents",
+  title: "تايب سكريبت تتجاوز بايثون: لغة الذكاء الاصطناعي الجديدة",
+  description:
+    "روبرتو ستاجي، المؤسس المشارك لـ Ratel، يشرح لماذا باتت TypeScript اللغة الافتراضية لتطبيقات الذكاء الاصطناعي — وكيف أن وكلاء البرمجة مثل Claude Code وCursor هم السبب الحقيقي وراء هذا التحول.",
+  keywords: [
+    "TypeScript",
+    "Python",
+    "تايب سكريبت",
+    "بايثون",
+    "ذكاء اصطناعي",
+    "Claude Code",
+    "Vercel AI SDK",
+    "coding agents",
+    "NPM",
+    "GitHub",
+  ],
+  category: ["برمجة", "ذكاء اصطناعي"],
+  author: "فريق مصدر إكس",
+  date: "12 يوليو 2026",
+  pubDate: new Date("2026-07-12"),
+  tags: ["TypeScript", "Python", "AI", "برمجة", "Claude Code"],
+  thumbnail: "/images/Linux-7.2-Drops-strncpy.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      في عام 2024 تصدّرت <strong>Python</strong> قائمة أكثر اللغات استخدامًا على GitHub
+      للمرة الأولى — مدفوعةً بموجة الذكاء الاصطناعي. بعدها بعام واحد، في أغسطس 2025،
+      أطاحت بها <strong>تايب سكريبت TypeScript</strong>. وجيثب نفسه عزا
+      التحوّلَين للذكاء الاصطناعي. <strong>روبرتو ستاجي</strong>، المؤسس المشارك
+      ومدير التقنية في Ratel، يشرح لماذا هذا التحول ليس مصادفة — بل بنية.
+    </p>
+
+    <h2>المكدّس ينقسم إلى طبقتين</h2>
+
+    <p>
+      ستاجي لا يدّعي أن بايثون ماتت — بل يضع حدًا واضحًا: <strong
+        >طبقة البنية التحتية</strong
+      > (التدريب، الأبحاث، خدمة النماذج على GPU) تبقى لبايثون. أما <strong
+        >طبقة التطبيقات</strong
+      > — حيث يعمل الـ agent ويستدعي النماذج ويتفاعل مع المستخدم — فقد انتقلت إلى
+      <strong>تايب سكريبت TypeScript</strong>. ببساطة: النموذج يعيش على pip، لكن
+      الـ agent الذي يُشغّله سيُشحن على npm.
+    </p>
+
+    <h2>وكلاء البرمجة صنعوا الفارق</h2>
+
+    <p>
+      السبب الجوهري ليس تفضيل المطورين بل سلوك الأدوات. <strong
+        >Claude Code</strong
+      > و<strong>Cursor</strong> و<strong>Codex</strong> تُولّد <strong
+        >تايب سكريبت TypeScript</strong
+      > بشكل افتراضي — مما خلق حلقة مفرغة: المزيد من كود TypeScript يُنتج، فتتحسن
+      النماذج في توليده، فيجذب مطورين أكثر. وقد أكد أنثروبيك رهانها على هذا بشراء
+      رانتايم <strong>Bun</strong> في ديسمبر 2024.
+    </p>
+
+    <h2>أربعة أسباب لبناء الـ Agents بـ تايب سكريبت TypeScript</h2>
+
+    <ul>
+      <li>
+        <strong>جودة توليد الكود:</strong> وكلاء البرمجة الكبرى تُنتج تايب سكريبت
+        TypeScript بشكل أتقن وأسرع
+      </li>
+      <li>
+        <strong>عمق NPM:</strong> المصادقة، المدفوعات، الواجهات، البنية التحتية —
+        كلها في نظام بيئي واحد
+      </li>
+      <li>
+        <strong>قاعدة كود موحّدة:</strong> تايب سكريبت TypeScript تجمع الـ agent والـ
+        backend والـ frontend في مشروع واحد، بينما Python تفرض خدمتين منفصلتين مع
+        عقد بينهما
+      </li>
+      <li>
+        <strong>اتساق الأنواع:</strong> مع Zod، تُعرّف الـ schema مرة واحدة وتستخدمها
+        في كل مكان — بايثون تكسر هذا الاتساق عند الحدود مع JavaScript
+      </li>
+    </ul>
+
+    <h2>الأرقام تتحدث</h2>
+
+    <p>
+      الـ <strong>Vercel AI SDK</strong> — أداة تايب سكريبت TypeScript-native لبناء
+      الـ agents — قفزت تنزيلاتها الأسبوعية من <strong>1.6 مليون</strong> إلى <strong
+        >15.1 مليون</strong
+      > في عام واحد فقط. عشرة أضعاف في 12 شهرًا.
+    </p>
+
+    <h2>ماذا يعني هذا للمطورين؟</h2>
+
+    <p>
+      توصية ستاجي واضحة: استمر في استخدام Python لتدريب النماذج حيث هيمنتها
+      محفوظة. لكن إذا كنت تبني agents أو تطبيقات ذكاء اصطناعي — فافعل ذلك بـ <strong
+        >تايب سكريبت TypeScript</strong
+      >. "إذا أغفلت تايب سكريبت الآن، فأنت على الأرجح ستتأخر عن الركب" — هذا ليس
+      رأيًا شخصيًا، بل ما تقوله البيانات.
+    </p>
+
+    <p>
+      قانون Atwood القديم يقول: "أي تطبيق يمكن كتابته بـ JavaScript، سيُكتب به
+      في النهاية." النسخة 2026: أي تطبيق ذكاء اصطناعي يمكن بناؤه بـ <strong
+        >تايب سكريبت TypeScript</strong
+      > — سيُبنى بها. والوكلاء يُسرّعون هذا المسار بشكل لم يكن أحد يتخيله.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://finance.biggo.com/news/7f258a69158aa36d"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        BigGo Finance
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
