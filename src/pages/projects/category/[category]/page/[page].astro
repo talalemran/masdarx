@@ -5,33 +5,51 @@ import { projects } from "@/data/projects";
 
 export async function getStaticPaths() {
   const categories = [...new Set(projects.flatMap((p) => Array.isArray(p.category) ? p.category : [p.category]))];
-  return categories.map((category) => ({
-    params: { category },
-    props: { category, projects },
-  }));
+  const pageSize = 6;
+
+  const paths = [];
+
+  for (const category of categories) {
+    const filteredProjects = projects.filter((p) => {
+      const cats = Array.isArray(p.category) ? p.category : [p.category];
+      return cats.includes(category);
+    }).reverse();
+    const totalPages = Math.ceil(filteredProjects.length / pageSize);
+
+    for (let page = 2; page <= totalPages; page++) {
+      paths.push({
+        params: { category, page: String(page) },
+        props: { category, projects, page, totalPages },
+      });
+    }
+  }
+
+  return paths;
 }
 
 export interface Props {
   category: string;
   projects: typeof projects;
+  page: number;
+  totalPages: number;
 }
 
-const { category, projects: allProjects } = Astro.props;
+const { category, projects: allProjects, page, totalPages } = Astro.props;
 const pageSize = 6;
 const filteredProjects = allProjects.filter((p) => {
   const cats = Array.isArray(p.category) ? p.category : [p.category];
   return cats.includes(category);
 }).reverse();
-const totalPages = Math.ceil(filteredProjects.length / pageSize);
-const pageProjects = filteredProjects.slice(0, pageSize);
+const pageProjects = filteredProjects.slice((page - 1) * pageSize, page * pageSize);
+
 const basePath = `/projects/category/${category}/page`;
 ---
 
 <BaseLayout
-  title={`مشاريع ${category}`}
-  description={`مشاريع مفتوحة المصدر في تصنيف ${category} على مصدر إكس`}
+  title={`مشاريع ${category} - الصفحة ${page}`}
+  description={`مشاريع ${category} على مصدر إكس - الصفحة ${page}`}
   keywords={[category, "مشاريع مفتوحة المصدر", "مفتوح المصدر"]}
-  canonical={`/projects/category/${category}/`}
+  canonical={`/projects/category/${category}/page/${page}/`}
   ogType="website"
 >
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -40,7 +58,9 @@ const basePath = `/projects/category/${category}/page`;
       <span class="mx-2">/</span>
       <a href="/projects/" class="hover:text-charcoal transition-colors no-underline text-gray-500">المشاريع</a>
       <span class="mx-2">/</span>
-      <span class="text-charcoal">{category}</span>
+      <a href={`/projects/category/${category}/`} class="hover:text-charcoal transition-colors no-underline text-gray-500">{category}</a>
+      <span class="mx-2">/</span>
+      <span class="text-charcoal">الصفحة {page}</span>
     </nav>
 
     <h1 class="font-heading text-3xl font-extrabold text-charcoal mb-2">
@@ -95,8 +115,6 @@ const basePath = `/projects/category/${category}/page`;
       ))}
     </div>
 
-    {totalPages > 1 && (
-      <Pagination currentPage={1} totalPages={totalPages} basePath={basePath} />
-    )}
+    <Pagination currentPage={page} totalPages={totalPages} basePath={basePath} />
   </section>
 </BaseLayout>
