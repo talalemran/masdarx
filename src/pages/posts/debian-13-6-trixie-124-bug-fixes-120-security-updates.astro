@@ -1,0 +1,119 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "debian-13-6-trixie-124-bug-fixes-120-security-updates",
+  title: "ديبيان 13.6 Trixie: 124 إصلاح و120 تحديث أمني",
+  description:
+    "ديبيان تُصدر النقطة السادسة من Trixie بـ 124 إصلاحًا و120 تحديثًا أمنيًا — تشمل نواة لينكس وNginx وRedis وFFmpeg وChromium وثاندربيرد، مع إصلاح عاجل لـ Secure Boot وتراجع قاعدة GeoIP.",
+  keywords: [
+    "Debian 13.6",
+    "ديبيان",
+    "Trixie",
+    "تحديث أمني",
+    "Secure Boot",
+    "لينكس",
+    "Linux kernel",
+    "Nginx",
+    "Chromium",
+    "مفتوح المصدر",
+  ],
+  category: "لينكس",
+  author: "فريق مصدر إكس",
+  date: "11 يوليو 2026",
+  pubDate: new Date("2026-07-11"),
+  tags: ["Debian", "لينكس", "أمان", "Trixie", "مفتوح المصدر"],
+  thumbnail: "/images/debian-13-6-trixie-124-bug-fixes-120-security-updates.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      أصدر مشروع <strong>Debian</strong> اليوم الإصدار <strong>13.6</strong> من التوزيعة
+      المستقرة بالاسم الكودي <strong>Trixie</strong> — وهو السادس في سلسلة نقاط الإصلاح
+      منذ الإصدار الرئيسي 13.0 في أغسطس 2025. يحمل الإصدار <strong
+        >124 إصلاحًا للأخطاء</strong
+      > و<strong>120 تحديثًا أمنيًا</strong> تطال النواة والعشرات من الحزم.
+    </p>
+
+    <h2>أبرز ما يعالجه Debian 13.6</h2>
+
+    <ul>
+      <li>
+        <strong>نواة لينكس:</strong> تصحيحات أمنية متعددة تُعالج ثغرات رفع الصلاحيات
+        والتعطل
+      </li>
+      <li>
+        <strong>Nginx وRedis وFFmpeg:</strong> إغلاق ثغرات تنفيذ كود عن بُعد ورفض
+        الخدمة
+      </li>
+      <li>
+        <strong>Chromium وThunderbird وPHP:</strong> تصحيحات أمنية شاملة لأحدث الثغرات
+        المكتشفة
+      </li>
+      <li><strong>curl:</strong> إصلاح ثغرات التعامل مع الطلبات والاتصالات</li>
+      <li><strong>QEMU:</strong> تصحيحات في طبقة المحاكاة الافتراضية</li>
+    </ul>
+
+    <h2>إصلاح عاجل لـ Secure Boot</h2>
+
+    <p>
+      الإصدار يجلب <strong>fwupd 2.0.20</strong> الذي يُضيف القدرة على تحديث قواعد
+      بيانات Secure Boot CA وKEK وDBX — وهذا إصلاح ضروري جداً لأن شهادة UEFI Secure
+      Boot CA المثبتة افتراضيًا على معظم الأجهزة والمستخدمة لتوقيع محمّلات الإقلاع
+      قد انتهت صلاحيتها، مما كان قد يمنع الإقلاع على أجهزة معينة. يُنصح بتطبيق تحديثات
+      CA وKEK وDBX من الشركة المصنّعة لجهازك.
+    </p>
+
+    <h2>تراجع قاعدة بيانات GeoIP</h2>
+
+    <p>
+      ديبيان تراجعت عن حزمة geoip-database لإعادتها إلى حالة ديسمبر 2019، إذ
+      تبيّن أن الإصدارات الأحدث من GeoLite غير متوافقة مع إرشادات البرمجيات
+      الحرة لديبيان (DFSG). إذا كانت أدواتك تعتمد على هذه القاعدة، يُنصح بالحصول
+      على ترخيص GeoLite مباشرةً.
+    </p>
+
+    <h2>كيف تُحدّث نظامك؟</h2>
+
+    <p>لا حاجة لإعادة التثبيت — يكفي تشغيل:</p>
+
+    <pre><code>sudo apt update && sudo apt upgrade</code></pre>
+
+    <p>
+      المستخدمون الذين يسحبون التحديثات من <code>security.debian.org</code> بانتظام
+      سيجدون الفارق صغيرًا. صور التثبيت الجديدة ستتوفر قريبًا على مواقع التحميل الرسمية.
+    </p>
+
+    <p>
+      Debian 13.6 يُذكّرنا بالسبب الحقيقي لشهرة ديبيان في عالم السيرفرات — فريق
+      أمني يعمل بصمت، يُصلح ويُرقّع ويُحدّث دون ضجيج، والنتيجة توزيعة لا تنام
+      على الثغرات.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://9to5linux.com/debian-13-6-trixie-released-with-124-bug-fixes-and-120-security-updates"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        9to5Linux
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
