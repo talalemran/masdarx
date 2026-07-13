@@ -1,0 +1,135 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "chatto-open-source-self-hosted-slack-alternative",
+  title: "Chatto: بديل Slack مفتوح المصدر وقابل للاستضافة الذاتية",
+  description:
+    "تشاتو يصبح مفتوح المصدر تحت رخصة AGPL-3.0 — تطبيق دردشة جماعي خفيف يدعم القنوات ومشاركة الملفات وتشفير المكالمات من طرف إلى طرف، بديل عملي لـ Slack وTeams وDiscord.",
+  keywords: [
+    "Chatto",
+    "تشاتو",
+    "Slack alternative",
+    "بديل Slack",
+    "self-hosted",
+    "مفتوح المصدر",
+    "AGPL",
+    "دردشة جماعية",
+    "Chatto Cloud",
+    "open source chat",
+  ],
+  category: "برامج",
+  author: "فريق مصدر إكس",
+  date: "13 يوليو 2026",
+  pubDate: new Date("2026-07-13"),
+  tags: ["Chatto", "مفتوح المصدر", "Slack", "self-hosted", "دردشة"],
+  thumbnail:
+    "/images/chatto-open-source-self-hosted-slack-alternative.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <article>
+      <p>
+        أعلن المطور <strong>هندريك مانس</strong> عن فتح مصدر تطبيق <strong
+          >Chatto</strong
+        > تحت رخصة <strong>AGPL-3.0</strong> مع استثناءات Apache-2.0 لبعض المكونات.
+        التطبيق الذي بناه وحده خلال العام الماضي يُقدّم نفسه بديلًا خفيفًا وقابلًا
+        للاستضافة الذاتية عن Slack وMicrosoft Teams وDiscord — لمن يريد التحكم الكامل
+        في بياناته.
+      </p>
+
+      <h2>ما الذي يقدّمه Chatto؟</h2>
+
+      <ul>
+        <li><strong>قنوات وغرف:</strong> تنظيم المحادثات بمرونة</li>
+        <li><strong>مشاركة الملفات وتضمين الفيديو</strong></li>
+        <li>
+          <strong>نظام أدوار وصلاحيات</strong> للتحكم الدقيق في وصول المستخدمين
+        </li>
+        <li><strong>مشاركة الشاشة</strong> مع دعم مكالمات صوتية ومرئية</li>
+        <li>
+          <strong>تشفير من طرف إلى طرف</strong> على جميع مكالمات الصوت والفيديو
+        </li>
+        <li>سعة المستخدمين مرتبطة فقط بقدرة السيرفر الخاص بك</li>
+      </ul>
+
+      <h2>ما الذي لا يزال ناقصًا؟</h2>
+
+      <p>
+        التطبيق في مرحلة مبكرة ولم يصدر بعد بإصدار مستقر 1.0. حاليًا <strong
+          >لا يوجد تطبيق سطح مكتب أو موبايل</strong
+        > — وخارطة الطريق تضعهما في مرحلة الدراسة فقط. من المخطط إضافة:
+      </p>
+
+      <ul>
+        <li>أداة هجرة من Slack إلى Chatto</li>
+        <li>تصدير البيانات المتوافق مع GDPR</li>
+        <li>قفل الخيوط وحذفها</li>
+        <li>وضع الإغلاق الطارئ للمشرفين</li>
+        <li>وضع البطء (Slow Mode) والإبلاغ عن الرسائل</li>
+        <li>دعوات السيرفر وحسابات البوت</li>
+      </ul>
+
+      <h2>لا تريد استضافة ذاتية؟</h2>
+
+      <p>
+        يُطلق هندريك قريبًا <strong>Chatto Cloud</strong> في نسخة تجريبية عامة — يعمل
+        على بنية تحتية أوروبية مع نسخ احتياطية ليلية وتوسع تلقائي. والانتقال بين الاستضافة
+        الذاتية والسحابة مفتوح في الاتجاهين دون قيود.
+      </p>
+
+      <ul>
+        <li>
+          <a
+            href="https://github.com/chattocorp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            المستودع الرسمي على GitHub
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://chatto.run/cloud"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Chatto Cloud — البيتا العامة قريبًا
+          </a>
+        </li>
+      </ul>
+
+      <p>
+        Chatto ليس المنافس الأكثر نضجًا في سوق بدائل Slack المفتوحة — لكنه مشروع
+        بني بدافع حقيقي وبرؤية واضحة، ومجانيته الكاملة مع إمكانية الاستضافة
+        الذاتية يجعلانه خيارًا يستحق المتابعة.
+      </p>
+
+      <h3>المصدر:</h3>
+      <p>
+        <a
+          href="https://itsfoss.com/news/chatto-goes-open-source/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          It's FOSS
+        </a>
+      </p>
+    </article>
+  </PostLayout>
+</BaseLayout>
