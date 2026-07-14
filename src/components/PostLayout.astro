@@ -238,7 +238,7 @@ const relatedPosts = allPosts
 
     const text = article.textContent || '';
     const wordCount = text.trim().split(/\s+/).length;
-    const wordsPerMinute = 200;
+    const wordsPerMinute = 160;
     const minutes = Math.ceil(wordCount / wordsPerMinute);
 
     readingTimeEl.textContent = `${minutes} دقيقة قراءة`;
