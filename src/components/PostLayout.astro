@@ -34,7 +34,7 @@ const relatedPosts = allPosts
   .filter((p) => p.slug !== slug)
   .map((p) => {
     const pCategories = Array.isArray(p.category) ? p.category : [p.category];
-    const categoryMatch = pCategories.some((c) => categories.includes(c)) ? 2 : 0;
+    const categoryMatch = pCategories.some((c: string) => categories.includes(c)) ? 2 : 0;
     return {
       ...p,
       score: (p.tags?.filter((t: string) => tags?.includes(t)).length || 0) + categoryMatch,
