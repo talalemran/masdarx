@@ -1,0 +1,124 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "google-swiss-comco-android-choice-screen-antitrust-2026",
+  title:
+    "سويسرا تحقق مع جوجل: إزالة Choice Screen على أندرويد انتهاك للمنافسة؟",
+  description:
+    "لجنة المنافسة السويسرية COMCO تفتح تحقيقًا استطلاعيًا ضد جوجل بعد إزالتها ميزة Choice Screen من أجهزة أندرويد في سويسرا — وجوجل تسيطر على 82% من سوق البحث هناك.",
+  keywords: [
+    "جوجل",
+    "Google",
+    "COMCO",
+    "سويسرا",
+    "Choice Screen",
+    "أندرويد",
+    "Android",
+    "مكافحة الاحتكار",
+    "Alphabet",
+    "محرك بحث افتراضي",
+  ],
+  category: "أندرويد",
+  author: "فريق مصدر إكس",
+  date: "14 يوليو 2026",
+  pubDate: new Date("2026-07-14"),
+  tags: ["Google", "Android", "سويسرا", "احتكار", "Alphabet"],
+  thumbnail: "/images/google-swiss-comco-android-choice-screen-antitrust-2026.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      فتحت <strong>لجنة المنافسة السويسرية (COMCO)</strong> تحقيقًا استطلاعيًا ضد
+      <strong>جوجل</strong> بعد أن أزالت الشركة ميزة <strong
+        >Choice Screen</strong
+      > من إعداد أجهزة أندرويد الجديدة في سويسرا — وهي الميزة التي تُتيح للمستخدمين
+      اختيار محرك البحث الافتراضي عند إعداد أجهزتهم لأول مرة.
+    </p>
+
+    <h2>ما المشكلة بالضبط؟</h2>
+
+    <p>
+      ميزة Choice Screen تُتيح للمستخدمين عند إعداد هاتف أو جهاز لوحي أندرويد
+      جديد اختيار محرك البحث المفضل بدلًا من الاعتماد التلقائي على Google
+      Search. جوجل أزالت هذه الميزة في سويسرا رغم بقائها متاحة في دول أوروبية
+      أخرى، مما يجعل محرك بحث جوجل هو الخيار المفروض افتراضيًا على المستخدمين
+      السويسريين.
+    </p>
+
+    <h2>لماذا هذا مهم؟</h2>
+
+    <ul>
+      <li>
+        جوجل تسيطر على ما يُقدَّر بـ <strong>82%</strong> من سوق البحث في سويسرا —
+        وهيمنة بهذا الحجم تجعل الإعدادات الافتراضية أداةً تنافسية فعلية
+      </li>
+      <li>
+        المستخدم لا يزال قادرًا على تغيير المحرك الافتراضي لكن بعد الإعداد وعبر
+        خطوات أكثر تعقيدًا
+      </li>
+      <li>
+        COMCO تُحذّر من أن هذا يُضعف ظهور محركات البحث المنافسة أمام المستخدمين
+        الجدد
+      </li>
+      <li>
+        الهيئة أشارت إلى أن هذا يُفرز معاملة غير متكافئة بين المستخدمين
+        السويسريين ونظرائهم في المنطقة الاقتصادية الأوروبية
+      </li>
+    </ul>
+
+    <h2>ماذا قالت جوجل؟</h2>
+
+    <p>
+      أكدت جوجل علمها بالتحقيق وأعلنت تعاونها الكامل مع السلطات السويسرية
+      للإجابة على تساؤلاتها — دون تعليق إضافي.
+    </p>
+
+    <h2>السياق الأوسع</h2>
+
+    <p>
+      يأتي التحقيق السويسري بعد أسبوعين من تأييد المحكمة الأوروبية العليا في 2
+      يوليو غرامةً بقيمة <strong>4.1 مليار يورو</strong> فُرضت على جوجل بسبب ممارسات
+      أندرويد المقيِّدة للمنافسة، في نهاية معركة قانونية امتدت ثمانية أعوام. كما أصدر
+      المنظّم البريطاني في يونيو اشتراطات سلوكية تتعلق بالشفافية والوصول التنافسي
+      على منصات جوجل.
+    </p>
+
+    <p>
+      سهم Alphabet انخفض <strong>1.3%</strong> إلى 352.51 دولار قبيل افتتاح التداول
+      الأمريكي يوم الإعلان.
+    </p>
+
+    <p>
+      جوجل تواجه ضغطًا تنظيميًا متصاعدًا على طرفَي الأطلسي — والقضية السويسرية
+      ليست استثناءً بل جزء من نمط واضح: الإعدادات الافتراضية باتت ساحة معركة
+      قانونية حقيقية في سوق محركات البحث.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://www.reuters.com/legal/litigation/google-probed-by-swiss-regulator-over-android-default-search-feature-2026-07-14/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Reuters
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
