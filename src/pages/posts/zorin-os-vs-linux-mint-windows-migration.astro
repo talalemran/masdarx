@@ -94,18 +94,17 @@ const tocItems = [
     </p>
 
     <nav
-      class="toc bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg p-5 my-6"
+      class="toc bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg p-8 my-6"
       aria-label="جدول المحتويات"
     >
-      <p class="font-bold mb-3">محتويات المقال</p>
-      <ol class="list-decimal list-inside space-y-1.5 marker:text-zinc-400">
+      <p class="font-bold text-lg mb-4">محتويات المقال</p>
+      <ol
+        class="list-decimal list-inside space-y-3 text-lg marker:text-zinc-400"
+      >
         {
           tocItems.map((item) => (
             <li>
-              <a
-                href={`#${item.id}`}
-                class="text-zinc-700 dark:text-zinc-300 hover:underline"
-              >
+              <a href={`#${item.id}`} class="text-white hover:underline">
                 {item.label}
               </a>
             </li>
