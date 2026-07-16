@@ -1,0 +1,129 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "anaconda-acquires-kilo-open-source-ai-coding-assistant",
+  title: "أناكوندا تستحوذ على Kilo: مساعد برمجة ذكاء اصطناعي مفتوح بلا قيود",
+  description:
+    "أناكوندا تشتري Kilo — أداة برمجة ذكاء اصطناعي مفتوحة المصدر مستقلة عن أي نموذج لغة — وتحافظ على طبيعتها المفتوحة مع إضافة إمكانيات إدارة حكومة ذكاء اصطناعي، لـ 3 ملايين مطور يختارون نماذجهم بحرية.",
+  keywords: [
+    "Kilo",
+    "كيلو",
+    "أناكوندا",
+    "Anaconda",
+    "مساعد برمجة",
+    "AI coding assistant",
+    "مفتوح المصدر",
+    "LLM",
+    "vendor lock-in",
+    "VS Code",
+  ],
+  category: ["برمجة", "ذكاء اصطناعي"],
+  author: "فريق مصدر إكس",
+  date: "16 يوليو 2026",
+  pubDate: new Date("2026-07-16"),
+  tags: ["Kilo", "Anaconda", "AI", "مفتوح المصدر", "برمجة"],
+  thumbnail: "/images/anaconda-acquires-kilo-open-source-ai-coding-assistant.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      استحوذت <strong>Anaconda</strong>، مزود حزم البرمجيات مفتوحة المصدر وأدوات
+      تطوير الذكاء الاصطناعي، على <strong>Kilo</strong> — مساعد برمجة ذكاء اصطناعي
+      مفتوح المصدر مستقل تماماً عن نماذج اللغات الكبيرة. الاستحواذ يهدف لتعزيز منصة
+      تطوير الذكاء الاصطناعي لديها مع الحفاظ الكامل على طبيعة المشروع المفتوحة.
+    </p>
+
+    <h2>ما هي مميزات Kilo؟</h2>
+
+    <ul>
+      <li>
+        <strong>استقلال عن النماذج:</strong> Kilo يعمل بشكل مستقل عن أي LLM محدد
+      </li>
+      <li>
+        <strong>حرية الاختيار:</strong> المطورون يستطيعون التبديل بين مزودي الخدمات
+        — من النماذج الملكية إلى المفتوحة المصدر والمستضافة ذاتياً
+      </li>
+      <li>
+        <strong>لا قيود البائع:</strong> تقليل الاعتماد على مزود واحد والاختيار بناءً
+        على الأداء والتكلفة والملاءمة للمهمة
+      </li>
+      <li>
+        <strong>مرونة النموذج:</strong> وصول إلى أكثر من <strong
+          >500 نموذج ذكاء اصطناعي</strong
+        > من <strong>60+ بائع</strong>
+      </li>
+    </ul>
+
+    <h2>الأرقام تتحدث</h2>
+
+    <ul>
+      <li>يساعد Kilo أكثر من <strong>3 ملايين مطور</strong></li>
+      <li>معالجة ما يقرب من <strong>10 تريليون token</strong> شهرياً</li>
+      <li>
+        <strong>26,000 نجمة</strong> على GitHub و<strong>3,000 fork</strong>
+      </li>
+      <li>شهرة عالية جداً في مجتمع المطورين</li>
+    </ul>
+
+    <h2>ماذا بعد الاستحواذ؟</h2>
+
+    <ul>
+      <li>
+        <strong>البقاء مفتوح المصدر:</strong> Kilo سيبقى مفتوح المصدر بالكامل وسيحصل
+        على استثمارات إضافية
+      </li>
+      <li>
+        <strong>نقل الملكية:</strong> مستودع GitHub والمجتمع سينتقلان تحت إدارة Anaconda
+      </li>
+      <li>
+        <strong>التكامل والتوسع:</strong> دمج Kilo في منصة تطوير Anaconda الحالية
+        مع إضافة إمكانيات حوكمة ذكاء اصطناعي للمؤسسات
+      </li>
+      <li>
+        <strong>المحررات والأدوات:</strong> استمرار الدعم الكامل لـ <strong
+          >Visual Studio Code</strong
+        > و<strong>JetBrains IDEs</strong> وأدوات سطر الأوامر
+      </li>
+    </ul>
+
+    <h2>المرونة هي المفتاح</h2>
+
+    <p>
+      الشركة توضح أن المنظمات تواجه خيارين: إما تقييد المطورين على أداة واحدة
+      فقط، أو السماح لهم باستخدام عدة أدوات دون إشراف تنظيمي. Kilo بحل هذا بسماح
+      استخدام عدة نماذج مع الحفاظ على حوكمة ومراقبة منظمية كاملة.
+    </p>
+
+    <p>
+      الاستحواذ يُمثل رسالة واضحة: في عصر الذكاء الاصطناعي، الحرية والمرونة لا
+      تتعارض مع الحوكمة والأمان — بل هي متممة له.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://www.opensourceforu.com/2026/07/coding-assistant-expands-development-platform/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open Source For You
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
