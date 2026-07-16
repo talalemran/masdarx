@@ -39,28 +39,14 @@ export const post = {
 };
 
 const tocItems = [
-  {
-    id: "why-these-two",
-    label: "لماذا يفكر مستخدمو ويندوز في هذه التوزيعتين تحديدًا؟",
-  },
-  {
-    id: "ui-ux",
-    label: "واجهة المستخدم: الأناقة الحديثة مقابل العملية المباشرة",
-  },
-  {
-    id: "performance",
-    label: "استهلاك الموارد والأداء: من يناسب الأجهزة القديمة؟",
-  },
-  {
-    id: "package-management",
-    label: "إدارة الحزم والبرامج: كيف تثبت ما تحتاجه؟",
-  },
-  {
-    id: "stability-community",
-    label: "الاستقرار والمجتمع: من يساعدك عند الوقوع في مشكلة؟",
-  },
+  { id: "why-these-two", label: "لماذا يفكر مستخدمو ويندوز في هذه التوزيعتين تحديدًا؟" },
+  { id: "ui-ux", label: "واجهة المستخدم: الأناقة الحديثة مقابل العملية المباشرة" },
+  { id: "performance", label: "استهلاك الموارد والأداء: من يناسب الأجهزة القديمة؟" },
+  { id: "package-management", label: "إدارة الحزم والبرامج: كيف تثبت ما تحتاجه؟" },
+  { id: "stability-community", label: "الاستقرار والمجتمع: من يساعدك عند الوقوع في مشكلة؟" },
   { id: "comparison-table", label: "جدول المقارنة السريع" },
   { id: "which-to-choose", label: "أيهما تختار فعليًا؟" },
+  { id: "official-links", label: "الروابط الرسمية للتحميل" },
   { id: "faq", label: "أسئلة شائعة" },
 ];
 ---
@@ -98,13 +84,14 @@ const tocItems = [
       aria-label="جدول المحتويات"
     >
       <p class="font-bold text-lg mb-4">محتويات المقال</p>
-      <ol
-        class="list-decimal list-inside space-y-3 text-lg marker:text-zinc-400"
-      >
+      <ol class="list-decimal list-inside space-y-3 text-lg marker:text-zinc-400">
         {
           tocItems.map((item) => (
             <li>
-              <a href={`#${item.id}`} class="text-white hover:underline">
+              <a
+                href={`#${item.id}`}
+                class="text-white hover:underline"
+              >
                 {item.label}
               </a>
             </li>
@@ -113,9 +100,7 @@ const tocItems = [
       </ol>
     </nav>
 
-    <h2 id="why-these-two">
-      لماذا يفكر مستخدمو ويندوز في هذه التوزيعتين تحديدًا؟
-    </h2>
+    <h2 id="why-these-two">لماذا يفكر مستخدمو ويندوز في هذه التوزيعتين تحديدًا؟</h2>
 
     <p>
       من بين مئات توزيعات لينكس الموجودة، تتصدر Zorin OS و Mint قوائم الترشيح
@@ -301,9 +286,7 @@ const tocItems = [
       وتفضل تجربة منظّفة من التعقيد، فموقف Mint من Snap مفهوم ومنطقي.
     </p>
 
-    <h2 id="stability-community">
-      الاستقرار والمجتمع: من يساعدك عند الوقوع في مشكلة؟
-    </h2>
+    <h2 id="stability-community">الاستقرار والمجتمع: من يساعدك عند الوقوع في مشكلة؟</h2>
 
     <p>هذه نقطة كثيرًا ما يتجاهلها المبتدئون، لكنها حاسمة على المدى الطويل.</p>
 
@@ -344,36 +327,36 @@ const tocItems = [
           class="bg-zinc-100 dark:bg-zinc-800 light:text-zinc-700 dark:text-zinc-300"
         >
           <tr>
-            <th class="px-4 py-2 font-semibold">المعيار</th>
-            <th class="px-4 py-2 font-semibold">Linux Mint</th>
-            <th class="px-4 py-2 font-semibold">Zorin OS</th>
+            <th>المعيار</th>
+            <th>Linux Mint</th>
+            <th>Zorin OS</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
           <tr>
-            <td class="px-4 py-2">واجهة المستخدم</td>
-            <td class="px-4 py-2">Cinnamon، عملية وكلاسيكية</td>
-            <td class="px-4 py-2">GNOME معدّلة، أنيقة وحديثة، أقرب بصريًا لويندوز 11</td>
+            <td>واجهة المستخدم</td>
+            <td>Cinnamon، عملية وكلاسيكية</td>
+            <td>GNOME معدّلة، أنيقة وحديثة، أقرب بصريًا لويندوز 11</td>
           </tr>
           <tr>
-            <td class="px-4 py-2">استهلاك الموارد</td>
-            <td class="px-4 py-2">خفيف، مثالي للأجهزة القديمة</td>
-            <td class="px-4 py-2">متوسط إلى ثقيل، مع توفر نسخة Lite</td>
+            <td>استهلاك الموارد</td>
+            <td>خفيف، مثالي للأجهزة القديمة</td>
+            <td>متوسط إلى ثقيل، مع توفر نسخة Lite</td>
           </tr>
           <tr>
-            <td class="px-4 py-2">سهولة التخصيص</td>
-            <td class="px-4 py-2">تخصيص وظيفي مباشر عبر Cinnamon</td>
-            <td class="px-4 py-2">تخصيص بصري متقدم (المظاهر المتعددة في النسخة المدفوعة)</td>
+            <td>سهولة التخصيص</td>
+            <td>تخصيص وظيفي مباشر عبر Cinnamon</td>
+            <td>تخصيص بصري متقدم (المظاهر المتعددة في النسخة المدفوعة)</td>
           </tr>
           <tr>
-            <td class="px-4 py-2">التحديثات</td>
-            <td class="px-4 py-2">تدرّج محافظ يفضّل الاستقرار على الحداثة</td>
-            <td class="px-4 py-2">تحديثات أكثر انتظامًا مع تحسينات أداء دورية</td>
+            <td>التحديثات</td>
+            <td>تدرّج محافظ يفضّل الاستقرار على الحداثة</td>
+            <td>تحديثات أكثر انتظامًا مع تحسينات أداء دورية</td>
           </tr>
           <tr>
-            <td class="px-4 py-2">التثبيت الافتراضي للبرامج</td>
-            <td class="px-4 py-2">Flatpak مفعّل، Snap معطّل</td>
-            <td class="px-4 py-2">Flatpak و Snap مفعّلان معًا منذ البداية</td>
+            <td>التثبيت الافتراضي للبرامج</td>
+            <td>Flatpak مفعّل، Snap معطّل</td>
+            <td>Flatpak و Snap مفعّلان معًا منذ البداية</td>
           </tr>
         </tbody>
       </table>
@@ -401,6 +384,52 @@ const tocItems = [
       تنتقل من نظام مغلق إلى نظام حر يمنحك تحكمًا كاملاً في جهازك، وهذا وحده
       يستحق التجربة.
     </p>
+
+    <h2 id="official-links">الروابط الرسمية للتحميل</h2>
+
+    <p>
+      قبل أي خطوة تجريبية، الأفضل دائمًا تحميل النظام من المصدر الرسمي مباشرة
+      لتفادي أي نسخة معدّلة أو غير آمنة:
+    </p>
+
+    <ul>
+      <li>
+        <strong>الموقع الرسمي لـ Zorin OS:</strong>{" "}
+        <a
+          href="https://zorin.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          zorin.com
+        </a>{" "}
+        — وصفحة التحميل المباشرة:{" "}
+        <a
+          href="https://zorin.com/os/download/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          zorin.com/os/download
+        </a>
+      </li>
+      <li>
+        <strong>الموقع الرسمي لـ Linux Mint:</strong>{" "}
+        <a
+          href="https://linuxmint.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          linuxmint.com
+        </a>{" "}
+        — وصفحة التحميل المباشرة:{" "}
+        <a
+          href="https://linuxmint.com/download.php"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          linuxmint.com/download.php
+        </a>
+      </li>
+    </ul>
 
     <h2 id="faq">أسئلة شائعة</h2>
 
