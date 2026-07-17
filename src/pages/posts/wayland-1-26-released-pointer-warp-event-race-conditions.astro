@@ -1,0 +1,117 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "wayland-1-26-released-pointer-warp-event-race-conditions",
+  title: "Wayland 1.26: حدث Pointer Warp وإصلاحات العرق التاريخية",
+  description:
+    "Wayland 1.26 صدر برسمية 16 يوليو 2026 — يجلب حدث wl_pointer.warp المطلوب منذ زمن لتحكم الكومبوزيتور بالمؤشر، وإصلاحات لعرق الكائنات العام، وتحسينات لقياس الأداء والـ debugging.",
+  keywords: [
+    "Wayland",
+    "وايلاند",
+    "وايلند",
+    "wl_pointer",
+    "Pointer Warp",
+    "بروتوكول Wayland",
+    "Linux",
+    "سطح المكتب",
+    "X11",
+    "Compositors",
+  ],
+  category: ["لينكس", "بيئة سطح المكتب"],
+  author: "فريق مصدر إكس",
+  date: "17 يوليو 2026",
+  pubDate: new Date("2026-07-17"),
+  tags: ["Wayland", "لينكس", "بروتوكول", "سطح المكتب", "Compositors"],
+  thumbnail:
+    "/images/wayland-1-26-released-pointer-warp-event-race-conditions.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      أعلن <strong>Simon Ser</strong> رسمياً عن إصدار <strong
+        >Wayland 1.26</strong
+      > في 16 يوليو 2026 — نسخة تاريخية تجلب أول ميزة طالب بها مجتمع المطورين منذ
+      سنوات، إلى جانب إصلاح عميق لمشاكل تزامن الخيوط التي أثقلت البروتوكول لأعوام.
+    </p>
+
+    <h2>الميزة الرئيسية: حدث wl_pointer.warp</h2>
+
+    <p>
+      حدث wl_pointer.warp الجديد يسمح بإخطار موضع مؤشر جديد دون حدث حركة ماوس من
+      قبل المستخدم — يحل مشكلة طويلة الأمد حيث لا يمكن للعميل الحصول على معلومات
+      الموضع الصحيحة للمؤشر في بعض السيناريوهات. على سبيل المثال: عندما يكون
+      التركيز على زر والماوس لا تتحرك لكن حجم النافذة يتغير، لا يستطيع العميل
+      تحديث معلومات الموضع من خلال حدث الحركة، مما ينتج عنه موضع ماوس غير صحيح.
+    </p>
+
+    <h2>إصلاح عرق الكائنات العام</h2>
+
+    <p>
+      يأتي مع <strong>wl_fixes.ack_global_remove request</strong> جديد — يعالج مشاكل
+      تزامن مزمنة في إزالة الكائنات العام. هذا يُحسّن تواصل عميل-كومبوزيتور بشكل كبير
+      خلال تغييرات الشاشات وتبديل الميزات، مما كان يسبب مشاكل ثبات كثيرة.
+    </p>
+
+    <h2>تحسينات الأداة وقياس الأداء</h2>
+
+    <ul>
+      <li>
+        <strong>إدارة ملفات المقبس المتماثلة:</strong> دالة <code
+          >wl_display_remove_socket_fd()</code
+        > جديدة للتحكم الأفضل بالمقابس المضافة سابقاً
+      </li>
+      <li>
+        <strong>طوابع زمنية بدقة الميكروثانية:</strong> توابع زمنية بدقة الميكروثانية
+        لـ WAYLAND_DEBUG logging لمساعدة المطورين في استكشاف الأخطاء
+      </li>
+      <li>
+        <strong>تحسينات إدارة ملفات المقبس:</strong> معالجة أفضل لدورة حياة اتصالات
+        المقبس
+      </li>
+    </ul>
+
+    <h2>من الاستفادة؟</h2>
+
+    <p>
+      بينما التغييرات تفيد بشكل أساسي المطورين الذين يبنون بنية لينكس الرسومية،
+      يمكن للمستخدمين العاديين توقع هذه التحديثات ستعزز تدريجياً تجربة سطح
+      المكتب من خلال إصدارات الكومبوزيتور والأدوات القادمة.
+    </p>
+
+    <h2>الخطوات التالية</h2>
+
+    <p>
+      الكومبوزيتورات والأدوات ستتبنى البروتوكول المحدث في الإصدارات القادمة، مع
+      دعم موسع متوقع عبر توزيعات لينكس خلال الأشهر القادمة. Wayland لا تعد
+      بميزات سطح مكتب براقة — بل تعد بسباكة قوية وموثوقة، وهذا الإصدار مثال صلب
+      على نضج المشروع وتطوره المستمر.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://9to5linux.com/wayland-1-26-is-now-available-for-download-with-new-features-and-improvements"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        9to5Linux
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
