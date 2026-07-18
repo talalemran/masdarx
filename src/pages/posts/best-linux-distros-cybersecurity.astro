@@ -1,0 +1,630 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "best-linux-distros-cybersecurity",
+  title: "أفضل 5 توزيعات لينكس للأمن السيبراني عالية الكفاءة",
+  description:
+    "مقارنة تقنية شاملة بين Kali Linux وParrot Security OS وBlackArch وFedora Security Lab وBackBox، لاختيار التوزيعة الأنسب لاختبار الاختراق والتحليل الجنائي الرقمي.",
+  keywords: [
+    "أفضل توزيعات لينكس للأمن السيبراني",
+    "كالي لينكس",
+    "Parrot OS",
+    "BlackArch Linux",
+    "Fedora Security Lab",
+    "BackBox Linux",
+    "توزيعات اختبار الاختراق",
+    "أدوات الأمن السيبراني",
+    "لينكس للهاكر الأخلاقي",
+    "أفضل نظام لاختبار الاختراق",
+  ],
+  category: ["لينكس", "مقالات"],
+  author: "فريق مصدر إكس",
+  date: "17 يوليو 2026",
+  pubDate: new Date("2026-07-17"),
+  tags: [
+    "Kali Linux",
+    "Parrot Security OS",
+    "BlackArch Linux",
+    "Fedora Security Lab",
+    "BackBox Linux",
+    "اختبار الاختراق",
+    "أمن المعلومات",
+  ],
+  thumbnail: "/images/best-linux-distros-cybersecurity.webp",
+};
+
+const tocItems = [
+  {
+    id: "why-specialized-distro",
+    label: "لماذا تحتاج توزيعة متخصصة في الأمن السيبراني؟",
+  },
+  { id: "selection-criteria", label: "معايير اختيار أفضل توزيعة" },
+  { id: "top-5-distros", label: "أفضل 5 توزيعات لينكس للأمن السيبراني" },
+  { id: "comparison-table", label: "مقارنة مباشرة بين التوزيعات" },
+  { id: "pros-cons-table", label: "جدول الإيجابيات والسلبيات" },
+  { id: "which-fits-you", label: "أي توزيعة تناسبك؟" },
+  { id: "legal-notice", label: "تنبيه ضروري قبل البدء" },
+  { id: "official-links", label: "الروابط الرسمية للتحميل" },
+  { id: "faq", label: "أسئلة شائعة" },
+];
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      اختيار بيئة العمل هو أول قرار تقني يواجهه أي شخص يدخل مجال اختبار الاختراق
+      أو التحليل الجنائي الرقمي. نظام التشغيل هنا ليس تفصيلاً، بل هو مجموعة
+      الأدوات التي ستعمل بها يوميًا، وطريقة تنظيمها تؤثر مباشرة على سرعة إنجازك
+      وجودة نتائجك.
+    </p>
+
+    <p>
+      في هذا المقال نستعرض <strong>أفضل توزيعات لينكس للأمن السيبراني</strong>،
+      مع مقارنة موضوعية بين كل واحدة، دون إعلان فائز مطلق، لأن الاختيار الصحيح
+      يعتمد على طبيعة عملك ومستوى خبرتك.
+    </p>
+
+    <nav
+      class="toc bg-zinc-800 border border-zinc-700 rounded-lg p-8 my-6"
+      aria-label="جدول المحتويات"
+    >
+      <p class="font-bold text-lg mb-4 text-white">محتويات المقال</p>
+      <ol class="list-decimal list-inside space-y-3 text-lg">
+        {
+          tocItems.map((item) => (
+            <li>
+              <a href={`#${item.id}`} class="text-white hover:underline">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <h2 id="why-specialized-distro">
+      لماذا تحتاج توزيعة متخصصة في الأمن السيبراني؟
+    </h2>
+
+    <p>
+      توزيعة لينكس عادية مثل أوبونتو أو فيدورا تصلح للاستخدام اليومي، لكنها لا
+      تأتي بأدوات فحص الشبكات أو تحليل الثغرات مثبتة مسبقًا. ستضطر لتثبيت كل
+      أداة يدويًا، وضبط التبعيات، وحل تعارضات الإصدارات بنفسك.
+    </p>
+
+    <p>التوزيعات الأمنية المتخصصة تحل هذه المشكلة من جذورها:</p>
+
+    <ul>
+      <li>مئات أدوات الأمن السيبراني مثبتة ومهيأة للعمل من أول إقلاع</li>
+      <li>بيئة اختبار جاهزة دون حاجة لإعداد يدوي طويل</li>
+      <li>
+        تحديثات موجهة خصيصًا لأدوات اختبار الاختراق والتحليل الجنائي الرقمي
+      </li>
+      <li>توثيق رسمي مخصص لسيناريوهات العمل الأمني، لا للاستخدام العام</li>
+    </ul>
+
+    <p>
+      الفرق الجوهري إذن ليس في كون النظام أقوى، بل في أنه مُعدّ سلفًا لهذا النوع
+      من العمل.
+    </p>
+
+    <h2 id="selection-criteria">معايير اختيار أفضل توزيعة</h2>
+
+    <p>
+      قبل الدخول في التوزيعات نفسها، من المفيد معرفة المعايير التي يُقاس عليها
+      أي نظام في هذا المجال:
+    </p>
+
+    <ul>
+      <li>
+        عدد الأدوات الأمنية المدمجة وتنوعها بين فحص الشبكات واختبار تطبيقات
+        الويب والتحليل الجنائي
+      </li>
+      <li>سهولة الاستخدام، خصوصًا لمن هو في بداية الطريق</li>
+      <li>الاستقرار أثناء تشغيل أدوات ثقيلة أو سيناريوهات اختبار طويلة</li>
+      <li>سرعة التحديثات ومدى مواكبتها لأحدث الثغرات والأدوات</li>
+      <li>دعم المجتمع وحجم الموارد التعليمية المتوفرة</li>
+      <li>التوثيق الرسمي ووضوحه لمستخدم جديد</li>
+      <li>
+        استهلاك الموارد، فبعض التوزيعات تحتاج جهازًا قويًا والبعض الآخر يعمل
+        بخفة
+      </li>
+      <li>
+        ملاءمة الأجهزة القديمة والحديثة، خصوصًا عند التشغيل داخل أجهزة افتراضية
+        (Virtual Machines)
+      </li>
+    </ul>
+
+    <h2 id="top-5-distros">أفضل 5 توزيعات لينكس للأمن السيبراني</h2>
+
+    <h3>1. Kali Linux</h3>
+
+    <img
+      src="/images/kali-linux.webp"
+      alt="Kali Linux - واجهة المستخدم"
+      width="2560"
+      height="1600"
+      class="w-full h-auto rounded-lg mb-4"
+      loading="lazy"
+    />
+
+    <p>
+      توزيعة اختبار الاختراق الأكثر شهرة عالميًا، تطورها شركة Offensive
+      Security، ومبنية على Debian.
+    </p>
+
+    <p><strong>أبرز المميزات:</strong></p>
+    <ul>
+      <li>أكبر مكتبة أدوات أمنية جاهزة في أي توزيعة لينكس</li>
+      <li>توثيق رسمي ضخم ومحدث باستمرار</li>
+      <li>دعم مباشر من مجتمع اختبار الاختراق الأكبر عالميًا</li>
+      <li>تكامل رسمي مع شهادات Offensive Security مثل OSCP</li>
+    </ul>
+
+    <p>
+      <strong>أشهر الأدوات المدمجة:</strong> Nmap، Metasploit Framework، Wireshark،
+      Burp Suite Community Edition، Aircrack-ng، Hydra، SQLmap، Nikto.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> تحديثات دورية سريعة، مناسبة تمامًا لبيئات التعلم والشهادات
+      المهنية، وتعمل بسلاسة داخل الأجهزة الافتراضية.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> كثافة الأدوات قد تُربك المبتدئ في البداية، وليست الخيار
+      الأمثل كنظام استخدام يومي عام.
+    </p>
+
+    <p>
+      <strong>لمن تناسب؟</strong> لمن يريد التحضير لشهادات اختبار الاختراق، أو العمل
+      المهني في هذا المجال.
+    </p>
+
+    <h3>2. Parrot Security OS</h3>
+
+    <img
+      src="/images/parrot-security-os.webp"
+      alt="Parrot Security OS - واجهة المستخدم"
+      width="1920"
+      height="984"
+      class="w-full h-auto rounded-lg mb-4"
+      loading="lazy"
+    />
+
+    <p>
+      توزيعة إيطالية الأصل مبنية على Debian أيضًا، لكنها توازن بين اختبار
+      الاختراق والاستخدام اليومي العادي.
+    </p>
+
+    <p><strong>أبرز المميزات:</strong></p>
+    <ul>
+      <li>واجهة مستخدم أخف وأقل استهلاكًا للموارد مقارنة بـ Kali</li>
+      <li>بيئة صالحة للاستخدام اليومي بجانب العمل الأمني</li>
+      <li>تركيز إضافي على أدوات الخصوصية وإخفاء الهوية</li>
+    </ul>
+
+    <p>
+      <strong>أشهر الأدوات المدمجة:</strong> معظم أدوات Kali نفسها (Nmap، Metasploit،
+      Wireshark)، بالإضافة إلى أدوات تشفير وخصوصية إضافية.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> استهلاك موارد أقل، يصلح كنظام تشغيل رئيسي، ومجتمع
+      نشط.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> عدد الأدوات المدمجة أقل قليلاً من Kali في بعض التخصصات
+      الدقيقة.
+    </p>
+
+    <p>
+      <strong>لمن تناسب؟</strong> لمن يريد توزيعة واحدة تجمع بين العمل الأمني والاستخدام
+      اليومي، خصوصًا على أجهزة أقل قوة.
+    </p>
+
+    <h3>3. BlackArch Linux</h3>
+
+    <img
+      src="/images/blackarch-linux.webp"
+      alt="BlackArch Linux - واجهة المستخدم"
+      width="1280"
+      height="720"
+      class="w-full h-auto rounded-lg mb-4"
+      loading="lazy"
+    />
+
+    <p>
+      توزيعة مبنية على Arch Linux، وتُعتبر الأضخم من ناحية عدد الأدوات الأمنية
+      المتوفرة إطلاقًا.
+    </p>
+
+    <p><strong>أبرز المميزات:</strong></p>
+    <ul>
+      <li>أكثر من 2800 أداة أمنية في مستودعاتها الرسمية</li>
+      <li>إمكانية تثبيتها كطبقة إضافية فوق أي نظام Arch موجود</li>
+      <li>
+        تحديثات سريعة جدًا بفضل نموذج Arch القائم على التحديث المستمر (Rolling
+        Release)
+      </li>
+    </ul>
+
+    <p>
+      <strong>أشهر الأدوات المدمجة:</strong> تغطي كل فئة تقريبًا: فحص الشبكات، اختبار
+      تطبيقات الويب، الهندسة العكسية، وأدوات مراقبة الشبكات المتخصصة.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> تنوع أدوات لا مثيل له، مرونة تخصيص كاملة بفضل بنية
+      Arch.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> منحنى تعلم حاد، غير موجهة إطلاقًا للمبتدئين، واستقرار
+      أقل مقارنة بتوزيعات مبنية على Debian.
+    </p>
+
+    <p>
+      <strong>لمن تناسب؟</strong> للمستخدمين المتقدمين الذين يعرفون Arch جيدًا، ويريدون
+      أقصى قدر ممكن من الأدوات والتخصيص.
+    </p>
+
+    <h3>4. Fedora Security Lab</h3>
+
+    <img
+      src="/images/fedora-security-lab.webp"
+      alt="Fedora Security Lab - واجهة المستخدم"
+      width="1280"
+      height="1024"
+      class="w-full h-auto rounded-lg mb-4"
+      loading="lazy"
+    />
+
+    <p>
+      نسخة أمنية رسمية من مشروع Fedora، مبنية على أساس RPM بدلاً من Debian أو
+      Arch.
+    </p>
+
+    <p><strong>أبرز المميزات:</strong></p>
+    <ul>
+      <li>استقرار عالٍ بفضل بنية Fedora الصلبة</li>
+      <li>بيئة نظيفة ومنظمة، أقل ازدحامًا من BlackArch</li>
+      <li>دعم رسمي من مجتمع Fedora الضخم</li>
+    </ul>
+
+    <p>
+      <strong>أشهر الأدوات المدمجة:</strong> Wireshark، Nmap، أدوات تحليل جنائي رقمي
+      متخصصة، بالإضافة إلى أدوات فحص أمني أساسية.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> خيار ممتاز لمن يفضل بيئة RPM، توثيق واضح من فريق Fedora،
+      واستقرار ملحوظ على المدى الطويل.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> عدد الأدوات المدمجة أقل من Kali أو BlackArch، ومجتمع
+      متخصص في الأمن السيبراني أصغر.
+    </p>
+
+    <p>
+      <strong>لمن تناسب؟</strong> لمن يفضل نظام RPM المستقر، أو يعمل أصلاً في بيئة
+      Fedora ويريد إضافة طبقة أمنية دون تغيير التوزيعة بالكامل.
+    </p>
+
+    <h3>5. BackBox Linux</h3>
+
+    <img
+      src="/images/backbox-linux.webp"
+      alt="BackBox Linux - واجهة المستخدم"
+      width="1280"
+      height="720"
+      class="w-full h-auto rounded-lg mb-4"
+      loading="lazy"
+    />
+
+    <p>
+      توزيعة إيطالية أخرى، مبنية على Ubuntu، وتركز على البساطة وخفة الأداء أكثر
+      من كثرة الأدوات.
+    </p>
+
+    <p><strong>أبرز المميزات:</strong></p>
+    <ul>
+      <li>واجهة مستخدم بسيطة جدًا وسهلة التعلم</li>
+      <li>استهلاك موارد منخفض نسبيًا</li>
+      <li>تركيز على أدوات فحص الثغرات وتقييم أمن الشبكات تحديدًا</li>
+    </ul>
+
+    <p>
+      <strong>أشهر الأدوات المدمجة:</strong> مجموعة مختارة بعناية من الأدوات الأساسية،
+      تشمل Nmap وأدوات فحص ثغرات مركزة.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> منحنى تعلم لطيف جدًا للمبتدئين، أداء خفيف يناسب الأجهزة
+      الأقدم، وبيئة منظمة بلا فوضى بصرية.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> عدد الأدوات محدود مقارنة بالخيارات الأخرى، ومجتمع أصغر
+      مع تحديثات أبطأ نسبيًا.
+    </p>
+
+    <p>
+      <strong>لمن تناسب؟</strong> للمبتدئين تمامًا في مجال اختبار الاختراق، أو لمن
+      يريد أداة تقييم أمني خفيفة دون تعقيد زائد.
+    </p>
+
+    <h2 id="comparison-table">مقارنة مباشرة بين التوزيعات</h2>
+
+    <div class="overflow-x-auto my-4">
+      <table
+        class="w-full text-right border border-zinc-200 dark:border-zinc-700 rounded-lg"
+      >
+        <thead
+          class="bg-zinc-100 dark:bg-zinc-800 light:text-zinc-700 dark:text-zinc-300"
+        >
+          <tr>
+            <th class="px-4 py-2 font-semibold">التوزيعة</th>
+            <th class="px-4 py-2 font-semibold">سهولة الاستخدام</th>
+            <th class="px-4 py-2 font-semibold">عدد الأدوات</th>
+            <th class="px-4 py-2 font-semibold">الأداء</th>
+            <th class="px-4 py-2 font-semibold">مستوى المستخدم</th>
+            <th class="px-4 py-2 font-semibold">أفضل استخدام</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+          <tr>
+            <td class="px-4 py-2">Kali Linux</td>
+            <td class="px-4 py-2">متوسطة</td>
+            <td class="px-4 py-2">ضخم جدًا</td>
+            <td class="px-4 py-2">متوسط</td>
+            <td class="px-4 py-2">متوسط إلى محترف</td>
+            <td class="px-4 py-2">اختبار اختراق شامل وشهادات مهنية</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Parrot Security OS</td>
+            <td class="px-4 py-2">جيدة</td>
+            <td class="px-4 py-2">كبير</td>
+            <td class="px-4 py-2">خفيف إلى متوسط</td>
+            <td class="px-4 py-2">مبتدئ إلى متوسط</td>
+            <td class="px-4 py-2">استخدام يومي مع عمل أمني</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">BlackArch Linux</td>
+            <td class="px-4 py-2">صعبة</td>
+            <td class="px-4 py-2">الأكبر إطلاقًا</td>
+            <td class="px-4 py-2">متوسط</td>
+            <td class="px-4 py-2">محترف فقط</td>
+            <td class="px-4 py-2">تخصيص كامل وتنوع أدوات أقصى</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Fedora Security Lab</td>
+            <td class="px-4 py-2">جيدة</td>
+            <td class="px-4 py-2">متوسط</td>
+            <td class="px-4 py-2">خفيف</td>
+            <td class="px-4 py-2">متوسط</td>
+            <td class="px-4 py-2">بيئة RPM مستقرة للتحليل الجنائي</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">BackBox Linux</td>
+            <td class="px-4 py-2">سهلة جدًا</td>
+            <td class="px-4 py-2">محدود</td>
+            <td class="px-4 py-2">خفيف جدًا</td>
+            <td class="px-4 py-2">مبتدئ</td>
+            <td class="px-4 py-2">فحص ثغرات بسيط وأجهزة ضعيفة</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="pros-cons-table">جدول الإيجابيات والسلبيات</h2>
+
+    <div class="overflow-x-auto my-4">
+      <table
+        class="w-full text-right border border-zinc-200 dark:border-zinc-700 rounded-lg"
+      >
+        <thead
+          class="bg-zinc-100 dark:bg-zinc-800 light:text-zinc-700 dark:text-zinc-300"
+        >
+          <tr>
+            <th class="px-4 py-2 font-semibold">التوزيعة</th>
+            <th class="px-4 py-2 font-semibold">الإيجابيات</th>
+            <th class="px-4 py-2 font-semibold">السلبيات</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+          <tr>
+            <td class="px-4 py-2">Kali Linux</td>
+            <td class="px-4 py-2"
+              >مكتبة أدوات ضخمة، توثيق ممتاز، معيار الصناعة</td
+            >
+            <td class="px-4 py-2"
+              >منحنى تعلم متوسط، أدوات كثيرة قد تربك المبتدئ</td
+            >
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Parrot Security OS</td>
+            <td class="px-4 py-2"
+              >خفيف، متعدد الاستخدامات، أدوات خصوصية إضافية</td
+            >
+            <td class="px-4 py-2">أدوات متخصصة أقل من Kali في بعض المجالات</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">BlackArch Linux</td>
+            <td class="px-4 py-2">أكبر عدد أدوات، تخصيص كامل، تحديث مستمر</td>
+            <td class="px-4 py-2">صعب على المبتدئين، استقرار أقل</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Fedora Security Lab</td>
+            <td class="px-4 py-2"
+              >استقرار عالٍ، بيئة نظيفة، دعم Fedora الرسمي</td
+            >
+            <td class="px-4 py-2">أدوات أقل، مجتمع أمني أصغر</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">BackBox Linux</td>
+            <td class="px-4 py-2">بسيط جدًا، خفيف على الموارد، سهل التعلم</td>
+            <td class="px-4 py-2">أدوات محدودة، تحديثات أبطأ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="which-fits-you">أي توزيعة تناسبك؟</h2>
+
+    <ul>
+      <li>
+        <strong>للمبتدئين:</strong> BackBox Linux أو Parrot Security OS، بفضل بساطة
+        الواجهة ومنحنى التعلم اللطيف
+      </li>
+      <li>
+        <strong>للمستخدم المتوسط:</strong> Parrot Security OS أو Fedora Security Lab،
+        توازن جيد بين الأدوات والاستقرار
+      </li>
+      <li>
+        <strong>للمحترفين:</strong> Kali Linux أو BlackArch Linux، حيث الحاجة لأقصى
+        عدد أدوات ومرونة تخصيص
+      </li>
+      <li>
+        <strong>للأجهزة الضعيفة:</strong> BackBox Linux، لخفة استهلاكه للموارد
+      </li>
+      <li>
+        <strong>للعمل الاحترافي واختبار الاختراق التجاري:</strong> Kali Linux، لكونه
+        معيار الصناعة المعترف به
+      </li>
+      <li>
+        <strong>للتعلم والتحضير للشهادات:</strong> Kali Linux، بفضل توثيقه وتكامله
+        مع مسارات تدريبية معروفة
+      </li>
+      <li>
+        <strong>للتحليل الجنائي الرقمي:</strong> Fedora Security Lab، لاستقراره وتنظيم
+        أدواته المتخصصة
+      </li>
+      <li>
+        <strong>لاختبار اختراق الشبكات تحديدًا:</strong> Kali Linux أو BlackArch Linux،
+        لتوفر أدوات فحص الشبكات المتقدمة
+      </li>
+      <li>
+        <strong>للعمل داخل الأجهزة الافتراضية:</strong> Parrot Security OS أو Kali
+        Linux، لتوفر صور جاهزة مخصصة للأجهزة الافتراضية رسميًا
+      </li>
+    </ul>
+
+    <h2 id="legal-notice">تنبيه ضروري قبل البدء</h2>
+
+    <p>
+      امتلاك توزيعة محملة بأدوات اختبار الاختراق لا يمنحك أي صلاحية قانونية
+      لاستخدامها ضد أنظمة أو شبكات لا تملكها أو لا تملك تصريحًا موثقًا
+      لاختبارها. استخدام هذه الأدوات خارج بيئة تخصك أو بيئة اختبار مصرح بها
+      رسميًا يُعد مخالفة قانونية في معظم الدول، بصرف النظر عن النية.
+    </p>
+
+    <p>
+      قبل تشغيل أي أداة من هذه القائمة، تأكد أن لديك إذنًا كتابيًا واضحًا، أو
+      أنك تعمل داخل بيئة تدريب مخصصة لهذا الغرض مثل الأجهزة الافتراضية المعزولة
+      أو منصات التدريب المرخصة.
+    </p>
+
+    <h2 id="official-links">الروابط الرسمية للتحميل</h2>
+
+    <p>
+      دائمًا حمّل هذه التوزيعات من مصادرها الرسمية فقط، لتفادي أي نسخة معدّلة أو
+      خبيثة تنتشر أحيانًا على مواقع غير موثوقة:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Kali Linux:</strong>{" "}
+        <a
+          href="https://www.kali.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kali.org
+        </a>
+      </li>
+      <li>
+        <strong>Parrot Security OS:</strong>{" "}
+        <a
+          href="https://www.parrotsec.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          parrotsec.org
+        </a>
+      </li>
+      <li>
+        <strong>BlackArch Linux:</strong>{" "}
+        <a
+          href="https://blackarch.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          blackarch.org
+        </a>
+      </li>
+      <li>
+        <strong>Fedora Security Lab:</strong>{" "}
+        <a
+          href="https://fedoraproject.org/labs/security/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          fedoraproject.org/labs/security
+        </a>
+      </li>
+      <li>
+        <strong>BackBox Linux:</strong>{" "}
+        <a
+          href="https://www.backbox.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          backbox.org
+        </a>
+      </li>
+    </ul>
+
+    <h2 id="faq">أسئلة شائعة</h2>
+
+    <p>
+      <strong>هل يمكنني تثبيت أدوات Kali Linux على توزيعة أخرى؟</strong><br />
+      نعم، معظم الأدوات مفتوحة المصدر ويمكن تثبيتها يدويًا على أي توزيعة، لكن هذا
+      يتطلب وقتًا وجهدًا إضافيًا لضبط التبعيات.
+    </p>
+
+    <p>
+      <strong>هل تحتاج هذه التوزيعات جهازًا قويًا؟</strong><br />
+      BlackArch وKali يفضل تشغيلهما بذاكرة 8 غيغابايت فأكثر للراحة، بينما BackBox
+      وParrot يعملان بسلاسة على مواصفات أقل.
+    </p>
+
+    <p>
+      <strong>هل يمكن تشغيل هذه التوزيعات داخل جهاز افتراضي؟</strong><br />
+      نعم، وهذا فعليًا الأسلوب الموصى به للمبتدئين، حيث توفر Kali وParrot صورًا جاهزة
+      مخصصة لبرامج مثل VirtualBox وVMware.
+    </p>
+
+    <p>
+      <strong>هل استخدام هذه التوزيعات قانوني؟</strong><br />
+      التوزيعة نفسها قانونية تمامًا كأي نظام تشغيل آخر. القانونية أو عدمها تعتمد بالكامل
+      على كيفية استخدامك للأدوات وضد أي نظام تشغّلها.
+    </p>
+  </PostLayout>
+</BaseLayout>
