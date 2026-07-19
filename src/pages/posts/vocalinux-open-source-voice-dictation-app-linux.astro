@@ -1,0 +1,139 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "vocalinux-open-source-voice-dictation-app-linux",
+  title: "Vocalinux: تطبيق إملاء صوتي مفتوح المصدر للينكس بخصوصية كاملة",
+  description:
+    "Vocalinux أداة إملاء صوتية مفتوحة المصدر تحول كلامك إلى نص مباشرة في التطبيق النشط — معالجة محلية بدون سحابة، دعم Wayland و X11، وتسريع GPU بـ Vulkan.",
+  keywords: [
+    "Vocalinux",
+    "إملاء صوتي",
+    "Voice Dictation",
+    "whisper.cpp",
+    "OpenAI Whisper",
+    "لينكس",
+    "Linux",
+    "Wayland",
+    "X11",
+    "مفتوح المصدر",
+  ],
+  category: "برامج",
+  author: "فريق مصدر إكس",
+  date: "18 يوليو 2026",
+  pubDate: new Date("2026-07-18"),
+  tags: ["Vocalinux", "لينكس", "إملاء صوتي", "مفتوح المصدر", "خصوصية"],
+  thumbnail: "/images/vocalinux-open-source-voice-dictation-app-linux.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      قدّم مطورو لينكس تطبيقًا جديدًا يتصدّى لثغرة حقيقية: <strong
+        >Vocalinux</strong
+      > — أداة إملاء صوتية مفتوحة المصدر تحول كلامك مباشرة إلى نص في المحرر أو المتصفح
+      أو أي تطبيق نشط، دون أي اعتماد على الخدمات السحابية أو الحسابات.
+    </p>
+
+    <h2>كيف تعمل؟</h2>
+
+    <p>
+      بدلًا من أن تكون أداة نسخ منفصلة، Vocalinux تعمل في الخلفية وتُفعَّل عبر
+      اختصار لوحة مفاتيح قابل للتخصيص. المستخدم يختار بين وضعَي التفعيل: اللمس
+      المزدوج لمفتاح معين، أو الضغط المستمر أثناء التحدث. الكلام يُحوَّل مباشرة
+      إلى نص ويُدرج في حقل النص النشط — سواء كان في متصفح أو محرر أو تطبيق مكتب
+      أو طرفية.
+    </p>
+
+    <h2>الخصوصية أولًا</h2>
+
+    <p>
+      المميز الأساسي: <strong>لا حساب، لا اشتراك، لا خدمة سحابية</strong>. جميع
+      المعالجة تحدث محليًا على جهازك، وتسجيلات الميكروفون لا تترك الحاسوب أبدًا.
+      بمجرد تحميل المكونات والنماذج، يعمل التطبيق بدون اتصال إنترنت.
+    </p>
+
+    <h2>محركات التعرف الصوتي</h2>
+
+    <p>Vocalinux يدعم ثلاثة محركات معالجة محلية:</p>
+
+    <ul>
+      <li>
+        <strong>Whisper.cpp:</strong> المحرك الافتراضي — تطبيق محسّن لنموذج Whisper
+        من OpenAI
+      </li>
+      <li><strong>OpenAI Whisper:</strong> الإصدار الأصلي من OpenAI</li>
+      <li><strong>VOSK:</strong> خيار خفيف للأجهزة الضعيفة</li>
+    </ul>
+
+    <p>المستخدم يختار المحرك حسب الأجهزة واللغة والأداء المطلوب.</p>
+
+    <h2>تسريع GPU مع Vulkan</h2>
+
+    <p>
+      التطبيق يدعم <strong>تسريع Vulkan</strong> عند توفره — مما يسمح بمعالجة الصوت
+      على معالجات رسومات AMD و Intel و NVIDIA بدلًا من الاعتماد على المعالج الرئيسي
+      فقط. للأجهزة الضعيفة، يمكن اختيار نماذج أصغر بدقة أقل لكن استهلاكًا أقل للموارد.
+    </p>
+
+    <h2>دعم X11 و Wayland</h2>
+
+    <p>
+      التطبيق يعمل على كلا نظام العرض، لكن Wayland بطبيعتها محدودة في السماح
+      للتطبيقات بمحاكاة مدخلات لوحة المفاتيح — وهنا يأتي دعم Vocalinux الكامل
+      لكلا النظامين كمميزة نادرة وقيّمة.
+    </p>
+
+    <h2>الوضع البعيد (Remote Mode)</h2>
+
+    <p>
+      رغم التركيز على المعالجة المحلية، Vocalinux يتيح <strong
+        >وضع بعيد اختياري</strong
+      > — حيث يمكن إشارة التطبيق إلى سيرفر نسخ نصية تشغّله بنفسك بدلًا من إرسال الصوت
+      لمزود تجاري. يدعم نقاط نهاية متوافقة مع OpenAI و whisper.cpp، مع خوادم إضافية
+      مثل FunASR و SenseVoice.
+    </p>
+
+    <h2>التثبيت والتوفر</h2>
+
+    <ul>
+      <li>
+        مثبِّت shell تفاعلي يدعم Ubuntu و Debian و Fedora و Arch و openSUSE
+      </li>
+      <li>توزيع عبر Flatpak للعزلة والأمان</li>
+      <li>متاح في Arch AUR للمتقدمين</li>
+      <li>الإصدار الحالي: 0.14.2</li>
+    </ul>
+
+    <p>
+      Vocalinux يملأ فراغًا حقيقيًا في عالم لينكس — أداة إملاء صوتي سهلة وخاصة
+      وقابلة للتحكم بها، بدون التضحية بالخصوصية أو الاستقلالية. في عصر تتسيطر
+      فيه البيانات الصوتية، هذا خيار يستحق المراعاة.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a
+        href="https://linuxiac.com/vocalinux-is-an-open-source-voice-dictation-app-built-for-linux/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Linuxiac
+      </a>
+    </p>
+  </PostLayout>
+</BaseLayout>
