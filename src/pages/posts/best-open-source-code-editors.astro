@@ -1,0 +1,704 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "best-open-source-code-editors",
+  title: "أفضل محررات الأكواد مفتوحة المصدر للمبرمجين والمطورين",
+  description:
+    "دليل شامل لأفضل محررات الأكواد مفتوحة المصدر — من VSCodium وZed إلى Neovim وHelix — مع مقارنة تقنية تساعدك على اختيار المحرر المناسب لأسلوب عملك.",
+  keywords: [
+    "أفضل محررات الأكواد مفتوحة المصدر",
+    "Visual Studio Code مفتوح المصدر",
+    "VSCodium",
+    "Neovim",
+    "Helix Editor",
+    "Zed Editor",
+    "Kate Editor",
+    "Lapce",
+    "محررات الأكواد",
+    "محرر أكواد للمبرمجين",
+    "أفضل محرر برمجة",
+    "محرر أكواد لينكس",
+    "محرر أكواد مجاني",
+    "أدوات المطورين",
+  ],
+  category: ["برمجة", "برامج", "مقالات"],
+  author: "فريق مصدر إكس",
+  date: "20 يوليو 2026",
+  pubDate: new Date("2026-07-20"),
+  tags: [
+    "VSCodium",
+    "Zed",
+    "Neovim",
+    "Helix",
+    "Lapce",
+    "Kate",
+    "Geany",
+    "محررات أكواد",
+  ],
+  thumbnail: "/images/best-open-source-code-editors.webp",
+};
+
+const tocItems = [
+  { id: "why-code-editor", label: "لماذا تحتاج إلى محرر أكواد احترافي؟" },
+  { id: "selection-criteria", label: "معايير اختيار أفضل محرر أكواد" },
+  { id: "top-editors", label: "أفضل محررات الأكواد مفتوحة المصدر" },
+  { id: "comparison-table", label: "جدول مقارنة شامل" },
+  { id: "pros-cons-table", label: "جدول المزايا والعيوب" },
+  { id: "by-use-case", label: "مقارنة حسب الاستخدام" },
+  { id: "vscode-open-source", label: "هل VS Code مفتوح المصدر؟" },
+  { id: "editor-vs-ide", label: "هل تحتاج إلى IDE أم محرر أكواد؟" },
+  { id: "which-fits-you", label: "أي محرر أكواد يناسبك؟" },
+  { id: "official-links", label: "الروابط الرسمية للتحميل" },
+  { id: "faq", label: "أسئلة شائعة" },
+];
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+    <p>
+      اختيار محرر الأكواد ليس قرارًا تقنيًا بحتًا. هو الأداة التي ستقضي فيها
+      ساعات يوميًا، وكل تفصيل فيها — من سرعة الإقلاع إلى طريقة التنقل بين
+      الملفات — ينعكس مباشرة على إنتاجيتك.
+    </p>
+
+    <p>
+      في هذا الدليل نستعرض <strong>أفضل محررات الأكواد مفتوحة المصدر</strong>
+      المتاحة حاليًا، بموضوعية ودون تحيز لاسم على حساب آخر، لأن المحرر
+      "الأفضل" يختلف باختلاف لغتك البرمجية وأسلوب عملك.
+    </p>
+
+    <nav
+      class="toc bg-zinc-800 border border-zinc-700 rounded-lg p-8 my-6"
+      aria-label="جدول المحتويات"
+    >
+      <p class="font-bold text-lg mb-4 text-white">محتويات المقال</p>
+      <ol class="list-decimal list-inside space-y-3 text-lg">
+        {
+          tocItems.map((item) => (
+            <li>
+              <a href={`#${item.id}`} class="text-white hover:underline">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <h2 id="why-code-editor">لماذا تحتاج إلى محرر أكواد احترافي؟</h2>
+
+    <p>
+      ثلاثة مستويات مختلفة تُستخدم غالبًا بالتبادل رغم اختلافها الجوهري:
+    </p>
+
+    <ul>
+      <li>
+        <strong>محرر النصوص العادي</strong> (مثل Notepad): يفتح أي ملف نصي،
+        لكن بلا تلوين صياغة (Syntax Highlighting) ولا أي دعم برمجي حقيقي
+      </li>
+      <li>
+        <strong>محرر الأكواد</strong>: يضيف تلوين الصياغة، الإكمال التلقائي،
+        دعم Language Server Protocol (LSP)، وتكامل Git، دون أن يكون بيئة
+        تطوير متكاملة
+      </li>
+      <li>
+        <strong>بيئة التطوير المتكاملة (IDE)</strong>: تضم أدوات بناء وتصحيح
+        أخطاء (Debugger) ومحاكيات وإدارة مشاريع مدمجة بالكامل داخل التطبيق
+        نفسه
+      </li>
+    </ul>
+
+    <p>
+      محرر الأكواد هو الخيار الأنسب حين تريد بيئة خفيفة وسريعة، قابلة
+      للتخصيص عبر الإضافات، تعمل على أكثر من لغة برمجة دون فرض هيكلية مشروع
+      معينة عليك.
+    </p>
+
+    <h2 id="selection-criteria">معايير اختيار أفضل محرر أكواد</h2>
+
+    <p>قبل الدخول في المحررات نفسها، هذه المعايير التي نقيس عليها كل خيار:</p>
+
+    <ul>
+      <li>الأداء وسرعة التشغيل، خصوصًا مع ملفات ومشاريع كبيرة</li>
+      <li>استهلاك الذاكرة أثناء العمل الفعلي لا عند الإقلاع فقط</li>
+      <li>دعم الإضافات (Extensions) وحجم متجرها</li>
+      <li>تكامل Git وإدارة الفروع من داخل المحرر</li>
+      <li>دعم Language Server Protocol (LSP) لإكمال أكواد دقيق</li>
+      <li>التكامل مع أدوات الذكاء اصطناعي للمبرمجين</li>
+      <li>سهولة التخصيص، من الثيمات إلى اختصارات لوحة المفاتيح</li>
+      <li>دعم الأنظمة المختلفة: ويندوز، ماك، ولينكس</li>
+      <li>حجم المجتمع وسرعة الاستجابة للمشاكل التقنية</li>
+      <li>وتيرة التحديثات ومدى نشاط التطوير</li>
+    </ul>
+
+    <h2 id="top-editors">أفضل محررات الأكواد مفتوحة المصدر</h2>
+
+    <h3>1. VSCodium</h3>
+
+    <p>
+      نسخة من كود Visual Studio Code نفسه، لكن بدون التتبع (Telemetry)
+      وبدون العلامة التجارية الخاصة بمايكروسوفت، ومبنية بالكامل من الكود
+      المفتوح المصدر لمشروع VS Code.
+    </p>
+
+    <p><strong>أهم المميزات:</strong></p>
+    <ul>
+      <li>نفس واجهة وميزات VS Code تقريبًا حرفيًا</li>
+      <li>وصول لمعظم إضافات VS Code عبر Open VSX بدلاً من متجر مايكروسوفت</li>
+      <li>بلا أي جمع بيانات استخدام افتراضيًا</li>
+    </ul>
+
+    <p>
+      <strong>أبرز التقنيات المدعومة:</strong> LSP، Git، تعدد المؤشرات
+      (Multi-cursor)، تكامل مع GitHub Copilot وContinue عبر إضافات متوافقة.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> منحنى تعلم شبه معدوم لمن يعرف VS Code أصلاً،
+      خصوصية أفضل، ومجتمع ضخم بحكم توافقه مع نظام إضافات VS Code.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> بعض الإضافات الحصرية لمايكروسوفت (مثل بعض
+      ميزات Copilot الرسمية) قد لا تعمل بنفس السلاسة عبر متجر Open VSX.
+    </p>
+
+    <p>
+      <strong>لمن يناسب؟</strong> لمن يحب VS Code لكنه يريد نسخة مفتوحة
+      المصدر بالكامل دون تتبع.
+    </p>
+
+    <h3>2. Zed</h3>
+
+    <p>
+      محرر حديث مكتوب بلغة Rust، طوره فريق من صناع محرر Atom سابقًا، ويركز
+      على الأداء العالي والتعاون الفوري بين المطورين.
+    </p>
+
+    <p><strong>أهم المميزات:</strong></p>
+    <ul>
+      <li>سرعة استجابة عالية جدًا بفضل بنيته المكتوبة بـ Rust</li>
+      <li>تعاون فوري (Real-time Collaboration) مدمج بين عدة مطورين على نفس الملف</li>
+      <li>تكامل عميق مع أدوات الذكاء الاصطناعي للمبرمجين ووكلاء البرمجة</li>
+    </ul>
+
+    <p>
+      <strong>أبرز التقنيات المدعومة:</strong> LSP، Git، وضع Vim اختياري،
+      دعم Helix mode، ودعم دفاتر Jupyter التفاعلية.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> أداء ملموس أسرع من محررات مبنية على
+      Electron، تجربة تعاون سلسة، وتطوير نشط جدًا بوتيرة إصدارات أسبوعية.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> بعض ميزات الذكاء الاصطناعي المتقدمة مدفوعة،
+      ونظام الإضافات أصغر مقارنة بمتجر VS Code الضخم.
+    </p>
+
+    <p>
+      <strong>لمن يناسب؟</strong> لمن يبحث عن أعلى أداء ممكن، أو يعمل ضمن
+      فريق يحتاج تعاونًا مباشرًا على نفس الكود.
+    </p>
+
+    <h3>3. Neovim</h3>
+
+    <p>
+      امتداد حديث لمحرر Vim الكلاسيكي، يعتمد بالكامل على لوحة المفاتيح،
+      ويُبنى حوله نظام بيئي ضخم من الإضافات المكتوبة بلغة Lua.
+    </p>
+
+    <p><strong>أهم المميزات:</strong></p>
+    <ul>
+      <li>تحكم كامل عبر لوحة المفاتيح دون الحاجة للفأرة إطلاقاً</li>
+      <li>خفة استثنائية في استهلاك الموارد حتى مع مشاريع ضخمة</li>
+      <li>قابلية تخصيص شبه لا نهائية عبر Lua</li>
+    </ul>
+
+    <p>
+      <strong>أبرز التقنيات المدعومة:</strong> LSP مدمج أصلاً في النواة،
+      Tree-sitter لتحليل الصياغة، وإضافات ذكاء اصطناعي مثل Copilot.vim.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> سرعة لا مثيل لها على الأجهزة الضعيفة، تحكم
+      دقيق جدًا في تحرير النص، ومجتمع ضخم وقديم غني بالموارد.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> منحنى تعلم حاد جدًا للمبتدئين، ويتطلب وقتًا
+      لضبط الإعدادات قبل أن يصبح مريحًا فعليًا.
+    </p>
+
+    <p>
+      <strong>لمن يناسب؟</strong> لمحبي لوحة المفاتيح والمستخدمين المتقدمين
+      الذين لا يمانعون قضاء وقت في التهيئة مقابل تحكم كامل.
+    </p>
+
+    <h3>4. Helix</h3>
+
+    <p>
+      محرر حديث مكتوب أيضًا بـ Rust، يعتمد نمط تحرير معدّل (Selection قبل
+      Action) بدلاً من نمط Vim التقليدي، ويأتي بإعدادات افتراضية قوية دون
+      حاجة لضبط يدوي مكثف.
+    </p>
+
+    <p><strong>أهم المميزات:</strong></p>
+    <ul>
+      <li>دعم LSP وTree-sitter مفعّل افتراضيًا دون أي إعداد إضافي</li>
+      <li>تعدد المؤشرات وتقسيم النوافذ مدمجان أصلاً</li>
+      <li>لا يحتاج ملفات إعداد ضخمة كما هو الحال غالبًا مع Neovim</li>
+    </ul>
+
+    <p>
+      <strong>أبرز التقنيات المدعومة:</strong> LSP، Tree-sitter، البحث
+      والاستبدال المتقدم، ودعم أساسي متنامٍ لأدوات الذكاء الاصطناعي.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> تجربة "جاهزة من الصندوق" أفضل بكثير من
+      Neovim، وأداء عالٍ مع استهلاك موارد منخفض جدًا.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> نظام الإضافات لا يزال في مرحلة تطوير نشطة
+      ومحدودًا مقارنة بـ Neovim أو VS Code، ونمط التحرير يحتاج تعلمًا حتى
+      لمستخدمي Vim السابقين.
+    </p>
+
+    <p>
+      <strong>لمن يناسب؟</strong> لمحبي التحرير بلوحة المفاتيح الذين يريدون
+      إعدادًا افتراضيًا قويًا دون تضييع وقت في التهيئة.
+    </p>
+
+    <h3>5. Lapce</h3>
+
+    <p>
+      محرر آخر مكتوب بـ Rust، يركز تحديدًا على الجمع بين خفة الأداء
+      وواجهة رسومية أقرب لتجربة VS Code من ناحية سهولة الاستخدام.
+    </p>
+
+    <p><strong>أهم المميزات:</strong></p>
+    <ul>
+      <li>محرك عرض (Rendering) مبني على GPU لتصفح سلس حتى في الملفات الكبيرة</li>
+      <li>نظام إضافات (Plugins) عبر WebAssembly لعزل أفضل وأمان أعلى</li>
+      <li>دعم Remote Development مدمج للعمل على خوادم بعيدة</li>
+    </ul>
+
+    <p>
+      <strong>أبرز التقنيات المدعومة:</strong> LSP، تعدد المؤشرات، ووضع Vim
+      اختياري للمستخدمين القادمين من Vim.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> أداء ملحوظ في التمرير والفتح حتى لملفات ضخمة
+      جدًا، وواجهة أقرب لمألوف VS Code.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> المشروع لا يزال أصغر وأقل نضجًا مقارنة بـ Zed
+      أو Neovim، وعدد الإضافات المتوفرة محدود حاليًا.
+    </p>
+
+    <p>
+      <strong>لمن يناسب؟</strong> لمن يريد تجربة أداء عالٍ بأسلوب واجهة قريب
+      من VS Code، دون الانتقال الكامل لنمط Vim.
+    </p>
+
+    <h3>6. Kate</h3>
+
+    <p>
+      محرر أكواد من مشروع KDE، أقدم بكثير من أغلب الأسماء في هذه القائمة،
+      ومعروف باستقراره الشديد وخفة استهلاكه.
+    </p>
+
+    <p><strong>أهم المميزات:</strong></p>
+    <ul>
+      <li>تقسيم النوافذ المتعدد ولوحة طرفية (Terminal) مدمجة</li>
+      <li>دعم مشاريع متعددة الملفات عبر إدارة جلسات (Sessions)</li>
+      <li>استقرار طويل الأمد بفضل تطويره ضمن مشروع KDE الناضج</li>
+    </ul>
+
+    <p>
+      <strong>أبرز التقنيات المدعومة:</strong> LSP، تلوين صياغة لعشرات
+      اللغات، والبحث والاستبدال عبر عدة ملفات دفعة واحدة.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> خفيف جدًا على الموارد، مستقر بشكل استثنائي،
+      ويأتي مثبتًا مسبقًا في أغلب توزيعات لينكس المعتمدة على KDE.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> نظام إضافات أبسط بكثير من VS Code أو Zed،
+      ودعم الذكاء الاصطناعي محدود مقارنة بالمحررات الأحدث.
+    </p>
+
+    <p>
+      <strong>لمن يناسب؟</strong> لمستخدمي بيئة KDE، أو لمن يريد محررًا
+      بسيطًا مستقرًا دون طبقات تعقيد إضافية.
+    </p>
+
+    <h3>7. Geany</h3>
+
+    <p>
+      محرر خفيف جدًا مبني بلغة C، يعمل كبديل بين محرر النصوص العادي ومحرر
+      الأكواد الكامل، بأقل استهلاك ممكن للموارد.
+    </p>
+
+    <p><strong>أهم المميزات:</strong></p>
+    <ul>
+      <li>إقلاع شبه فوري حتى على أجهزة قديمة جدًا</li>
+      <li>أدوات بناء (Build) أساسية مدمجة لعدة لغات برمجة</li>
+      <li>واجهة بسيطة جدًا لا تحتاج تعلمًا مسبقًا</li>
+    </ul>
+
+    <p>
+      <strong>أبرز التقنيات المدعومة:</strong> تلوين صياغة لعشرات اللغات،
+      طي الأكواد (Code Folding)، ودعم إضافات أساسي عبر Plugins.
+    </p>
+
+    <p>
+      <strong>المزايا:</strong> الأخف على الإطلاق في هذه القائمة، ومناسب
+      جدًا للأجهزة الضعيفة أو الأنظمة القديمة.
+    </p>
+
+    <p>
+      <strong>العيوب:</strong> لا يدعم LSP بشكل كامل كبقية المحررات
+      الحديثة، ولا يوجد دعم فعلي لأدوات الذكاء الاصطناعي.
+    </p>
+
+    <p>
+      <strong>لمن يناسب؟</strong> للمهام السريعة، التعديلات الصغيرة، أو
+      العمل على أجهزة محدودة الموارد بشدة.
+    </p>
+
+    <h2 id="comparison-table">جدول مقارنة شامل</h2>
+
+    <div class="overflow-x-auto my-4">
+      <table
+        class="w-full text-right border border-zinc-200 dark:border-zinc-700 rounded-lg"
+      >
+        <thead
+          class="bg-zinc-100 dark:bg-zinc-800 light:text-zinc-700 dark:text-zinc-300"
+        >
+          <tr>
+            <th class="px-4 py-2 font-semibold">المحرر</th>
+            <th class="px-4 py-2 font-semibold">الأداء</th>
+            <th class="px-4 py-2 font-semibold">دعم الإضافات</th>
+            <th class="px-4 py-2 font-semibold">الذكاء الاصطناعي</th>
+            <th class="px-4 py-2 font-semibold">سهولة التعلم</th>
+            <th class="px-4 py-2 font-semibold">الأنظمة المدعومة</th>
+            <th class="px-4 py-2 font-semibold">الأنسب لـ</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+          <tr>
+            <td class="px-4 py-2">VSCodium</td>
+            <td class="px-4 py-2">جيد</td>
+            <td class="px-4 py-2">ضخم (عبر Open VSX)</td>
+            <td class="px-4 py-2">جيد عبر إضافات</td>
+            <td class="px-4 py-2">سهلة جدًا</td>
+            <td class="px-4 py-2">ويندوز، ماك، لينكس</td>
+            <td class="px-4 py-2">بديل VS Code مفتوح تمامًا</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Zed</td>
+            <td class="px-4 py-2">ممتاز</td>
+            <td class="px-4 py-2">متوسط ومتنامٍ</td>
+            <td class="px-4 py-2">مدمج بعمق</td>
+            <td class="px-4 py-2">سهلة</td>
+            <td class="px-4 py-2">ويندوز، ماك، لينكس</td>
+            <td class="px-4 py-2">أداء وتعاون فوري</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Neovim</td>
+            <td class="px-4 py-2">ممتاز جدًا</td>
+            <td class="px-4 py-2">ضخم عبر Lua</td>
+            <td class="px-4 py-2">عبر إضافات</td>
+            <td class="px-4 py-2">صعبة</td>
+            <td class="px-4 py-2">ويندوز، ماك، لينكس</td>
+            <td class="px-4 py-2">محبي لوحة المفاتيح والتخصيص العميق</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Helix</td>
+            <td class="px-4 py-2">ممتاز</td>
+            <td class="px-4 py-2">محدود ومتنامٍ</td>
+            <td class="px-4 py-2">أساسي</td>
+            <td class="px-4 py-2">متوسطة</td>
+            <td class="px-4 py-2">ويندوز، ماك، لينكس</td>
+            <td class="px-4 py-2">إعداد جاهز بلا تهيئة يدوية</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Lapce</td>
+            <td class="px-4 py-2">ممتاز</td>
+            <td class="px-4 py-2">محدود</td>
+            <td class="px-4 py-2">أساسي</td>
+            <td class="px-4 py-2">سهلة</td>
+            <td class="px-4 py-2">ويندوز، ماك، لينكس</td>
+            <td class="px-4 py-2">أداء عالٍ بواجهة مألوفة</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Kate</td>
+            <td class="px-4 py-2">جيد جدًا</td>
+            <td class="px-4 py-2">أساسي</td>
+            <td class="px-4 py-2">غير متوفر عمليًا</td>
+            <td class="px-4 py-2">سهلة جدًا</td>
+            <td class="px-4 py-2">ويندوز، ماك، لينكس</td>
+            <td class="px-4 py-2">مستخدمي KDE والاستقرار</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Geany</td>
+            <td class="px-4 py-2">الأخف إطلاقًا</td>
+            <td class="px-4 py-2">أساسي جدًا</td>
+            <td class="px-4 py-2">غير متوفر</td>
+            <td class="px-4 py-2">سهلة جدًا</td>
+            <td class="px-4 py-2">ويندوز، ماك، لينكس</td>
+            <td class="px-4 py-2">الأجهزة الضعيفة والمهام السريعة</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="pros-cons-table">جدول المزايا والعيوب</h2>
+
+    <div class="overflow-x-auto my-4">
+      <table
+        class="w-full text-right border border-zinc-200 dark:border-zinc-700 rounded-lg"
+      >
+        <thead
+          class="bg-zinc-100 dark:bg-zinc-800 light:text-zinc-700 dark:text-zinc-300"
+        >
+          <tr>
+            <th class="px-4 py-2 font-semibold">المحرر</th>
+            <th class="px-4 py-2 font-semibold">المزايا</th>
+            <th class="px-4 py-2 font-semibold">العيوب</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+          <tr>
+            <td class="px-4 py-2">VSCodium</td>
+            <td class="px-4 py-2">توافق شبه كامل مع إضافات VS Code، خصوصية أعلى</td>
+            <td class="px-4 py-2">بعض ميزات مايكروسوفت الحصرية غير متاحة</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Zed</td>
+            <td class="px-4 py-2">سرعة عالية، تعاون فوري، تطوير نشط</td>
+            <td class="px-4 py-2">إضافات أقل، بعض ميزات الذكاء الاصطناعي مدفوعة</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Neovim</td>
+            <td class="px-4 py-2">خفة استثنائية، تحكم دقيق جدًا، مجتمع ضخم</td>
+            <td class="px-4 py-2">منحنى تعلم حاد، إعداد أولي يستغرق وقتًا</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Helix</td>
+            <td class="px-4 py-2">إعداد جاهز قوي، أداء عالٍ، خفيف على الموارد</td>
+            <td class="px-4 py-2">نظام إضافات ما زال محدودًا</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Lapce</td>
+            <td class="px-4 py-2">أداء GPU سلس، واجهة مألوفة، Remote Development</td>
+            <td class="px-4 py-2">مشروع أصغر، إضافات محدودة</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Kate</td>
+            <td class="px-4 py-2">استقرار عالٍ، خفيف جدًا، مثبت مسبقًا في KDE</td>
+            <td class="px-4 py-2">إضافات أساسية، دعم ذكاء اصطناعي ضعيف</td>
+          </tr>
+          <tr>
+            <td class="px-4 py-2">Geany</td>
+            <td class="px-4 py-2">الأخف على الإطلاق، إقلاع فوري</td>
+            <td class="px-4 py-2">لا يدعم LSP بشكل كامل، بلا ذكاء اصطناعي</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="by-use-case">مقارنة حسب الاستخدام</h2>
+
+    <ul>
+      <li><strong>للمبتدئين:</strong> VSCodium، بفضل واجهته المألوفة ومجتمعه الضخم</li>
+      <li><strong>للمطورين المحترفين:</strong> Zed أو Neovim، حسب أولوية الأداء مقابل التخصيص العميق</li>
+      <li><strong>لمطوري الويب:</strong> VSCodium، لغنى إضافاته الخاصة بجافاسكريبت وأطر العمل الحديثة</li>
+      <li><strong>لمطوري Python:</strong> VSCodium أو Zed، لدعم LSP القوي وإضافات التصحيح الجاهزة</li>
+      <li><strong>لمبرمجي Rust:</strong> Zed أو Helix، كونهما مكتوبين بـ Rust ومهيأين جيدًا لبيئتها</li>
+      <li><strong>للأجهزة الضعيفة:</strong> Geany أو Kate، لخفتهما الشديدة على الموارد</li>
+      <li><strong>لمحبي لوحة المفاتيح:</strong> Neovim أو Helix</li>
+      <li><strong>لمن يريد بديلاً مفتوح المصدر لـ VS Code تحديدًا:</strong> VSCodium، لأنه نفس الكود دون التتبع</li>
+    </ul>
+
+    <h2 id="vscode-open-source">هل VS Code مفتوح المصدر؟</h2>
+
+    <p>
+      الكود المصدري لمحرر Visual Studio Code نفسه مفتوح فعلاً تحت رخصة MIT.
+      لكن النسخة التي توزعها مايكروسوفت رسميًا تضيف طبقة تتبع (Telemetry)
+      وعلامة تجارية خاصة غير مفتوحة المصدر بالكامل.
+    </p>
+
+    <p>
+      VSCodium يأخذ نفس الكود المفتوح، ويبنيه دون هذه الإضافات، فتحصل على
+      نفس التجربة تقريبًا لكن دون إرسال بيانات استخدام لمايكروسوفت افتراضيًا.
+    </p>
+
+    <p>
+      بعض المطورين يفضلون VSCodium تحديدًا لهذا السبب: الشفافية الكاملة حول
+      ما يُرسل من بياناتهم، دون التخلي عن نظام الإضافات الضخم الذي بناه
+      مجتمع VS Code على مدى سنوات.
+    </p>
+
+    <p>
+      هذا لا يعني أن VS Code الرسمي خيار سيئ؛ ميزات مثل Copilot الرسمية
+      تعمل بسلاسة أكبر عليه. الاختيار هنا فعليًا بين تجربة رسمية متكاملة
+      وتجربة مطابقة تقريبًا لكن أكثر خصوصية.
+    </p>
+
+    <h2 id="editor-vs-ide">هل تحتاج إلى IDE أم محرر أكواد؟</h2>
+
+    <p>
+      محررات الأكواد ممتازة لمرونتها وخفتها، لكن بعض السيناريوهات تحتاج
+      فعلاً بيئة تطوير متكاملة (IDE) مثل:
+    </p>
+
+    <ul>
+      <li>
+        <strong>IntelliJ IDEA Community</strong>: مثالي لتطوير Java وKotlin
+        بفضل أدوات إعادة الهيكلة (Refactoring) المتقدمة المدمجة
+      </li>
+      <li>
+        <strong>Eclipse</strong>: خيار قديم وراسخ لمشاريع Java الكبيرة
+        والمؤسسية، مع دعم قوي لأنظمة البناء المعقدة
+      </li>
+      <li>
+        <strong>Apache NetBeans</strong>: مناسب لمن يريد دعمًا جاهزًا
+        لـ Java وPHP دون إعداد أدوات خارجية إضافية
+      </li>
+    </ul>
+
+    <p>
+      استخدام IDE أكثر منطقية حين يكون مشروعك كبيرًا، متعدد الوحدات، ويحتاج
+      أدوات تصحيح أخطاء متقدمة أو إعادة هيكلة تلقائية. أما للمشاريع الأخف،
+      أو حين تعمل على لغات متعددة في نفس اليوم، يبقى محرر الأكواد الخيار
+      الأسرع والأخف.
+    </p>
+
+    <h2 id="which-fits-you">أي محرر أكواد يناسبك؟</h2>
+
+    <ul>
+      <li><strong>للمبتدئ:</strong> VSCodium — واجهة مألوفة وموارد تعليمية لا تنتهي</li>
+      <li><strong>لمطور الويب:</strong> VSCodium — إضافات جاهزة لكل إطار عمل تقريبًا</li>
+      <li><strong>لمطور Python:</strong> VSCodium أو Zed — دعم LSP قوي وتصحيح أخطاء جاهز</li>
+      <li><strong>لمطور Rust:</strong> Zed أو Helix — بيئة مبنية أصلاً بنفس اللغة</li>
+      <li><strong>لمحبي Vim:</strong> Neovim — أقصى تحكم وتخصيص عبر لوحة المفاتيح</li>
+      <li><strong>لمن يريد أعلى أداء:</strong> Zed أو Lapce — سرعة استثنائية مبنية على Rust</li>
+      <li><strong>لمن يبحث عن أفضل بديل مفتوح المصدر لـ VS Code:</strong> VSCodium بلا منازع</li>
+      <li><strong>لمن يعمل على أجهزة قديمة أو محدودة الموارد:</strong> Geany أو Kate</li>
+    </ul>
+
+    <p>
+      لا يوجد فائز مطلق بين هذه الخيارات. القرار يعتمد على أسلوب عملك،
+      اللغات التي تستخدمها يوميًا، ومدى استعدادك لقضاء وقت في التهيئة مقابل
+      تحكم أعمق لاحقًا.
+    </p>
+
+    <h2 id="official-links">الروابط الرسمية للتحميل</h2>
+
+    <ul>
+      <li>
+        <strong>VSCodium:</strong>{" "}
+        <a href="https://vscodium.com/" target="_blank" rel="noopener noreferrer">
+          vscodium.com
+        </a>
+      </li>
+      <li>
+        <strong>Zed:</strong>{" "}
+        <a href="https://zed.dev/" target="_blank" rel="noopener noreferrer">
+          zed.dev
+        </a>
+      </li>
+      <li>
+        <strong>Neovim:</strong>{" "}
+        <a href="https://neovim.io/" target="_blank" rel="noopener noreferrer">
+          neovim.io
+        </a>
+      </li>
+      <li>
+        <strong>Helix:</strong>{" "}
+        <a
+          href="https://helix-editor.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          helix-editor.com
+        </a>
+      </li>
+      <li>
+        <strong>Lapce:</strong>{" "}
+        <a href="https://lapce.dev/" target="_blank" rel="noopener noreferrer">
+          lapce.dev
+        </a>
+      </li>
+      <li>
+        <strong>Kate:</strong>{" "}
+        <a
+          href="https://kate-editor.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kate-editor.org
+        </a>
+      </li>
+      <li>
+        <strong>Geany:</strong>{" "}
+        <a
+          href="https://www.geany.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          geany.org
+        </a>
+      </li>
+    </ul>
+
+    <h2 id="faq">أسئلة شائعة</h2>
+
+    <p>
+      <strong>هل VSCodium يدعم إضافات VS Code كلها؟</strong><br />
+      معظمها متوفر عبر متجر Open VSX البديل، لكن بعض الإضافات الحصرية
+      لمايكروسوفت قد لا تعمل بنفس السلاسة أو تكون غير متاحة إطلاقًا.
+    </p>
+
+    <p>
+      <strong>هل Neovim مناسب للمبتدئين؟</strong><br />
+      ليس الخيار الأول للبداية، لأنه يتطلب إعدادًا يدويًا لأغلب الميزات.
+      البدء بـ VSCodium أو Helix أسهل بكثير في المرحلة الأولى.
+    </p>
+
+    <p>
+      <strong>أيهما أخف على الموارد، Kate أم Geany؟</strong><br />
+      Geany أخف بشكل عام، لكن الفرق يصبح شبه معدوم في الاستخدام اليومي على
+      أي جهاز حديث.
+    </p>
+
+    <p>
+      <strong>هل يمكن استخدام أكثر من محرر حسب المشروع؟</strong><br />
+      نعم، وهذا شائع جدًا بين المطورين المحترفين، خصوصًا حين تختلف احتياجات
+      المشاريع من حيث اللغة أو حجم الكود.
+    </p>
+  </PostLayout>
+</BaseLayout>
