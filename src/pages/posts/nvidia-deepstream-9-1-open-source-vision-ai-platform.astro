@@ -1,0 +1,92 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+  .map((mod: any) => mod.post)
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+  slug: "nvidia-deepstream-9-1-open-source-vision-ai-platform",
+  title: "NVIDIA DeepStream 9.1: منصة رؤية ذكاء اصطناعي مفتوحة المصدر مع 13 أداة جديدة",
+  description:
+    "NVIDIA تفتح مصدر DeepStream 9.1 — مجموعة أدوات تطوير لتحليل الفيديو توفر إنشاء بخطوط أنابيب بلغة طبيعية، تتبع 3D متعدد المنظر، وإدارة كاميرات مؤتمتة — المهام تُنجز الآن في ساعات بدلًا من أسابيع.",
+  keywords: [
+    "NVIDIA",
+    "DeepStream",
+    "رؤية ذكاء اصطناعي",
+    "Vision AI",
+    "مفتوح المصدر",
+    "تحليل فيديو",
+    "Video Analytics",
+    "Jetson",
+    "Metropolis",
+    "GPU",
+  ],
+  category: "ذكاء اصطناعي",
+  author: "فريق مصدر إكس",
+  date: "20 يوليو 2026",
+  pubDate: new Date("2026-07-20"),
+  tags: ["NVIDIA", "DeepStream", "Vision AI", "مفتوح المصدر", "AI"],
+  thumbnail: "/images/nvidia-deepstream-9-1-open-source-vision-ai-platform.webp",
+};
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  keywords={post.keywords}
+  canonical={`/posts/${post.slug}/`}
+  ogImage={post.thumbnail}
+  ogType="article"
+>
+  <PostLayout {post} allPosts={allPosts}>
+
+    <p>أعلنت <strong>NVIDIA</strong> عن إطلاق <strong>DeepStream 9.1</strong> كـ <strong>مجموعة تطوير برمجيات مفتوحة المصدر (SDK)</strong> متخصصة في تحليل الفيديو وتطبيقات رؤية الذكاء الاصطناعي. الإصدار يجلب <strong>13 قدرة ذكاء اصطناعي جديدة</strong> وينقل المشروع إلى مستودع GitHub الموحد لـ NVIDIA، مما يجعل الوصول والمساهمة أسهل بكثير.</p>
+
+    <h2>أبرز المزايا الجديدة</h2>
+
+    <h3>إنشاء خطوط أنابيب بلغة طبيعية</h3>
+
+    <p>إحدى أكبر الإضافات تتيح بناء وتحرير وإدارة خطوط أنابيب تحليل الفيديو باستخدام المحادثة الطبيعية بدلًا من التكوين اليدوي لكل خطوة في العملية.  بحسب NVIDIA، يمكن الآن إنجاز المهام في <strong>ساعات بدلًا من أسابيع</strong>.</p>
+
+    <h3>تتبع 3D متعدد المنظر (MV3DT)</h3>
+
+    <p>هذه الميزة تساعد في الحفاظ على هوية أي جسم — سواء كانوا أشخاصًا أو مركبات أو أجسامًا أخرى — أثناء تحركهم عبر عدة آراء كاميرا ضمن نظام إحداثيات 3D مشترك.</p>  وهذا مهم جداً لتطبيقات المراقبة التي تعتمد على كاميرات متعددة.</p>
+
+    <h3>معايرة الكاميرا المؤتمتة (AutoMagicCalib)</h3>
+
+    <p>تؤتمت هذه الميزة معايرة الكاميرا للنشر على نطاق واسع من الكاميرات المتعددة — مما يقلل الحاجة للضبط اليدوي الذي كان يستغرق وقتًا طويلًا.</p>
+
+    <h2>الحركة نحو مستودع موحد</h2>
+
+    <p>تم نقل DeepStream إلى مستودع GitHub الموحد لـ NVIDIA، مما يسهّل على المطورين الوصول للكود الأحدث وتبني التحديثات بسهولة أكبر والمساهمة في التحسينات.</p>  هذه الخطوة توضح التزام NVIDIA بنموذج المصدر المفتوح الحقيقي.</p>
+
+    <h2>دعم إضافي</h2>
+
+    <ul>
+      <li>دعم <strong>JetPack 7.2</strong> للأجهزة القائمة على Jetson</li>
+      <li>تكامل مع <strong>Metropolis</strong> — منصة رؤية الذكاء الاصطناعي الأوسع من NVIDIA</li>
+      <li>توافق مع <strong>معالجات GPU لمراكز البيانات</strong> وأجهزة <strong>Jetson الحدية</strong></li>
+    </ul>
+
+    <h2>التطبيقات العملية</h2>
+
+    <p>المزايا الجديدة ستكون مفيدة بشكل خاص في التطبيقات مثل المراقبة الذكية، المراقبة الصناعية، الخدمات اللوجستية، التجزئة، والمستودعات.</p></p> 
+
+    <h2>الأثر الأوسع</h2>
+
+    <p>فتح مصدر DeepStream يضع أداة قوية مباشرة في يد المطورين والشركات — بدون قيود ترخيص حكومية. المزايا مثل النمذجة باللغة الطبيعية تخفض حاجز الدخول بشكل كبير، حتى المتخصصون غير المتقدمين في الذكاء الاصطناعي يمكنهم الآن بناء خطوط أنابيب معقدة.</p>
+
+    <p>NVIDIA DeepStream 9.1 ليس مجرد تحديث للبرامج — بل حركة استراتيجية نحو ديموقراطية رؤية الذكاء الاصطناعي، وتسليح المطورين بأدوات عملية وقوية يمكنهم السيطرة عليها بالكامل.</p>
+
+    <h3>المصدر:</h3>
+    <p>
+      <a href="https://www.opensourceforu.com/2026/07/vision-ai-platform-goes-open-source/" target="_blank" rel="noopener noreferrer">
+        Open Source For You
+      </a>
+    </p>
+
+  </PostLayout>
+</BaseLayout>
