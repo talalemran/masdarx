@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="405" viewBox="0 0 720 405">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#bg)"/>
+  <text x="360" y="180" font-family="Arial,sans-serif" font-size="72" font-weight="bold" fill="#F6851F" text-anchor="middle">Zed</text>
+  <text x="360" y="230" font-family="Arial,sans-serif" font-size="22" fill="rgba(255,255,255,0.6)" text-anchor="middle">High-Performance, Collaborative Editor</text>
+  <rect x="260" y="260" width="200" height="3" rx="1.5" fill="#F6851F" opacity="0.5"/>
+</svg>

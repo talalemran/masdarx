@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="405" viewBox="0 0 720 405">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3D3845"/>
+      <stop offset="100%" stop-color="#1E1A24"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="405" fill="url(#bg)"/>
+  <text x="360" y="175" font-family="Arial,sans-serif" font-size="64" font-weight="bold" fill="#F7A41D" text-anchor="middle">Lapce</text>
+  <text x="360" y="220" font-family="Arial,sans-serif" font-size="22" fill="rgba(255,255,255,0.6)" text-anchor="middle">Pure Rust Fast Code Editor</text>
+  <rect x="290" y="250" width="140" height="2" rx="1" fill="#F7A41D" opacity="0.5"/>
+</svg>
