@@ -1,0 +1,126 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "fedora-45-stratis-storage-anaconda-integration-approved",
+    title: "فيدورا 45 تتبنى Stratis: نظام التخزين الذي انتظرنا عقدًا كاملًا",
+    description:
+        "لجنة الهندسة والتوجيه بـ Fedora (FESCo) توافق على تكامل Stratis Storage في مثبّت Anaconda — عقد من الانتظار بعد أن تخلت Red Hat عن Btrfs والآن يحصل Fedora 45 على هذا التطور الطويل الأمل.",
+    keywords: [
+        "Fedora 45",
+        "Stratis Storage",
+        "Anaconda",
+        "XFS",
+        "LVM",
+        "Btrfs",
+        "Red Hat",
+        "لينكس",
+        "نظام الملفات",
+        "مثبّت",
+    ],
+    category: "لينكس",
+    author: "فريق مصدر إكس",
+    date: "21 يوليو 2026",
+    pubDate: new Date("2026-07-21"),
+    tags: ["Fedora 45", "Stratis", "لينكس", "نظام ملفات", "Anaconda"],
+    thumbnail:
+        "/images/fedora-45-stratis-storage-anaconda-integration-approved.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            أعطت <strong>لجنة Fedora للهندسة والتوجيه (FESCo)</strong> موافقتها على
+            دفعة جديدة من المزايا لـ <strong>Fedora 45</strong> — وأبرزها تكامل <strong
+                >Stratis Storage</strong
+            > في مثبّت Anaconda. هذا الإنجاز يأتي بعد عقد كامل من بدء Red Hat تطوير
+            Stratis بعد تخليها عن أحلام Btrfs.
+        </p>
+
+        <h2>ما هو Stratis؟</h2>
+
+        <p>
+            Stratis هي أداة تخزين مبنية على XFS و LVM، وRedhat بدأت تطويرها بعد
+            مغادرتها محاولات استخدام Btrfs. الآن بعد سنوات من التطوير، Fedora 45
+            ستصبح أول توزيعة رئيسية توفر دعم الثبت الكامل للتثبيت عليها.
+        </p>
+
+        <h2>لماذا هذا مهم؟</h2>
+
+        <ul>
+            <li>
+                سيسمح هذا للمستخدمين بنشر Fedora 45 مباشرة على هذا المكدس الـ
+                Stratis (XFS + LVM)، دون الحاجة لإجراء خطوات يدوية معقدة بعد
+                التثبيت
+            </li>
+            <li>يوفر حلاً موحداً وسهل الاستخدام لإدارة التخزين</li>
+            <li>
+                يختبر Stratis في بيئة واقعية واسعة النطاق عبر ملايين تثبيتات
+                Fedora
+            </li>
+            <li>
+                يفتح الطريق لتبني أوسع من Stratis في توزيعات Red Hat و CentOS
+                لاحقاً
+            </li>
+        </ul>
+
+        <h2>تحديثات إضافية موافق عليها</h2>
+
+        <p>بجانب Stratis، أقرت FESCo عدة تحديثات أخرى:</p>
+
+        <ul>
+            <li>
+                <strong>تحديث DNF:</strong> تعطيل تغيير البائع بشكل افتراضي — تحسين
+                أمني مهم
+            </li>
+            <li><strong>Fontconfig 2.18:</strong> تحسينات في إدارة الخطوط</li>
+            <li>
+                <strong>oo7 Secrets Service Provider:</strong> دعم محسّن لإدارة الأسرار
+                والمفاتيح
+            </li>
+            <li>
+                <strong>Bash Color Prompt 1.0:</strong> تحسينات في واجهة سطر الأوامر
+            </li>
+            <li><strong>Ruby on Rails 8.1:</strong> إصدار جديد لمطوري الويب</li>
+        </ul>
+
+        <h2>خارطة الطريق</h2>
+
+        <p>
+            Fedora 45 تستهدف إصدار نسخة بيتا في منتصف سبتمبر والإصدار الرسمي
+            بنهاية أكتوبر.
+        </p> الإطار الزمني يعطي فرصة كافية للاختبار والتحسينات.</PostLayout
+    >
+
+    <p>
+        Stratis في Anaconda يمثل نقطة فاصلة — ليس لأنها مزيج تقني معقد، بل لأنها
+        تختتم فصلًا من الانتظار والتطوير الذي استمر عقدًا. الآن Fedora users
+        ستحصل على تجربة تثبيت سلسة مع أحدث تقنيات التخزين المتاحة.
+    </p>
+
+    <h3>المصدر:</h3>
+    <p>
+        <a
+            href="https://www.phoronix.com/news/Fedora-45-Approves-Stratis"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Phoronix
+        </a>
+    </p>
+    </PostLayout>
+</BaseLayout>
