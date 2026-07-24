@@ -1,7 +1,7 @@
 ---
 const navLinks = [
   { href: "/", label: "الرئيسية" },
-  { href: "/wiki/linux-wiki/", label: "لينكس" },
+  { href: "/wiki/linux-wiki/", label: "دليل لينكس" },
   { href: "/projects/", label: "المشاريع" },
   { href: "/about/", label: "حول الموقع" },
   { href: "/contact/", label: "اتصل بنا" },
@@ -89,14 +89,14 @@ const navLinks = [
     if (!toggleBtn || !closeBtn || !mobileMenu || !overlay) return;
 
     function openMenu() {
-      mobileMenu.classList.remove("hidden");
-      overlay.classList.remove("hidden");
+      mobileMenu!.classList.remove("hidden");
+      overlay!.classList.remove("hidden");
       document.body.style.overflow = "hidden";
     }
 
     function closeMenu() {
-      mobileMenu.classList.add("hidden");
-      overlay.classList.add("hidden");
+      mobileMenu!.classList.add("hidden");
+      overlay!.classList.add("hidden");
       document.body.style.overflow = "";
     }
 
