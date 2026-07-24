@@ -1,0 +1,130 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "pip-26-2-only-deps-python-package-manager",
+    title: "أخيرًا.. pip يحل واحدة من أكثر مشاكل بايثون إزعاجًا",
+    description:
+        "إصدار pip 26.2 القادم يضيف الخيار --only-deps الذي يسمح بتثبيت اعتماديات المشروع فقط دون تثبيت المشروع نفسه، وهي ميزة طال انتظارها من مطوري بايثون.",
+    keywords: [
+        "Python",
+        "pip",
+        "pip 26.2",
+        "--only-deps",
+        "PyPI",
+        "Python packages",
+        "برمجة",
+        "بايثون",
+    ],
+    category: "برمجة",
+    author: "فريق مصدر إكس",
+    date: "24 يوليو 2026",
+    pubDate: new Date("2026-07-24"),
+    tags: ["Python", "pip", "برمجة", "PyPI"],
+    thumbnail: "/images/pip-26-2-only-deps-python-package-manager.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            بعد سنوات من طلبات المطورين، يستعد مدير حزم <strong>pip</strong> للحصول
+            على ميزة طال انتظارها في الإصدار <strong>26.2</strong>. الميزة
+            الجديدة تتيح تثبيت <strong>اعتماديات المشروع فقط</strong> دون الحاجة إلى
+            تثبيت المشروع نفسه، وهو أمر كان يتطلب سابقًا حلولًا يدوية أو أدوات خارجية.
+        </p>
+
+        <h2>ما المشكلة التي كانت تواجه المطورين؟</h2>
+
+        <p>
+            حتى الآن، إذا أراد المطور تثبيت المكتبات المطلوبة لمشروع معين دون
+            تثبيت المشروع نفسه، لم يكن هناك خيار رسمي داخل pip. وكان عليه إما
+            استخراج قائمة الاعتماديات يدويًا أو اللجوء إلى أدوات خارجية لتحقيق
+            ذلك.
+        </p>
+
+        <p>
+            يظهر هذا الاحتياج في حالات عديدة، مثل إعداد بيئة اختبار جديدة، أو
+            تجهيز خوادم البناء (CI)، أو إنشاء حزم المصدر التي تحتاج إلى بعض
+            المكتبات أثناء عملية البناء فقط.
+        </p>
+
+        <h2>الحل الجديد في pip 26.2</h2>
+
+        <p>الإصدار القادم سيضيف الخيار الجديد:</p>
+
+        <pre><code>pip install --only-deps</code></pre>
+
+        <p>
+            عند استخدام هذا الخيار، سيقوم pip بتثبيت جميع <strong
+                >اعتماديات التشغيل (Runtime Dependencies)</strong
+            > الخاصة بالمشروع دون تثبيت المشروع نفسه.
+        </p>
+
+        <p>
+            ومن المهم ملاحظة أن الخيار لا يقوم بتثبيت اعتماديات البناء (Build
+            Dependencies)، بل يركز فقط على المكتبات اللازمة لتشغيل المشروع.
+        </p>
+
+        <h2>لماذا تعتبر هذه الإضافة مهمة؟</h2>
+
+        <p>
+            رغم بساطة الميزة، فإنها تحل مشكلة قديمة رافقت مطوري بايثون لسنوات
+            طويلة، وتختصر الكثير من الخطوات اليدوية التي كانت ضرورية في بيئات
+            التطوير والاختبار.
+        </p>
+
+        <p>
+            كما أنها تقلل الاعتماد على أدوات خارجية لتنفيذ مهمة أصبحت الآن جزءًا
+            رسميًا من مدير الحزم نفسه.
+        </p>
+
+        <h2>وماذا عن الأدوات الأخرى؟</h2>
+
+        <p>
+            بعض الأدوات الحديثة مثل <strong>uv</strong> كانت توفر سلوكًا مشابهًا عبر
+            أوامر مثل:
+        </p>
+
+        <pre><code>uv sync --no-install-project</code></pre>
+
+        <p>
+            لكن دمج هذه الإمكانية داخل pip يعني أن المطورين لن يحتاجوا إلى تثبيت
+            أدوات إضافية أو الاعتماد على حلول غير رسمية للحصول على نفس النتيجة.
+        </p>
+
+        <h2>موعد الإطلاق</h2>
+
+        <p>
+            بحسب فريق تطوير pip، من المتوقع وصول هذه الميزة مع إصدار <strong
+                >pip 26.2</strong
+            > المقرر إطلاقه قبل نهاية يوليو 2026، لتصبح متاحة لجميع مستخدمي مدير الحزم
+            الرسمي في بايثون.
+        </p>
+
+        <h3>المصدر:</h3>
+
+        <p>
+            <a
+                href="https://www.infoworld.com/article/4200712/new-pip-flag-fixes-longstanding-python-frustration.html"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                InfoWorld
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
