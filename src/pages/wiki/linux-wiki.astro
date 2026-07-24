@@ -56,47 +56,68 @@ const tocItems = [
       كل ما تحتاج معرفته عن نظام تشغيل لينكس — من المبتدئ إلى المتقدم
     </p>
 
-    <div class="flex justify-center my-8">
-      <svg
-        width="140"
-        height="160"
-        viewBox="0 0 140 160"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="رسم توضيحي لبطريق، الرمز غير الرسمي لنظام لينكس"
+    <div
+      class="relative overflow-hidden rounded-2xl border border-zinc-700 bg-gradient-to-br from-zinc-900 via-[#0d1117] to-black my-8 shadow-xl"
+    >
+      <div
+        class="absolute inset-0 opacity-[0.07] pointer-events-none"
+        style="background-image: repeating-linear-gradient(0deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 3px);"
       >
-        <ellipse cx="70" cy="150" rx="34" ry="6" fill="#000000" opacity="0.08" />
-        <path
-          d="M70 8c-24 0-38 20-38 46 0 20 6 34 6 34 0-2 2-4 4-4h56c2 0 4 2 4 4 0 0 6-14 6-34 0-26-14-46-38-46z"
-          fill="#0a0a0a"
-        />
-        <path
-          d="M70 20c-16 0-26 15-26 35 0 22 8 42 10 60 0 6 6 10 16 10s16-4 16-10c2-18 10-38 10-60 0-20-10-35-26-35z"
-          fill="#ffffff"
-        />
-        <ellipse cx="58" cy="42" rx="5" ry="6" fill="#0a0a0a" />
-        <ellipse cx="82" cy="42" rx="5" ry="6" fill="#0a0a0a" />
-        <ellipse cx="59.5" cy="40.5" rx="1.6" ry="2" fill="#ffffff" />
-        <ellipse cx="83.5" cy="40.5" rx="1.6" ry="2" fill="#ffffff" />
-        <path d="M64 52c2 4 10 4 12 0" stroke="none" />
-        <polygon points="63,52 77,52 70,60" fill="#f5a623" />
-        <path
-          d="M36 70c-8 4-14 14-12 24 8-2 16-10 18-20z"
-          fill="#0a0a0a"
-        />
-        <path
-          d="M104 70c8 4 14 14 12 24-8-2-16-10-18-20z"
-          fill="#0a0a0a"
-        />
-        <path
-          d="M52 138c-2 6-6 10-6 10h14l4-9z"
-          fill="#f5a623"
-        />
-        <path
-          d="M88 138c2 6 6 10 6 10H80l-4-9z"
-          fill="#f5a623"
-        />
-      </svg>
+      </div>
+
+      <div class="relative flex items-center gap-3 px-5 py-3 border-b border-zinc-700/80 bg-black/20">
+        <span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+        <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+        <span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
+        <span class="ms-3 font-mono text-xs text-zinc-400" dir="ltr"
+          >user@linux:~$ cat linux-guide.md</span
+        >
+      </div>
+
+      <div
+        class="relative flex flex-col sm:flex-row items-center justify-between gap-8 px-6 sm:px-12 py-10 sm:py-14"
+      >
+        <div class="text-center sm:text-right">
+          <p class="font-mono text-emerald-400 text-sm mb-3" dir="ltr">$ whoami</p>
+          <h2
+            class="font-heading text-3xl sm:text-5xl font-extrabold text-white leading-tight mb-3"
+          >
+            دليل لينكس الشامل
+          </h2>
+          <p class="font-body text-zinc-400 text-base sm:text-lg max-w-md">
+            من التعريف الأول إلى الاحتراف — كل ما يخص عالم لينكس في مكان واحد
+          </p>
+        </div>
+
+        <svg
+          width="150"
+          height="172"
+          viewBox="0 0 140 160"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="رسم توضيحي لبطريق، الرمز غير الرسمي لنظام لينكس"
+          class="flex-shrink-0 drop-shadow-[0_8px_24px_rgba(16,185,129,0.25)]"
+        >
+          <ellipse cx="70" cy="150" rx="34" ry="6" fill="#000000" opacity="0.25" />
+          <path
+            d="M70 8c-24 0-38 20-38 46 0 20 6 34 6 34 0-2 2-4 4-4h56c2 0 4 2 4 4 0 0 6-14 6-34 0-26-14-46-38-46z"
+            fill="#e5e7eb"
+          />
+          <path
+            d="M70 20c-16 0-26 15-26 35 0 22 8 42 10 60 0 6 6 10 16 10s16-4 16-10c2-18 10-38 10-60 0-20-10-35-26-35z"
+            fill="#ffffff"
+          />
+          <ellipse cx="58" cy="42" rx="5" ry="6" fill="#0a0a0a" />
+          <ellipse cx="82" cy="42" rx="5" ry="6" fill="#0a0a0a" />
+          <ellipse cx="59.5" cy="40.5" rx="1.6" ry="2" fill="#ffffff" />
+          <ellipse cx="83.5" cy="40.5" rx="1.6" ry="2" fill="#ffffff" />
+          <polygon points="63,52 77,52 70,60" fill="#f5a623" />
+          <path d="M36 70c-8 4-14 14-12 24 8-2 16-10 18-20z" fill="#e5e7eb" />
+          <path d="M104 70c8 4 14 14 12 24-8-2-16-10-18-20z" fill="#e5e7eb" />
+          <path d="M52 138c-2 6-6 10-6 10h14l4-9z" fill="#f5a623" />
+          <path d="M88 138c2 6 6 10 6 10H80l-4-9z" fill="#f5a623" />
+        </svg>
+      </div>
     </div>
 
     <nav
