@@ -139,4 +139,16 @@
   main li {
     @apply mb-2;
   }
+
+  code {
+    @apply bg-zinc-100 text-zinc-800 px-1.5 py-0.5 rounded text-[0.9em] font-mono;
+  }
+
+  pre {
+    @apply bg-zinc-900 text-zinc-100 rounded-xl p-5 my-6 overflow-x-auto;
+  }
+
+  pre code {
+    @apply bg-transparent text-inherit p-0 text-sm leading-relaxed;
+  }
 }
