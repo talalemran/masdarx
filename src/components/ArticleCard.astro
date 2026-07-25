@@ -26,11 +26,11 @@ const {
 const categories = Array.isArray(category) ? category : [category];
 ---
 
-<article class="relative bg-card rounded-lg shadow-sm border border-border overflow-hidden transition-shadow hover:shadow-md">
+<article class="relative bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden transition-shadow hover:shadow-md">
   <a href={`/posts/${slug}/`} class="absolute inset-0 z-0 no-underline" aria-label={title}></a>
   {
     thumbnail && (
-      <div class="bg-zinc-800 overflow-hidden">
+      <div class="bg-gray-100 overflow-hidden">
         <img
           src={thumbnail}
           alt={title}
@@ -48,7 +48,7 @@ const categories = Array.isArray(category) ? category : [category];
       {categories.map((cat) => (
         <a
           href={`/category/${cat}/`}
-          class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full hover:bg-zinc-700 transition-colors no-underline"
+          class="inline-block px-3 py-1 text-xs font-bold font-heading text-white bg-charcoal rounded-full hover:bg-gray-700 transition-colors no-underline"
         >
           {cat}
         </a>
@@ -59,19 +59,19 @@ const categories = Array.isArray(category) ? category : [category];
       href={`/posts/${slug}/`}
       class="block no-underline group/title"
     >
-      <h3 class="font-heading text-lg font-bold text-white mb-2 leading-snug group-hover/title:text-zinc-400 transition-colors">
+      <h3 class="font-heading text-lg font-bold text-charcoal mb-2 leading-snug group-hover/title:text-gray-700 transition-colors">
         {title}
       </h3>
     </a>
 
-    <p class="font-body text-sm text-zinc-400 leading-relaxed mb-3 line-clamp-2">
+    <p class="font-body text-sm text-gray-600 leading-relaxed mb-3 line-clamp-2">
       {description}
     </p>
 
-    <div class="flex items-center gap-2 text-xs text-zinc-500 font-body mb-3">
+    <div class="flex items-center gap-2 text-xs text-gray-500 font-body mb-3">
       <a
         href={`/author/${author}/`}
-        class="hover:text-white transition-colors no-underline text-zinc-500"
+        class="hover:text-charcoal transition-colors no-underline text-gray-500"
       >
         {author}
       </a>

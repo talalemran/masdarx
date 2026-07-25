@@ -109,7 +109,7 @@
   }
 
   body {
-    @apply font-body text-zinc-200 bg-surface leading-relaxed;
+    @apply font-body text-charcoal bg-white leading-relaxed;
     overflow-x: hidden;
   }
 
@@ -141,7 +141,7 @@
   }
 
   code {
-    @apply bg-zinc-800 text-zinc-200 px-1.5 py-0.5 rounded text-[0.9em] font-mono;
+    @apply bg-zinc-100 text-zinc-800 px-1.5 py-0.5 rounded text-[0.9em] font-mono;
   }
 
   pre {
