@@ -1,0 +1,145 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "meta-open-source-ai-strategy-llama-ecosystem-advantage",
+    title: "استراتيجية Meta الخفية: إعطاء Llama مجانًا وإنفاق 145 مليار دولار على الأجهزة",
+    description:
+        "Meta توزّع نماذج Llama مفتوحة المصدر بلا مقابل بينما تُنفق مليارات على البنية التحتية — إليك كيف قد تكون هذه الاستراتيجية الظاهرة المتناقضة الأكثر ذكاءً في عالم الذكاء الاصطناعي.",
+    keywords: [
+        "Meta",
+        "Llama",
+        "مفتوح المصدر",
+        "ذكاء اصطناعي",
+        "OpenAI",
+        "Google Gemini",
+        "chips",
+        "infrastructure",
+        "ecosystem",
+        "AI models",
+    ],
+    category: "ذكاء اصطناعي",
+    author: "فريق مصدر إكس",
+    date: "25 يوليو 2026",
+    pubDate: new Date("2026-07-25"),
+    tags: ["Meta", "Llama", "ذكاء اصطناعي", "مفتوح المصدر", "AI ecosystem"],
+    thumbnail: "/images/meta-open-source-ai-strategy-llama-ecosystem-advantage.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            تبدو استراتيجية Meta في مجال الذكاء الاصطناعي متناقضة على السطح:
+            توزّع <strong
+                >نماذج Llama الطويلة الذيل مفتوحة المصدر بشكل كامل</strong
+            > بينما تُنفق في نفس الوقت ما يصل إلى <strong
+                >145 مليار دولار</strong
+            > على بناء البنية التحتية والأجهزة المخصصة. لكن هذا التناقض قد يكون أذكى
+            استراتيجية تنافسية في عالم الذكاء الاصطناعي الحالي.
+        </p>
+
+        <h2>اللغز الظاهري</h2>
+
+        <p>
+            Meta تعطي بعيداً نماذج ذكاء اصطناعي قوية جداً بينما تُنفق بشكل ضخم
+            على البنية التحتية والرقائق. الأمر يبدو غير منطقي في البداية — لماذا
+            تعطي تقنيتك للمنافسين مجاناً؟
+        </p>
+
+        <h2>الإجابة: بناء نظام بيئي</h2>
+
+        <p>
+            الحقيقة أن Meta لا تنافس OpenAI و Google على بيع نماذج احتكارية — بل
+            تبني <strong>نظام بيئي أوسع كثيراً</strong>. بإطلاق Llama مفتوح
+            المصدر، Meta:
+        </p>
+
+        <ul>
+            <li>
+                <strong>تضعف المنافسين الاحتكاريين:</strong> كل مطور بإمكانه الآن
+                استخدام نموذج Llama قوي مجاناً، مما يقلل الطلب على GPT و Gemini
+            </li>
+            <li>
+                <strong>تبني الولاء الجماهيري:</strong> المطورون يحبّون الأدوات مفتوحة
+                المصدر — تعطيهم التحكم والحرية
+            </li>
+            <li>
+                <strong>تجعل Llama معياراً صناعياً:</strong> كلما زاد الاستخدام، زادت
+                قيمة Meta كمركز النظام البيئي
+            </li>
+            <li>
+                <strong>تستثمر في الأجهزة المخصصة:</strong> كل حاسوب يحتاج معالجات
+                قوية لتشغيل Llama — وهنا تستفيد Meta من استثماراتها في البنية التحتية
+                والرقائق
+            </li>
+        </ul>
+
+        <h2>الرهان الاستراتيجي</h2>
+
+        <p>
+            بينما Meta تُسلّح المطورين والشركات ببدائل Llama المفتوحة، تراكم
+            الاستثمار في الأجهزة والبنية التحتية تضع نفسها في مركز مثالي. إذا
+            أرادت أي شركة تشغيل Llama بكفاءة على ملايين المستخدمين، فستحتاج إلى
+            أجهزة قوية — وهنا توجد Meta.
+        </p>
+
+        <h2>إضعاف المنافسين</h2>
+
+        <p>
+            الفكرة الأساسية: إذا كان كل مطور يستطيع استخدام Llama مجاناً، فلماذا
+            سيدفع مقابل OpenAI أو Google؟ المطورون الصغار والشركات الناشئة
+            ستنتقل فوراً — مما يقطع إيرادات OpenAI و Google من هذه القطاعات،
+            بينما تبقى Meta الرابح الأكبر لأنها تبني البنية التحتية التي تشغّل
+            كل هذا.
+        </p>
+
+        <h2>الاستثمار الحقيقي</h2>
+
+        <p>
+            الـ 145 مليار دولار ليست تكلفة فقط — بل استثمار في <strong
+                >توحّد السوق حول Llama</strong
+            >. كلما زاد الاستخدام، زادت قيمة البنية التحتية التي بنتها Meta،
+            وزاد اعتماد المطورين على نظامها البيئي.
+        </p>
+
+        <h2>ما الذي يتجاهله Wall Street؟</h2>
+
+        <p>
+            المستثمرون يركزون على تكاليف الإنفاق الضخم — لكنهم قد يتجاهلون أن
+            Meta تبني <strong>خندق اقتصادي عملاق</strong> قد يصبح أقوى من الأسعار
+            والنماذج الاحتكارية. الحب لـ Open Source عميق في مجتمع المطورين، وإذا
+            تمكنت Meta من جعل Llama معياراً صناعياً، فإن إمبراطوريتها ستُبنى على أساسات
+            أقوى من أي منافس.
+        </p>
+
+        <p>
+            Meta لا تُعطي فقط — بل تحتل. والسلاح الذي اختارته ليس السعر أو
+            الحماية، بل الحرية والمصدر المفتوح.
+        </p>
+
+        <h3>المصدر:</h3>
+        <p>
+            <a
+                href="https://www.fool.com/investing/2026/07/25/metas-open-source-ai-strategy-could-be-its-biggest/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                The Motley Fool
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
