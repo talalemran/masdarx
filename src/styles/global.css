@@ -158,5 +158,5 @@
 }
 
 .dark code {
-  @apply bg-zinc-800 text-zinc-200;
+  @apply bg-transparent text-zinc-200;
 }
