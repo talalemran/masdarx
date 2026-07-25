@@ -151,6 +151,37 @@
   pre code {
     @apply bg-transparent text-inherit p-0 text-sm leading-relaxed;
   }
+
+  a {
+    @apply transition-all duration-200;
+  }
+}
+
+@layer components {
+  .btn-navy {
+    @apply bg-navy text-white px-6 py-3 rounded-lg font-heading font-bold transition-all duration-300;
+  }
+  .btn-navy:hover {
+    @apply shadow-glow -translate-y-0.5;
+  }
+  .btn-accent {
+    @apply bg-accent text-navy px-6 py-3 rounded-lg font-heading font-bold transition-all duration-300;
+  }
+  .btn-accent:hover {
+    @apply shadow-glow-accent -translate-y-0.5;
+  }
+  .card-fancy {
+    @apply bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300;
+  }
+  .card-fancy:hover {
+    @apply shadow-glow -translate-y-1;
+  }
+  .gradient-navy {
+    @apply bg-gradient-to-br from-navy via-navy to-[#021a4a];
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-navy to-accent;
+  }
 }
 
 .dark body {
