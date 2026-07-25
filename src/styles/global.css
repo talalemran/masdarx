@@ -152,3 +152,11 @@
     @apply bg-transparent text-inherit p-0 text-sm leading-relaxed;
   }
 }
+
+.dark body {
+  @apply bg-[#0C0C0C] text-zinc-200;
+}
+
+.dark code {
+  @apply bg-zinc-800 text-zinc-200;
+}
