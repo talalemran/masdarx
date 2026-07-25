@@ -19,8 +19,8 @@ function href(p: number): string {
     href={currentPage > 1 ? href(currentPage - 1) : undefined}
     class={`px-4 py-2 text-sm font-body font-medium rounded-lg transition-colors no-underline ${
       currentPage <= 1
-        ? "text-gray-300 dark:text-zinc-600 pointer-events-none"
-        : "text-navy dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800"
+        ? "text-navy-200 dark:text-zinc-600 pointer-events-none"
+        : "text-navy dark:text-zinc-300 hover:bg-navy-50 dark:hover:bg-zinc-800"
     }`}
     aria-disabled={currentPage <= 1}
   >
@@ -35,7 +35,7 @@ function href(p: number): string {
         class={`px-3 py-2 text-sm font-body font-medium rounded-lg transition-colors no-underline ${
           p === currentPage
             ? "bg-navy text-white dark:bg-zinc-200 dark:text-zinc-900"
-            : "text-navy dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800"
+            : "text-navy dark:text-zinc-300 hover:bg-navy-50 dark:hover:bg-zinc-800"
         }`}
       >
         {p}
@@ -48,8 +48,8 @@ function href(p: number): string {
     href={currentPage < totalPages ? href(currentPage + 1) : undefined}
     class={`px-4 py-2 text-sm font-body font-medium rounded-lg transition-colors no-underline ${
       currentPage >= totalPages
-        ? "text-gray-300 dark:text-zinc-600 pointer-events-none"
-        : "text-navy dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800"
+        ? "text-navy-200 dark:text-zinc-600 pointer-events-none"
+        : "text-navy dark:text-zinc-300 hover:bg-navy-50 dark:hover:bg-zinc-800"
     }`}
     aria-disabled={currentPage >= totalPages}
   >

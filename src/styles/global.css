@@ -109,7 +109,7 @@
   }
 
   body {
-    @apply font-body text-charcoal bg-white leading-relaxed;
+    @apply font-body text-navy-700 bg-white leading-relaxed;
     overflow-x: hidden;
   }
 
@@ -155,6 +155,13 @@
   a {
     @apply transition-all duration-200;
   }
+
+  .post-content a {
+    @apply text-navy underline font-medium;
+  }
+  .dark .post-content a {
+    @apply text-zinc-300;
+  }
 }
 
 @layer components {
@@ -171,10 +178,10 @@
     @apply shadow-glow-accent -translate-y-0.5;
   }
   .card-fancy {
-    @apply bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300;
+    @apply bg-white rounded-xl border border-navy-100 shadow-sm transition-all duration-300;
   }
   .card-fancy:hover {
-    @apply shadow-glow -translate-y-1;
+    @apply shadow-glow border-accent/50 -translate-y-1;
   }
   .gradient-navy {
     @apply bg-gradient-to-br from-navy via-navy to-[#021a4a];

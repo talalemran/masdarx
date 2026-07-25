@@ -8,12 +8,12 @@ const navLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-50 bg-white dark:bg-[#0C0C0C] border-b border-gray-100 dark:border-zinc-800">
+<header class="sticky top-0 z-50 bg-navy dark:bg-[#0C0C0C] border-b border-white/10 dark:border-zinc-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <a
         href="/"
-        class="font-heading text-2xl font-extrabold text-navy dark:text-white hover:text-gray-600 dark:hover:text-zinc-300 transition-colors no-underline"
+        class="font-heading text-2xl font-extrabold text-white dark:text-white hover:text-accent dark:hover:text-zinc-300 transition-colors no-underline"
       >
         مصدر إكس
       </a>
@@ -23,7 +23,7 @@ const navLinks = [
           navLinks.map((link) => (
             <a
               href={link.href}
-              class="font-body text-base font-medium text-navy dark:text-zinc-300 hover:text-gray-600 dark:hover:text-white transition-colors no-underline"
+              class="font-body text-base font-medium text-white/80 dark:text-zinc-300 hover:text-accent dark:hover:text-white transition-colors no-underline"
             >
               {link.label}
             </a>
@@ -34,27 +34,27 @@ const navLinks = [
       <div class="flex items-center gap-2">
         <button
           id="theme-toggle"
-          class="flex items-center justify-center w-10 h-10 cursor-pointer bg-transparent border-none rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+          class="flex items-center justify-center w-10 h-10 cursor-pointer bg-transparent border-none rounded-lg text-white hover:bg-white/10 dark:hover:bg-zinc-800 transition-colors"
           aria-label="تبديل الوضع"
           type="button"
         >
-          <svg class="w-5 h-5 text-navy dark:text-zinc-300 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
-          <svg class="w-5 h-5 text-navy dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
         </button>
 
         <button
           id="menu-toggle"
-          class="md:hidden flex flex-col items-center justify-center w-10 h-10 cursor-pointer bg-transparent border-none rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+          class="md:hidden flex flex-col items-center justify-center w-10 h-10 cursor-pointer bg-transparent border-none rounded-lg text-white hover:bg-white/10 dark:hover:bg-zinc-800 transition-colors"
           aria-label="فتح القائمة"
           type="button"
         >
-          <span class="block w-5 h-[2px] bg-navy dark:bg-zinc-300"></span>
-          <span class="block w-5 h-[2px] bg-navy dark:bg-zinc-300 my-[4px]"></span>
-          <span class="block w-5 h-[2px] bg-navy dark:bg-zinc-300"></span>
+          <span class="block w-5 h-[2px] bg-white dark:bg-zinc-300"></span>
+          <span class="block w-5 h-[2px] bg-white dark:bg-zinc-300 my-[4px]"></span>
+          <span class="block w-5 h-[2px] bg-white dark:bg-zinc-300"></span>
         </button>
       </div>
     </div>
@@ -68,13 +68,13 @@ const navLinks = [
 
 <div
   id="mobile-menu"
-  class="fixed top-0 bottom-0 right-0 w-72 bg-white dark:bg-[#0C0C0C] shadow-2xl z-50 hidden"
+  class="fixed top-0 bottom-0 right-0 w-72 bg-navy dark:bg-[#0C0C0C] shadow-2xl z-50 hidden"
 >
-  <div class="flex justify-between items-center p-4 border-b border-gray-100 dark:border-zinc-800">
-    <span class="font-heading text-xl font-extrabold text-navy dark:text-white">مصدر إكس</span>
+  <div class="flex justify-between items-center p-4 border-b border-white/10 dark:border-zinc-800">
+    <span class="font-heading text-xl font-extrabold text-white dark:text-white">مصدر إكس</span>
     <button
       id="menu-close"
-      class="w-10 h-10 flex items-center justify-center text-2xl cursor-pointer bg-transparent border-none text-navy dark:text-zinc-300 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+      class="w-10 h-10 flex items-center justify-center text-2xl cursor-pointer bg-transparent border-none text-white dark:text-zinc-300 rounded-lg hover:bg-white/10 dark:hover:bg-zinc-800 transition-colors"
       aria-label="إغلاق القائمة"
       type="button"
     >
@@ -86,7 +86,7 @@ const navLinks = [
       navLinks.map((link) => (
         <a
           href={link.href}
-          class="mobile-nav-link font-body text-lg font-medium text-navy dark:text-zinc-300 hover:text-gray-600 dark:hover:text-white transition-colors no-underline py-2 border-b border-gray-50 dark:border-zinc-800"
+          class="mobile-nav-link font-body text-lg font-medium text-white/80 dark:text-zinc-300 hover:text-accent dark:hover:text-white transition-colors no-underline py-2 border-b border-white/10 dark:border-zinc-800"
         >
           {link.label}
         </a>
