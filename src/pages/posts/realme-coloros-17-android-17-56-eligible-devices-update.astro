@@ -1,0 +1,164 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "realme-coloros-17-android-17-56-eligible-devices-update",
+    title: "Realme يستقبل ColorOS 17: 56 جهازًا يحصل على Android 17 بحلول أغسطس",
+    description:
+        "Realme توحّد واجهتها تحت ColorOS من OPPO — 56 هاتفًا من سلاسل GT و Number و P و C و Narzo و Note مؤهلون للتحديث الذي يجلب تحسينات أداء وخصوصية وذكاء اصطناعي.",
+    keywords: [
+        "Realme",
+        "ColorOS 17",
+        "Android 17",
+        "تحديث",
+        "OPPO",
+        "Realme GT",
+        "Realme Narzo",
+        "واجهة رسومية",
+        "Liquid Glass UI",
+        "الهند",
+    ],
+    category: "أندرويد",
+    author: "فريق مصدر إكس",
+    date: "26 يوليو 2026",
+    pubDate: new Date("2026-07-26"),
+    tags: ["Realme", "ColorOS 17", "Android 17", "تحديث", "OPPO"],
+    thumbnail: "/images/realme-coloros-17-android-17-56-eligible-devices-update.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            أعلنت <strong>Realme</strong> عن نقطة تحول كبيرة في استراتيجية البرمجيات
+            الخاصة بها: <strong
+                >موحّدة واجهة realme UI مع ColorOS 17 من OPPO</strong
+            >. هذا يعني أن مالكي أجهزة Realme سيودعون واجهة realme UI المألوفة
+            ويستقبلون <strong>ColorOS 17 المبني على Android 17</strong> — وذلك بحلول
+            أغسطس 2026.
+        </p>
+
+        <h2>القائمة الكاملة: 56 جهازًا مؤهلًا</h2>
+
+        <p>
+            Realme حددت قائمة شاملة من 56 هاتفًا عبر جميع سلاسلها المؤهلة
+            للتحديث، موزعة على ستة خطوط رئيسية:
+        </p>
+
+        <h3>سلسلة GT (8 أجهزة)</h3>
+        <p>الأجهزة الرائدة التي ستتصدر المرحلة الأولى من التحديث:</p>
+        <ul>
+            <li>Realme GT 8 Pro</li>
+            <li>Realme GT 7 Pro و GT 7 Pro Racing Edition</li>
+            <li>Realme GT 7 و GT 7T</li>
+            <li>Realme GT 6 و GT 6T</li>
+            <li>Realme GT 5 Pro</li>
+        </ul>
+
+        <h3>سلسلة الأرقام (13 جهازًا)</h3>
+        <p>
+            النواة الوسطية من Realme التي توازن بين الميزات والسعر المعقول. تشمل
+            أجهزة من الخطوط 14 و15 و16.
+        </p>
+
+        <h3>سلسلة P (11 جهازًا)</h3>
+        <p>
+            أجهزة موجهة لعشاق الأداء في الفئة الوسطى، من P3 إلى P4 بكل
+            تنويعاتها.
+        </p>
+
+        <h3>سلسلة C (12 جهازًا)</h3>
+        <p>
+            Realme تمدد دعم البرمجيات المطولة حتى لأجهزتها الميسورة الثمن، مما
+            يضمن أن مستخدمي سلسلة C يحصلون على تحسينات الأمان والواجهة الأساسية
+            من Android 17.
+        </p>
+
+    <h3>سلسلة Narzo (9 أجهزة)</h3>
+    <p>
+        تحظى بشهرة واسعة بين متسوقي الإنترنت وعشاق الألعاب بالميزانية المحدودة.
+    </p>
+
+    <h3>سلسلة Note (3 أجهزة)</h3>
+    <p>أجهزة Realme Note 80 و Note 70 و Note 70T ستحصل على التحديث.</p>
+
+    <h2>أسباب الدمج مع OPPO</h2>
+
+    <p>
+        الانتقال من realme UI إلى ColorOS 17 يتوافق مع تحركات استراتيجية أوسع من
+        الشركة الأم OPPO — وحيث أيضًا OnePlus أكدت انتقالها إلى ColorOS 17.
+        الفوائد المتوقعة:
+    </p>
+
+    <ul>
+        <li>
+            <strong>تحديثات برمجيات أسرع:</strong> دمج الفِرَق يعني كود مشترك ونشر
+            أسرع
+        </li>
+        <li>
+            <strong>كفاءة هندسية أفضل:</strong> تقليل التكرار والتطوير المتوازي
+        </li>
+        <li><strong>دعم أطول:</strong> قاعدة كود موحدة تعني صيانة أسهل</li>
+    </ul>
+
+    <h2>ما الذي يتوقع في ColorOS 17</h2>
+
+    <ul>
+        <li>
+            <strong>تحسين الأداء الموجه بالذكاء الاصطناعي:</strong> إدارة ديناميكية
+            للذاكرة العشوائية وتخصيص عمليات الخلفية لتعددية مهام أسلس
+        </li>
+    </ul>
+    <li>
+        <strong>محرك رسوميات وحركة محسّن:</strong> بدلًا من إعادة تصميم بصري جذرية،
+        OPPO تركّز على <strong
+            >السرعة الأساسية وأسعار إعادة التحديث الأسلس</strong
+        > — ما يطلق عليه Liquid Glass UI
+    </li>
+    <li>
+        <strong>تحكم خصوصية متقدم:</strong> لوحات إذن محسّنة من Android 17 وعزل تطبيقات
+        محسّن وأمان على مستوى النظام
+    </li>
+<li>
+    <strong>تخصيص موحّد:</strong> خيارات Always-On Display موسّعة وثيمات ديناميكية
+    ومودجات شاشة قفل محسّنة
+</li>
+
+<h2>متى يصدر؟</h2>
+
+<p>
+    وفقًا لتسريبات الصناعة وخارطة طريق الإطلاق، قد تُطلق واجهات Android 17
+    المخصصة الرئيسية — بما فيها ColorOS 17 — قبل أوائل أغسطس 2026.
+</p>
+
+<p>
+    الدمج مع ColorOS يمثل نقطة انعطاف لـ Realme — ليس ميتًا لواجهة realme UI، بل
+    ولادة جديدة تحت مظلة OPPO الأوسع والأكثر موارد.
+</p>
+
+<h3>المصدر:</h3>
+<p>
+    <a
+        href="https://nokiapoweruser.com/realme-coloros-17-android-17-eligible-devices-list/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        NPowerUser
+    </a>
+</p>
+
+    </PostLayout>
+</BaseLayout>
