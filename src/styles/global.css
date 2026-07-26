@@ -115,7 +115,7 @@
 
   p, li {
     @apply mb-4;
-    @apply text-lg;
+    @apply text-xl;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -124,11 +124,11 @@
   }
 
   h2 {
-    @apply text-2xl;
+    @apply text-3xl;
   }
   
   h3 {
-    @apply text-xl;
+    @apply text-2xl;
   }
   
   main ul {
