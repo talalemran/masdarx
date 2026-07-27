@@ -1,0 +1,162 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "firedragon-v13-rewritten-from-scratch-garuda-linux",
+    title: "FireDragon 13: المتصفح المعاد كتابته من الصفر ينمو أجنحة جديدة",
+    description:
+        "Garuda Linux يُطلق FireDragon 13 المعاد بناؤه بالكامل — تحسينات تجربة المستخدم، DuckDuckGo افتراضي، إعدادات سريعة، وتبويبات عمودية. لكن هناك مشاكل صغيرة مع نظام الألوان والشريط العنواني.",
+    keywords: [
+        "FireDragon",
+        "فايردراغون",
+        "Garuda Linux",
+        "متصفح",
+        "Firefox",
+        "مفتوح المصدر",
+        "Dr460nized",
+        "Arch Linux",
+        "DuckDuckGo",
+        "خصوصية",
+    ],
+    category: "برامج",
+    author: "فريق مصدر إكس",
+    date: "27 يوليو 2026",
+    pubDate: new Date("2026-07-27"),
+    tags: ["FireDragon", "Garuda Linux", "متصفح", "مفتوح المصدر", "Firefox"],
+    thumbnail: "/images/firedragon-v13-rewritten-from-scratch-garuda-linux.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            <strong>FireDragon</strong> هو المتصفح الافتراضي على Garuda Linux، توزيعة
+            Arch المعروفة بتقديمات KDE Plasma المصقولة والموثوقية رغم اتباعها أحدث
+            التطورات. الآن <strong
+                >الإصدار 13 يجلب إعادة بناء كاملة من الصفر</strong
+            > مع تحسينات تركز على تجربة المستخدم والخصوصية.
+        </p>
+
+        <h2>ما الجديد في FireDragon 13؟</h2>
+
+        <h3>محرك بحث جديد وخيارات موسّعة</h3>
+
+        <p>
+            المتصفح الآن يأتي مع <strong>DuckDuckGo</strong> كمحرك البحث الافتراضي،
+            جنباً إلى جنب مع قائمة موسّعة من محركات البحث التي تشمل خيارات موجهة للخصوصية
+            مثل Qwant وBrave Search وStartpage، وخيارات Big Tech مثل Bing و Google.
+        </p>
+
+        <h3>تجربة إعداد محسّنة</h3>
+
+        <p>
+            حوار الترحيب الجديد يوفر تبديلات بضغطة واحدة لأشياء تحتاج عادةً
+            للبحث في `about:config` — يمكنك إيقاف مدير كلمات المرور المدمج،
+            تفعيل ResistFingerprinting لخصوصية أقوى، أو تفعيل المسح المسبق
+            لتسريع تحميل الصفحات.
+        </p>
+
+        <h3>تحسينات الأداء</h3>
+
+        <ul>
+            <li>
+                <strong>TLS 0-RTT:</strong> مفعّل افتراضياً الآن، مما يقلل زمن الكمون
+                عند إعادة الاتصال بالمواقع المزارة سابقاً
+            </li>
+            <li>
+                <strong>المسح المسبق الاختياري:</strong> تحميل الصفحة فور تحريك الماوس
+                فوق رابط
+            </li>
+            <li>
+                <strong>دعم XDG Base Directories:</strong> التعامل مع محتوى WebGL
+                و DRM عبر صلاحيات الموقع
+            </li>
+        </ul>
+    
+
+    <h3>تغييرات الإضافات</h3>
+
+    <p>
+        تم حذف Dark Reader من قائمة الإضافات الافتراضية، تاركاً Flagfox و uBlock
+        Origin فقط مثبتَين بشكل مسبق.
+    </p>
+
+<h2>تبويبات عمودية ومشاكل صغيرة</h2>
+
+<p>
+    التبويبات العمودية موجودة وتبدو تقريباً متطابقة مع Firefox. لكن هناك <strong
+        >مشكلة شريط العنوان</strong
+    > — Firefox يخفيه تلقائياً على Fedora Workstation (GNOME)، لكن FireDragon يعرض
+    واحداً قبيح الشكل ولا توجد طريقة في الإعدادات لإيقافه.
+</p>
+
+<h2>مشكلة نظام الألوان</h2>
+
+<p>
+    المشكلة الأكبر: Firefox يتبع تلقائياً نمط النظام (مظلم/فاتح) لكل من الواجهة
+    والمواقع المدعومة. FireDragon لم يفعل ذلك للمواقع، حتى مع ضبط خيار "مظهر
+    الموقع" على "مظلم".
+</p> تم اختبار هذا على Mastodon وDuckDuckGo — لم تتغير الألوان.
+
+<h2>إعدادات FireDragon المخصصة</h2>
+
+<p>
+    صفحة إعدادات FireDragon المخصصة توفر تحكماً أعمق — تبديلات لإغلاق المتصفح مع
+    آخر تبويب، تفعيل اللصق بالزر الأوسط للماوس، التحديث التلقائي للإضافات، وتحكم
+    إضافي للمسح المسبق.
+</p>
+
+<h2>هل تهجر Firefox من أجله؟</h2>
+
+<ul>
+    <li>
+        إذا كنت على Garuda Linux مسبقاً، FireDragon 13 يمكن أن يصبح متصفحاً
+        يومياً مع بعض التعديلات
+    </li>
+    <li>
+        إذا كنت مستقراً على Firefox نفسه، مشكلة نظام الألوان وشريط العنوان
+        العنيد يجعلان الأمر أصعب
+    </li>
+</ul>
+
+<h2>كيفية التثبيت</h2>
+
+<p>يمكنك تثبيت FireDragon من Flathub على معظم أجهزة لينكس:</p>
+
+<pre><code>flatpak install flathub org.garudalinux.firedragon</code></pre>
+
+<p>
+    لمستخدمي Arch، هناك أربع حزم AUR متاحة — نسخة مجمّعة مسبقاً وأخرى تحتاج
+    تجميع، بالإضافة إلى نسختَي Catppuccin.
+</p>
+
+<p>
+    FireDragon 13 متابع قوي لـ Firefox مع نكهة Garuda — لكن تجربته الأولى تكشف
+    أن الطريق لا يزال أمامه قليلاً، خاصة مع مشاكل نظام الألوان التي يجب حلها.
+</p>
+
+<h3>المصدر:</h3>
+<p>
+    <a
+        href="https://itsfoss.com/news/firedragon-v13-release/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        It's FOSS
+    </a>
+</p>
+</PostLayout>
+</BaseLayout>
