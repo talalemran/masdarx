@@ -1,0 +1,509 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "opensuse-complete-guide",
+    title: "توزيعة openSUSE: دليل شامل لواحدة من أعرق توزيعات لينكس",
+    description:
+        "دليل شامل لتوزيعة openSUSE، من تاريخها وإصداراتها Leap وTumbleweed وMicroOS، إلى أدواتها المميزة مثل YaST وAgama وZypper، ولمن تناسب فعليًا.",
+    keywords: [
+        "openSUSE",
+        "أوبن سوزي",
+        "openSUSE Leap",
+        "openSUSE Tumbleweed",
+        "YaST",
+        "Zypper",
+        "توزيعات لينكس",
+        "SUSE Linux",
+        "لينكس للخوادم",
+        "Agama installer",
+    ],
+    category: ["لينكس", "مقالات"],
+    author: "فريق مصدر إكس",
+    date: "25 يوليو 2026",
+    pubDate: new Date("2026-07-25"),
+    tags: ["openSUSE", "Leap", "Tumbleweed", "YaST", "SUSE", "توزيعات لينكس"],
+    thumbnail: "/images/opensuse-complete-guide.webp",
+};
+
+const tocItems = [
+    { id: "history", label: "نبذة تاريخية سريعة" },
+    { id: "editions", label: "إصدارات openSUSE: Leap وTumbleweed وMicroOS" },
+    { id: "tools", label: "أدوات openSUSE المميزة" },
+    { id: "desktop-environments", label: "بيئات سطح المكتب المدعومة" },
+    {
+        id: "comparison-table",
+        label: "جدول مقارنة سريع: Leap مقابل Tumbleweed",
+    },
+    { id: "why-choose", label: "لماذا يختار المستخدمون openSUSE تحديدًا؟" },
+    { id: "challenges", label: "التحديات والقيود" },
+    { id: "who-fits", label: "لمن تناسب openSUSE فعليًا؟" },
+    { id: "official-links", label: "الروابط الرسمية والمصادر" },
+    { id: "faq", label: "أسئلة شائعة" },
+];
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            قلة من توزيعات لينكس تجمع بين عمر يتجاوز ثلاثة عقود، وأدوات إدارة
+            نظام مميزة، ودعم مؤسسي حقيقي من شركة قائمة فعليًا. openSUSE واحدة من
+            هذه التوزيعات القليلة، ورغم ذلك تبقى أقل شهرة من أوبونتو أو فيدورا
+            لدى المستخدم العربي تحديدًا.
+        </p>
+
+        <p>
+            هذا الدليل يشرح كل ما تحتاج معرفته عن openSUSE: تاريخها، إصداراتها
+            المختلفة، أدواتها المميزة، ولمن تناسب فعليًا.
+        </p>
+
+        <nav
+            class="toc bg-navy-50 border border-navy-200 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg p-8 my-6"
+            aria-label="جدول المحتويات"
+        >
+            <p class="font-bold text-lg mb-4 text-navy dark:text-white">
+                محتويات المقال
+            </p>
+            <ol class="list-decimal list-inside space-y-3 text-lg">
+                {
+                    tocItems.map((item) => (
+                        <li>
+                            <a
+                                href={`#${item.id}`}
+                                class="text-navy-700 dark:text-white hover:text-accent dark:hover:text-accent hover:underline"
+                            >
+                                {item.label}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ol>
+        </nav>
+
+        <h2 id="history">نبذة تاريخية سريعة</h2>
+
+        <img
+            src="/images/gnome-welcome.webp"
+            alt="واجهة الترحيب في GNOME على openSUSE"
+            width="1200"
+            height="748"
+            loading="lazy"
+            class="w-48 h-auto float-left mr-6 mb-4 rounded-lg shadow-lg"
+        />
+
+        <p>
+            جذور openSUSE تعود لتوزيعة SUSE Linux الألمانية، التي ظهرت أول مرة
+            عام 1994، أي قبل أن تصبح أوبونتو أو فيدورا موجودتين أصلاً. لاحقًا
+            انقسم المشروع إلى فرعين:
+        </p>
+
+        <ul>
+            <li>
+                <strong>SUSE Linux Enterprise (SLE):</strong> النسخة التجارية المدفوعة،
+                موجهة للشركات والخوادم المؤسسية
+            </li>
+            <li>
+                <strong>openSUSE:</strong> النسخة المجتمعية المجانية، ظهرت رسميًا
+                تحت هذا الاسم عام 2006
+            </li>
+        </ul>
+
+        <p>
+            الشركة الأم SUSE لا تزال قائمة وتدعم مشروع openSUSE ماديًا وتقنيًا،
+            وهذا يمنح التوزيعة استقرارًا نادرًا بين المشاريع المجتمعية البحتة:
+            فريق تطوير محترف يعمل خلفها، إلى جانب مجتمع مفتوح يساهم بحرية.
+        </p>
+
+        <h2 id="editions">إصدارات openSUSE: Leap وTumbleweed وMicroOS</h2>
+
+        <p>
+            openSUSE ليست توزيعة واحدة، بل عائلة من الإصدارات المصممة
+            لسيناريوهات مختلفة تمامًا.
+        </p>
+
+        <h3>openSUSE Leap</h3>
+
+        <p>
+            إصدار ثابت (Fixed Release)، يصدر نسخة رئيسية جديدة كل سنة تقريبًا.
+            الميزة الأهم فيه أنه مبني مباشرة على قاعدة SUSE Linux Enterprise
+            (SLE)، ما يعني استقرارًا على مستوى الأنظمة المؤسسية لكن مجانًا
+            بالكامل.
+        </p>
+
+        <ul>
+            <li>
+                مناسب لخوادم الإنتاج والاستخدام المكتبي الذي يفضل الاستقرار على
+                أحدث الإصدارات
+            </li>
+            <li>تحديثات أمنية منتظمة دون تغييرات جذرية مفاجئة في النظام</li>
+            <li>
+                أحدث إصدار رئيسي هو Leap 16.0، الذي جلب تغييرات جوهرية في أدوات
+                الإدارة سنشرحها لاحقًا
+            </li>
+        </ul>
+
+        <h3>openSUSE Tumbleweed</h3>
+
+        <p>
+            على النقيض تمامًا، Tumbleweed توزيعة <strong>Rolling Release</strong
+            >: لا يوجد "إصدار" بالمعنى التقليدي، بل تحديثات مستمرة تصل فور
+            جاهزيتها واجتيازها اختبارات آلية عبر نظام openQA.
+        </p>
+
+        <ul>
+            <li>
+                أحدث نواة لينكس، وأحدث إصدارات بيئات سطح المكتب مثل GNOME وKDE
+                Plasma
+            </li>
+            <li>
+                رغم كونها Rolling Release، معدل الاستقرار فيها أعلى من المتوقع
+                بفضل اختبار كل حزمة قبل نشرها
+            </li>
+            <li>
+                مناسبة للمطورين وعشاق التقنية الذين يريدون أحدث البرمجيات دون
+                التضحية باستقرار معقول
+            </li>
+        </ul>
+
+        <h3>openSUSE MicroOS</h3>
+
+        <p>
+            إصدار أحدث وأكثر تخصصًا، مصمم كنظام <strong
+                >غير قابل للتعديل (Immutable)</strong
+            >، موجه أساسًا للحاويات (Containers) والخوادم التي تحتاج تحديثات
+            ذرية آمنة تمامًا، مع إمكانية التراجع الفوري عن أي تحديث فشل.
+        </p>
+
+        <h2 id="tools">أدوات openSUSE المميزة</h2>
+
+        <h3>YaST: الإرث الذي يمر بمرحلة انتقالية</h3>
+
+        <p>
+            YaST (Yet another Setup Tool) كان لعقود الأداة التي تميز openSUSE
+            فعليًا عن أغلب توزيعات لينكس الأخرى: واجهة رسومية واحدة تتحكم في
+            الشبكة، المستخدمين، الأقراص، الحزم، وإعداد الخوادم دون تحرير ملفات
+            نصية يدويًا.
+        </p>
+
+        <p>
+            لكن هذا يتغير فعليًا: بدءًا من <strong>openSUSE Leap 16.0</strong>
+            (المُصدر في أكتوبر 2025)، تقاعد YaST كأداة أساسية، واستُبدل بثلاث أدوات
+            حديثة:
+        </p>
+
+        <ul>
+            <li>
+                <strong>Agama</strong>: مثبّت جديد قائم على الويب، يمكن تشغيله
+                محليًا أو عن بُعد، ويدعم تثبيت أكثر من إصدار (Leap، Tumbleweed،
+                Slowroll) من نفس صورة التثبيت
+            </li>
+            <li>
+                <strong>Cockpit</strong>: لوحة إدارة النظام أثناء التشغيل، تُفتح
+                عبر المتصفح على المنفذ 9090
+            </li>
+            <li>
+                <strong>Myrlyn</strong>: مدير حزم رسومي جديد مبني على libzypp،
+                ليحل محل وحدة إدارة البرامج في YaST
+            </li>
+        </ul>
+
+        <p>
+            openSUSE Tumbleweed وSlowroll لا تزالان تحتفظان بـ YaST حاليًا، لكن
+            مستقبله في يد المجتمع، وفريق المشروع أوضح أن الانتقال سيكون تدريجيًا
+            لا فوريًا.
+        </p>
+
+        <h3>Zypper: مدير الحزم</h3>
+
+        <p>
+            أداة سطر الأوامر لإدارة الحزم في openSUSE، تعتمد على تنسيق RPM نفسه
+            المستخدم في Fedora وRed Hat. سريعة نسبيًا في حل تعارضات التبعيات،
+            وتدعم منذ Leap 16 التحميل المتوازي (Parallel Downloads) لتسريع
+            التثبيت والتحديث.
+        </p>
+
+        <h3>Snapper وBtrfs: الحماية من الأخطاء</h3>
+
+        <p>
+            openSUSE من أوائل التوزيعات التي اعتمدت نظام ملفات Btrfs كخيار
+            افتراضي، مقترنًا بأداة Snapper التي تأخذ لقطات (Snapshots) تلقائية
+            للنظام قبل كل تحديث كبير.
+        </p>
+
+        <p>
+            النتيجة عمليًا: إذا فشل تحديث أو تسبب في مشكلة، يمكنك التراجع للحالة
+            السابقة للنظام بالكامل من قائمة الإقلاع مباشرة، دون الحاجة لإعادة
+            تثبيت أي شيء.
+        </p>
+
+        <h2 id="desktop-environments">بيئات سطح المكتب المدعومة</h2>
+
+        <img
+            src="/images/opensuse-kde.webp"
+            alt="واجهة KDE Plasma على openSUSE"
+            width="1200"
+            height="675"
+            loading="lazy"
+            class="w-48 h-auto float-right ml-6 mb-4 rounded-lg shadow-lg"
+        />
+
+        <p>
+            openSUSE لا تفرض بيئة سطح مكتب واحدة. عند التثبيت، يمكنك الاختيار
+            بين:
+        </p>
+
+        <ul>
+            <li>
+                <strong>KDE Plasma</strong>: البيئة الافتراضية تاريخيًا، وأكثرها
+                دمجًا مع أدوات openSUSE
+            </li>
+            <li><strong>GNOME</strong>: مدعومة رسميًا وبشكل كامل</li>
+            <li>
+                <strong>Xfce، MATE، LXQt، Cinnamon، Enlightenment</strong>:
+                متوفرة جميعًا عبر خيارات التثبيت المخصص، مع دعم متنامٍ لجلسات
+                Wayland
+            </li>
+        </ul>
+
+        <p>
+            هذه المرونة تجعل openSUSE خيارًا صالحًا سواء كنت تفضل واجهة حديثة
+            مليئة بالتأثيرات، أو بيئة خفيفة جدًا لجهاز متواضع.
+        </p>
+
+        <h2 id="comparison-table">جدول مقارنة سريع: Leap مقابل Tumbleweed</h2>
+
+        <div class="overflow-x-auto my-4">
+            <table
+                class="w-full text-right border border-zinc-200 dark:border-zinc-700 rounded-lg"
+            >
+                <thead
+                    class="bg-zinc-100 dark:bg-zinc-800 light:text-zinc-700 dark:text-zinc-300"
+                >
+                    <tr>
+                        <th class="px-4 py-2 font-semibold">المعيار</th>
+                        <th class="px-4 py-2 font-semibold">openSUSE Leap</th>
+                        <th class="px-4 py-2 font-semibold"
+                            >openSUSE Tumbleweed</th
+                        >
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+                    <tr>
+                        <td class="px-4 py-2">نموذج الإصدار</td>
+                        <td class="px-4 py-2"
+                            >ثابت، تحديث رئيسي سنويًا تقريبًا</td
+                        >
+                        <td class="px-4 py-2">مستمر (Rolling Release)</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">الاستقرار</td>
+                        <td class="px-4 py-2"
+                            >عالٍ جدًا، مبني على قاعدة SUSE Enterprise</td
+                        >
+                        <td class="px-4 py-2">جيد، لكن أقرب لأحدث التقنيات</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">حداثة البرمجيات</td>
+                        <td class="px-4 py-2">متوسطة، حزم مختبرة لفترة أطول</td>
+                        <td class="px-4 py-2">عالية جدًا، تحديثات شبه يومية</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">أداة الإدارة الأساسية</td>
+                        <td class="px-4 py-2">Agama + Cockpit + Myrlyn</td>
+                        <td class="px-4 py-2">YaST (لا يزال متاحًا حاليًا)</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">الأنسب لـ</td>
+                        <td class="px-4 py-2">خوادم الإنتاج، مكاتب الشركات</td>
+                        <td class="px-4 py-2">مطورين، أجهزة شخصية حديثة</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="why-choose">لماذا يختار المستخدمون openSUSE تحديدًا؟</h2>
+
+        <ul>
+            <li>
+                <strong>دعم مؤسسي حقيقي:</strong> خلف المشروع شركة SUSE الفعلية، لا
+                مجرد متطوعين فقط
+            </li>
+            <li>
+                <strong>مرونة نادرة:</strong> توزيعة واحدة تخدم من يريد الاستقرار
+                المطلق (Leap) ومن يريد أحدث كل شيء (Tumbleweed)
+            </li>
+            <li>
+                <strong>أمان استثنائي عبر اللقطات:</strong> نظام Snapper وBtrfs يجعل
+                التراجع عن الأخطاء أسهل بكثير من أغلب التوزيعات
+            </li>
+            <li>
+                <strong>توثيق رسمي قوي:</strong> ويكي openSUSE من أكثر الموارد التقنية
+                تنظيمًا في عالم لينكس
+            </li>
+            <li>
+                <strong>أدوات إدارة حديثة:</strong> الانتقال إلى Agama وCockpit يقرّب
+                openSUSE أكثر من معايير إدارة الأنظمة المتبعة في توزيعات أخرى، ويسهّل
+                الإدارة عن بُعد
+            </li>
+        </ul>
+
+        <h2 id="challenges">التحديات والقيود</h2>
+
+        <p>بموضوعية، openSUSE ليست مثالية للجميع:</p>
+
+        <ul>
+            <li>
+                <strong>مجتمع أصغر مقارنة بأوبونتو:</strong> موارد ودروس أقل بكثير
+                على الإنترنت، خصوصًا بالعربية
+            </li>
+            <li>
+                <strong>مرحلة انتقالية في أدوات الإدارة:</strong> مستخدمو YaST القدامى
+                يحتاجون وقتًا للتأقلم مع Agama وCockpit وMyrlyn في Leap 16
+            </li>
+            <li>
+                <strong>دعم أقل من بعض الشركات المصنّعة للعتاد:</strong> بعض تعريفات
+                الأجهزة الحديثة تصل لأوبونتو أولًا قبل غيرها
+            </li>
+            <li>
+                <strong>تنسيق RPM أقل شيوعًا من DEB:</strong> بعض البرامج التجارية
+                توفر حزم DEB فقط دون نسخة RPM رسمية
+            </li>
+        </ul>
+
+        <h2 id="who-fits">لمن تناسب openSUSE فعليًا؟</h2>
+
+        <ul>
+            <li>
+                <strong>لمسؤولي الأنظمة والخوادم:</strong> بفضل استقرار Leap المبني
+                على SUSE Enterprise وأدوات الإدارة الحديثة عبر المتصفح
+            </li>
+            <li>
+                <strong>للمطورين الذين يريدون أحدث الأدوات:</strong> عبر Tumbleweed
+                دون التضحية بموثوقية النظام
+            </li>
+            <li>
+                <strong>لمن جرّب لينكس من قبل ويريد تحكمًا أعمق:</strong> أدوات openSUSE
+                تكافئ من يفهم كيف يعمل النظام تحتها
+            </li>
+            <li>
+                <strong>لبيئات الحاويات والأنظمة غير القابلة للتعديل:</strong> عبر
+                MicroOS تحديدًا
+            </li>
+            <li>
+                <strong>أقل ملاءمة:</strong> لمن يريد أبسط تجربة ممكنة دون أي احتكاك
+                بمفاهيم إدارة الأنظمة، حيث توزيعات مثل Linux Mint قد تكون أنسب
+            </li>
+        </ul>
+
+        <h2 id="official-links">الروابط الرسمية والمصادر</h2>
+
+        <p>
+            للتحميل أو التعمق أكثر في أدوات openSUSE المذكورة في هذا المقال، هذه
+            المصادر الرسمية:
+        </p>
+
+        <ul>
+            <li>
+                <strong>الموقع الرسمي لـ openSUSE:</strong>{" "}
+                <a
+                    href="https://www.opensuse.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    opensuse.org
+                </a>
+            </li>
+            <li>
+                <strong>صفحة تحميل Leap:</strong>{" "}
+                <a
+                    href="https://get.opensuse.org/leap/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    get.opensuse.org/leap
+                </a>
+            </li>
+            <li>
+                <strong>صفحة تحميل Tumbleweed:</strong>{" "}
+                <a
+                    href="https://get.opensuse.org/tumbleweed/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    get.opensuse.org/tumbleweed
+                </a>
+            </li>
+            <li>
+                <strong>ويكي openSUSE الرسمي:</strong>{" "}
+                <a
+                    href="https://en.opensuse.org/Main_Page"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    en.opensuse.org
+                </a>
+            </li>
+            <li>
+                <strong>مدونة أخبار openSUSE:</strong>{" "}
+                <a
+                    href="https://news.opensuse.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    news.opensuse.org
+                </a>{" "}
+                — لمتابعة تحديثات Tumbleweed الشهرية وتفاصيل الانتقال من YaST
+            </li>
+            <li>
+                <strong>موقع YaST الرسمي:</strong>{" "}
+                <a
+                    href="https://yast.opensuse.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    yast.opensuse.org
+                </a>
+            </li>
+        </ul>
+
+        <h2 id="faq">أسئلة شائعة</h2>
+
+        <p>
+            <strong>ما الفرق العملي بين Leap وTumbleweed لمستخدم عادي؟</strong
+            ><br />
+            Leap يعطيك نظامًا مستقرًا يتغير ببطء، وTumbleweed يعطيك أحدث البرمجيات
+            دائمًا مقابل تحديثات متكررة أكثر.
+        </p>
+
+        <p>
+            <strong>هل YaST اختفى تمامًا من openSUSE؟</strong><br />
+            لا، لا يزال متاحًا في Tumbleweed وSlowroll حاليًا، لكنه تقاعد كأداة أساسية
+            في Leap 16 لصالح Agama وCockpit وMyrlyn.
+        </p>
+
+        <p>
+            <strong>هل openSUSE مناسبة للمبتدئين في لينكس؟</strong><br />
+            ممكنة، خصوصًا مع Leap، لكنها تفترض استعدادًا أكبر للتعلم مقارنة بتوزيعات
+            مثل Linux Mint أو Zorin OS.
+        </p>
+
+        <p>
+            <strong>هل openSUSE مجانية بالكامل؟</strong><br />
+            نعم، كل من Leap وTumbleweed وMicroOS مجانية تمامًا. النسخة المدفوعة الوحيدة
+            هي SUSE Linux Enterprise، الموجهة للشركات التي تحتاج دعمًا تجاريًا رسميًا.
+        </p>
+    </PostLayout>
+</BaseLayout>
