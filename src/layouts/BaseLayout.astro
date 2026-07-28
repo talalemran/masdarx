@@ -29,7 +29,11 @@ const {
 <html lang="ar" dir="rtl">
   <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/fontawesome/css/all.min.css" />
+    <link rel="preload" href="/fonts/cairo-arabic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/tajawal-700-arabic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/tajawal-400-arabic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="/fontawesome/css/all.min.css" /></noscript>
     <link rel="alternate" type="application/rss+xml" title="مصدر إكس" href="/rss.xml" />
     <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
     <link rel="me" href="https://mastodon.social/@masdarx" />

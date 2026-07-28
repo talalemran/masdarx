@@ -75,7 +75,7 @@ const projectUrl = `https://www.masdarx.com/projects/${project.slug}/`;
     {
       thumbnail && (
         <div class="bg-navy-50 dark:bg-zinc-800 rounded-xl overflow-hidden mb-8">
-          <img src={thumbnail} alt={name} width="720" height="405" class="w-full h-auto" />
+          <img src={thumbnail} alt={name} width="720" height="405" class="w-full h-auto" fetchpriority="high" />
         </div>
       )
     }
