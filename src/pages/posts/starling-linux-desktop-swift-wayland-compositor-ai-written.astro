@@ -29,7 +29,8 @@ export const post = {
     date: "28 يوليو 2026",
     pubDate: new Date("2026-07-28"),
     tags: ["Starling", "لينكس", "Wayland", "Swift", "AI-written"],
-    thumbnail: "/images/starling-linux-desktop-swift-wayland-compositor-ai-written.webp",
+    thumbnail:
+        "/images/starling-linux-desktop-swift-wayland-compositor-ai-written.webp",
 };
 ---
 
@@ -61,21 +62,20 @@ export const post = {
                 و idle-inhibit و cursor-shape و xdg-decoration و xdg-activation و
                 xdg-output و wlr-data-control.
             </li>
+            <li>
+                <strong>خادم X11 مدمج:</strong> مع دعم DRI3/Present بحيث تعمل عملاء
+                X11 أيضاً.
+            </li>
+            <li>
+                <strong>محرك Flutter C مع Swift:</strong> الـ shell والـ window manager
+                والـ compositor والتطبيقات مكتوبة بـ Swift — بدون Dart VM
+            </li>
+            <li>
+                <strong>جلسة غير امتيازية:</strong> DRM master والمدخلات تأتي من logind
+                عبر libseat، وليس بتشغيل البرنامج كـ root. يقلع عبر GDM مثل أي جلسة
+                Wayland أخرى.
+            </li>
         </ul>
-        <li>
-            <strong>خادم X11 مدمج:</strong> مع دعم DRI3/Present بحيث تعمل عملاء X11
-            أيضاً.
-        </li>
-        <li>
-            <strong>محرك Flutter C مع Swift:</strong> الـ shell والـ window manager
-            والـ compositor والتطبيقات مكتوبة بـ Swift — بدون Dart VM
-        </li>
-        <li>
-            <strong>جلسة غير امتيازية:</strong> DRM master والمدخلات تأتي من logind
-            عبر libseat، وليس بتشغيل البرنامج كـ root. يقلع عبر GDM مثل أي جلسة Wayland
-            أخرى.
-        </li>
-
         <h2>تطبيقات حقيقية تعمل بالفعل</h2>
 
         <p>
@@ -92,17 +92,17 @@ export const post = {
                 <strong>حجم صغير جداً:</strong> يشحن كـ .deb بحجم ~53 ميجابايت فقط
                 على Ubuntu 26.04.
             </li>
+            <li>
+                <strong>التوافق:</strong> اختبر على AMD (Radeon 780M) و على virtio-gpu/virgl
+                في جهاز افتراضي
+            </li>
+            <li>
+                <strong>التحذير:</strong> هذا إصدار مبكر جداً (v0.2) — AMD و virtio-gpu
+                مختبران فقط، Intel و NVIDIA لم يختبران بعد
+            </li>
+            <li>التحجيم حالياً مثبت على 2.0</li>
+            <li>Ubuntu 26.04 فقط حالياً</li>
         </ul>
-        <li>
-            <strong>التوافق:</strong> اختبر على AMD (Radeon 780M) و على virtio-gpu/virgl
-            في جهاز افتراضي
-        </li>
-        <li>
-            <strong>التحذير:</strong> هذا إصدار مبكر جداً (v0.2) — AMD و virtio-gpu
-            مختبران فقط، Intel و NVIDIA لم يختبران بعد
-        </li>
-        <li>التحجيم حالياً مثبت على 2.0</li>
-        <li>Ubuntu 26.04 فقط حالياً</li>
 
         <h2>مميزات Starling</h2>
 
@@ -111,13 +111,15 @@ export const post = {
                 <strong>مكتوب بالذكاء الاصطناعي:</strong> المشروع كُتب في الأساس عبر
                 Claude خلال الستة أشهر الماضية.
             </li>
+            <li><strong>مرخص تحت Apache 2.0:</strong> مفتوح المصدر بالكامل</li>
+            <li>
+                <strong>دعم كومبوزيتور Wayland كامل:</strong> تطبيقات حديثة بدون الحاجة
+                لـ X11 Legacy
+            </li>
+            <li>
+                <strong>إدارة موارد فعّالة:</strong> بيئة سطح مكتب خفيفة وسريعة
+            </li>
         </ul>
-        <li><strong>مرخص تحت Apache 2.0:</strong> مفتوح المصدر بالكامل</li>
-        <li>
-            <strong>دعم كومبوزيتور Wayland كامل:</strong> تطبيقات حديثة بدون الحاجة
-            لـ X11 Legacy
-        </li>
-        <li><strong>إدارة موارد فعّالة:</strong> بيئة سطح مكتب خفيفة وسريعة</li>
 
         <h2>أين يذهب من هنا؟</h2>
 
