@@ -1,0 +1,156 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "starling-linux-desktop-swift-wayland-compositor-ai-written",
+    title: "Starling: بيئة سطح مكتب لينكس مكتوبة بـ Swift وكومبوزيتور Wayland خاص بها",
+    description:
+        "Starling نظام سطح مكتب جديد مفتوح المصدر كُتب بلغة Swift وبمساعدة Claude الذكاء الاصطناعي — كومبوزيتور Wayland مخصص بـ C، دعم X11، وتطبيقات حقيقية مثل Chrome و VS Code و Blender، كل ذلك في 53 ميجابايت.",
+    keywords: [
+        "Starling",
+        "Swift",
+        "Wayland compositor",
+        "Linux desktop",
+        "سطح المكتب",
+        "Claude AI",
+        "X11",
+        "كومبوزيتور",
+        "مفتوح المصدر",
+        "Apache 2.0",
+    ],
+    category: "لينكس",
+    author: "فريق مصدر إكس",
+    date: "28 يوليو 2026",
+    pubDate: new Date("2026-07-28"),
+    tags: ["Starling", "لينكس", "Wayland", "Swift", "AI-written"],
+    thumbnail: "/images/starling-linux-desktop-swift-wayland-compositor-ai-written.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            عصر الذكاء الاصطناعي كتب مجموعة كاملة من سطح المكتب لينكس الجديدة —
+            الآن يأتي <strong>Starling</strong>، بيئة سطح مكتب مفتوحة المصدر <strong
+                >كتبها بالكامل تقريباً Claude باستخدام لغة Swift</strong
+            >، مع كومبوزيتور Wayland مخصص مكتوب بـ C.
+        </p>
+
+        <h2>المكدّس التقني</h2>
+
+        <p>Starling يتميز بـ:</p>
+
+        <ul>
+            <li>
+                <strong>كومبوزيتور Wayland مخصص بـ C:</strong> ينفذ xdg-shell و linux-dmabuf
+                (استيراد بدون نسخ) و viewporter و fractional-scale و pointer-constraints
+                و relative-pointer و text-input و presentation-time و primary-selection
+                و idle-inhibit و cursor-shape و xdg-decoration و xdg-activation و
+                xdg-output و wlr-data-control.
+            </li>
+        </ul>
+        <li>
+            <strong>خادم X11 مدمج:</strong> مع دعم DRI3/Present بحيث تعمل عملاء X11
+            أيضاً.
+        </li>
+        <li>
+            <strong>محرك Flutter C مع Swift:</strong> الـ shell والـ window manager
+            والـ compositor والتطبيقات مكتوبة بـ Swift — بدون Dart VM
+        </li>
+        <li>
+            <strong>جلسة غير امتيازية:</strong> DRM master والمدخلات تأتي من logind
+            عبر libseat، وليس بتشغيل البرنامج كـ root. يقلع عبر GDM مثل أي جلسة Wayland
+            أخرى.
+        </li>
+
+        <h2>تطبيقات حقيقية تعمل بالفعل</h2>
+
+        <p>
+            يشغّل تطبيقات حقيقية كعملاء أصليين — Chrome و VS Code و Slack و
+            IntelliJ و GIMP و Blender (عرض EEVEE عبر linux-dmabuf) — يغطي
+            Chromium/Electron و Qt6 و GTK3/4 و JetBrains Runtime و GHOST من
+            Blender.
+        </p>
+
+        <h2>الحجم والأداء</h2>
+
+        <ul>
+            <li>
+                <strong>حجم صغير جداً:</strong> يشحن كـ .deb بحجم ~53 ميجابايت فقط
+                على Ubuntu 26.04.
+            </li>
+        </ul>
+        <li>
+            <strong>التوافق:</strong> اختبر على AMD (Radeon 780M) و على virtio-gpu/virgl
+            في جهاز افتراضي
+        </li>
+        <li>
+            <strong>التحذير:</strong> هذا إصدار مبكر جداً (v0.2) — AMD و virtio-gpu
+            مختبران فقط، Intel و NVIDIA لم يختبران بعد
+        </li>
+        <li>التحجيم حالياً مثبت على 2.0</li>
+        <li>Ubuntu 26.04 فقط حالياً</li>
+
+        <h2>مميزات Starling</h2>
+
+        <ul>
+            <li>
+                <strong>مكتوب بالذكاء الاصطناعي:</strong> المشروع كُتب في الأساس عبر
+                Claude خلال الستة أشهر الماضية.
+            </li>
+        </ul>
+        <li><strong>مرخص تحت Apache 2.0:</strong> مفتوح المصدر بالكامل</li>
+        <li>
+            <strong>دعم كومبوزيتور Wayland كامل:</strong> تطبيقات حديثة بدون الحاجة
+            لـ X11 Legacy
+        </li>
+        <li><strong>إدارة موارد فعّالة:</strong> بيئة سطح مكتب خفيفة وسريعة</li>
+
+        <h2>أين يذهب من هنا؟</h2>
+
+        <p>
+            Starling لا يزال في مرحلة v0.2، وهناك الكثير من العمل الذي يتعين
+            القيام به — خاصة دعم Intel و NVIDIA، ودعم التحجيم الديناميكي،
+            والتوسع إلى توزيعات Linux أخرى. لكن كمشروع تم بناؤه بالكامل تقريباً
+            عبر AI في ستة أشهر فقط، فهو إنجاز مثير للانتباه.
+        </p>
+
+        <h2>كيفية التجربة</h2>
+
+        <p>
+            يمكن العثور على Starling على <strong>Starling.build</strong> والكود متاح
+            على <strong>GitHub</strong> تحت رخصة Apache 2.0. حزمة Debian مثبتة مسبقاً
+            متوفرة لـ Ubuntu 26.04 LTS.
+        </p>
+
+        <p>
+            Starling ممثل شيق لعصر جديد من تطوير سطح المكتب — حيث يمكن للذكاء
+            الاصطناعي أن يسرّع من نماذج بناء الأنظمة المعقدة. هل سيصبح خيار سطح
+            مكتب رئيسي؟ ربما لا — لكن إنه بداية مثيرة.
+        </p>
+
+        <h3>المصدر:</h3>
+        <p>
+            <a
+                href="https://www.phoronix.com/news/Starling-Swift-Desktop"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Phoronix
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
