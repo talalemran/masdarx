@@ -1,0 +1,567 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "linux-desktop-environments-guide",
+    title: "بيئات سطح المكتب في لينكس: دليل شامل لكل الخيارات المتاحة",
+    description:
+        "دليل شامل لأبرز بيئات سطح المكتب في لينكس — من GNOME وKDE Plasma إلى Xfce وCinnamon وCOSMIC — مع مقارنة تقنية تساعدك على اختيار البيئة المناسبة لجهازك واستخدامك.",
+    keywords: [
+        "بيئات سطح المكتب لينكس",
+        "GNOME",
+        "KDE Plasma",
+        "Xfce",
+        "Cinnamon",
+        "MATE",
+        "LXQt",
+        "Budgie",
+        "Deepin",
+        "Pantheon",
+        "Enlightenment",
+        "COSMIC",
+        "Wayland",
+        "X11",
+        "توزيعات لينكس",
+    ],
+    category: ["لينكس", "مقالات"],
+    author: "فريق مصدر إكس",
+    date: "27 يوليو 2026",
+    pubDate: new Date("2026-07-27"),
+    tags: [
+        "GNOME",
+        "KDE Plasma",
+        "Xfce",
+        "Cinnamon",
+        "COSMIC",
+        "بيئات سطح المكتب",
+    ],
+    thumbnail: "/images/linux-desktop-environments-guide.webp",
+};
+
+const tocItems = [
+    { id: "what-is-de", label: "ما هي بيئة سطح المكتب أصلاً؟" },
+    { id: "gnome", label: "GNOME" },
+    { id: "kde-plasma", label: "KDE Plasma" },
+    { id: "xfce", label: "Xfce" },
+    { id: "cinnamon", label: "Cinnamon" },
+    { id: "mate", label: "MATE" },
+    { id: "lxqt", label: "LXQt" },
+    { id: "budgie", label: "Budgie" },
+    { id: "deepin", label: "Deepin (DDE)" },
+    { id: "pantheon", label: "Pantheon" },
+    { id: "enlightenment", label: "Enlightenment" },
+    { id: "cosmic", label: "COSMIC" },
+    { id: "comparison-table", label: "جدول مقارنة سريع" },
+    { id: "multiple-des", label: "هل يمكن تثبيت أكثر من بيئة على نفس النظام؟" },
+    { id: "how-to-choose", label: "كيف تختار البيئة المناسبة لك؟" },
+    { id: "official-links", label: "الروابط الرسمية" },
+    { id: "faq", label: "أسئلة شائعة" },
+];
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            أكبر فرق بين لينكس وأنظمة التشغيل الأخرى ليس النواة أو الأدوات،
+            بل أنك لا تُجبر على واجهة واحدة. يمكنك تجربة عشر واجهات مختلفة
+            على نفس التوزيعة دون إعادة تثبيت أي شيء. لكن هذه الحرية تحمل
+            تحديًا: كيف تختار من بين كل هذه الخيارات؟
+        </p>
+
+        <p>
+            هذا الدليل يشرح أبرز بيئات سطح المكتب المتوفرة للينكس، الفروقات
+            الجوهرية بينها، ولمن تناسب كل واحدة فعليًا، اعتمادًا على وضع هذه
+            البيئات في عام 2026.
+        </p>
+
+        <nav
+            class="toc bg-navy-50 border border-navy-200 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg p-8 my-6"
+            aria-label="جدول المحتويات"
+        >
+            <p class="font-bold text-lg mb-4 text-navy dark:text-white">محتويات المقال</p>
+            <ol class="list-decimal list-inside space-y-3 text-lg">
+                {
+                    tocItems.map((item) => (
+                        <li>
+                            <a
+                                href={`#${item.id}`}
+                                class="text-navy-700 dark:text-white hover:text-accent dark:hover:text-accent hover:underline"
+                            >
+                                {item.label}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ol>
+        </nav>
+
+        <h2 id="what-is-de">ما هي بيئة سطح المكتب أصلاً؟</h2>
+
+        <p>
+            بيئة سطح المكتب (Desktop Environment) هي الطبقة الرسومية الكاملة
+            التي تتفاعل معها فوق نواة لينكس: شريط المهام، قائمة التطبيقات،
+            مدير الملفات، الإعدادات، وحتى الخط والألوان الافتراضية.
+        </p>
+
+        <p>
+            هذا يختلف عن <strong>مدير النوافذ (Window Manager)</strong> وحده،
+            الذي يتحكم فقط في كيفية عرض وترتيب النوافذ دون توفير الأدوات
+            المصاحبة الكاملة. بيئة سطح المكتب = مدير نوافذ + مجموعة أدوات
+            وتطبيقات متكاملة تعمل معًا بتصميم موحد.
+        </p>
+
+        <p>
+            نقطة مهمة تقنيًا: أغلب البيئات الحديثة انتقلت أو تنتقل حاليًا من
+            بروتوكول العرض القديم <strong>X11</strong> إلى البديل الأحدث
+            <strong>Wayland</strong>، لأسباب تتعلق بالأمان وسلاسة الأداء.
+            بحلول نهاية 2026، أصبح X11 في أغلب البيئات الكبرى وضع احتياطي
+            فقط لا الافتراضي.
+        </p>
+
+        <h2 id="gnome">GNOME</h2>
+
+        <p>
+            الأكثر انتشارًا واعتمادًا كافتراضي في توزيعات كبرى مثل Fedora
+            Workstation وDebian.
+        </p>
+
+        <p>
+            <strong>الفلسفة</strong>: بساطة مقصودة. بدلاً من إغراقك بخيارات،
+            تركز واجهة GNOME على تدفق عمل نظيف: قائمة أنشطة (Activities)
+            موحدة، مساحات عمل تلقائية، وإيماءات لمس متقدمة للابتوبات
+            الحديثة.
+        </p>
+
+        <ul>
+            <li>مبنية على مكتبة GTK4، ومحرك العرض الخاص بها Mutter</li>
+            <li>إصدارها الحالي (GNOME 50) يعمل حصريًا على Wayland تقريبًا</li>
+            <li>التخصيص العميق يتطلب إضافات (GNOME Shell Extensions) بدل إعدادات مدمجة</li>
+            <li>استهلاك ذاكرة معتدل، ويناسب أجهزة بذاكرة 8 غيغابايت فأكثر بسلاسة كاملة</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: من يفضل واجهة نظيفة بلا فوضى بصرية،
+            ولا يمانع تعلم منطق "الأنشطة" بدلاً من شريط مهام تقليدي.
+        </p>
+
+        <h2 id="kde-plasma">KDE Plasma</h2>
+
+        <p>
+            المنافس التقليدي لـ GNOME، لكنه يسير في اتجاه معاكس تمامًا من
+            ناحية الفلسفة: حرية تخصيص شبه كاملة.
+        </p>
+
+        <ul>
+            <li>
+                مبني على مكتبة Qt6، ومحرك العرض الخاص به KWin (يعمل كمدير
+                نوافذ على X11 وكمُركِّب على Wayland)
+            </li>
+            <li>الإصدار الحالي (Plasma 6.x) يصدر تحديثات كل أربعة أشهر تقريبًا دون نسخ دعم طويل الأمد</li>
+            <li>كل عنصر في الواجهة تقريبًا قابل للتعديل: من شكل الأيقونات إلى سلوك النوافذ وتأثيرات الانتقال</li>
+            <li>أداء محسّن بشكل كبير في السنوات الأخيرة، ولم يعد "الخيار الثقيل" كما كانت سمعته سابقًا</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: مستخدمين متقدمين يريدون التحكم في كل
+            تفصيل، ومطورين وألعاب تحتاج تخصيص إدارة نوافذ دقيق.
+        </p>
+
+        <h2 id="xfce">Xfce</h2>
+
+        <p>
+            بيئة خفيفة، مستقرة، وموجودة منذ أكثر من عشرين عامًا دون تغييرات
+            جذرية مفاجئة في فلسفتها.
+        </p>
+
+        <ul>
+            <li>استهلاك موارد منخفض جدًا مقارنة بـ GNOME أو KDE</li>
+            <li>واجهة تقليدية: شريط مهام سفلي، قائمة تطبيقات واضحة، لا مؤثرات بصرية مبالغ فيها</li>
+            <li>
+                دعم Wayland لا يزال في مراحل مبكرة نسبيًا مقارنة بمنافسيه
+                الكبار، وX11 لا يزال الخيار الأكثر نضجًا فيها حاليًا
+            </li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: أجهزة قديمة أو ضعيفة المواصفات، ومن
+            يفضل بيئة يمكن التنبؤ بسلوكها دون مفاجآت بعد كل تحديث.
+        </p>
+
+        <h2 id="cinnamon">Cinnamon</h2>
+
+        <p>
+            طوّره فريق Linux Mint خصيصًا كبديل مستقر لجنوم بعد تغييراته
+            الجذرية قبل سنوات.
+        </p>
+
+        <ul>
+            <li>واجهة أقرب لمنطق ويندوز الكلاسيكي: قائمة ابدأ، شريط مهام، أيقونات نظام واضحة</li>
+            <li>توازن جيد بين الأداء والمظهر الحديث، دون تعقيد إعدادات KDE</li>
+            <li>يبقى الخيار الافتراضي الأشهر لتوزيعة Linux Mint تحديدًا</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: القادمين حديثًا من ويندوز، ومن يريد
+            واجهة مألوفة دون منحنى تعلم.
+        </p>
+
+        <h2 id="mate">MATE</h2>
+
+        <p>
+            استمرارية لواجهة GNOME 2 الكلاسيكية، بعد أن قرر مجتمع منفصل
+            مواصلة تطويرها حين تحول GNOME لتصميمه الحديث.
+        </p>
+
+        <ul>
+            <li>بساطة شديدة واستهلاك موارد منخفض</li>
+            <li>تصميم تقليدي: قوائم منسدلة، لوحات قابلة للتخصيص، لا فلسفة "أنشطة" حديثة</li>
+            <li>تطوير مستمر لكن بوتيرة أبطأ من البيئات الكبرى</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: محبي الطراز الكلاسيكي لسطح المكتب،
+            أو من يريد أقصى استقرار بأقل موارد ممكنة.
+        </p>
+
+        <h2 id="lxqt">LXQt</h2>
+
+        <p>
+            خليفة LXDE، مبني على Qt بدلاً من GTK، ويستهدف أقصى قدر من
+            الخفة.
+        </p>
+
+        <ul>
+            <li>من أخف البيئات الكاملة المتوفرة، مناسب جدًا للأجهزة المحدودة جدًا</li>
+            <li>واجهة بسيطة تفتقر لبعض اللمسات الجمالية مقارنة بمنافسين أكبر</li>
+            <li>تطوير مجتمعي أصغر، لكنه مستقر لما يقدمه</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: أجهزة قديمة جدًا، أو أنظمة تحتاج أقل
+            استهلاك ممكن للموارد مع واجهة رسومية كاملة.
+        </p>
+
+        <h2 id="budgie">Budgie</h2>
+
+        <p>
+            طورته توزيعة Solus في البداية، ثم أصبح متاحًا كخيار مستقل في
+            توزيعات أخرى.
+        </p>
+
+        <ul>
+            <li>واجهة أنيقة وحديثة، تجمع بين بساطة GNOME وبعض عناصر التخصيص</li>
+            <li>لوحة إشعارات وأدوات جانبية (Raven) مميزة عن أغلب البيئات الأخرى</li>
+            <li>أصغر من ناحية المجتمع مقارنة بالخيارات الكبرى، وهذا ينعكس أحيانًا على سرعة الإصلاحات</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: من يريد مظهرًا عصريًا دون تعقيد
+            GNOME الكامل أو ثقل KDE.
+        </p>
+
+        <h2 id="deepin">Deepin (DDE)</h2>
+
+        <p>
+            بيئة صينية الأصل، تُعتبر من أكثر بيئات لينكس جمالًا من الناحية
+            البصرية البحتة.
+        </p>
+
+        <ul>
+            <li>تصميم زجاجي أنيق مع رسوم متحركة سلسة جدًا</li>
+            <li>تطبيقات مصاحبة مصممة خصيصًا لتتناسق مع الهوية البصرية للبيئة</li>
+            <li>استهلاك موارد أعلى نسبيًا بسبب المؤثرات البصرية الكثيفة</li>
+            <li>أسئلة متكررة حول الخصوصية بسبب أصل المشروع، رغم كون الكود مفتوحًا للفحص</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: من يعطي أولوية قصوى للمظهر الجمالي،
+            ولا يمانع استهلاك موارد أعلى مقابل ذلك.
+        </p>
+
+        <h2 id="pantheon">Pantheon</h2>
+
+        <p>
+            بيئة توزيعة elementary OS الحصرية، مستوحاة تصميميًا من نظام
+            ماك.
+        </p>
+
+        <ul>
+            <li>بساطة شديدة مقصودة، مع تركيز كبير على الاتساق البصري بين كل التطبيقات</li>
+            <li>غير متوفرة رسميًا لتثبيتها بسهولة على توزيعات أخرى كخيار مستقل</li>
+            <li>تطبيقات مصاحبة أنيقة لكنها أقل عددًا من متاجر التطبيقات الكبرى</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: من يريد تجربة أقرب لماك على لينكس،
+            ضمن توزيعة elementary OS تحديدًا.
+        </p>
+
+        <h2 id="enlightenment">Enlightenment</h2>
+
+        <p>
+            من أقدم بيئات لينكس، ومعروف بخفته الشديدة وتأثيراته البصرية
+            الفريدة رغم استهلاكه المنخفض للموارد.
+        </p>
+
+        <ul>
+            <li>أداء استثنائي حتى على عتاد قديم جدًا</li>
+            <li>منحنى تعلم أعلى قليلاً بسبب فلسفة تصميم مختلفة عن باقي البيئات</li>
+            <li>مجتمع أصغر بكثير، وتوثيق أقل تنظيمًا مقارنة بالخيارات الشائعة</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: مستخدمين متقدمين يبحثون عن أداء
+            أقصى مع استعداد لتعلم منطق مختلف.
+        </p>
+
+        <h2 id="cosmic">COSMIC</h2>
+
+        <p>
+            بيئة جديدة نسبيًا طورتها شركة System76 (صانعة أجهزة Pop!_OS)،
+            مبنية من الصفر بلغة Rust لتكون بديلاً حديثًا مصممًا لـ Wayland
+            أصلاً منذ يومها الأول.
+        </p>
+
+        <ul>
+            <li>لا تحمل أي إرث كود من X11، ما يمنحها استقرارًا أفضل على Wayland منذ البداية</li>
+            <li>تركز على إدارة نوافذ حديثة (Tiling اختياري) قريبة من تجربة أنظمة تشغيل حديثة أخرى</li>
+            <li>لا تزال في مراحل نضج نسبية مقارنة بـ GNOME أو KDE، لكنها تتطور بوتيرة سريعة</li>
+        </ul>
+
+        <p>
+            <strong>الأنسب لـ</strong>: مستخدمي Pop!_OS تحديدًا، أو من يريد
+            تجربة بيئة حديثة مبنية بالكامل لعصر Wayland دون إرث تقني قديم.
+        </p>
+
+        <h2 id="comparison-table">جدول مقارنة سريع</h2>
+
+        <div class="overflow-x-auto my-4">
+            <table
+                class="w-full text-right border border-zinc-200 dark:border-zinc-700 rounded-lg"
+            >
+                <thead
+                    class="bg-zinc-100 dark:bg-zinc-800 light:text-zinc-700 dark:text-zinc-300"
+                >
+                    <tr>
+                        <th class="px-4 py-2 font-semibold">البيئة</th>
+                        <th class="px-4 py-2 font-semibold">الأساس التقني</th>
+                        <th class="px-4 py-2 font-semibold">استهلاك الموارد</th>
+                        <th class="px-4 py-2 font-semibold">التخصيص</th>
+                        <th class="px-4 py-2 font-semibold">الأنسب لـ</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+                    <tr>
+                        <td class="px-4 py-2">GNOME</td>
+                        <td class="px-4 py-2">GTK4 / Mutter</td>
+                        <td class="px-4 py-2">متوسط</td>
+                        <td class="px-4 py-2">محدود بدون إضافات</td>
+                        <td class="px-4 py-2">بساطة ونظافة بصرية</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">KDE Plasma</td>
+                        <td class="px-4 py-2">Qt6 / KWin</td>
+                        <td class="px-4 py-2">متوسط (محسّن كثيرًا)</td>
+                        <td class="px-4 py-2">شبه كامل</td>
+                        <td class="px-4 py-2">التحكم الدقيق والتخصيص</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Xfce</td>
+                        <td class="px-4 py-2">GTK</td>
+                        <td class="px-4 py-2">منخفض جدًا</td>
+                        <td class="px-4 py-2">متوسط</td>
+                        <td class="px-4 py-2">الأجهزة القديمة والاستقرار</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Cinnamon</td>
+                        <td class="px-4 py-2">GTK</td>
+                        <td class="px-4 py-2">منخفض إلى متوسط</td>
+                        <td class="px-4 py-2">متوسط</td>
+                        <td class="px-4 py-2">القادمين من ويندوز</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">MATE</td>
+                        <td class="px-4 py-2">GTK2/3</td>
+                        <td class="px-4 py-2">منخفض</td>
+                        <td class="px-4 py-2">متوسط</td>
+                        <td class="px-4 py-2">الطراز الكلاسيكي</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">LXQt</td>
+                        <td class="px-4 py-2">Qt</td>
+                        <td class="px-4 py-2">الأخف تقريبًا</td>
+                        <td class="px-4 py-2">محدود</td>
+                        <td class="px-4 py-2">الأجهزة الضعيفة جدًا</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Budgie</td>
+                        <td class="px-4 py-2">GTK</td>
+                        <td class="px-4 py-2">متوسط</td>
+                        <td class="px-4 py-2">متوسط</td>
+                        <td class="px-4 py-2">مظهر عصري بسيط</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Deepin (DDE)</td>
+                        <td class="px-4 py-2">Qt</td>
+                        <td class="px-4 py-2">مرتفع نسبيًا</td>
+                        <td class="px-4 py-2">متوسط</td>
+                        <td class="px-4 py-2">الأولوية للجمال البصري</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Pantheon</td>
+                        <td class="px-4 py-2">GTK</td>
+                        <td class="px-4 py-2">منخفض إلى متوسط</td>
+                        <td class="px-4 py-2">محدود</td>
+                        <td class="px-4 py-2">تجربة أقرب لماك</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Enlightenment</td>
+                        <td class="px-4 py-2">EFL</td>
+                        <td class="px-4 py-2">منخفض جدًا</td>
+                        <td class="px-4 py-2">مرتفع لكن معقد</td>
+                        <td class="px-4 py-2">أداء أقصى على عتاد قديم</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">COSMIC</td>
+                        <td class="px-4 py-2">Rust / Iced</td>
+                        <td class="px-4 py-2">منخفض إلى متوسط</td>
+                        <td class="px-4 py-2">متوسط ومتنامٍ</td>
+                        <td class="px-4 py-2">تجربة Wayland حديثة كليًا</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="multiple-des">هل يمكن تثبيت أكثر من بيئة على نفس النظام؟</h2>
+
+        <p>
+            نعم، وهذا شائع جدًا. يمكنك تثبيت GNOME وKDE Plasma على نفس
+            التوزيعة، ثم الاختيار بينهما من شاشة تسجيل الدخول قبل كل جلسة
+            عمل. هذا مفيد للتجربة، لكن يُنصح بتجنبه على الأنظمة الأساسية
+            للاستخدام اليومي، لأن بعض البيئات قد تتعارض في ملفات الإعداد أو
+            الخدمات الخلفية أحيانًا.
+        </p>
+
+        <p>
+            الخيار الأكثر أمانًا للتجربة الفعلية: تثبيت البيئات المختلفة
+            على أجهزة افتراضية منفصلة، أو استخدام أقراص USB حية (Live USB)
+            لكل توزيعة تريد تجربتها.
+        </p>
+
+        <h2 id="how-to-choose">كيف تختار البيئة المناسبة لك؟</h2>
+
+        <ul>
+            <li><strong>جهاز حديث وتريد بساطة</strong>: GNOME</li>
+            <li><strong>جهاز حديث وتريد أقصى تحكم وتخصيص</strong>: KDE Plasma</li>
+            <li><strong>جهاز قديم أو محدود الموارد</strong>: Xfce أو LXQt</li>
+            <li><strong>قادم حديثًا من ويندوز</strong>: Cinnamon</li>
+            <li><strong>تحب الطراز الكلاسيكي البسيط</strong>: MATE</li>
+            <li><strong>الأولوية للمظهر الجمالي أولاً</strong>: Deepin</li>
+            <li><strong>تريد تجربة حديثة مبنية أصلاً لـ Wayland</strong>: COSMIC</li>
+            <li><strong>تريد أقصى أداء على عتاد قديم جدًا وتقبل منحنى تعلم</strong>: Enlightenment</li>
+        </ul>
+
+        <p>
+            لا توجد بيئة "الأفضل مطلقًا"، لأن كل واحدة صُممت بفلسفة مختلفة
+            تمامًا عن الأخرى. أفضل طريقة للاختيار فعليًا هي تجربة اثنتين أو
+            ثلاث منها عمليًا لأسبوع، بدلًا من الاعتماد على المواصفات
+            النظرية وحدها.
+        </p>
+
+        <h2 id="official-links">الروابط الرسمية</h2>
+
+        <p>
+            لمن يريد قراءة التوثيق الرسمي أو تجربة كل بيئة عن كثب، هذه
+            المواقع الرسمية لكل بيئة ذُكرت في هذا المقال:
+        </p>
+
+        <ul>
+            <li>
+                <strong>GNOME:</strong>{" "}
+                <a href="https://www.gnome.org/" target="_blank" rel="noopener noreferrer">gnome.org</a>
+            </li>
+            <li>
+                <strong>KDE Plasma:</strong>{" "}
+                <a href="https://kde.org/plasma-desktop/" target="_blank" rel="noopener noreferrer">kde.org/plasma-desktop</a>
+            </li>
+            <li>
+                <strong>Xfce:</strong>{" "}
+                <a href="https://www.xfce.org/" target="_blank" rel="noopener noreferrer">xfce.org</a>
+            </li>
+            <li>
+                <strong>Cinnamon:</strong>{" "}
+                <a href="https://projects.linuxmint.com/cinnamon/" target="_blank" rel="noopener noreferrer">projects.linuxmint.com/cinnamon</a>
+            </li>
+            <li>
+                <strong>MATE:</strong>{" "}
+                <a href="https://mate-desktop.org/" target="_blank" rel="noopener noreferrer">mate-desktop.org</a>
+            </li>
+            <li>
+                <strong>LXQt:</strong>{" "}
+                <a href="https://lxqt-project.org/" target="_blank" rel="noopener noreferrer">lxqt-project.org</a>
+            </li>
+            <li>
+                <strong>Budgie:</strong>{" "}
+                <a href="https://buddiesofbudgie.org/" target="_blank" rel="noopener noreferrer">buddiesofbudgie.org</a>
+            </li>
+            <li>
+                <strong>Deepin (DDE):</strong>{" "}
+                <a href="https://www.deepin.org/" target="_blank" rel="noopener noreferrer">deepin.org</a>
+            </li>
+            <li>
+                <strong>Pantheon:</strong>{" "}
+                <a href="https://elementary.io/" target="_blank" rel="noopener noreferrer">elementary.io</a>{" "}
+                — بيئة Pantheon موزعة حصريًا ضمن توزيعة elementary OS
+            </li>
+            <li>
+                <strong>Enlightenment:</strong>{" "}
+                <a href="https://www.enlightenment.org/" target="_blank" rel="noopener noreferrer">enlightenment.org</a>
+            </li>
+            <li>
+                <strong>COSMIC:</strong>{" "}
+                <a href="https://system76.com/cosmic/" target="_blank" rel="noopener noreferrer">system76.com/cosmic</a>
+            </li>
+        </ul>
+
+        <h2 id="faq">أسئلة شائعة</h2>
+
+        <p>
+            <strong>هل تغيير بيئة سطح المكتب يؤثر على أداء البرامج نفسها؟</strong><br />
+            لا بشكل مباشر. البرامج نفسها تعمل بنفس الكفاءة تقريبًا، لكن بيئة
+            سطح المكتب تؤثر على استهلاك موارد النظام العام أثناء الاستخدام
+            اليومي.
+        </p>
+
+        <p>
+            <strong>هل يمكن تخصيص GNOME ليبدو مثل ويندوز؟</strong><br />
+            نعم عبر إضافات وثيمات إضافية، لكن Cinnamon أو KDE يوفران هذا
+            الشكل بشكل جاهز وأكثر استقرارًا دون الحاجة لإضافات خارجية.
+        </p>
+
+        <p>
+            <strong>ما الفرق بين Wayland وX11 عمليًا للمستخدم العادي؟</strong><br />
+            Wayland أحدث وأكثر أمانًا وسلاسة في الأداء العام، بينما X11 أقدم
+            وأكثر توافقًا مع بعض البرامج والأدوات القديمة التي لم تُحدَّث
+            بعد.
+        </p>
+
+        <p>
+            <strong>هل تغيير البيئة يحذف ملفاتي الشخصية؟</strong><br />
+            لا، ملفاتك تبقى في مكانها. بيئة سطح المكتب طبقة رسومية فقط، ولا
+            علاقة لها بمكان تخزين ملفاتك على القرص.
+        </p>
+    </PostLayout>
+</BaseLayout>
