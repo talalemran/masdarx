@@ -152,18 +152,32 @@ const relatedPosts = allPosts
   {relatedPosts.length > 0 && (
     <div class="mt-10 pt-6 border-t border-navy-100 dark:border-zinc-800">
       <h2 class="font-heading text-lg font-bold text-navy dark:text-white mb-4">مقالات ذات صلة</h2>
-      <ul class="space-y-2">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {relatedPosts.map((rp) => (
-          <li>
-            <a
-              href={`/posts/${rp.slug}/`}
-              class="font-body text-navy-600 dark:text-zinc-300 hover:text-accent dark:hover:text-zinc-300 transition-colors no-underline"
-            >
-              {rp.title}
-            </a>
-          </li>
+          <a
+            href={`/posts/${rp.slug}/`}
+            class="group block rounded-xl overflow-hidden border border-navy-100 dark:border-zinc-800 hover:border-accent dark:hover:border-zinc-600 transition-colors no-underline"
+          >
+            <div class="bg-navy-50 dark:bg-zinc-800 aspect-video flex items-center justify-center p-4">
+              {rp.thumbnail ? (
+                <img
+                  src={rp.thumbnail}
+                  alt={rp.title}
+                  width="400"
+                  height="225"
+                  class="w-full h-full object-cover rounded-lg"
+                  loading="lazy"
+                />
+              ) : (
+                <span class="font-heading text-sm font-bold text-navy dark:text-zinc-300 text-center leading-snug line-clamp-3">{rp.title}</span>
+              )}
+            </div>
+            <div class="p-3">
+              <p class="font-heading text-sm font-bold text-navy dark:text-white leading-snug line-clamp-2 group-hover:text-accent dark:group-hover:text-zinc-300 transition-colors">{rp.title}</p>
+            </div>
+          </a>
         ))}
-      </ul>
+      </div>
     </div>
   )}
 
