@@ -1,0 +1,188 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "javascript-date-object-flaws-production-temporal-api-fix",
+    title: "Date في جافاسكريبت: 6 أخطاء تحطّم الإنتاج والحل هو Temporal API",
+    description:
+        "كائن Date في جافاسكريبت قنبلة موقوتة: تحويلات المنطقة الزمنية الخفية، الشهور ذات الفهرسة 0، والحالة القابلة للتغيير. تعرف على 6 أعطال إنتاجية وكيفية إصلاحها برمجياً.",
+    keywords: [
+        "JavaScript Date",
+        "Temporal API",
+        "التعامل مع التواريخ",
+        "المناطق الزمنية",
+        "جافاسكريبت",
+        "برمجة",
+        "أخطاء الإنتاج",
+        "UTC",
+        "JSON serialization",
+        "date-fns",
+    ],
+    category: "برمجة",
+    author: "فريق مصدر إكس",
+    date: "1 أغسطس 2026",
+    pubDate: new Date("2026-08-01"),
+    tags: ["JavaScript", "Date", "Temporal", "برمجة", "أخطاء إنتاجية"],
+    thumbnail: "/images/javascript-date-object-flaws-production-temporal-api-fix.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            كائن <strong>Date</strong> في جافاسكريبت قنبلة موقوتة في أنظمة الإنتاج.
+            تعتمد على طوابع زمنية بالميلي ثانية منذ حقبة Unix (1 يناير 1970 UTC)،
+            لكن التصميم ينقصه الدقة اللازمة للتعامل الآمن مع التواريخ. النتيجة؟ فواتير
+            بيوم واحد مختلف، تجديدات اشتراكات في الشهر الخاطئ، وفوضى في الجداول الزمنية.
+        </p>
+
+        <h2>6 أعطال تحطّم الإنتاج</h2>
+
+        <h3>1. فخ تحويل UTC إلى العرض المحلي</h3>
+
+        <p>
+            عندما تُنشئ `new Date('2026-07-21')`، يفسرها جافاسكريبت كـ UTC، لكن
+            عند العرض تنزاح بيوم واحد في المناطق الزمنية غرب UTC. السبب: الطابع
+            الزمني يُختزل برقم الساعات، وهذا قد يعبر منتصف الليل. مثلاً:
+            `2026-07-21T00:00:00Z` (UTC) تصبح `2026-07-20T18:00:00` في UTC-6.
+            النتيجة: التقارير والفواتير تظهر ليوم مختلف.
+        </p>
+
+        <p>
+            <strong>الحل الآمن:</strong> أضف المنطقة الزمنية صراحةً: `new Date('2026-07-21T00:00:00+00:00')`
+        </p>
+        <p>
+            <strong>الحل الأمثل:</strong> استخدم <strong>Temporal API</strong>:
+            `Temporal.PlainDate.from('2026-07-21[UTC]')`
+        </p>
+
+        <h3>2. مفاجأة أغسطس: الشهور بفهرسة 0</h3>
+
+        <p>
+            `new Date(2026, 7, 21)` تُنشئ 21 أغسطس، وليس يوليو، لأن الفهرسة تبدأ
+            من 0. هذا عدم توافق بين ما يتوقعه البشر (شهور 1-12) وما تفعله
+            الواجهة البرمجية. فاتورة قد تُسجل في الشهر الخاطئ بسبب هذا.
+        </p>
+
+        <p>
+            <strong>الحل الآمن:</strong> استخدم parsing النصوص: `new Date('2026-07-21')`
+        </p>
+        <p>
+            <strong>الحل الأمثل:</strong>
+            <code
+                >Temporal.PlainDate.from(&#123; year: 2026, month: 7, day: 21
+                &#125;)</code
+            > — شهور 1-based
+        </p>
+
+        <h3>3. خطأ المراجع المشتركة: Mutability يفسد البيانات</h3>
+
+        <p>
+            طرق مثل `setMonth` أو `setDate` تعدّل كائن Date في المكان. إذا أشارت
+            عدة متغيرات لنفس الكائن، التعديلات تؤثر عليها جميعاً. في بيئات غير
+            متزامنة، هذا مصدر صامت لفساد البيانات.
+        </p>
+
+        <pre><code>const d1 = new Date();
+const d2 = d1;
+d2.setMonth(0); // د1 و د2 أصبحا الآن في يناير!</code></pre>
+
+        <p>
+            <strong>الحل الآمن:</strong> انسخ قبل التعديل: `const d2 = new Date(d1.getTime())`
+        </p>
+        <p>
+            <strong>الحل الأمثل:</strong> استخدم <strong
+                >Temporal.PlainDate</strong
+            > — كائنات غير قابلة للتغيير
+        </p>
+
+        <h3>4. حساب الشهور مقابل الأيام: الاختلاف عند الحدود</h3>
+
+        <p>
+            إضافة شهر واحد وإضافة 30 يوماً يختلفان عند حدود الشهور. إضافة 30 يوم
+            لـ 2026-01-31 ينتج 2026-03-02، لكن إضافة شهر واحد تعطي 2026-02-28.
+            هذا يكسر دورات التجديد والفواتير.
+        </p>
+
+        <p><strong>الحل الآمن:</strong> استخدم مكتبات محققة مثل `date-fns`</p>
+        <p>
+            <strong>الحل الأمثل:</strong>
+            <code>Temporal.PlainDate.add(&#123; months: 1 &#125;)</code>
+        </p>
+
+        <h3>5. فقدان المنطقة الزمنية الصامت في JSON</h3>
+
+        <p>
+            `JSON.stringify` يسلسل كائنات Date كنصوص ISO بدون معلومات المنطقة
+            الزمنية (مثل `"2026-07-21T00:00:00.000Z"`). هذا يرغم العملاء على
+            تخمين المنطقة الزمنية الأصلية، مما يؤدي لأخطاء في الأنظمة الموزعة.
+        </p>
+
+        <p>
+            <strong>الحل الآمن:</strong> أضف الـ offset يدويًا: `date.toISOString().replace('Z',
+            '+00:00')`
+        </p>
+        <p>
+            <strong>الحل الأمثل:</strong> `Temporal.PlainDate.toString()` يحافظ على
+            السياق
+        </p>
+
+        <h3>6. غموض البناء: مصيدة التحليل</h3>
+
+        <p>
+            `new Date(2026, 0, 1)` تُنشئ 2026-01-01، لكن `new Date(2026, 0, 1,
+            0, 0, 0, 0)` تُعامل كمنطقة زمنية محلية بشكل افتراضي، مما يسبب عدم
+            توافق إذا كان المقصود UTC.
+        </p>
+
+        <p>
+            <strong>الحل الآمن:</strong> استخدم parsing النصوص مع منطقة زمنية محددة
+        </p>
+        <p>
+            <strong>الحل الأمثل:</strong>
+            <code
+                >Temporal.PlainDateTime.from(&#123; year: 2026, month: 1, day:
+                1, timeZone: 'UTC' &#125;)</code>
+        </p>
+
+        <h2>الخلاصة: Temporal API هو المستقبل</h2>
+
+        <p>
+            Temporal API ليست مجرد غلاف — إنها إعادة تصميم أساسية. بفرض الـ
+            immutability، معالجة المنطقة الزمنية الصريحة، والحسابات المتسقة،
+            تزيل الأسباب الجذرية لأخطاء Date. القاعدة واضحة: <strong
+                >إذا كانت الدقة والموثوقية غير قابلة للتفاوض، استخدم Temporal
+                للأكواد الجديدة</strong
+            >.
+        </p>
+
+        <p>
+            للأنظمة الموروثة، فرض أنماط آمنة إلزامي. لكن هذه ليست حلاً — إنها
+            ضمادة على نظام مكسور. الحل الحقيقي هو الهجرة.
+        </p>
+
+        <h3>المصدر:</h3>
+        <p>
+            <a
+                href="https://hackernoon.com/javascript-date-object-flaws-cause-production-issues-exploring-solutions-for-accurate-date-handling"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                HackerNoon
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
