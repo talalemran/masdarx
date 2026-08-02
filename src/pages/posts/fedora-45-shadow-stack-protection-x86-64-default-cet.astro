@@ -1,0 +1,126 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "fedora-45-shadow-stack-protection-x86-64-default-cet",
+    title: "فيدورا 45 تفعّل حماية Shadow Stack افتراضياً: دفاع صلب ضد هجمات ROP",
+    description:
+        "فيدورا لينكس 45 تُفعّل حماية Shadow Stack بشكل افتراضي على أجهزة x86_64 — ميزة أمان مدعومة من الأجهزة على معالجات Intel 11 وأحدث و AMD Zen 3 وأحدث، تحمي من هجمات Return-Oriented Programming بتكلفة أداء ضئيلة جداً.",
+    keywords: [
+        "Fedora 45",
+        "فيدورا",
+        "Shadow Stack",
+        "x86_64",
+        "أمان",
+        "ROP attacks",
+        "Control Flow Enforcement",
+        "Intel CET",
+        "معالج",
+        "الأمان",
+    ],
+    category: "لينكس",
+    author: "فريق مصدر إكس",
+    date: "2 أغسطس 2026",
+    pubDate: new Date("2026-08-02"),
+    tags: ["Fedora 45", "أمان", "Shadow Stack", "لينكس", "حماية"],
+    thumbnail: "/images/fedora-45-shadow-stack-protection-x86-64-default-cet.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            فيدورا لينكس 45 ستفعّل حماية Shadow Stack بشكل افتراضي لمعظم
+            التطبيقات على أجهزة x86_64. هذا تحديث أمني جوهري يحول توزيعة المجتمع
+            الشهيرة إلى واحدة من الأنظمة الأكثر أماناً في عالم لينكس — وذلك برمز
+            واحد.
+        </p>
+
+        <h2>ما هو Shadow Stack؟</h2>
+
+        <p>
+            Shadow Stacks هي ميزة أمان مفروضة بالأجهزة من قبل معالجات Intel و
+            AMD الحديثة للدفاع ضد هجمات Return-Oriented Programming (ROP).
+            الفكرة بسيطة وقوية: المعالج يحتفظ بنسخة مختفية من عناوين الإرجاع
+            للدوال، وعندما تحاول دالة العودة، يتحقق المعالج من أن العنوان الفعلي
+            يطابق النسخة المخفية. إذا لم يتطابقا، يوقف البرنامج.
+        </p>
+
+        <h2>من يدعم هذا؟</h2>
+
+        <p>
+            دعم Shadow Stack متاح على معالجات Intel الجيل 11 والأحدث، ومعالجات
+            AMD Zen 3 والأحدث. بمعنى آخر: معظم أجهزة الكمبيوتر الحديثة.
+        </p>
+
+        <h2>كيف تعمل في فيدورا 45؟</h2>
+
+        <p>
+            الرابط الديناميكي أو روتينات البدء الثابتة ستفعّل Shadow Stack لأي
+            عملية تكون فيها النسخة الثنائية وجميع مكتبات الاعتماديات المشتركة
+            مبنية بدعم Shadow Stack، محمية بشكل افتراضي متى أمكن ذلك. هذا يعني
+            أن معظم التطبيقات ستحصل على الحماية تلقائياً دون تدخل من المستخدم.
+        </p>
+
+        <h2>الأداء والتكلفة</h2>
+
+        <p>
+            هذا سيحمي غالبية ثنائيات فيدورا، لكن يضيف نفقات أداء صغيرة جداً.
+            بعبارة أخرى: الأمان بدون ألم حقيقي.
+        </p>
+
+        <h2>اللغات المدعومة</h2>
+
+        <p>
+            تطبيقات ومكتبات مبنية بـ gcc (C، C++)، و clang (C، C++)، و rustc
+            (Rust) ستحصل على الحماية بشكل افتراضي. هذا يغطي معظم البرامج
+            الموجودة على نظام فيدورا.
+        </p>
+
+        <h2>استثناءات للتطبيقات غير المتوافقة</h2>
+
+        <p>
+            إذا كان تطبيق معين غير متوافق مع Shadow Stack، يمكن تعطيله له بشكل
+            منفصل عبر ملف drop-in يملكه الحزمة. عندما تُصلح الحزمة المشكلة،
+            يُزيل الملف ويحصل التطبيق على الحماية مجدداً.
+        </p>
+
+        <h2>الخطوة التالية: IBT</h2>
+
+        <p>
+            تفعيل Shadow Stack يمهّد الطريق لفريق فيدورا لتفعيل Indirect Branch
+            Tracking (IBT) في إصدار مستقبلي، مما سيوفر تقنية فرض تدفق التحكم
+            الكاملة (CET). بعبارة أخرى: هذا ليس النهاية — بل البداية.
+        </p>
+
+        <p>
+            فيدورا 45 تصنع خطوة جريئة نحو أمان افتراضي حقيقي. بدلاً من ترك
+            الأمان لاختيار المستخدم أو الإعدادات اليدوية، تفعّله بشكل افتراضي
+            على كل جهاز يدعمه. هذا هو الأمان الذي يعمل بصمت.
+        </p>
+
+        <h3>المصدر:</h3>
+        <p>
+            <a
+                href="https://9to5linux.com/fedora-linux-45-to-enable-shadow-stack-protection-by-default-on-64-bit"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                9to5Linux
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
