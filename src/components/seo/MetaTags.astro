@@ -25,7 +25,8 @@ const siteName = "مصدر إكس";
 const fullTitle = `${title} | ${siteName}`;
 const domain = "https://www.masdarx.com";
 const canonicalUrl = canonical ? `${domain}${canonical}` : undefined;
-const ogImageUrl = ogImage?.startsWith("http") ? ogImage : ogImage ? `${domain}${ogImage}` : undefined;
+const defaultOgImage = "/images/masdarx.webp";
+const ogImageUrl = ogImage?.startsWith("http") ? ogImage : ogImage ? `${domain}${ogImage}` : `${domain}${defaultOgImage}`;
 const truncatedDesc =
   description.length > 160 ? description.slice(0, 157) + "..." : description;
 ---
@@ -49,9 +50,9 @@ const truncatedDesc =
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={truncatedDesc} />
 <meta property="og:url" content={canonicalUrl || domain} />
-{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
-{ogImageUrl && <meta property="og:image:width" content="1200" />}
-{ogImageUrl && <meta property="og:image:height" content="630" />}
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:type" content={ogType} />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content="ar_AR" />
@@ -59,7 +60,7 @@ const truncatedDesc =
 <meta name="twitter:card" content={twitterCard} />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={truncatedDesc} />
-{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+<meta name="twitter:image" content={ogImageUrl} />
 <meta name="twitter:site" content="@masdarx" />
 <meta name="twitter:creator" content="@masdarx" />
 <meta name="p:domain_verify" content="bbf25bfda7eed0ab0844a86d57bee994"/>
