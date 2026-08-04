@@ -1,0 +1,198 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "typescript-7-released-native-go-rewrite-10x-faster",
+    title: "تايب سكريبت TypeScript 7 صدر رسمياً: أسرع 11 مرة من الإصدار السابق",
+    description:
+        "Microsoft تعلن عن TypeScript 7 — الإصدار الأول المكتوب بالكامل بلغة Go الأصلية بدلاً من JavaScript. السرعة تحسنت بـ 8-12 مرة على البناء الكامل، وأوقات الترجمة تنخفض بشكل درامي من دقائق لثوان.",
+    keywords: [
+        "TypeScript 7",
+        "تايب سكريبت",
+        "Go language",
+        "برمجة",
+        "JavaScript",
+        "Microsoft",
+        "compiler",
+        "أداء",
+        "ترجمة",
+        "تطوير ويب",
+    ],
+    category: "برمجة",
+    author: "فريق مصدر إكس",
+    date: "4 أغسطس 2026",
+    pubDate: new Date("2026-08-04"),
+    tags: ["TypeScript", "برمجة", "أداء", "Go", "JavaScript"],
+    thumbnail: "/images/typescript-7-released-native-go-rewrite-10x-faster.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            أعلنت <strong>Microsoft</strong> رسمياً عن إطلاق <strong
+                >TypeScript 7</strong
+            > — وهو إصدار تاريخي يمثل أول مرة يُكتب فيها TypeScript بالكامل بلغة أصلية
+            <strong>Go</strong> بدلاً من JavaScript. النتيجة؟ <strong
+                >أسرع 8-12 مرة</strong
+            > من الإصدار السابق على المشاريع الكبيرة.
+        </p>
+
+        <h2>لماذا إعادة الكتابة بـ Go؟</h2>
+
+        <p>
+            فريق TypeScript أعاد كتابة الكود بأمانة تامة — لكن باستخدام لغة
+            أصلية يمكنها استغلال البنية الحديثة للأجهزة. القرار سُنفذ بحذر:
+            الفريق أبقى على هيكل الكود الأصلي والمنطق بالكامل لضمان أن النتائج
+            متطابقة وملائمة تماماً بين الترجمتَين.
+        </p>
+
+        <h2>أرقام الأداء الصادمة</h2>
+
+        <p>
+            اختبرت Microsoft TypeScript 7 على عدة مشاريع برمجية مفتوحة المصدر
+            كبيرة:
+        </p>
+
+        <div class="overflow-x-auto my-4">
+            <table
+                class="w-full text-sm text-right border border-zinc-200 dark:border-zinc-700 rounded-lg"
+            >
+                <thead class="bg-zinc-100 dark:bg-zinc-800">
+                    <tr>
+                        <th class="px-4 py-2 font-semibold">المشروع</th>
+                        <th class="px-4 py-2 font-semibold">TypeScript 6</th>
+                        <th class="px-4 py-2 font-semibold">TypeScript 7</th>
+                        <th class="px-4 py-2 font-semibold">التحسن</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-zinc-200 dark:divide-zinc-700">
+                    <tr>
+                        <td class="px-4 py-2 font-medium">VSCode</td>
+                        <td class="px-4 py-2">125.7 ثانية</td>
+                        <td class="px-4 py-2">10.6 ثواني</td>
+                        <td class="px-4 py-2">11.9x</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Sentry</td>
+                        <td class="px-4 py-2">139.8 ثانية</td>
+                        <td class="px-4 py-2">15.7 ثواني</td>
+                        <td class="px-4 py-2">8.9x</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Bluesky</td>
+                        <td class="px-4 py-2">24.3 ثانية</td>
+                        <td class="px-4 py-2">2.8 ثواني</td>
+                        <td class="px-4 py-2">8.7x</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Playwright</td>
+                        <td class="px-4 py-2">12.8 ثانية</td>
+                        <td class="px-4 py-2">1.47 ثانية</td>
+                        <td class="px-4 py-2">8.7x</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-2">Tldraw</td>
+                        <td class="px-4 py-2">11.2 ثانية</td>
+                        <td class="px-4 py-2">1.46 ثانية</td>
+                        <td class="px-4 py-2">7.7x</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>أين التحسن يشعر به المطورون؟</h2>
+
+        <p>
+            تحسن الأداء يغطي كل جزء من TypeScript — من فتح المحرر، إلى فتح ملف
+            TypeScript، إلى تشغيل عمليات مثل find-all-references عبر المشاريع.
+            بمعنى عملي:
+        </p>
+
+        <ul>
+            <li>
+                <strong>تحميل المشروع:</strong> فوري بدلاً من الانتظار الطويل
+            </li>
+            <li>
+                <strong>الإكمال التلقائي:</strong> يظهر بسرعة برق بدلاً من التأخير
+                المحبط
+            </li>
+            <li>
+                <strong>تشخيص الأخطاء:</strong> يُظهِر الأخطاء لحظة الكتابة بدلاً
+                من التأخير
+            </li>
+            <li>
+                <strong>البناء الكامل:</strong> عند تشغيل tsc أو وضع --watch، حلقات
+                التطوير تصبح أسرع بكثير
+            </li>
+        </ul>
+
+        <h2>ما قاله مدير المنتج</h2>
+
+        <p>
+            Daniel Rosenwasser، مدير المنتجات الرئيسي، قال: "TypeScript أسرع
+            يعني أن كل جزء فوقها مُسرّع. انتظار تحميل محررك لمشروعك سيبدو
+            فورياً. التأخيرات في find-all-references والإكمال التلقائي
+            والتشخيصات يجب أن تأخذ جزء صغير من الوقت الذي كانت تستغرقه. وعندما
+            تشغّل tsc، ربما في وضع --watch، ستتمكن من شد حلقة التغذية الراجعة
+            والتكرار أسرع من أي وقت مضى."
+        </p>
+
+        <h2>TypeScript 6 ينتهي هنا</h2>
+
+        <p>
+            TypeScript 7 هو أول إصدار مكتوب بالكود الأصلي، وTypeScript 6.0 سيكون
+            آخر إصدار من النسخة المستندة على JavaScript.
+        </p> هذا يعني أن المطورين الذين يريدون الاستفادة من التحسينات الهائلة سيحتاجون
+        للانتقال.
+
+        <h2>الاختبار الشامل</h2>
+
+        <p>
+            فريق Microsoft اختبر TypeScript 7 بشكل كثيف قبل الإطلاق — بما في ذلك
+            العمل مع فِرَق كبيرة داخل Microsoft وخارجاً على مشاريع حقيقية.
+            النتائج كانت "إيجابية بشكل ساحق".
+        </p>
+
+        <h2>الحصول على TypeScript 7</h2>
+
+        <p>TypeScript 7 متاح الآن على:</p>
+
+        <ul>
+            <li>Visual Studio Marketplace</li>
+            <li>NuGet للمشاريع .NET</li>
+            <li>GitHub للمطورين الذين يريدون الكود المصدري</li>
+        </ul>
+
+        <p>
+            TypeScript 7 أكثر من مجرد تحديث سرعة — إنها نقطة انعطاف في تطور
+            اللغة. بإعادة كتابة المترجم بلغة أصلية، Microsoft تثبت أن حتى
+            الأدوات المُستقرة يمكن أن تحصل على قفزات أداء هائلة عند إعادة النظر
+            في القرارات الأساسية.
+        </p>
+
+        <h3>المصدر:</h3>
+        <p>
+            <a
+                href="https://www.i-programmer.info/news/98-languages/19053-typescript-7-released.html"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                I Programmer
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
