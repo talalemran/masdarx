@@ -1,0 +1,161 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "genoffice-ai-first-microsoft-office-alternative-open-source",
+    title: "GenOffice: بديل مفتوح المصدر للإنتاجية موجّه بالذكاء الاصطناعي بالكامل",
+    description:
+        "GenOffice من MainFunc.ai منصة عمل مفتوحة المصدر مبنية بـ Electron تجمع محررات Docs و Sheets و Slides و PDF — كل شيء مركز على الذكاء الاصطناعي، لكن بدون دعم لينكس حتى الآن.",
+    keywords: [
+        "GenOffice",
+        "جينأوفيس",
+        "أداة إنتاجية",
+        "ذكاء اصطناعي",
+        "مفتوح المصدر",
+        "Microsoft Office alternative",
+        "Electron",
+        "Genspark",
+        "Docs",
+        "Sheets",
+    ],
+    category: "برامج",
+    author: "فريق مصدر إكس",
+    date: "5 أغسطس 2026",
+    pubDate: new Date("2026-08-05"),
+    tags: ["GenOffice", "ذكاء اصطناعي", "مفتوح المصدر", "إنتاجية", "Electron"],
+    thumbnail:
+        "/images/genoffice-ai-first-microsoft-office-alternative-open-source.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            هناك تحول جديد يحدث في سوق البرامج الإنتاجية. بينما Microsoft تدفع
+            Copilot في كل مكان — سواء أردت ذلك أم لا — يأتي مشروع جديد يدعى <strong
+                >GenOffice</strong
+            > ليقدم رؤية مختلفة: منصة عمل مفتوحة المصدر موجّهة بالكامل نحو الذكاء
+            الاصطناعي، لكن بطريقة أقل إزعاجاً.
+        </p>
+
+        <h2>ما هي GenOffice؟</h2>
+
+        <p>
+            GenOffice من MainFunc.ai مشروع مبني بواسطة مطور واحد مزوّد بـ 10,000
+            دولار من رموز الذكاء الاصطناعي، يجمع أربعة محررات في تطبيق سطح مكتب
+            واحد مبني على Electron:
+        </p>
+
+        <ul>
+            <li><strong>Docs:</strong> لتحرير ملفات .docx — صيغة Word</li>
+            <li><strong>Sheets:</strong> لجداول البيانات .xlsx — صيغة Excel</li>
+            <li>
+                <strong>Slides:</strong> لعروض التقديم .pptx — صيغة PowerPoint
+            </li>
+            <li><strong>PDF:</strong> لقراءة وتحليل ملفات PDF</li>
+        </ul>
+
+        <h2>الذكاء الاصطناعي في كل مكان</h2>
+
+        <p>
+            الفارق الحقيقي بين GenOffice وأدوات أخرى هو أن الذكاء الاصطناعي ليس
+            إضافة جانبية — بل هو القلب. في Docs، يمكنك كتابة مقطع، إعادة تنسيق
+            فقرة، أو إعادة كتابتها لقارئ مختلف من خلال prompt بسيط، مع عمل
+            الذكاء الاصطناعي مباشرة داخل الوثيقة بدلاً من لوحة جانبية.
+        </p>
+        <p>
+            في Slides، يمكنك إنشاء عرض تقديمي كامل من prompt واحد فقط — المنصة
+            تختار التخطيط، تكتب النص، وتُدرج بطاقات البيانات.
+        </p>
+
+        <h2>التكنولوجيا وراء الكواليس</h2>
+
+        <ul>
+            <li>
+                <strong>Sheets:</strong> تعمل على Univer، محرك جداول بيانات مفتوح
+                المصدر، مع خادم مخصص مكتوب بـ Rust لقراءة وكتابة الملفات
+            </li>
+
+            <li>
+                <strong>PDF:</strong> مبنية على مكتبات مفتوحة المصدر pdf.js و pdf-lib،
+                تتيح قراءة المستندات الطويلة والسؤال عن أقسام محددة
+            </li>
+            <li>
+                <strong>قلب الذكاء الاصطناعي:</strong> جميع هذه الأدوات تعمل عبر Genspark's
+                Super Agent، الذي يُعامل كجزء أساسي من التطبيق وليس نافذة دردشة مرفقة
+                على الجانب
+            </li>
+        </ul>
+
+        <h2>المشكلة: الخصوصية وتكاليف الذكاء الاصطناعي</h2>
+
+        <p>هناك مشاكل كبيرة تستحق الانتباه:</p>
+
+        <ul>
+            <li>
+                <strong>ليس كل شيء مجاني:</strong> فتح الملفات وتحريرها وحفظها مجاني،
+                لكن ميزات الذكاء الاصطناعي تستخدم نظام رصيد من Genspark، مربوطة بحساب
+                وليس نموذج محلي
+            </li>
+            <li>
+                <strong>مشاكل الخصوصية الخطيرة:</strong> GenOffice لا يبدو أن لديه
+                سياسة خصوصية خاصة به. ميزات الذكاء الاصطناعي تعمل عبر خدمة Genspark،
+                لذا أي شيء تُرسله يخضع لشروط Genspark وسياستها
+            </li>
+            <li>
+                <strong>مشاركة مع جهات خارجية:</strong> النصوص المُرسلة لميزات الذكاء
+                الاصطناعي تُمرّر إلى موفري خدمات خارجيين، بما فيهم OpenAI، Anthropic،
+                Google، xAI، و ElevenLabs، ولا يتم تخزين أي مفتاح API على جهازك
+            </li>
+        </ul>
+
+        <h2>دعم الأنظمة الأساسية</h2>
+
+        <p>
+            حالياً، GenOffice متوفر فقط لـ Windows (x64) و macOS على Apple
+            Silicon. لا يتم دعم أجهزة Mac على Intel، وكما قد تتوقعون، لا يتم دعم
+            لينكس أيضاً.
+        </p>
+
+        <h2>هل يأتي دعم لينكس؟</h2>
+
+        <p>
+            هناك issue مفتوحة على GitHub (يبدو أنها مكتوبة بواسطة الذكاء
+            الاصطناعي) تذكر بناء lينكس أصلي، قُدمت من قبل عضو في المجتمع. تشرح
+            كيف أن شحن GenOffice على لينكس ليس بسيطاً كما يبدو. اعتباراً من
+            الكتابة، لم تكن هناك رد من مطور GenOffice الرئيسي، لذا لا تتوقع بناء
+            لينكس قريباً
+        </p>
+
+        <p>
+            إذا كنت تريد تجربة GenOffice، يمكنك الحصول على المثبتات من الموقع
+            الرسمي أو من GitHub، لكن توقعاتك يجب أن تكون واضحة: هذا ليس بديلاً
+            حقيقياً للإنتاجية المحلية الكاملة — بل نموذج SaaS مرتبط بالسحابة
+            والذكاء الاصطناعي.
+        </p>
+
+        <h3>المصدر:</h3>
+        <p>
+            <a
+                href="https://itsfoss.com/news/genoffice-overview/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                It's FOSS
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
