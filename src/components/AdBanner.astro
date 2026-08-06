@@ -4,7 +4,7 @@ import { ads } from "@/data/ads";
 const ad = ads[0];
 ---
 
-<div class="my-8 pt-6 border-t border-navy-100 dark:border-zinc-800">
+<div class="my-8">
     <h2 class="font-heading text-lg font-bold text-navy dark:text-white mb-3">فاصل اعلاني</h2>
     <a
         href={ad.link}
@@ -25,7 +25,7 @@ const ad = ads[0];
             <h3 class="font-heading text-base font-bold text-navy dark:text-white group-hover:text-accent dark:group-hover:text-zinc-300 transition-colors">
                 {ad.title}
             </h3>
-            <p class="font-body text-sm text-navy-400 dark:text-zinc-400 mt-1">
+            <p class="font-body text-base text-navy-400 dark:text-zinc-400 mt-1">
                 {ad.description}
             </p>
         </div>
