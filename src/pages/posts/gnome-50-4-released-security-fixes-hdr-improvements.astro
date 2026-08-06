@@ -1,0 +1,141 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "gnome-50-4-released-security-fixes-hdr-improvements",
+    title: "جنوم 50.4 صدر رسمياً: إصلاحات أمنية حرجة و HDR وتحسينات",
+    description:
+        "فريق جنوم أطلق 50.4 و49.9 في 5 أغسطس 2026 — تصحيحات أمان حرجة لـ GDM ضد ثغرات traversal واجتياز المصادقة، إضافة دعم HDR mastering metadata وإصلاحات متعددة في الرسوميات والصوت.",
+    keywords: [
+        "GNOME 50.4",
+        "جنوم",
+        "GDM security",
+        "HDR mastering",
+        "سطح المكتب",
+        "Linux",
+        "Mutter",
+        "GNOME Shell",
+        "تحديث أمني",
+        "مفتوح المصدر",
+    ],
+    category: "بيئة سطح المكتب",
+    author: "فريق مصدر إكس",
+    date: "5 أغسطس 2026",
+    pubDate: new Date("2026-08-05"),
+    tags: ["GNOME 50.4", "بيئة سطح المكتب", "أمان", "HDR", "سطح المكتب"],
+    thumbnail: "/images/gnome-50-4-released-security-fixes-hdr-improvements.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            أطلق <strong>فريق جنوم GNOME</strong> يوم أمس <strong
+                >جنوم 50.4</strong
+            > و<strong>جنوم 49.9</strong> كتحديثات مستقرة وإصلاحات أخطاء — وكلا الإصدارين
+            يحملان <strong>تصحيحات أمنية حرجة</strong> لمدير العرض GDM إلى جانب تحسينات
+            تقنية متعددة.
+        </p>
+
+        <h2>إصلاحات الأمان الحرجة</h2>
+
+        <p>
+            كلا الإصدارين يشملان تصلب أمني حرج لـ GDM، حيث تم إصلاح ثغرات path
+            traversal واجتياز المصادقة الآلية وهجمات رفض الخدمة في مدير العرض.
+        </p>
+
+        <ul>
+            <li>
+                <strong>Path Traversal:</strong> مهاجم قد يتجاوز قيود الملفات ويصل
+                لملفات حساسة
+            </li>
+            <li>
+                <strong>Autologin Bypass:</strong> حماية المصادقة الآلية ضد الاختراق
+                المباشر
+            </li>
+            <li>
+                <strong>Denial of Service:</strong> منع هجمات إيقاف الخدمة ضد GDM
+            </li>
+        </ul>
+
+        <h2>GLib: إصلاح ثغرة D-Bus خطيرة</h2>
+
+        <p>
+            GLib 2.88.3 يعالج CVE-2026-15588 — ثغرة رفض خدمة قبل المصادقة في
+            GDBusServer. مهاجمون بعيدون يمكنهم إيقاف خوادم D-Bus بإرسال أسطر
+            مصادقة طويلة جداً. المخزن المؤقت SASL غير المحدود الآن مُحدود.
+        </p>
+
+        <h2>تحسينات جنوم شل GNOME Shell</h2>
+
+        <p>
+            جنوم 50.4 يحسّن رسوم القائمة في جنوم شل، وكذلك حصل على إصلاحات لمؤشر
+            مصغّر مُعاد تحجيمه بشكل خاطئ على شاشات HiDPI، وصرير صوتي عند دفع
+            تغييرات مستقلة للصوت، وخلل عند التبديل إلى نافذة مصغّرة على مساحة
+            عمل أخرى.
+        </p>
+
+        <ul>
+            <li>إصلاح حركات القائمة الخاطئة</li>
+            <li>تصحيح عرض المؤشر المصغّر على الشاشات عالية الدقة</li>
+            <li>إزالة صرير الصوت من تغييرات مستقلة</li>
+            <li>تحسين السلوك عند التبديل بين النوافذ المصغّرة</li>
+        </ul>
+
+        <h2>تحسينات Mutter: HDR والرسوميات</h2>
+
+        <p>
+            Mutter 50.4 يضيف دعم HDR mastering display metadata، وهي تحسن دقة
+            tone-mapping لإخراج HDR. التصحيح أيضاً يثبّت الرسم المشوّه على
+            الشاشات غير المتوازنة بكسل. أوضاع المراقب الاحتياطية غير المدعومة لا
+            تُضاف بعد الآن، وتُصحح مناطق إعادة الرسم غير الصحيحة على الشاشات
+            المدورة.
+        </p>
+
+        <h2>النهج المحافظ</h2>
+
+        <p>
+            فريق الإطلاق وصفت هذه بأنها تحديثات محافظة متعمدة لتحسين الاستقرار
+            دون تقديم ميزات جديدة. المكونات الأساسية مثل Nautilus و GTK بقيت دون
+            تغيير.
+        </p> هذا مؤشر على نضج المشروع — الأولوية للأمان والاستقرار.
+
+        <h2>الخلاصة</h2>
+
+        <ul>
+            <li>تصحيحات أمنية حرجة لـ GDM و D-Bus</li>
+            <li>دعم جديد لـ HDR mastering metadata</li>
+            <li>إصلاحات متعددة للصوت والشاشات والرسوميات</li>
+            <li>نهج محافظ يركز على الاستقرار</li>
+        </ul>
+
+        <p>
+            جنوم 50.4 تحديث كلاسيكي — بدون ضجيج، فقط إصلاحات محتاجة وأمان أقوى.
+            مستخدمو لينكس الذين يريدون سطح مكتب موثوق يجب أن يحدّثوا فوراً.
+        </p>
+
+        <h3>المصدر:</h3>
+        <p>
+            <a
+                href="https://9to5linux.com/gnome-50-4-desktop-environment-released-with-various-improvements"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                9to5Linux
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
