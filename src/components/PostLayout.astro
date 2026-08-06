@@ -1,5 +1,6 @@
 ---
 import TagBadge from "./TagBadge.astro";
+import AdBanner from "./AdBanner.astro";
 
 export interface Props {
   post: {
@@ -244,7 +245,28 @@ const relatedPosts = allPosts
   </div>
 </article>
 
+<div id="ad-slot" class="hidden" aria-hidden="true">
+  <AdBanner />
+</div>
+
 <script>
+  function injectAd() {
+    const content = document.querySelector('.post-content');
+    const slot = document.getElementById('ad-slot');
+    if (!content || !slot) return;
+
+    const paragraphs = content.querySelectorAll(':scope > p');
+    if (paragraphs.length < 2) return;
+
+    const ad = slot.firstElementChild;
+    if (!ad) return;
+
+    ad.removeAttribute('class');
+    ad.removeAttribute('aria-hidden');
+    ad.setAttribute('data-ad-slot', '');
+    paragraphs[1].after(ad);
+  }
+
   function calculateReadingTime() {
     const article = document.querySelector('.post-content');
     const readingTimeEl = document.getElementById('reading-time');
@@ -258,5 +280,6 @@ const relatedPosts = allPosts
     readingTimeEl.textContent = `${minutes} دقيقة قراءة`;
   }
 
+  injectAd();
   calculateReadingTime();
 </script>
