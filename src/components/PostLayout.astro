@@ -261,10 +261,9 @@ const relatedPosts = allPosts
     const ad = slot.firstElementChild;
     if (!ad) return;
 
-    ad.removeAttribute('class');
-    ad.removeAttribute('aria-hidden');
-    ad.setAttribute('data-ad-slot', '');
-    paragraphs[1].after(ad);
+    slot.removeAttribute('class');
+    slot.removeAttribute('aria-hidden');
+    paragraphs[1].after(slot);
   }
 
   function calculateReadingTime() {
