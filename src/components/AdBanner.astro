@@ -5,7 +5,7 @@ const ad = ads[0];
 ---
 
 <div class="my-8">
-    <h2 class="font-heading text-lg font-bold text-navy dark:text-white mb-3">فاصل اعلاني</h2>
+    <h2>فاصل اعلاني</h2>
     <a
         href={ad.link}
         target="_blank"
@@ -21,20 +21,21 @@ const ad = ads[0];
             loading="lazy"
         />
         <div class="p-4">
-            <h3 class="font-heading text-base font-bold text-navy dark:text-white transition-colors">
+            <h3>
                 {ad.title}
             </h3>
-            <p class="font-body text-base text-navy-400 dark:text-zinc-400 mt-1">
+            <p>
                 {ad.description}
             </p>
+            <p>
             <a
                 href={ad.link}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                class="inline-block mt-4 px-6 py-2 bg-navy dark:bg-navy-700 text-white font-body font-medium rounded-lg hover:bg-accent hover:text-white dark:hover:bg-navy-600 transition-colors no-underline"
             >
                 تصفح العرض
             </a>
+            </p>
         </div>
     </a>
 </div>
