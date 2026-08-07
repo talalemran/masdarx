@@ -1,0 +1,81 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const wikiPages = [
+  {
+    title: "لينكس",
+    description: "دليل شامل عن نظام لينكس: تاريخه، التوزيعات، بيئات سطح المكتب، أوامر الأساس، والبدء العملي.",
+    href: "/wiki/linux-wiki/",
+    icon: "fa-brands fa-linux",
+  },
+  {
+    title: "ما هو المصادر المفتوحة؟",
+    description: "شرح مفصل لمفهوم المصادر المفتوحة، كيف نشأت، ولماذا غيّرت وجهة صناعة البرمجيات في العالم.",
+    href: "/wiki/what-is-open-source/",
+    icon: "fa-solid fa-code-branch",
+  },
+];
+---
+
+<BaseLayout
+  title="الموسوعة — مصدر إكس"
+  description="موسوعة مصدر إكس: دليلك الشامل لعالم تقنية المعلومات والبرمجيات والمصادر المفتوحة."
+  keywords={["موسوعة", "ويكي", "تقنية معلومات", "برمجيات", "مصادر مفتوحة", "لينكس"]}
+  canonical="/wiki/"
+>
+  <article class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <nav class="mb-6 text-sm font-body text-navy-400 dark:text-zinc-500">
+      <a href="/" class="hover:text-accent dark:hover:text-white transition-colors no-underline"
+        >الرئيسية</a
+      >
+      <span class="mx-2">/</span>
+      <span class="text-navy dark:text-white">الموسوعة</span>
+    </nav>
+
+    <h1
+      class="font-heading text-3xl sm:text-4xl font-extrabold text-navy dark:text-white mb-4 leading-snug"
+    >
+      موسوعة مصدر إكس
+    </h1>
+    <p class="font-body text-lg text-navy-400 dark:text-zinc-500 mb-8 max-w-3xl">
+      موسوعة شاملة عن عالم تقنية المعلومات والبرمجيات والمصادر المفتوحة. هنا تجد
+      أدلة مفصّلة وشروحات مبسّطة تساعدك على فهم المفاهيم الأساسية والتعمّق في
+      التقنيات الحديثة.
+    </p>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+      {
+        wikiPages.map((page) => (
+          <a
+            href={page.href}
+            class="block p-6 bg-white dark:bg-zinc-800 border border-navy-100 dark:border-zinc-700 rounded-xl no-underline hover:border-accent dark:hover:border-accent transition-colors group"
+          >
+            <div class="flex items-center gap-3 mb-3">
+              <i class={`${page.icon} text-2xl text-accent`} />
+              <h2 class="font-heading text-xl font-bold text-navy dark:text-white group-hover:text-accent transition-colors">
+                {page.title}
+              </h2>
+            </div>
+            <p class="font-body text-base text-navy-400 dark:text-zinc-400 leading-relaxed">
+              {page.description}
+            </p>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 p-6 bg-navy-50 dark:bg-zinc-800/50 border border-navy-200 dark:border-zinc-700 rounded-xl">
+      <h2 class="font-heading text-xl font-bold text-navy dark:text-white mb-3">
+        <i class="fa-solid fa-circle-info text-accent ml-2" />
+        عن هذه الموسوعة
+      </h2>
+      <p class="font-body text-base text-navy-700 dark:text-zinc-300 leading-relaxed">
+        موسوعة مصدر إكس هي مشروع مفتوح المصدر يهدف إلى تقديم محتوى عربي شامل
+        وموثوق في مجالات التقنية والبرمجيات. جميع المقالات مكتوبة بأسلوب مبسّط
+        ومناسب للمبتدئين والمحترفين على حد سواء. إذا كنت ترغب في المساهمة أو
+        اقتراح موضوع جديد، لا تتردد في التواصل معنا عبر
+        <a href="/contact/" class="text-accent hover:underline">صفحة الاتصال</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

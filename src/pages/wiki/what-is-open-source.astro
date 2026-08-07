@@ -1,0 +1,347 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const tocItems = [
+  { id: "definition", label: "تعريف المصادر المفتوحة" },
+  { id: "history", label: "تاريخ المصادر المفتوحة" },
+  { id: "how-it-works", label: "كيف تعمل المصادر المفتوحة؟" },
+  { id: "licenses", label: "الترخيصات" },
+  { id: "benefits", label: "فوائد المصادر المفتوحة" },
+  { id: "examples", label: "أمثلة شائعة" },
+  { id: "myths", label: "مفاهيم خاطئة" },
+  { id: "getting-involved", label: "كيف تشارك في المشاريع مفتوحة المصدر؟" },
+  { id: "resources", label: "موارد ومقالات ذات صلة" },
+];
+---
+
+<BaseLayout
+  title="ما هو المصادر المفتوحة؟ — موسوعة مصدر إكس"
+  description="شرح مفصل لمفهوم المصادر المفتوحة: كيف نشأت، كيف تعمل، فوائدها، الترخيصات المستخدمة، وأمثلة حقيقية من حياتنا اليومية."
+  keywords={[
+    "مصادر مفتوحة",
+    "open source",
+    "برمجيات حرة",
+    "free software",
+    "رخصة جنو",
+    "GPL",
+    "رخصة MIT",
+    "GitHub",
+  ]}
+  canonical="/wiki/what-is-open-source/"
+  ogType="article"
+>
+  <article class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <nav class="mb-6 text-sm font-body text-navy-400 dark:text-zinc-500">
+      <a href="/" class="hover:text-accent dark:hover:text-white transition-colors no-underline"
+        >الرئيسية</a
+      >
+      <span class="mx-2">/</span>
+      <a href="/wiki/" class="hover:text-accent dark:hover:text-white transition-colors no-underline"
+        >الموسوعة</a
+      >
+      <span class="mx-2">/</span>
+      <span class="text-navy dark:text-white">ما هو المصادر المفتوحة؟</span>
+    </nav>
+
+    <h1
+      class="font-heading text-3xl sm:text-4xl font-extrabold text-navy dark:text-white mb-4 leading-snug"
+    >
+      ما هو المصادر المفتوحة؟
+    </h1>
+    <p class="font-body text-navy-400 dark:text-zinc-500 mb-8">
+      شرح شامل لمفهوم المصادر المفتوحة وتأثيرها على عالم البرمجيات والتكنولوجيا
+    </p>
+
+    <nav
+      class="toc bg-navy-50 border border-navy-200 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg p-8 my-6"
+      aria-label="جدول المحتويات"
+    >
+      <p class="font-bold text-lg mb-4 text-navy dark:text-white">محتويات المقال</p>
+      <ol class="list-decimal list-inside space-y-3 text-lg">
+        {
+          tocItems.map((item) => (
+            <li>
+              <a href={`#${item.id}`} class="text-navy-700 dark:text-white hover:text-accent dark:hover:text-accent hover:underline">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <div class="post-content font-body text-base text-navy-700 dark:text-zinc-300 leading-relaxed">
+      <h2 id="definition">تعريف المصادر المفتوحة</h2>
+
+      <p>
+        <strong>المصادر المفتوحة (Open Source)</strong> هي منهجية في تطوير البرمجيات
+        تسمح لأي شخص بـ <strong>مشاهدة الكود المصدري</strong> للبرنامج، و<strong>تعديله</strong>،
+        و<strong>توزيع نسخ معدلة</strong> منه. هذا يعني أن البرنامج لا يُملكه أو يتحكم
+        فيه جهة واحدة، بل يكون متاحًا للجميع للمراجعة والمساهمة والتحسين.
+      </p>
+
+      <p>
+        لكن المصادر المفتوحة ليست مجرد "مجانية". فهي تعتمد على مبدأ أساسي: أن
+        أفضل البرامج هي تلك التي يراها و يراجعها عدد كبير من المطورين. عندما
+        يكون الكود مكشوفًا، يمكن اكتشاف الثغرات وحلها بسرعة أكبر، وتحسين
+        الأداء، وجعل البرنامج أكثر أمانًا وموثوقية.
+      </p>
+
+      <h2 id="history">تاريخ المصادر المفتوحة</h2>
+
+      <p>
+        لم تبدأ المصادر المفتوحة كحركة تجارية، بل كMovement فلسفي في عالم البرمجة.
+        إليك أبرز المحطات:
+      </p>
+
+      <ul>
+        <li>
+          <strong>الستينيات:</strong> في مختبرات贝尔 (Bell Labs) وأكاديمية MIT، كان
+          المبرمجون يشاركون الكود بحرية تامة، وكان مفهوم "البرمجيات الاحتكارية" غير
+          موجود تقريبًا
+        </li>
+        <li>
+          <strong>1983:</strong> أطلق <strong>ريتشارد ستالمان</strong> مشروع GNU
+          كرد على انتشار البرمجيات الاحتكارية، وأسّس مبدأ البرمجيات الحرة
+        </li>
+        <li>
+          <strong>1985:</strong> تأسيس <strong>مؤسسة البرمجيات الحرة (FSF)</strong>
+          لدعم مشروع GNU ووضع الإطار القانوني للبرمجيات الحرة
+        </li>
+        <li>
+          <strong>1991:</strong> إطلاق <strong>نواة لينكس</strong> بواسطة لينوس
+          تورفالدس،.which became the missing piece of the GNU system
+        </li>
+        <li>
+          <strong>1997:</strong> نشر إريك رايموند كتاب <strong>"The Cathedral and
+          the Bazaar"</strong> الذي شرح فلسفة المصادر المفتوحة بأسلوب مقنع
+        </li>
+        <li>
+          <strong>1998:</strong> إطلاق منظمة <strong>Open Source Initiative (OSI)</strong>
+          لتعريف المصادر المفتوحة وترويجها لعالم الأعمال
+        </li>
+        <li>
+          <strong>2000s:</strong> انتشار المصادر المفتوحة بشكل واسع مع ظهور
+          <strong>SourceForge</strong> ثم <strong>GitHub</strong>
+        </li>
+        <li>
+          <strong>2010s–الآن:</strong> أصبحت المصادر المفتوحة هي الافتراضي في عالم
+          البرمجيات والحوسبة السحابية والذكاء الاصطناعي
+        </li>
+      </ul>
+
+      <h2 id="how-it-works">كيف تعمل المصادر المفتوحة؟</h2>
+
+      <p>
+        تعمل المشاريع مفتوحة المصدر وفق نموذج تعاوني. إليك كيف تسير الأمور:
+      </p>
+
+      <ul>
+        <li>
+          <strong>الكود المصدري متاح للجميع:</strong> أي شخص يمكنه تحميل الكود
+          ودراسته وفهمه
+        </li>
+        <li>
+          <strong>حق التعديل:</strong> يمكن لأي مطور تعديل الكود وتخصيصه ليناسب
+          احتياجاته
+        </li>
+        <li>
+          <strong>حق التوزيع:</strong> يمكنك توزيع نسخة معدلة من البرنامج، لكن يجب
+          عليك تضمين الكود المصدري أو الإشارة إلى مصدره
+        </li>
+        <li>
+          <strong>المساهمة:</strong> يمكنك إرسال تعديلاتك للمطور الأصلي (Pull Request)
+          لتُدمج في الإصدار الرسمي إذا وافق عليها
+        </li>
+        <li>
+          <strong>المجتمع:</strong> يتفاعل المساهمون عبر منتديات أو غرف دردشة أو
+          أدوات مثل GitHub لتنسيق العمل وحل المشاكل
+        </li>
+      </ul>
+
+      <p>
+        هذا النموذج يخلق <strong>دورة تحسين مستمرة</strong>: كل مساهمة تجعل البرنامج
+        أفضل، وكل مراجعة تكشف نقاطًا يمكن تحسينها.
+      </p>
+
+      <h2 id="licenses">الترخيصات</h2>
+
+      <p>
+        الترخيص هو العقد القانوني الذي يحدد كيف يمكن استخدام الكود وتعديله وتوزيعه.
+        توجد نوعان رئيسيان من الترخيصات:
+      </p>
+
+      <h3>الترخيصات المتساهلة (Permissive)</h3>
+      <ul>
+        <li>
+          <strong>MIT:</strong> أبسط الترخيصات. تسمح بفعل أي شيء شريطة الإشارة
+          إلى الكود الأصلي
+        </li>
+        <li>
+          <strong>Apache 2.0:</strong> مشابه لـ MIT مع حماية إضافية براءات الاختراع
+        </li>
+        <li>
+          <strong>BSD:</strong> ترخيص متساهل مع شروط محدودة
+        </li>
+      </ul>
+
+      <h3>الترخيصات التبادلية (Copyleft)</h3>
+      <ul>
+        <li>
+          <strong>GPL (GNU General Public License):</strong> إذا عدّلت البرنامج ووزعته،
+          يجب أن تنشر الكود المعدّل بنفس الرخصة
+        </li>
+        <li>
+          <strong>LGPL:</strong> نسخة مخففة من GPL للמكتبات البرمجية
+        </li>
+        <li>
+          <strong>AGPL:</strong> مصممة للبرامج التي تعمل عبر الشبكة (SaaS)
+        </li>
+      </ul>
+
+      <p>
+        الفرق الجوهري: الترخيصات المتساهلة تسمح باستخدام الكود في برمجيات احتكارية
+        (مغلقة المصدر)، بينما ترخيصات Copyleft تفرض نشر أي تعديلات بنفس الرخصة.
+      </p>
+
+      <h2 id="benefits">فوائد المصادر المفتوحة</h2>
+
+      <ul>
+        <li>
+          <strong>الأمان:</strong> عندما يراجع الآلاف الكود، يُكتشف الثغرات وحُلّ
+          أسرع بكثير من البرمجيات المغلقة
+        </li>
+        <li>
+          <strong>المرونة:</strong> يمكنك تخصيص البرنامج بالكامل لتتناسب مع
+          احتياجاتك
+        </li>
+        <li>
+          <strong>التكلفة:</strong> معظم البرامج مفتوحة المصدر مجانية، ما يوفر
+          مبالغ ضخمة على التراخيص
+        </li>
+        <li>
+          <strong>المجتمع:</strong> دعم فني مجتمعي سريع وفوري عبر منتديات وغرف
+          دردشة
+        </li>
+        <li>
+          <strong>الابتعاد عن القيود:</strong> لا أمانع من تغيير المزود أو إيقاف
+          الدعم — الكود بيدك دائمًا
+        </li>
+        <li>
+          <strong>التعليم:</strong> أفضل طريقة لتعلم البرمجة هي قراءة كود حقيقي
+          ومساهمته
+        </li>
+      </ul>
+
+      <h2 id="examples">أمثلة شائعة</h2>
+
+      <ul>
+        <li>
+          <strong>نظام لينكس:</strong> نظام التشغيل الذي يشغّل أكثر من 96% من
+          أقوى 500 حاسوب خارق وعلى غالبية هواتف Android
+        </li>
+        <li>
+          <strong>Firefox:</strong> المتصفح مفتوح المصدر من Mozilla
+        </li>
+        <li>
+          <strong>VS Code:</strong> محرر الكود الأكثر استخدامًا من Microsoft
+        </li>
+        <li>
+          <strong>WordPress:</strong> نظام إدارة المحتوى الذي يشغّل أكثر من 40%
+          من مواقع الإنترنت
+        </li>
+        <li>
+          <strong>Blender:</strong> برنامج النمذجة ثلاثية الأبعاد والرسوم المتحركة
+        </li>
+        <li>
+          <strong>TensorFlow / PyTorch:</strong> أطر عمل الذكاء الاصطناعي من
+          Google وMeta
+        </li>
+        <li>
+          <strong>Git:</strong> نظام التحكم في الإصدارات الأكثر استخدامًا في العالم
+        </li>
+      </ul>
+
+      <h2 id="myths">مفاهيم خاطئة</h2>
+
+      <ul>
+        <li>
+          <strong>"مفتوح المصدر = مجاني":</strong> ليس صحيحًا دائمًا. مفتوح المصدر
+          يعني إمكانية الوصول للكود، وليس بالضرورة أنه مجاني. بعض الشركات تبيع
+          خدمات دعم فني أو ميزات إضافية
+        </li>
+        <li>
+          <strong>"المفتوح المصدر أقل أمانًا":</strong> العكس هو الصحيح. مراجعة
+          الكود من مئات المطورين تجعل اكتشاف الثغرات أسرع بكثير
+        </li>
+        <li>
+          <strong>"لا يمكن الربح منه":</strong> شركات كبرى مثل Red Hat وGoogle
+          وMicrosoft ت赚Billions من المصادر المفتوحة عبر الخدمات والمنتجات المضافة
+        </li>
+        <li>
+          <strong>"المفتوح المصدر لا يصلح للمؤسسات":</strong> أكثر من 90% من
+          الشركات تستخدم برامج مفتوحة المصدر في بنيتها التحتية
+        </li>
+      </ul>
+
+      <h2 id="getting-involved">كيف تشارك في المشاريع مفتوحة المصدر؟</h2>
+
+      <ol>
+        <li>
+          <strong>ابدأ بالاستخدام:</strong> استخدم برامج مفتوحة المصدر وتعلّم
+          كيفية عملها
+        </li>
+        <li>
+          <strong>أبلغ عن الأخطاء:</strong> إذا وجدت مشكلة، أبلغ عنها في صفحة
+          Issues على GitHub
+        </li>
+        <li>
+          <strong>ساهم في التوثيق:</strong> تحسين الوثائق أسهل من تحسين الكود
+          ويساعد الآلاف
+        </li>
+        <li>
+          <strong>أرسل Pull Request:</strong> إذا كنت قادرًا على حل مشكلة، أرسل
+          تعديلك
+        </li>
+        <li>
+          <strong>انضم للمجتمع:</strong> تواصل مع المطورين عبر Discord أو Slack أو
+          منتدى المشروع
+        </li>
+      </ol>
+
+      <h2 id="resources">موارد ومقالات ذات صلة</h2>
+
+      <ul>
+        <li>
+          <a href="/wiki/linux-wiki/">دليل لينكس الشامل</a>
+        </li>
+        <li>
+          <a href="/posts/linux-desktop-environments-guide/"
+            >مقارنة شاملة: بيئات سطح المكتب في لينكس</a
+          >
+        </li>
+        <li>
+          <a href="/posts/linux-distros-by-use-case-which-one-suits-you/"
+            >أنواع توزيعات لينكس حسب الاستخدام</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <a
+      href="https://buymeacoffee.com/masdarx"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="block mt-8 p-6 bg-gradient-to-l from-navy to-navy-700 rounded-xl text-center no-underline group"
+    >
+      <p
+        class="font-heading text-xl font-bold text-white mb-2 group-hover:scale-105 transition-transform"
+      >
+        أعجبك المقال؟
+      </p>
+      <p class="font-body text-base text-white/80">
+        ادعم مصدر إكس لنستمر في تقديم محتوى عربي مميز
+      </p>
+    </a>
+  </article>
+</BaseLayout>
