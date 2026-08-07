@@ -1,0 +1,149 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "calibre-9-13-pdf-output-fixes-content-server-improvements",
+    title: "كاليبر 9.13: إصلاحات PDF وتحسينات خادم المحتوى وإصلاحات شاملة",
+    description:
+        "كوفيد جويال أطلق Calibre 9.13 — محرر الكتب الإلكترونية المجاني — مع إصلاح رجعي حرج في ارتباطات PDF يتجاوز الهدف، تحسينات خادم المحتوى، وإصلاحات Linux لتحويل PDF على أنظمة libxml2 القديمة.",
+    keywords: [
+        "Calibre 9.13",
+        "كاليبر",
+        "كتب إلكترونية",
+        "e-book",
+        "PDF",
+        "Content Server",
+        "مجاني",
+        "مفتوح المصدر",
+        "تحويل",
+        "EPUB",
+    ],
+    category: "برامج",
+    author: "فريق مصدر إكس",
+    date: "7 أغسطس 2026",
+    pubDate: new Date("2026-08-07"),
+    tags: ["Calibre", "e-book", "PDF", "مفتوح المصدر", "تحويل"],
+    thumbnail: "/images/calibre-9-13-pdf-output-fixes-content-server-improvements.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            أطلق <strong>كوفيد جويال</strong>، المطور الرئيسي لـ <strong
+                >Calibre</strong
+            >، اليوم الإصدار <strong>9.13</strong> من برنامج إدارة الكتب الإلكترونية
+            المجاني والمفتوح المصدر. بعد أسبوع واحد من إطلاق Calibre 9.12، يركز الإصدار
+            الجديد على <strong>إصلاح الأخطاء والانحدارات</strong>، خاصةً مشاكل
+            في إخراج PDF وخادم المحتوى.
+        </p>
+
+        <h2>إصلاح حرج: ارتباطات PDF تقفز إلى الموقع الخطأ</h2>
+
+        <p>
+            الإصدار الأول من سلسلة Calibre 9 كان به انحدار في خرج PDF يسبب
+            ارتباطات في ملفات PDF الناتجة بالقفز إلى موقع الهدف ناقصاً الهامش
+            العلوي، مما ينتج عنه قفزة لعدة أسطر فوق الهدف الفعلي.
+        </p> هذا الأمر كان مزعجاً للغاية — المستخدمون يضغطون على ارتباط في جدول محتويات
+        PDF ويجدون أنفسهم يقرأون أسطر خاطئة. <strong
+            >Calibre 9.13 يصلح هذا الآن</strong
+        > والارتباطات تأخذ المستخدمين للموقع الصحيح تماماً.
+        <h2>تحسينات خادم المحتوى</h2>
+
+        <p>
+            خادم المحتوى أصبح أكثر موثوقية — تم إصلاح خطأ عند رفع ملف بيانات إلى
+            كتاب إلكتروني لم يكن لديه أي ملفات بيانات موجودة مسبقاً.
+        </p> كما تم إصلاح انحدارين من Calibre 9.12:
+
+        <ul>
+            <li>
+                <strong>البحث في المشاهد المدمجة:</strong> لم تعد عملية البحث مكسورة
+            </li>
+            <li>
+                <strong>أقسام خيارات التحويل المفقودة:</strong> تعاد الآن ظهور أقسام
+                الخيارات المفقودة
+            </li>
+        </ul>
+
+        <h2>حوار البيانات الوصفية المجمّع</h2>
+
+        <p>
+            حوار البيانات الوصفية المجمّع تحسّن أيضاً — انحدار من Calibre 9.12
+            كان يخفي أزرار نعم/لا <strong>في الحوار العام</strong>.
+        </p>
+
+        <h2>تحسينات Linux محددة</h2>
+
+        <p>
+            Calibre 9.13 يحسّن بناء لينكس بتحميل مسبق لمكتبة html5-parser على
+            الأنظمة التي تأتي مع إصدارات قديمة جداً من libxml2 لتجنب الأخطاء عند
+            تحويل الكتب الإلكترونية إلى PDF.
+        </p> هذا يحل مشكلة حقيقية على الأنظمة القديمة التي تحتفظ بمكتبات نظام قديمة.
+
+        <h2>إصلاحات Windows</h2>
+
+        <ul>
+            <li>
+                <strong>ضغط الصور:</strong> إصلاح خطأ في ميزة Compress Images في Edit
+                Book عند تحويل صور GIF إلى JPEG على Windows
+            </li>
+            <li>
+                <strong>إشعارات من البرامج الخارجية:</strong> إصلاح تعطل عندما تحاول
+                مكونات خارجية إرسال إشعارات من threads غير الـ GUI
+            </li>
+        </ul>
+
+        <h2>تحسينات أخرى</h2>
+
+        <ul>
+            <li>
+                <strong>مصدر أخبار Nautilus Magazine:</strong> تم تحسين مصدر الأخبار
+                المدمج
+            </li>
+            <li>
+                <strong>سحب الأغلفة:</strong> إصلاح انحدار يتعلق بسحب وإفلات الأغلفة
+            </li>
+            <li>
+                <strong>معالجة الصور:</strong> تحسينات في كيفية تعامل البرنامج مع
+                الصور المستخرجة من الملفات
+            </li>
+        </ul>
+
+        <h2>الحصول على Calibre 9.13</h2>
+
+        <p>
+            Calibre 9.13 متاح الآن كملفات جاهزة الاستخدام لـ لينكس و macOS و
+            Windows من الموقع الرسمي. على لينكس، يمكنك أيضاً تثبيت Calibre
+            كتطبيق Flatpak.
+        </p>
+
+        <p>
+            Calibre 9.13 تحديث متواضع من حيث الميزات الجديدة، لكنه حيوي من حيث
+            الاستقرار — خاصةً لمن يعتمدون على إخراج PDF لعملهم اليومي.
+        </p>
+
+        <h3>المصدر:</h3>
+        <p>
+            <a
+                href="https://9to5linux.com/calibre-9-13-e-book-manager-improves-pdf-output-content-server-and-more"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                9to5Linux
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
