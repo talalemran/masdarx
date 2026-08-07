@@ -100,17 +100,9 @@ const relatedPosts = allPosts
   <nav class="mb-6 text-sm font-body text-navy-400 dark:text-zinc-500">
     <a href="/" class="hover:text-accent dark:hover:text-white transition-colors no-underline">الرئيسية</a>
     <span class="mx-2">/</span>
-    {categories.map((cat, i) => (
-      <>
-        <a
-          href={`/category/${cat}/`}
-          class="hover:text-accent dark:hover:text-white transition-colors no-underline text-navy-400 dark:text-zinc-500"
-        >
-          {cat}
-        </a>
-        {i < categories.length - 1 && <span class="mx-2">,</span>}
-      </>
-    ))}
+    <a href={`/category/${categories[0]}/`} class="hover:text-accent dark:hover:text-white transition-colors no-underline">{categories[0]}</a>
+    <span class="mx-2">/</span>
+    <span class="text-navy dark:text-white">{title}</span>
   </nav>
 
   {
