@@ -13,7 +13,7 @@ const posts = Object.values(postModules)
 const featured = posts[0];
 const restPosts = posts.slice(1);
 
-const pageSize = 6;
+const pageSize = 9;
 const totalPages = Math.ceil(restPosts.length / pageSize);
 const currentPage = 1;
 const pagePosts = restPosts.slice(0, pageSize);

@@ -9,7 +9,7 @@ export async function getStaticPaths() {
     .map((mod: any) => mod.post)
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
-  const pageSize = 6;
+  const pageSize = 9;
   const gridPosts = allPosts.slice(1);
   const totalPages = Math.ceil(gridPosts.length / pageSize);
 
@@ -29,7 +29,7 @@ export interface Props {
 }
 
 const { page, totalPages, gridPosts } = Astro.props;
-const pageSize = 6;
+const pageSize = 9;
 const start = (page - 1) * pageSize;
 const pagePosts = gridPosts.slice(start, start + pageSize);
 
