@@ -8,7 +8,10 @@ export interface Props {
 const { currentPage, totalPages, basePath = "/page" } = Astro.props;
 
 function href(p: number): string {
-  if (p === 1) return "/";
+  if (p === 1) {
+    const parts = basePath.split("/page");
+    return parts[0] + "/";
+  }
   return `${basePath}/${p}/`;
 }
 ---
