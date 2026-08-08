@@ -1,0 +1,140 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostLayout from "@/components/PostLayout.astro";
+
+const postModules = import.meta.glob("../posts/*.astro", { eager: true });
+const allPosts = Object.values(postModules)
+    .map((mod: any) => mod.post)
+    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+
+export const post = {
+    slug: "debian-13-kernel-security-update-zapscape-sctphantom-28-cves",
+    title: "ديبيان 13 يصحح ثغرة 18 سنة: SCTPhantom و Zapscape في تحديث نواة حرج",
+    description:
+        "ديبيان 13 تريكسي تصدر تحديث نواة أمني يوم 6 أغسطس يعالج 28 ثغرة — أبرزها SCTPhantom، ثغرة use-after-free عمرها 18 سنة في SCTP تسمح لأي مستخدم عادي باختراق root والهروب من الحاويات.",
+    keywords: [
+        "Debian 13",
+        "ديبيان",
+        "Linux kernel",
+        "SCTPhantom",
+        "Zapscape",
+        "أمان",
+        "CVE-2026-64564",
+        "SCTP",
+        "privilege escalation",
+        "نواة لينكس",
+    ],
+    category: "لينكس",
+    author: "فريق مصدر إكس",
+    date: "8 أغسطس 2026",
+    pubDate: new Date("2026-08-08"),
+    tags: ["Debian 13", "أمان", "Linux kernel", "CVE", "SCTP"],
+    thumbnail: "/images/debian-13-kernel-security-update-zapscape-sctphantom-28-cves.webp",
+};
+---
+
+<BaseLayout
+    title={post.title}
+    description={post.description}
+    keywords={post.keywords}
+    canonical={`/posts/${post.slug}/`}
+    ogImage={post.thumbnail}
+    ogType="article"
+>
+    <PostLayout {post} allPosts={allPosts}>
+        <p>
+            أطلق <strong>مشروع ديبيان</strong> يوم 6 أغسطس تحديث نواة أمني جديد لمستخدمي
+            <strong>ديبيان 13 "Trixie"</strong> — تحديث جاء بعد أسبوع واحد من التحديث
+            السابق ويعالج <strong>28 ثغرة أمنية</strong> في نواة لينكس 6.12 LTS. معظم
+            هذه الثغرات قد تؤدي لرفع الصلاحيات أو رفض الخدمة أو تسريب المعلومات.
+        </p>
+
+        <h2>SCTPhantom: ثغرة عمرها 18 سنة تحقق جذور كاملة</h2>
+
+        <p>
+            أهم ثغرة في التحديث هي CVE-2026-64564، المعروفة باسم "SCTPhantom" —
+            ثغرة use-after-free عمرها 18 سنة في معالجة نواة لينكس للـ SCTP
+            ASCONF التي تسمح لأي مستخدم عادي (غير امتيازي) محلي بالحصول على جذور
+            كاملة والهروب من الحاويات.
+        </p> بمعنى آخر: أي شخص لديه حساب عادي على النظام يمكنه أن يصبح root والهروب
+        من الحاويات إذا كان يعمل داخل واحدة.
+
+        <h2>كيف تعمل الثغرة؟</h2>
+
+        <p>
+            SCTPhantom تنبع من عدم تطابق بين هويتَين مستخدمتَين أثناء معالجة
+            ASCONF chunk: عنوان IP مصدر الحزمة المستخدمة للتحقق DEL-IP، وmessage
+            Parameter المستخدمة لاختيار النقل الفعلي. لأن لينكس يتحقق ضد الأولى
+            لكن يعمل على النقل المختار عبر الثانية، يمكن لمهاجم حرفة تسلسل مرتب
+            يزيل نقل حي بينما مؤشرات primary_path و active_path للاتصال لا تزال
+            تشير إليه.
+        </p>
+
+        <h2>Zapscape: الهروب من الحاويات الافتراضية</h2>
+
+        <p>
+            ثغرة أخرى مهمة هي CVE-2026-64561، المعروفة باسم "Zapscape" — ثغرة
+            use-after-free في كود KVM الخاص بـ MMU التي يمكن أن تسمح لمستخدم
+            root في ضيف الـ VM بصعود الامتيازات إلى root على المضيف، أو تسمح
+            لمهاجم أو موقع ويب مخترق بإنشاء ضيف مؤقت والهجوم على نواة المضيف من
+            داخله حتى على مضيف لا يعمل بأي VMs على الإطلاق. هذا يتطلب تفعيل
+            الافتراض المتداخل ولا يعمل إلا على معالجات AMD أو Intel
+            Ice-Lake-SP+.
+        </p>
+
+        <h2>ثغرات أخرى بارزة</h2>
+
+        <ul>
+            <li>
+                <strong>CVE-2025-40098:</strong> خطأ NULL pointer dereference في درايفر
+                ALSA cs35l41 الخاص بـ audio codec يؤدي لتعطل نظام
+            </li>
+            <li>
+                <strong>CVE-2026-64562:</strong> ثغرة use-after-free في كود KVM nested-VMX
+                (nVMX) تؤدي لتعطل نواة المضيف أو رفض الخدمة
+            </li>
+            <li>ثغرات إضافية متعلقة بمحركات الأقراص والملفات وتوجيه الحركة</li>
+        </ul>
+
+        <h2>القائمة الكاملة من الثغرات</h2>
+
+        <p>
+            التحديث يعالج 28 ثغرة موثقة — أقل من التحديث السابق الذي عالج 68
+            ثغرة الأسبوع الماضي. لكن جودة الثغرات أعلى من حيث الشدة.
+        </p>
+
+        <h2>كيفية التحديث</h2>
+
+        <p>
+            مستخدمو ديبيان 13 يجب أن يحدّثوا نواة لينكسهم إلى الإصدار 6.12.101-1
+            على الفور. افتح الطرفية واشغّل:
+        </p>
+
+        <pre><code>sudo apt update && sudo apt full-upgrade</code></pre>
+
+        <h2>الخطورة</h2>
+
+        <p>
+            SCTPhantom والثغرات الأخرى في هذا التحديث <strong
+                >تصنف بأنها حرجة</strong
+            > — خاصةً في بيئات متعددة المستخدمين أو بنية تحتية استضافة الحاويات حيث
+            يكون SCTP مفعّلاً. المسؤولون يجب أن يطبقوا التحديث بأولوية قصوى.
+        </p>
+
+        <p>
+            ديبيان تابعة مجددة كيف أن النوى الحديثة تتطلب مراقبة دقيقة — ثغرة
+            عمرها 18 سنة تنتظر بصمت لتُكتشف، وعندما تُكتشف، الجميع يركضون.
+        </p>
+
+        <h3>المصدر:</h3>
+        <p>
+            <a
+                href="https://9to5linux.com/new-debian-13-kernel-security-update-fixes-zapscape-and-sctphantom"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                9to5Linux
+            </a>
+        </p>
+    </PostLayout>
+</BaseLayout>
