@@ -32,6 +32,14 @@ const navLinks = [
       </nav>
 
       <div class="flex items-center gap-2">
+        <a
+          href="/search/"
+          class="flex items-center justify-center w-10 h-10 rounded-lg text-white hover:bg-white/10 dark:hover:bg-zinc-800 transition-colors no-underline"
+          aria-label="بحث"
+        >
+          <i class="fa-solid fa-magnifying-glass text-lg"></i>
+        </a>
+
         <button
           id="theme-toggle"
           class="flex items-center justify-center w-10 h-10 cursor-pointer bg-transparent border-none rounded-lg text-white hover:bg-white/10 dark:hover:bg-zinc-800 transition-colors"
@@ -92,6 +100,13 @@ const navLinks = [
         </a>
       ))
     }
+    <a
+      href="/search/"
+      class="mobile-nav-link font-body text-lg font-medium text-white/80 dark:text-zinc-300 hover:text-accent dark:hover:text-white transition-colors no-underline py-2 border-b border-white/10 dark:border-zinc-800"
+    >
+      <i class="fa-solid fa-magnifying-glass ml-2"></i>
+      بحث
+    </a>
   </nav>
 </div>
 
