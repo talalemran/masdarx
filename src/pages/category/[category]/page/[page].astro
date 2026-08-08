@@ -10,7 +10,8 @@ export async function getStaticPaths() {
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 
   const categories = [...new Set(allPosts.flatMap((p) => Array.isArray(p.category) ? p.category : [p.category]))];
-const pageSize = 9;
+const firstPageSize = 9;
+const pageSize = 6;
 
   const paths = [];
 
@@ -19,7 +20,8 @@ const pageSize = 9;
       const cats = Array.isArray(p.category) ? p.category : [p.category];
       return cats.includes(category);
     });
-    const totalPages = Math.ceil(filteredPosts.length / pageSize);
+    const remaining = Math.max(0, filteredPosts.length - firstPageSize);
+    const totalPages = filteredPosts.length <= firstPageSize ? 1 : 1 + Math.ceil(remaining / pageSize);
 
     for (let page = 2; page <= totalPages; page++) {
       paths.push({
@@ -40,12 +42,13 @@ export interface Props {
 }
 
 const { category, posts: allPosts, page, totalPages } = Astro.props;
+const firstPageSize = 9;
 const pageSize = 6;
 const filteredPosts = allPosts.filter((p) => {
   const cats = Array.isArray(p.category) ? p.category : [p.category];
   return cats.includes(category);
 });
-const pagePosts = filteredPosts.slice((page - 1) * pageSize, page * pageSize);
+const pagePosts = filteredPosts.slice(firstPageSize + (page - 2) * pageSize, firstPageSize + (page - 1) * pageSize);
 
 const basePath = `/category/${category}/page`;
 ---
